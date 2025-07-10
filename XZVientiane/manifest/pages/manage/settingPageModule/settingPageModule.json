@@ -1,0 +1,9 @@
+{
+    "usingComponents":
+    {
+		"picker": "/components/web/picker/picker",
+		"upload": "/components/common/upload/upload"
+    },
+    "enablePullDownRefresh": false,
+    "navigationBarTitleText": "模块设置"
+}

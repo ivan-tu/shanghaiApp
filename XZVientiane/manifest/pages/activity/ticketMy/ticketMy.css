@@ -1,0 +1,112 @@
+.activityMyTicket_count{
+	font-size:12px;
+	color:#636363;
+	position:absolute;
+	right:10px;
+	top:0;
+	z-index:2;
+}
+.activityMyTicket_box .listBox{
+	box-shadow: 0px 0px 4px 0px rgba(215, 215, 215, 1);
+	margin:15px 20px;
+	border-radius:10px;
+}
+.activityMyTicket_box .activityInfo{
+	padding:20px 15px;
+	position:relative;
+}
+.activityMyTicket_box .activityInfo .picBox{
+	width:88px;
+	height:88px;
+	float:left;
+}
+.activityMyTicket_box .activityInfo .textBox{
+	margin-left:98px;
+}
+.activityMyTicket_box .activityInfo .title{
+	font-size:14px;
+	color:#1E1E1E;
+	line-height:20px;
+}
+.activityMyTicket_box .activityInfo .tips{
+	font-size:12px;
+	color:#727272;
+}
+.activityMyTicket_box .activityInfo .price{
+	font-size:14px;
+	color:#E53737;
+	font-weight:600;
+}
+.activityMyTicket_line{
+	border-top:2px dashed #D8D8D8;
+	position:relative;
+}
+.activityMyTicket_line:before{
+	content:'';
+	width:16px;
+	height:16px;
+	border-radius:50%;
+	position:absolute;
+	left:-10px;
+	top:50%;
+	margin-top:-8px;
+	background:rgb(254,254,254);
+	border-right:1px solid #D8D8D8;
+}
+.activityMyTicket_line:after{
+	content:'';
+	width:16px;
+	height:16px;
+	border-radius:50%;
+	position:absolute;
+	right:-10px;
+	top:50%;
+	margin-top:-8px;
+	background:rgb(254,254,254);
+	border-left:1px solid #D8D8D8;
+}
+.activityMyTicket_footBtn{
+	padding:10px 15px;
+	position:relative;
+}
+.activityMyTicket_footBtn .spanStatus{
+	line-height:26px;
+}
+.activityMyTicket_footBtn .btn{
+	display:inline-block;
+	border-radius: 22px;
+	height:28px;
+	line-height:28px;
+	margin:0;
+	padding:0;
+	padding:0 12px;
+	font-size:12px;
+	text-align:center;
+}
+.activityMyTicket_footBtn .btn + .btn{
+	margin-left:5px;
+}
+.activityMyTicket_footBtn .detail_redBtn{
+	background: #E53737;
+	color:#fff;
+}
+.activityMyTicket_footBtn .detail_redBtn:hover{
+	background: #E53737;
+	color:#fff;
+}
+.activityMyTicket_footBtn .detail_blueBtn{
+	background: #1577FE;
+	color:#fff;
+}
+.activityMyTicket_footBtn .detail_blueBtn:hover{
+	background: #1577FE;
+	color:#fff;
+}
+.activityMyTicket_footBtn .detail_grayBtn{
+	background: #bbb;
+	color:#fff;
+}
+.activityMyTicket_footBtn .detail_grayBtn:hover{
+	background: #bbb;
+	color:#fff;
+}

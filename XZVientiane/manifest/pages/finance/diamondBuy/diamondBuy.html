@@ -1,0 +1,61 @@
+<div class="app-wrapper positionBottom">
+    <div wx:if="{{isUserLogin}}" class="app-main">
+    	<div class="markWraper"></div>
+        <div class="ptb5">
+            <div class="searchCategory-box clearfix">
+                <div class="searchCategory">
+                    <div class="listBox">
+                        <span wx:for="{{typeList}}" class="list {{(form.type==item.type?' active':'' )}}" data-index="{{index}}" bindtap="selectThis">{{item.name}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p class="p14 c666 plr15" style="white-space:pre-wrap;">{{itemData.content}}</p>
+        <div class="finance-agreeMent"><span bindtap="changeAgreeMent" class="xzui-checkbox-new small {{(agreeMent?' active':'')}}"></span><navigator url="../../home/articleDetail/articleDetail?customId=rechargeRule" target="_blank" class="displayIB vMid ml5">已阅读并同意《充值协议》</navigator></div>
+        <div class="xz-bottomBox-fixed setTopLine">
+            <div class="clearfix" wx:if="{{showToBuy}}">
+                <div class="xz-bottomBox-fixedTotal"><span class="cRed p18">¥{{totalPrice}}</span><span wx:if="{{oldPrice}}" class="cRed oldPrice">¥{{oldPrice}}</span></div>
+                <button wx:if="{{oldPrice}}" class="xz-bottomBox-fixedSave ml5 {{(canBuy?'':' disable')}}" bindtap="toBuy" style="width:200px;">差价购买截止：<span class="p12">{{expertInfo.upgradeDate}}</span></button>
+                <button wx:else class="xz-bottomBox-fixedSave ml5 {{(canBuy?'':' disable')}}" bindtap="toBuy" style="width:110px;">立即购买</button>
+                <button wx:if="{{!oldPrice}}" class="xz-bottomBox-fixedSave" bindtap="toChange" style="background:#FFFDDD;width:110px;">兑换礼包</button>
+            </div>
+            <div class="clearfix" wx:else>
+                <div class="xz-bottomBox-fixedTotal"><span class="cRed p18">¥{{totalPrice}}</span><span wx:if="{{oldPrice}}" class="cRed oldPrice">¥{{oldPrice}}</span></div>
+                <span class="fr displayIB" style="color:#999;line-height:38px;padding:0 10px;">暂不支持购买，可关注公众号</span>
+            </div>
+        </div>
+        <!--兑换弹框-->
+        <div class="publicScroll_dialog {{(changeForm.show?' show':'')}}">
+            <view class="publicScroll_body" style="height:{{changeForm.height}}px;">
+                <div class="publicScroll_head clearfix tac bgfff">
+                    <span class="p16">使用兑换码</span>
+                    <span class="fr p16" bindtap="toHideDialog"><i class="xzicon-close"></i></span>
+                </div>
+                <div class="publicScroll_main bgfff">
+                    <view class="bgfff">
+                        <div class="form-list">
+                            <div class="form-list-item title long">兑换码</div>
+                            <div class="form-list-item">
+                                <input placeholder="请输入" bindinput="model" data-model="changeForm.changecode" value="{{changeForm.changecode}}" class="textInput" type="tel" />
+                            </div>
+                            <div class="form-list-item title tar long"><span class="yellowBtn" bindtap="checkCode">确认兑换码</span></div>
+                        </div>
+                        <div class="form-list" wx:if="{{changeForm.data}}">
+                            <div class="form-list-item p12">
+                            	<p>礼包名称：{{changeForm.data.name}}<span wx:if="{{changeForm.data.status==1}}" class="cRed displayIB ml5">已兑换</span><span wx:else class="cGreen displayIB ml5">可兑换</span></p>
+                                <p style="white-space:pre-wrap;">{{changeForm.data.confirmTips}}</p>
+                            </div>
+                        </div>
+                        <div class="form-list" wx:else>
+                            <div class="form-list-item p12 c999 tac ptb20">暂无礼包数据</div>
+                        </div>
+                    </view>
+                </div>
+                <view class="publicScroll_footBtn">
+                    <button class="submitBtn" type="button" bindtap="toConfirmDialog">确定</button>
+                </view>
+            </view>
+        </div>
+    </div>
+    <nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

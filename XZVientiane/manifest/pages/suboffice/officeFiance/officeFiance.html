@@ -1,0 +1,41 @@
+<div class="app-wrapper">
+    <div class="app-main pb20">
+        <div class="loadingBox mlr15" wx:if="{{ajaxLoading}}">
+			<div class="xzicon-loading"></div>
+		</div>
+		<div class="noData mlr15" wx:elif="{{ajaxNoData}}">暂无管理权限</div>
+        <div wx:else>
+            <div class="officeFiance-infoBox bgfff clearfix">
+                <navigator url="../../suboffice/officeFianceRecord/officeFianceRecord?clubid={{options.id}}" class="list">
+                	<p class="number">{{data.total||0}}</p>
+                    <p class="title">收入</p>
+                </navigator>
+                <div class="list">
+                	<p class="number">{{data.lirun||0}}</p>
+                    <p class="title">利润</p>
+                </div>
+                <navigator url="../../finance/withdraw/withdraw?clubid={{options.id}}&type=club" class="list">
+                	<p class="number">{{data.balance||0}}</p>
+                    <p class="title">可提现</p>
+                </navigator>
+            </div>
+            <div class="officeFiance-infoBox bgfff clearfix hasBorder top">
+                <navigator url="../../suboffice/officeFianceOutRecord/officeFianceOutRecord?clubid={{options.id}}&gettype=user" class="list">
+                	<p class="number">{{data.tuiguangTotal||0}}</p>
+                    <p class="title">推广支出</p>
+                </navigator>
+                <navigator url="../../suboffice/officeFianceOutRecord/officeFianceOutRecord?clubid={{options.id}}&gettype=platform" class="list">
+                	<p class="number">{{data.fuwuTotal||0}}</p>
+                    <p class="title">服务支出</p>
+                </navigator>
+                <navigator url="../../suboffice/officeWallteRecord/officeWallteRecord?clubid={{options.id}}" class="list">
+                	<p class="number">{{data.beans||0}}</p>
+                    <p class="title">分红股</p>
+                </navigator>
+            </div>
+            <navigator url="../../finance/withdraw/withdraw?clubid={{options.id}}&type=club" class="form-list mt10 bgfff">
+            	<div class="form-list-item rightIcon">去提现</div>
+            </navigator>
+        </div>
+    </div>
+</div>

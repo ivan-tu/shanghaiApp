@@ -1,0 +1,85 @@
+<div class="app-wrapper">
+    <div wx:if="{{isUserLogin}}" class="app-main">
+    	<div class="loadingBox mlr15" wx:if="{{ajaxLoading}}">
+			<div class="xzicon-loading"></div>
+		</div>
+        <div wx:else>
+        	<div class="ptb15" wx:if="{{data&&data.myLevelname}}">
+            	<div class="markWraper"></div>
+            	<p class="tac c666">当前用户级别</p>
+            	<p class="upGrade-title mt5">{{myLevelInfo.name}}</p>
+                <p class="tac c888">到期时间：{{data.expiretime||'永久'}}<span class="myLevelInfo-signOut" bindtap="toOut">退出俱乐部</span></p>
+                <div class="searchCategory-box clearfix bgfff">
+                    <div class="searchCategory">
+                        <div class="listBox">
+                            <span wx:for="{{levelList}}" class="list {{(form.levelid==item._id?' active':'')}}"  data-id="{{item._id}}" data-index="{{index}}" bindtap="changeLevel">{{item.name}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="plr15 mt10">
+                    <p class="p16 mt15 mb10">升级条件：</p>
+                    <p wx:if="{{levelInfo.payUpgradeStatus==1&&levelInfo.payUpgradePrice==0}}" class="c666 p12">免费升级</p>
+                    <p wx:elif="{{levelInfo.payUpgradeStatus==1&&levelInfo.payUpgradePrice}}" class="c666 p12">支付{{levelInfo.payUpgradePrice}}元升级</p>
+                    <p wx:if="{{levelInfo.remUpgradeStatus==1}}" class="c666 p12">推荐{{levelInfo.remUpgradeLevelNum}}名{{levelInfo.remUpgradeLevelName}}升级</p>
+                    <p wx:if="{{levelInfo.remUpgradeStatus==2}}" class="c666 p12">团队{{levelInfo.remUpgradeLevelNum}}名{{levelInfo.remUpgradeLevelName}}升级</p>
+                </div>
+                <!--
+                <div class="plr15 mt10">
+                    <p class="p16 mt15 mb10">推荐奖励</p>
+                    <div class="clearfix c666 p12" wx:for="{{levelInfo.directReward}}" wx:for-item="g">推荐<span class="cRed">{{g.name}}</span>奖励<span class="cRed">{{g.total}}</span>元</div>
+                </div>
+                <div class="plr15 mt10" wx:if="{{levelInfo.treamRewardStatus==1}}"> 
+                    <p class="p16 mt15 mb10">团队奖励</p>
+                    <div class="c666 p12" wx:for="{{levelInfo.treamReward}}" wx:for-item="g">团队推荐<span class="cRed">{{g.name}}</span>奖励<span class="cRed">{{g.total}}</span>元</div>
+                </div>
+                <div class="plr15 mt10" wx:if="{{levelInfo.partnerRewardStatus==1}}"> 
+                    <p class="p16 mt15 mb10">合伙人奖励</p>
+                    <div class="c666 p12">培育<span class="cRed">团队长</span>提成<span class="cRed">{{levelInfo.partnerRewardRatio}}%</span></div>
+                </div>
+                <div class="plr15 mt10">
+                    <p class="p16 mt15 mb10">会员介绍：</p>
+                    <div wx:if="{{levelInfo.content}}"><image class="w100" src="{{levelInfo.content}}" mode="widthFix" /></div>
+                </div>-->
+                <!--
+                <div class="mt15 pd15" wx:if="{{data.nextLevel&&data.nextLevel.name}}">
+                    <p class="p16 mt10 mb10">晋升条件：</p>
+                    <div class="upGrade-ruleBox">
+                    	<div class="upGrade-ruleList" wx:if="{{data.nextLevel.con1&&data.nextLevel.con1.title}}">
+                        	<span class="xzicon-checkcircle" wx:if="{{data.nextLevel.con1.status==1}}"></span>
+                            <span class="xzicon-minuscircle" wx:else></span>
+                            <p class="p16">{{data.nextLevel.con1.title}}</p>
+                            <p class="p16 rightNum cRed" wx:if="{{data.nextLevel.con1.status!=1}}">差{{data.nextLevel.con1.need}}名</p>
+          				</div>
+                    </div>
+                </div>-->
+                <div class="xz-bottomBox-fixed setTopLine" wx:if="{{canBuy==3}}">
+                    <div class="clearfix">
+                        <div class="xz-bottomBox-fixedTotal p16">
+                            <span class="ml5" wx:if="{{levelInfo.remUpgradeStatus==1}}">推荐{{levelInfo.remUpgradeLevelNum}}名{{levelInfo.remUpgradeLevelName}}升级</span>
+                            <span class="ml5" wx:elif="{{levelInfo.remUpgradeStatus==2}}">团队{{levelInfo.remUpgradeLevelNum}}名{{levelInfo.remUpgradeLevelName}}升级</span>
+                        </div>
+                        <button class="xz-bottomBox-fixedSave" bindtap="toShare">立即邀请</button>
+                    </div>
+                </div>
+                <div class="xz-bottomBox-fixed setTopLine" wx:elif="{{canBuy>0}}">
+                    <div class="clearfix">
+                        <div class="xz-bottomBox-fixedTotal p16">
+                            <span class="ml5">合计：</span><span class="cRed p18" wx:if="{{totalPrice}}">¥{{totalPrice}}</span><span class="cRed p18" wx:else>免费</span>
+                        </div>
+                        <button class="xz-bottomBox-fixedSave" bindtap="toBuy" wx:if="{{canBuy==2}}">立即续费</button>
+                        <button class="xz-bottomBox-fixedSave" bindtap="toBuy" wx:elif="{{canBuy==1}}">立即购买</button>
+                    </div>
+                </div>
+            </div>
+            <div class="ptb15" wx:else style="padding-top:60px;">
+            	<div class="markWraper"></div>
+            	<p class="tac c666">您还没加入俱乐部</p>
+            	<div class="xzui-btn-app" wx:if="{{data.nextLevel}}">
+                	<button class="xzui-btn primary xzui-btn_b"  bindtap="toPage" data-page="../../suboffice/upGradeList/upGradeList?clubid={{options.id}}">立即加入</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nologin bindloginsuccess="onShow" wx:else></nologin>
+    <newShare id="newShareCon"></newShare>
+</div>

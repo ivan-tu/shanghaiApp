@@ -1,0 +1,138 @@
+.shop-checkout-address{
+	position:relative;
+}
+.shop-checkout-address-middle{
+	margin:0 20px;
+}
+.shop-checkout-address-left{
+	position:absolute;
+	top:50%;
+	bottom:0;
+	left:0;
+	margin-top:-8px;
+}
+.shop-checkout-address-right{
+	position:absolute;
+	right:0;
+	top:50%;
+	bottom:0;
+	margin-top:-8px;
+}
+.shop-noData-linkBtn{
+	/*background:#D81E06;*/
+	background:#000000;
+	color:#fff;
+	display:inline-block;
+	width:100px;
+	text-align:center;
+	height:35px;
+	line-height:35px;
+	margin:20px 10px;
+	border-radius:4px;
+}
+.shop-noData-linkBtn:hover{
+	color:#fff;
+}
+.shop-noData-icon{
+	font-size:80px;
+	line-height:80px;
+	color:#aaa;
+}
+.shop-ok-icon{
+	font-size:80px;
+	line-height:80px;
+	color:#f90022;
+}
+
+/**
+	商品列表模板1
+ */
+.page-goods-template1-wrapper{
+	margin-left:-5px;
+	margin-top:-5px;
+}
+.page-goods-template1-list{
+	width:50%;
+	padding-left:5px;
+	padding-top:5px;
+	float:left;
+	box-sizing:border-box;
+}
+.page-goods-template1-box{
+	border-radius:5px;
+	background:#fff;
+	padding:5px;
+}
+.page-goods-template1-name{
+	margin-top:5px;
+	font-size:14px;
+	color:#333;
+	height:24px;
+	line-height:24px;
+}
+
+.xz-bottomBox-fixed{
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: #fff;
+	padding:10px 15px;
+	z-index: 11;
+}
+.xz-bottomBox-fixedTotal{
+	float: left;
+	line-height: 38px;
+	color: #666;
+	font-weight: 300;
+}
+.xz-bottomBox-fixedTotal .unit{
+	display: inline-block;
+	vertical-align: top;
+	color: #f90022;
+	margin-left: 8px;
+}
+.xz-bottomBox-fixedTotal .money{
+	font-size: 24px;
+	padding-left: 4px;
+	color: #f90022;
+	font-weight: 500;
+}
+.xz-bottomBox-fixedSave{
+	float: right;
+	line-height: 38px;
+	width: 114px;
+	font-weight: 300;
+	background-color: #000000;
+	color: #fff !important;
+	font-size: 16px;
+	border-radius: 19px;
+}
+.xz-bottomBox-fixedSave.disabled{
+	background-color: #CCCCCC;
+}
+
+.checkout_listBtn{
+	background: #000000;
+	color: #fff;
+	display: block;
+	text-align: center;
+	height: 35px;
+	line-height: 35px;
+	border-radius: 4px;
+}
+.checkout_listBtn:hover{
+	color:#fff;
+}
+.checkout_listBtn.green{
+	background:#66CC00;
+}
+.checkout_listBtn.orange{
+	background:#FF9900;
+}
+.checkout_div{
+	background:#fff;
+	margin:15px;
+	border-radius:8px;
+	overflow:hidden;
+}

@@ -1,0 +1,110 @@
+.ticketMyCode_box{
+	box-shadow: 0px 0px 4px 0px rgba(215, 215, 215, 1);
+	margin:20px;
+	border-radius:10px;
+}
+.ticketMyCode_box .activityInfo{
+	padding:20px 15px;
+}
+.ticketMyCode_box .activityInfo .picBox{
+	width:88px;
+	height:88px;
+	float:left;
+}
+.ticketMyCode_box .activityInfo .textBox{
+	margin-left:98px;
+}
+.ticketMyCode_box .activityInfo .title{
+	font-size:14px;
+	color:#1E1E1E;
+	line-height:20px;
+}
+.ticketMyCode_box .activityInfo .tips{
+	font-size:12px;
+	color:#727272;
+}
+.ticketMyCode_box .codeText{
+	font-size:12px;
+	color:#727272;
+}
+.ticketMyCode_box .codeImage{
+	width:150px;
+	height:150px;
+	margin:10px auto;
+}
+.activityMyCode_line{
+	border-top:2px dashed #D8D8D8;
+	position:relative;
+}
+.activityMyCode_line:before{
+	content:'';
+	width:16px;
+	height:16px;
+	border-radius:50%;
+	position:absolute;
+	left:-10px;
+	top:50%;
+	margin-top:-8px;
+	background:rgb(254,254,254);
+	border-right:1px solid #D8D8D8;
+}
+.activityMyCode_line:after{
+	content:'';
+	width:16px;
+	height:16px;
+	border-radius:50%;
+	position:absolute;
+	right:-10px;
+	top:50%;
+	margin-top:-8px;
+	background:rgb(254,254,254);
+	border-left:1px solid #D8D8D8;
+}
+.activityMyCode_redBtn{
+	min-width:140px;
+	font-size:16px;
+}
+/*activityMyCode_footBtn*/
+.activityMyCode_footBtn{
+	position:fixed;
+	z-index:10;
+	left:0;
+	right:0;
+	bottom:0;
+	padding:16px 10px;
+	background:#fff;
+	box-shadow: 0px -2px 5px 0px rgba(200, 200, 200, 0.5);
+}
+.activityMyCode_footBtn .btnBox .list + .list{
+	margin-left:15px;
+}
+.activityMyCode_footBtn .btn{
+	display:block;
+	border-radius: 22px;
+	height:44px;
+	line-height:44px;
+	margin:0;
+	padding:0;
+	width:100%;
+	font-size:14px;
+}
+.activityMyCode_footBtn .detail_redBtn{
+	background: #E53737;
+	color:#fff;
+}
+.activityMyCode_footBtn .detail_redBtn:hover{
+	background: #E53737;
+	color:#fff;
+}
+.activityMyCode_footBtn .detail_blueBtn{
+	background: #1577FE;
+	color:#fff;
+}
+.activityMyCode_footBtn .detail_blueBtn:hover{
+	background: #1577FE;
+	color:#fff;
+}
+.activity-submitInfoBtn{
+	padding:4px 15px;
+	font-size:16px;
+}

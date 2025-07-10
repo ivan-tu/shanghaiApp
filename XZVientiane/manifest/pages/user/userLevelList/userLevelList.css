@@ -1,0 +1,52 @@
+.userLevel-head{
+	padding:10px 15px;
+	position:relative;
+	background:#fff;
+}
+.userLevel-head .picBox{
+	width:45px;
+	height:45px;
+	overflow:hidden;
+	border-radius:50%;
+	float:left;
+	background:#fff;
+}
+.userLevel-head .textBox{
+	margin-left:55px;
+	position:relative;
+}
+.userLevel-head .textBox .username{
+	font-size:15px;
+}
+.userLevel-head .textBox .levelName{
+	font-size:12px;
+	background:#FF9900;
+	color:#fff;
+	border-radius:10px;
+	display:inline-block;
+	vertical-align:middle;
+	padding:0 5px;
+	margin-left:5px;
+}
+.userLevel-table{
+	background:#fff;
+	margin:0 5px;
+	border: 1px solid #eee;
+	border-top:0 none;
+	border-collapse: collapse;
+	font-size:0;
+	border-radius:4px;
+}
+.userLevel-table .thList{
+	display: flex;
+  	border-top: 1px solid #eee;
+}
+.userLevel-table .tdList{
+	flex: 1;
+	padding: 10px;
+	border-right: 1px solid #eee;
+	font-size:14px;
+}
+.userLevel-table .tdList:last-child{
+	border-right:0 none;
+}

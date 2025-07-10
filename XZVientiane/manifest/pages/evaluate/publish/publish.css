@@ -1,0 +1,86 @@
+.goodsAddPic-item.goodsAddPic-item-row5{
+	width:25%;
+	float:left;
+}
+.goodsAddPic-container.goodsAddPic-container-picture{
+	margin:-10px 0 0 -5px;
+}
+.goodsAddPic-container-picture .goodsAddPic-bar{
+    margin: 10px 0 0 5px;
+	position:relative;
+}
+.goodsAddPic-item .xzui-uploader__input-box{
+	margin:0;
+}
+.dynamicPublish_btnBox .xzui-btn{
+	margin:auto;
+	color:#fff !important;
+	background:#DABB53 !important;
+	padding:0;
+	border-radius:30px;
+}
+.dynamicPublish_uploadBtn{
+	display:inline-block;
+	text-align:center;
+	background:#F9F9F9;
+	padding:6px 17px;
+	border-radius:4px;
+}
+.dynamicPublish_uploadBtn .pic{
+	vertical-align:middle;
+	width:35px;
+	height:35px;
+}
+.dynamicPublish_uploadText{
+	vertical-align:middle;
+	display:inline-block;
+	font-size:12px;
+	color:#818181;
+}
+.borderR{
+	border-right:1px solid #e9e9e9;
+}
+.publish_clubList{
+	margin-top:10px;
+}
+.publish_footBtn .xzui-btn{
+	max-width:180px;
+	margin:auto;
+	background:#DABB53 !important;
+	padding:0;
+	border-radius:6px;
+}
+
+
+.evaluatePublish_headMain{
+	background:rgba(248,236,236,0.5);
+	padding:10px 0;
+}
+.evaluatePublish_head{
+	width:320px;
+	margin:auto;
+	font-size:0;
+}
+.evaluatePublish_head .displayFlex .list{
+	text-align:center;
+}
+.evaluatePublish_head .displayFlex .list +.list{
+	margin-left:5px;
+}
+.evaluatePublish_head .iconPic{
+	width:14px;
+	vertical-align:middle;
+}
+.evaluatePublish_head .iconTitle{
+	font-size:12px;
+	vertical-align:middle;
+	margin-left:3px;
+	color:#888;
+}
+.evaluatePublish_head .displayFlex .list.active .iconTitle{
+	color:#111;
+}
+.evaluatePublish_head .starBox{
+	width:26px;
+	margin:5px auto;
+}

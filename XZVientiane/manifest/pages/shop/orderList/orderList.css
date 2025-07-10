@@ -1,0 +1,66 @@
+.orderList_btn{
+	margin:0;
+	display:inline-block;
+	border-radius:4px;
+	text-align:center;
+	height:30px;
+	line-height:30px;
+	font-size:12px;
+	width:65px;
+}
+.orderList_btn.b1{
+	border:1px solid #999;
+	background:#fff;
+	color:#666;
+}
+.orderList_btn.b1:hover{
+	color:#666;
+}
+.orderList_btn.b2{
+	border:1px solid #D2161F;
+	background:#D2161F;
+	color:#fff;
+}
+.orderList_btn.b2:hover{
+	color:#fff;
+}
+.orderList_btn + .orderList_btn{
+	margin-left:10px;
+}
+.orderListGoods{
+	position:relative;
+	padding-right:40px;
+	margin-left:-5px;
+}
+.orderListGoods .picList{
+	width:25%;
+	float:left;
+}
+.orderListGoods .picList .list{
+	margin-left:5px;
+}
+.orderListGoods .quantityText{
+	width:15px;
+	font-size:12px;
+	color:#666;
+	position:absolute;
+	right:10px;
+	top:50%;
+	line-height:20px;
+	height:60px;
+	margin-top:-30px;
+	text-align:center;
+	padding-left:10px;
+	border-left:1px solid #eee;
+}
+.orderList_storeInfo .picBox{
+	float:left;
+	width:24px;
+	height:24px;
+	border-radius:50%;
+	overflow:hidden;
+}
+.orderList_storeInfo .textBox{
+	margin-left:30px;
+	line-height:24px;
+}

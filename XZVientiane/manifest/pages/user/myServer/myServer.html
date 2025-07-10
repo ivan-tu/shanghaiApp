@@ -1,0 +1,72 @@
+<div class="app-wrapper">
+	<div wx:if="{{isUserLogin}}" class="app-main">
+    	<div class="markWraper"></div>
+        <view class="loadingBox mlr14" wx:if="{{showLoading}}">
+            <div class="xzicon-loading"></div>
+        </view>
+        <view wx:else>
+            <!--是服务商-->
+            <div class="myServer-header" wx:if="{{data.isserver==1}}">
+                <p class="myServer-header-title tac p18">您已经是服务商</p>
+                <div class="bgfff displayFlex tac hasBorder top">
+                    <navigator url="../../user/myServerTeam/myServerTeam" class="list ptb15">
+                        <p class="p18">{{data.teamCount}}</p>
+                        <p class="p14 c666">达人</p>
+                    </navigator>
+                    <navigator url="../../finance/incomeReocrd/incomeReocrd?fromre=4101" class="list ptb15">
+                        <p class="p18">{{data.commion}}</p>
+                        <p class="p14 c666">收益</p>
+                    </navigator>
+                </div>
+            </div>
+            <!--不是服务商，有权利申请-->
+            <div class="myServer-header" wx:elif="{{data.isagent==1&&data.teamCount>=5}}">
+                <p class="myServer-header-title tac p18">您已经满足服务商申请条件</p>
+                <div wx:if="{{data.applyInfo}}">
+                	<div class="form-list">
+                        <div class="form-list-item title large">申请状态</div>
+                        <div class="form-list-item">
+                        	<p class="cRed" wx:if="{{data.applyInfo.status==2}}">已拒绝</p>
+                            <p class="c999" wx:elif="{{data.applyInfo.status==0}}">待审核</p>
+                        </div>
+                    </div>
+                    <div class="form-list">
+                        <div class="form-list-item title large">群截图</div>
+                        <div class="form-list-item">
+                            <image class="myServer-grouppic" src="{{data.applyInfo.grouppic}}" />
+                        </div>
+                    </div>
+                    <div class="xzui-btn-app" wx:if="{{data.applyInfo.status==2}}">
+                        <button type="button" bindtap="reSubmit" class="xzui-btn xzui-btn_b primary" size="large">重新申请</button>
+                    </div>
+                </div>
+                <div wx:else>
+                    <div class="form-list">
+                        <div class="form-list-item title large">群截图</div>
+                        <div class="form-list-item">
+                            <upload value="{{form.grouppic}}" class="user-upload" width="90" height="90" bindchange="uploadSuccess" id="uploadPic"></upload>
+                        </div>
+                    </div>
+                    <div class="xzui-btn-app">
+                        <button type="button" bindtap="submit" class="xzui-btn xzui-btn_b primary" size="large">立即申请</button>
+                    </div>
+                </div>
+            </div>
+            <!--不是服务商，无权利申请-->
+            <div class="myServer-header" wx:else>
+                <p class="myServer-header-title tac p18">您还不满足服务商申请条件</p>
+                <div class="clearfix plr15">
+                    <p class="fl">条件1：是代理身份</p>
+                    <p class="fr cGreen" wx:if="{{data.isagent==1}}">已满足</p>
+                    <p class="fr cRed" wx:else>不满足</p>
+                </div>
+                <div class="clearfix plr15 mt10">
+                    <p class="fl">条件2：直推满5名达人</p>
+                    <p class="fr cGreen" wx:if="{{data.teamCount>=5}}">已满足</p>
+                    <p class="fr cRed" wx:else>不满足</p>
+                </div>
+            </div>
+        </view>
+    </div>
+    <nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

@@ -1,0 +1,31 @@
+.userList-list{
+	padding:15px;
+	position:relative;
+}
+.userList-list + .userList-list{
+	border-top:1px solid #F9F9F9;
+}
+.userList-list .picBox{
+	float:left;
+	border-radius:50%;
+	overflow:hidden;
+	width:50px;
+	height:50px;
+}
+.userList-list .textBox{
+	margin-left:60px;
+}
+.userList-list .spanList + .spanList{
+	margin-left:5px;
+}
+.userList-list .detailBtn{
+	display:inline-block;
+	height:24px;
+	font-size:12px;
+	border-radius:4px;
+	background:#FEE10B;
+	color:#000;
+	text-align:center;
+	line-height:24px;
+	padding:0 5px;
+}

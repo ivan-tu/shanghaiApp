@@ -1,0 +1,31 @@
+<div class="app-wrapper">
+	<div class="app-main pb20" wx:if="{{isUserLogin}}">
+        <p class="form-title">可提：{{expertInfo.userBeans}}</p>
+        <div class="bgfff">
+            <div class="form-list">
+                <div class="form-list-item title long">提币数量</div>
+                <div class="form-list-item">
+                    <input type="number" class="textInput" bindinput="model" data-model="form.total" value="{{form.total}}" placeholder="请输入" />
+                </div>
+                <div class="form-list-item title large tar"><span class="yellowBtn" bindtap="setAll">全部提现</span></div>
+            </div>
+            <div class="form-list">
+                <div class="form-list-item title long">接收地址</div>
+                <div class="form-list-item">
+                    <input type="text" class="textInput" bindinput="model" data-model="form.solAddress" value="{{form.solAddress}}" placeholder="请输入" />
+                </div>
+            </div>
+            <div class="form-list">
+                <div class="form-list-item title long">验证码</div>
+                <div class="form-list-item">
+                    <input type="number" class="textInput" bindinput="model" data-model="form.code" value="{{form.code}}" placeholder="请输入" />
+                </div>
+                <div class="form-list-item title large tar"><span bindtap="getCode" class="yellowBtn {{(codeStatus==1?' disable':'')}}">{{codeText}}</span></div>
+            </div>
+        </div>
+        <div class="xzui-btn-app">
+            <button class="xzui-btn primary xzui-btn_b" bindtap="submit">立即提币</button>
+        </div>
+    </div>
+    <nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

@@ -1,0 +1,38 @@
+<div class="app-wrapper">
+    <div wx:if="{{isUserLogin}}" class="app-main">
+        <div class="user-withdraw">
+            <div class="user-withdraw-body">
+                <div class="user-withdraw-head setBottomLine">
+                    <div class="user-withdraw-headRow clearfix">
+                        <p class="user-withdraw-headRowL">提现账号</p>
+                        <span bindtap="toWithdrawSet" class="user-withdraw-headRowR" wx:if="{{withdrawInfo.bankcard}}"><i class="xzicon-pen"></i></span>
+                        <span bindtap="toWithdrawSet" class="user-withdraw-headRowR primary" wx:else><i class="xzicon-right"></i></span>
+                        <div class="user-withdraw-headRowC" wx:if="{{withdrawInfo.bankcard}}">{{withdrawInfo.bankcard}}</div>
+                        <span bindtap="toWithdrawSet" class="user-withdraw-headRowC primary" wx:else>前往设置</span>
+                    </div>
+                </div>
+                <div class="user-withdraw-main">
+                    <p class="user-withdraw-title">提现金额</p>
+                    <div class="user-withdraw-inputBox">
+                        <div class="clearfix">
+                            <div class="user-withdraw-unit">¥</div>
+                            <div class="user-withdraw-all" bindtap="getAll">全部提现</div>
+                            <div class="user-withdraw-inputBar">
+                                <input class="user-withdraw-input xzui-input" bindinput="model" value="{{form.total}}" data-model="form.total" value="{{form.total}}" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pt10  hasBorder top c999">可提现：¥{{canWithdraw}}<span wx:if="{{poundage&&poundage>0}}">，税率：{{poundage}}%</span></div>
+                    <div class="c999 mt10" wx:if="{{tipText&&tipText.length}}">
+                        <p wx:for="{{tipText}}">{{item}}</p>
+                    </div>
+                    <div class="xzui-btn-app">
+                    	<button type="button" size="large" bindtap="submit" class="xzui-btn xzui-btn_b primary">确认提现</button>
+                    </div>
+                    <span bindtap="toRecord" class="mt10 c000 tac displayB">提现记录 ></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

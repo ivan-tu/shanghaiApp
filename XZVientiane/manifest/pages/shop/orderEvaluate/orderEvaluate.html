@@ -1,0 +1,65 @@
+<div class="app-wrapper">
+    <div class="app-main positionBottom">
+        <div class="form-title">商品</div>
+        <div class="bgfff">
+            <div class="shop-orderDetail-goodsList" wx:for="{{goodsList}}">
+                <div class="displayB clearfix positionR plr14 pt15 pb15">
+                    <div class="goodsPic hasLoading"><image class="pic" src="{{item.pic}}"  mode="widthFix" /></div>
+                    <div class="goodsSet tar">
+                        <div class="cRed p16">¥{{item.totalPrice}}</div>
+                        <div class="c666 p14 mt30">x{{item.quantity}}</div>
+                    </div>
+                    <div class="goodsText">
+                        <div class="c333 p16 textOver">{{item.goodsname}}</div>
+                        <div class="c666 p12 textLine mt15">{{item.format}}</div>
+                        <div class="c666 p12 textLine">¥{{item.price}}</div>
+                    </div>     
+                </div>
+                <div class="hasBorder top left">
+                    <div class="form-list">
+                        <div class="form-list-item">
+                            <span class="order_starList" data-index="{{index}}" bindtap="addStar" data-num="1"><i class="{{(item.eva_stars>=1?'xzicon-star2':'xzicon-staro')}}"></i></span>
+                            <span class="order_starList" data-index="{{index}}" bindtap="addStar" data-num="2"><i class="{{(item.eva_stars>=2?'xzicon-star2':'xzicon-staro')}}"></i></span>
+                            <span class="order_starList" data-index="{{index}}" bindtap="addStar" data-num="3"><i class="{{(item.eva_stars>=3?'xzicon-star2':'xzicon-staro')}}"></i></span>
+                            <span class="order_starList" data-index="{{index}}" bindtap="addStar" data-num="4"><i class="{{(item.eva_stars>=4?'xzicon-star2':'xzicon-staro')}}"></i></span>
+                            <span class="order_starList" data-index="{{index}}" bindtap="addStar" data-num="5"><i class="{{(item.eva_stars>=5?'xzicon-star2':'xzicon-staro')}}"></i></span>
+                            <span class="order_starTips" wx:if="{{item.eva_stars==1}}">非常差</span>
+                            <span class="order_starTips" wx:if="{{item.eva_stars==2}}">很差</span>
+                            <span class="order_starTips" wx:if="{{item.eva_stars==3}}">一般</span>
+                            <span class="order_starTips" wx:if="{{item.eva_stars==4}}">满意</span>
+                            <span class="order_starTips" wx:if="{{item.eva_stars==5}}">超赞</span>
+                        </div>
+                    </div>
+                    <div class="form-list noBorder">
+                        <div class="form-list-item">
+                            <textarea class="xzui-textarea c666 p14" data-index="{{index}}" placeholder="请输入评价内容" bindinput="changeContent" style="height:90px;" value="{{item.eva_content}}"></textarea>
+                        </div>
+                    </div>
+                    <div class="album-container hasBorder top left">
+                        <div class="album-list clearfix">
+                            <div class="album-item" wx:for="{{item.eva_picsArray}}" wx:for-item="g" wx:for-index="l">
+                                <div class="album-bar" style="height:{{imageHeight}}px;">
+                                    <image src="{{g.src}}" mode="widthFix" />
+                                    <view class="xzui-uploader_progress" hidden="{{g.hidePercent}}">
+                                        <span class="xzui-uploader_progressText">{{(g.percent||0)}}%</span>
+                                    </view>
+                                    <button type="button" class="album-del" bindtap="del" data-parent="{{index}}" data-index="{{l}}"><i class="xzicon-minuscircle"></i></button>
+                                </div>
+                            </div>
+                            <div class="album-item">
+                                <div class="album-bar">
+                                    <view class="xzui-uploader__input-box" style="height:{{imageHeight}}px;width:{{imageWidth}}px;" catchtap="upload" data-parent="{{index}}"></view>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <view class="xzui-btn-app positionBottom displayFlex">
+            <div class="list ml10">
+        		<button type="button" class="xzui-btn xzui-btn_b primary" size="large" bindtap="submit">提交评价</button>
+            </div>
+        </view>
+    </div>
+</div>

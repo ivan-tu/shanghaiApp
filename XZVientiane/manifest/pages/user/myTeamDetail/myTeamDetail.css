@@ -1,0 +1,56 @@
+.myTeamDetail_header{
+	padding:15px;
+	position:relative;
+}
+.myTeamDetail_header .picBox{
+	width:60px;
+	height:60px;
+	overflow:hidden;
+	border-radius:50%;
+	float:left;
+	background:#fff;
+}
+.myTeamDetail_header .textBox{
+	margin-left:70px;
+	padding-right:40px;
+	position:relative;
+}
+.myTeamDetail_header .textBox .levelName{
+	font-size:12px;
+	background:#FEE10B;
+	color:#fff;
+	border-radius:10px;
+	display:inline-block;
+	vertical-align:middle;
+	padding:0 5px;
+	margin-left:5px;
+	font-weight:500;
+}
+.myTeamDetail_header .textBox .telBtn{
+	font-size:12px;
+	background:#FF9900;
+	color:#fff;
+	border-radius:4px;
+	display:inline-block;
+	vertical-align:middle;
+	padding:0 10px;
+	margin-left:5px;
+}
+.myTeamDetail_titleDiv{
+	border-top:8px solid rgb(247,247,247);
+}
+.myTeamDetail_userInfo{
+	width:120px;
+}
+.myTeamDetail_userInfo .userFace{
+	width:30px;
+	height:30px;
+	border-radius:50%;
+	overflow:hidden;
+}
+.myTeamDetail_userInfo .userName{
+	display:inline-block;
+	margin-left:5px;
+	color:#333;
+	line-height:30px;
+}

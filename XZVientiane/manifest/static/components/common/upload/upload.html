@@ -1,0 +1,13 @@
+<div class="xzui-uploader">
+    <div class="xzui-uploader__bd {{(count==1?'xzui-uploader__one':'')}}">
+        <div class="xzui-uploader__files">
+            <div class="xzui-uploader__file {{(count==1?'xzui-uploader__one':'')}}" wx:for="{{files}}" data-index="{{index}}" bindtap="tool" style="width:{{width}}px;height:{{height}}px;">
+                <image src="{{item.src}}" mode="widthFix"/>
+                <view class="xzui-uploader_progress" hidden="{{item.hidePercent}}">
+                    <span class="xzui-uploader_progressText">{{(item.percent||0)}}%</span>
+                </view>
+            </div>
+        </div>
+        <view class="xzui-uploader__input-box {{(count==1?'xzui-uploader__one':'')}}" style="width:{{width}}px;height:{{height}}px;" catchtap="upload" hidden="{{files.length==count}}"></view>
+    </div>
+</div>

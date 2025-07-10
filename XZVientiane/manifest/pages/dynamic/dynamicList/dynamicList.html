@@ -1,0 +1,60 @@
+<div class="app-wrapper">
+    <div class="app-main pb20">
+    	<div class="markWraper"></div>
+        <div class="dynamicList_dynamicBox plr15" wx:if="{{data&&data.length}}">
+            <div class="dynamicList_dynamicList" wx:for="{{data}}">
+            	<div class="userPicBox" data-id="{{item.userid}}" bindtap="toUserDetail"><image class="round w100 h100" src="{{item.headpic}}" mode="widthFix" /></div>
+                <div class="contentBox">
+                    <p class="userName" data-id="{{item.userid}}" bindtap="toUserDetail">{{item.username}}</p>
+                    <p class="content" style="white-space:pre-wrap;">{{item.content}}</p>
+                    <div class="picContainer row1 clearfix mt10" wx:if="{{item.videos&&item.videos.file}}">
+                        <div class="picBox">
+                            <div class="picList" style="width:170px;" data-index="{{index}}" catchtap="viewDynamicVideo" wx:if="{{client=='wx'}}">
+                                <video data-index="{{index}}" bindfullscreenchange="fullScreenChange" id="myVideo_{{index}}" poster="{{item.videos.pic}}" src="{{item.videos.file}}" controls></video>
+                            </div>
+                            <div wx:else class="picList" style="width:170px;" data-index="{{index}}" catchtap="viewDynamicVideo">
+                                <image mode="widthFix" src="{{item.videos.pic}}"/>
+                                <image mode="widthFix" src="https://static.gedian.shop/16492353454154144.png" class="videoPlay_image" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="picContainer row1 clearfix mt10" wx:elif="{{item.pics&&item.pics.length==1}}">
+                        <div class="picBox" wx:for="{{item.pics}}" wx:for-item="g" wx:for-index="l">
+                            <div class="picList hasLoading" style="width:170px;height:187px;" data-index="{{l}}" data-parent="{{index}}" bindtap="viewImage">
+                                <image src="{{g.src}}" class="pic" mode="widthFix" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="picContainer row2 clearfix mt10" wx:elif="{{item.pics&&item.pics.length==2}}">
+                        <div class="picBox" wx:for="{{item.pics}}" wx:for-item="g" wx:for-index="l">
+                            <div class="picList hasLoading" style="width:{{dynamicPicW_a}}px;height:{{dynamicPicH_a}}px;" data-index="{{l}}" data-parent="{{index}}" bindtap="viewImage">
+                                <image src="{{g.src}}" class="pic" mode="widthFix" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="picContainer row3 clearfix mt10" wx:elif="{{item.pics&&item.pics.length>2}}">
+                        <div class="picBox" wx:for="{{item.pics}}" wx:for-item="g" wx:for-index="l">
+                            <div class="picList hasLoading" style="width:{{dynamicPicW_b}}px;height:{{dynamicPicH_b}}px;" data-index="{{l}}" data-parent="{{index}}" bindtap="viewImage">
+                                <image src="{{g.src}}" class="pic" mode="widthFix" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt10 clearfix" style="overflow:hidden;">
+                        <div class="fl addtime">{{item.createAt}}</div>
+                        <div class="fr p12 c888">
+                            <span wx:if="{{item.ismy==1}}" class="displayIB dynamicList_dynamicListBtn" catchtap="delThisDynamic" data-index="{{index}}">删除</span>
+                            <span wx:if="{{controlShow==1&&item.showstatus==1}}" class="displayIB dynamicList_dynamicListBtn" catchtap="hideThisDynamic" data-index="{{index}}">隐藏</span>
+                            <span wx:elif="{{controlShow==1}}" class="displayIB dynamicList_dynamicListBtn" catchtap="showThisDynamic" data-index="{{index}}">显示</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <view class="loadingBox mlr15" hidden="{{!showLoading}}">
+			<div class="xzicon-loading"></div>
+			<div class="xzui-loadmore__tips">正在加载</div>
+		</view>
+		<view class="noData mlr15" hidden="{{!showNoData}}">暂无数据</view>
+    </div>
+    <videoPlay id="videoPlay"></videoPlay>
+</div>

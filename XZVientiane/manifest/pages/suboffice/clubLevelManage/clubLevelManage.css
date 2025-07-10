@@ -1,0 +1,26 @@
+.clubLevel-list{
+	background:#fff;
+	padding:10px;
+	position:relative;
+}
+.clubLevel-list +.clubLevel-list{
+	margin-top:15px;
+}
+.clubLevel-list .title{
+	font-size:16px;
+}
+.clubLevel-reward{
+	padding-left:12px;
+}
+.clubLevel-rewardList{
+	margin-top:10px;
+}
+.clubLevel-list .spanStatus{
+	font-size:14px;
+	position:absolute;
+	right:10px;
+	top:10px;
+}
+.clubLevel-list .spanStatus +.spanStatus{
+	margin-top:20px;
+}

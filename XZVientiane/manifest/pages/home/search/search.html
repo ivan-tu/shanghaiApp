@@ -1,0 +1,73 @@
+<div class="app-wrapper">
+    <div class="app-main">
+        <div class="home-search">
+            <div class="home-search-head">
+                <div class="home-search-search">
+                    <form action="javascript:;" class="searchForm" bindsubmit="getList">
+                        <i class="xzicon-search1 icon"></i>
+                        <div class="searchInput">
+                            <input placeholder="请输入搜索内容" bindconfirm="getList" autofocus data-model="form.keyword" bindinput="model" value="{{form.keyword}}" type="search" class="xzui-input" confirm-type="search" focus="true" />
+                        </div>
+                        <div class="searchClear" bindtap="clearKeyword" wx:if="{{form.keyword}}"><i class="xzicon-closecircle"></i></div>
+                    </form>
+                </div>
+            </div>
+            <div class="home-search-main">
+                <div class="home-search-userBox" wx:if="{{userList&&userList.length}}">
+                    <p class="form-title">用户<span class="cRed">（{{userList.length}}位）</span></p>
+                    <div class="userBox">
+                        <navigator url="../../user/businessCard/businessCard?id={{item._id}}" class="userList clearfix" wx:for="{{userList}}" hidden="{{item.hide==1}}">
+                            <div class="picBox">
+                                <image src="{{item.headpic}}" class="w100 h100 round" mode="widthFix" />
+                            </div>
+                            <div class="textBox">
+                                <p class="userName">{{item.username}}</p>
+                                <div wx:if="{{item.sex==2}}" class="sexIcon"><image src="https://statics.tuiya.cc/17510223747109026.png" data-src="{{staticPath}}iconPic/girlIcon.png" class="w100" mode="widthFix" /></div>
+                                <div wx:else class="sexIcon"><image src="https://statics.tuiya.cc/17510224026368063.png" data-src="{{staticPath}}iconPic/boyIcon.png" class="w100" mode="widthFix" /></div>
+                            </div>
+                        </navigator>
+                    </div>
+                    <div class="getMoreBtn" wx:if="{{showMoreUser}}" bindtap="toShowMore" data-type="user">展开更多</div>
+                </div>
+                <div wx:if="{{clubList&&clubList.length}}">
+                	<p class="form-title">俱乐部<span class="cRed">（{{clubList.length}}个）</span></p>
+                    <div class="home-search-clubBox clearfix">
+                        <navigator url="../../suboffice/clubDetail/clubDetail?id={{item._id}}" class="listBox" wx:for="{{clubList}}" hidden="{{item.hide==1}}">
+                            <div class="list clearfix">
+                                <div class="picBox hasLoading" style="width:{{clubPicWidth}}px;height:{{clubPicWidth}}px;">
+                                    <image class="w100 h100" src="{{item.pic}}" mode="heightFix" />
+                                </div>
+                                <div class="textBox">
+                                    <p class="c333 p14 textOver tac">{{item.name}}</p>
+                                </div>
+                            </div>
+                        </navigator>
+                    </div>
+                    <div class="getMoreBtn" wx:if="{{showMoreClub}}" bindtap="toShowMore" data-type="club">展开更多</div>
+                </div>
+                <div class="home-search-activityBox" wx:if="{{activityList&&activityList.length}}">
+                	<p class="form-title">活动<span class="cRed">（{{activityList.length}}场）</span></p>
+                    <navigator url="../../activity/detail/detail?id={{item._id}}" class="activityList clearfix" wx:for="{{activityList}}" hidden="{{item.hide==1}}">
+                        <div class="picBox hasLoading"><image class="w100 h100 pic" src="{{item.pic}}" mode="widthFix" /></div>
+                        <div class="textBox">
+                            <p class="title">{{item.name}}</p>
+                            <p class="address mt2">{{item.begintime}}开始 | {{item.areaText}}</p>
+                            <div class="userInfo mt2"><image src="{{item.masterpic}}" class="userPic" mode="widthFix" /><span class="userName">{{item.mastername}}组织</span></div>
+                            <div class="clearfix mt2">
+                                <p class="fl signInfo">限{{item.limitnum}}人，<span class="signBtn" wx:if="{{item.friendnum}}">{{item.friendnum}}好友已报名</span><span class="signBtn" wx:else>{{item.joinnum}}人已报名</span></p>
+                                <p class="fr price" wx:if="{{item.isfree==2&&item.price}}">{{item.price}}<span class="p12"> 钻</span></p>
+                                <p class="fr price" wx:else>免费</p>
+                            </div>
+                        </div>
+                    </navigator>
+                    <div class="getMoreBtn" wx:if="{{showMoreActivity}}" bindtap="toShowMore" data-type="activity">展开更多</div>
+                </div>
+            </div>
+            <view class="loadingBox mlr14" hidden="{{!showLoading}}">
+                <div class="xzicon-loading"></div>
+                <div class="xzui-loadmore__tips">正在加载</div>
+            </view>
+            <view class="noData mlr14" hidden="{{!showNoData}}">暂无数据</view>
+        </div>
+    </div>
+</div>

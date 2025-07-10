@@ -1,0 +1,394 @@
+@import "/static/css/shopIndex.wxss";
+/**
+ *设置相关
+ **/
+.manage-settingPage-addModelBtn{
+	padding:6px 0;
+	color:#000;
+	font-size:16px;
+	display:block;
+	background:#f4f4f4;
+	border-radius:20px;
+	width:120px;
+	margin:15px auto;
+}
+.manage-settingPage-publishBtn{
+	background:#f90022;
+	border-radius:5px;
+	color:#fff;
+	padding:2px 15px;
+	display:inline-block;
+}
+
+
+/*------信息流模块-----*/
+.shopNew-container-list{
+	display:block;
+	background: #FFFFFF;
+	border-radius: 12px 12px 0 0;
+	margin:10px 10px 0 10px;
+	cursor:pointer;
+}
+.shopNew-container-listBox{
+	position:relative;
+}
+.shopNew-container-listBox .delBtn{
+	position:absolute;
+	z-index:5;
+	right:12px;
+	top:-10px;
+	color:#dd0000;
+	font-size:21px;
+}
+.shopNew-container-btn{
+	margin:0 10px 10px 10px;
+	border-radius:0 0 12px 12px;
+	border-top:1px solid #eee;
+	background:#fff;
+}
+/*商品*/
+.shopNew-goods .shopInfo{
+	position:relative;
+	padding:15px;
+}
+.shopNew-goods .shopInfo .picBox{
+	position:absolute;
+	left:15px;
+	top:50%;
+	margin-top:-18px;
+	width:36px;
+	height:36px;
+	border-radius:4px;
+	overflow:hidden;
+}
+.shopNew-goods .shopInfo .textBox{
+	color:#232323;
+	font-size:16px;
+	padding:0 80px 0 45px;
+}
+.shopNew-goods .shopInfo .picBox .pic{
+	border-radius:4px;
+}
+.shopNew-goods .goodsInfo{
+	padding:10px;
+}
+.shopNew-goods .goodsInfo .picBox{
+	float:left;
+	width:120px;
+	height:120px;
+}
+.shopNew-goods .goodsInfo .textBox{
+	margin-left:135px;
+}
+.shopNew-goods .goodsInfo .textBox .name{
+	color:#232323;
+	font-size:14px;
+	line-height:18px;
+	height:40px;
+	overflow:hidden;
+}
+.shopNew-goods .goodsInfo .textBox .price{
+	color:#232323;
+	font-size:12px;
+	line-height:20px;
+}
+.shopNew-goods .goodsInfo .textBox .number{
+	color:#FF2A06;
+	font-size:16px;
+}
+.shopNew-goods .goodsInfo .textBox .unit{
+	color:#FF2A06;
+	font-size:12px;
+}
+.shopNew-goods .goodsInfo .oldPrice{
+	color:#B8B8B8;
+	font-size:12px;
+	text-decoration:line-through;
+	line-height:20px;
+}
+.shopNew-goods .btnBox{
+	margin-top:5px;
+	text-align:right;
+	font-size:0;
+}
+.shopNew-goods .btnBox .addCartBtn{
+	display:inline-block;
+	background: #FFA955;
+	margin:0;
+	padding:0 8px 0 8px;
+	height:30px;
+	line-height:30px;
+	border-radius:100px 0 0 100px;
+	color:#fff;
+	font-size:12px;
+}
+.shopNew-goods .btnBox .buyBtn{
+	display:inline-block;
+	background: #D40000;
+	margin:0;
+	padding:0 8px 0 8px;
+	height:30px;
+	line-height:30px;
+	border-radius:0 100px 100px 0;
+	color:#fff;
+	font-size:12px;
+}
+/*接龙购*/
+.shopNew-solitaire .shopInfo{
+	position:relative;
+	padding:15px;
+}
+.shopNew-solitaire .shopInfo .picBox{
+	position:absolute;
+	left:15px;
+	top:50%;
+	margin-top:-18px;
+	width:36px;
+	height:36px;
+	border-radius:4px;
+	overflow:hidden;
+}
+.shopNew-solitaire .shopInfo .textBox{
+	color:#232323;
+	font-size:16px;
+	padding:0 80px 0 45px;
+}
+.shopNew-solitaire .shopInfo .statusImage{
+	position:absolute;
+	right:-10px;
+	top:50%;
+	margin-top:-16px;
+	display:inline-block;
+	width:100px;
+}
+.shopNew-solitaire .shopInfo .picBox .pic{
+	border-radius:4px;
+}
+.shopNew-solitaire .goodsInfo{
+	padding:10px;
+}
+.shopNew-solitaire .goodsInfo .picBox{
+	float:left;
+	width:120px;
+	height:120px;
+}
+.shopNew-solitaire .goodsInfo .textBox{
+	margin-left:135px;
+}
+.shopNew-solitaire .goodsInfo .textBox .name{
+	color:#232323;
+	font-size:14px;
+	line-height:18px;
+	height:40px;
+	overflow:hidden;
+}
+.shopNew-solitaire .goodsInfo .textBox .price{
+	color:#232323;
+	font-size:12px;
+	line-height:24px;
+}
+.shopNew-solitaire .goodsInfo .textBox .number{
+	color:#FF2A06;
+	font-size:16px;
+}
+.shopNew-solitaire .goodsInfo .textBox .unit{
+	color:#FF2A06;
+	font-size:12px;
+}
+.shopNew-solitaire .goodsInfo .oldPrice{
+	color:#B8B8B8;
+	font-size:12px;
+	text-decoration:line-through;
+	line-height:20px;
+}
+.shopNew-solitaire .moreInfo{
+	position:relative;
+	padding:15px 110px 15px 15px;
+}
+.shopNew-solitaire .moreInfo .userList{
+	margin-left:-5px;
+}
+.shopNew-solitaire .moreInfo .userList{
+	margin-left:-5px;
+}
+.shopNew-solitaire .moreInfo .list{
+	float:left;
+	width:16.666666%;
+}
+.shopNew-solitaire .moreInfo .list .picBox{
+	margin-left:5px;
+	border-radius:50%;
+	overflow:hidden;
+}
+.shopNew-solitaire .moreInfo .rightNum{
+	position:absolute;
+	right:10px;
+	top:50%;
+	margin-top:-15px;
+	color:#232323;
+	line-height:25px;
+	font-size:16px;
+}
+.shopNew-solitaire .progressBox{
+	position:relative;
+	margin:0 15px;
+	background:#eee;
+	border-radius:20px;
+	height:10px;
+}
+.shopNew-solitaire .progressBox .progressSpan{
+	position:absolute;
+	left:0;
+	background:#FF0E00;
+	border-radius:20px;
+	top:0;
+	height:100%;
+}
+.shopNew-solitaire .endInfo{
+	padding:15px 15px 10px 15px;
+}
+.shopNew-solitaire .endInfo .left{
+	float:left;
+	font-size: 12px;
+	color: #050505;
+}
+.shopNew-solitaire .endInfo .left .price{
+	color:#FF2A06;
+	font-size:18px;
+}
+.shopNew-solitaire .endInfo .right{
+	float:right;
+	display:block;
+	width:140px;
+	padding:3px 0;
+	background: #E10004;
+	border-radius:24px;
+	font-size:12px;
+	color:#fff;
+	letter-spacing: 1px;
+	text-align:center;
+}
+.shopNew-solitaire .endInfo .numList{
+	display: inline-block;
+	background: #fff;
+	border-radius: 2px;
+	text-align: center;
+	font-size: 12px;
+	color: #FF2A06;
+	width: 18px;
+	padding-left:1px;
+	height: 16px;
+	vertical-align: middle;
+	margin: 0 2px;
+	line-height: 16px;
+}
+/*直播*/
+.shopNew-live .picBox{
+	float:left;
+	width:120px;
+	height:120px;
+	overflow:hidden;
+	position:relative;
+}
+.shopNew-live .picBox .statusImage{
+	position: absolute;
+	bottom: 7px;
+	right: 7px;
+	display: inline-block;
+	padding: 3px 8px;
+	z-index: 2;
+	border-radius: 11px;
+	text-align: center;
+}
+.shopNew-live .picBox .statusImage .pic{
+	height:14px;
+	margin-right:3px;
+	width:auto;
+}
+.shopNew-live .picBox .btn1{
+	font-size:10px;
+	color:#fff;
+	background:#D40000;
+}
+.shopNew-live .picBox .btn2{
+	font-size:10px;
+	color:#fff;
+	background:#0A80DB;
+}
+.shopNew-live .textBox{
+	margin-left:135px;
+}
+.shopNew-live .goodsList{
+	margin-left:-10px;
+}
+.shopNew-live .textBox .name{
+	color:#232323;
+	font-size:14px;
+	line-height:18px;
+	height:40px;
+	overflow:hidden;
+}
+.shopNew-live .goodsList .list{
+	float:left;
+	width:25%;
+	overflow:hidden;
+}
+.shopNew-live .goodsList .list .pic{
+	border-radius:4px;
+}
+.shopNew-live .goodsList .list .list_pic{
+	margin-left:10px;
+	border-radius:4px;
+	overflow:hidden;
+}
+/*视频*/
+.shopNew-video .picBox{
+	float:left;
+	width:120px;
+	height:120px;
+	overflow:hidden;
+	position:relative;
+}
+.shopNew-video .statusImage{
+	position:absolute;
+	z-index:2px;
+	top:50%;
+	left:50%;
+	margin-top:-15px;
+	margin-left:-15px;
+}
+.shopNew-video .statusImage .pic{
+	width:30px;
+	height:30px;
+}
+.shopNew-video .textBox{
+	margin-left:135px;
+}
+.shopNew-video .textBox .name{
+	color:#232323;
+	font-size:14px;
+	line-height:18px;
+	height:40px;
+	overflow:hidden;
+}
+.shopNew-video .goodsBox .goodsPic{
+	width:44px;
+	height:44px;
+	float:left;
+	border-radius:4px;
+	overflow:hidden;
+}
+.shopNew-video .goodsBox .goodsPrice{
+	margin-left:54px;
+}
+.shopNew-video .goodsBox .price{
+	color:#D40000;
+	font-size:10px;
+	line-height:16px;
+}
+.shopNew-video .goodsBox .oldPrice{
+	color:#767676;
+	font-size:10px;
+	text-decoration:line-through;
+	line-height:16px;
+}

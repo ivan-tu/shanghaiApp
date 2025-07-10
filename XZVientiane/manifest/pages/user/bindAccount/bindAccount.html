@@ -1,0 +1,52 @@
+<div class="app-wrapper">
+    <div class="app-main">
+        <div class="user-login">
+            <div class="user-login-canvas"></div>
+            <!--
+            <div class="user-login-logo" style="height: 32px;">
+                <image src="{{assetsPath}}images/morePeople.png" mode="widthFix" />
+            </div>
+            <div class="user-login-title">绑定手机号</div>-->
+            <div class="user-login-main" wx:if="{{client=='wx'&&bindType=='weixinPhone'}}">
+              <div class="user-login-mobile">
+              <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" class="user-login-submit active" wx:if="{{client=='wx'}}">绑定微信手机号</button>
+              </div>
+              <div bindtap="selectOther" class="pd20 p14 c888 tac">绑定其他手机号</div>
+            </div>
+            <div class="user-login-main" wx:else>
+                <div class="user-login-code" wx:if="{{isCode}}">
+                    <div class="user-login-codeMobile">
+                        <span wx:for="{{form.mobile}}" class="user-login-codeMobile{{index}}">{{item}}</span>
+                        <button type="button" bindtap="editMobile" class="user-login-codeEdit"><i class="xzicon-form"></i></button>
+                    </div>
+                    <div class="user-login-codeBox">
+                        <div class="user-login-codeInput">
+                            <input auto-focus="true" autofocus type="tel" class="xzui-input" bindfocus="focusMobile" bindblur="blurMobile" value="{{form.code}}" bindinput="inputCode" maxlendth="4" />
+                            <span class="user-login-codeCursor {{(focusInput?'show':'')}} user-login-codeCursor_{{form.code.length}}"></span>
+                        </div>
+                        <div class="user-login-codeList clearfix">
+                            <div><span>{{form.code[0]}}</span></div>
+                            <div><span>{{form.code[1]}}</span></div>
+                            <div><span>{{form.code[2]}}</span></div>
+                            <div><span>{{form.code[3]}}</span></div>
+                        </div>
+                    </div>
+                    <button type="button" bindtap="submit" wx:if="{{checkLogin}}" class="user-login-submit active" size="large" >绑定</button>
+                    <button class="user-login-submit" type="button" wx:elif="{{isCode&&isSendCode}}">重新发送（{{countDownNum}}s）</button>
+                    <button class="user-login-submit active" type="button" bindtap="sendCode" wx:elif="{{isCode}}">获取验证码</button>
+                    <p class="user-login-error" bindtap="sendVoice">收不到验证码？发送语音验证码</p>
+                </div>
+                <div class="user-login-mobile" wx:else>
+                    <input type="tel" class="xzui-input user-login-input" bindfocus="focusMobile" bindblur="blurMobile" value="{{form.mobile}}" maxlendth="11" placeholder="输入手机号" bindinput="inputMobile" />
+                    <button class="user-login-submit active" type="button" bindtap="sendCode" wx:if="{{checkMobile}}">获取验证码</button>
+                    <button class="user-login-submit" type="button" wx:else>获取验证码</button>
+                    <div class="tac pd20">
+                    <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" class="tac p14 c888" wx:if="{{client=='wx'}}">
+                    绑定微信手机号
+                    </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,41 @@
+<div class="app-wrapper">
+    <div class="app-main positionBottom">
+    	<div class="markWraper"></div>
+        <div class="loadingBox mlr14" wx:if="{{ajaxLoading}}">
+            <div class="xzicon-loading"></div>
+        </div>
+        <div wx:else>
+            <div class="myTeamDetail_header">
+                <div class="clearfix">
+                    <div class="picBox hasLoading"><image src="{{data.headpic}}" mode="widthFix" /></div>
+                    <div class="textBox">
+                        <p class="c333 p18">{{data.username}}</p>
+                        <p class="c333 p14">{{data.account}}<span class="telBtn" wx:if="{{client=='wx'}}" data-tel="{{data.account}}" bindtap="callTel">拨打</span><span class="telBtn" data-tel="{{data.account}}" bindtap="copyThis">复制</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="myTeamDetail_titleDiv">
+                <div class="form-list">
+                    <div class="form-list-item title long c666">用户身份</div>
+                    <div class="form-list-item tar">
+                        <p wx:if="{{data.ispartner==1}}">合伙人</p>
+                        <p wx:elif="{{data.isagent==1}}">代理</p>
+                        <p wx:elif="{{data.isexpert==1}}">达人</p>
+                        <p wx:else>普通用户</p>
+                    </div>
+                </div>
+                <div class="form-list">
+                    <div class="form-list-item title long c666">邀请人数</div>
+                    <div class="form-list-item tar">{{data.child||0}}</div>
+                </div>
+                <div class="form-list" wx:if="{{data.parentInfo&&data.parentInfo.username}}">
+                	<div class="form-list-item title long c666">推荐人</div>
+                    <div class="form-list-item tar myTeamDetail_userInfo">
+                        <image class="userFace" src="{{data.parentInfo.headpic}}" mode="widthFix" />
+                        <span class="userName">{{data.parentInfo.username}}/{{data.parentInfo.account}}</span>
+                    </div>
+     			</div>
+            </div>
+        </div>
+    </div>
+</div>

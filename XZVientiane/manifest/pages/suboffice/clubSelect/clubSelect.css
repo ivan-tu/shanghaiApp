@@ -1,0 +1,22 @@
+.clubSelect_list{
+	background:#fff;
+	position:relative;
+	padding:10px 15px 10px 45px;
+}
+.clubSelect_list +.clubSelect_list{
+	border-top:1px solid #F5F5F5;
+}
+.clubSelect_list .xzui-checkbox-new{
+	position:absolute;
+	left:15px;
+	top:50%;
+	margin-top:-10px;
+}
+.clubSelect_list .picBox{
+	float:left;
+	width:50px;
+	height:50px;
+}
+.clubSelect_list .textBox{
+	margin-left:60px;
+}

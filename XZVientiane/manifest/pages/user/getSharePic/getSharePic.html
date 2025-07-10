@@ -1,0 +1,45 @@
+<div class="app-wrapper">
+    <div class="app-main">
+        <div class="sharePic_body">
+        	<span class="closeBtn" bindtap="toBack"><image class="w100 h100" src="{{staticPath}}images/shareClose.png" mode="widthFix" /></span>
+            <div id="myPic" class="sharePic_container">
+            	<div wx:if="{{type=='user'}}">
+                    <div class="header clearfix">
+                        <div class="picBox"><image class="w100" src="{{data.headpic}}" mode="widthFix" /></div>
+                        <p class="username">{{data.username}}</p>
+                    </div>
+                    <div class="qrcode">
+                        <div class="qrcodePic"><image class="w100" src="{{qrcodePic}}" mode="widthFix" /></div>
+                        <p class="c666 tac mt5">用微信扫一扫，查看我的在局名片</p>
+                    </div>
+                </div>
+                <div wx:elif="{{type=='home'}}" class="sharePic_home_container">
+                	<div class="home_container_headerPic"><image class="w100" src="https://statics.tuiya.cc/16871100036325480.jpg" mode="widthFix" /></div>
+                    <div class="home_container_inviteInfo">
+                        <p class="p16 c000">{{data.username}}</p>
+                        <p class="p14 c000">邀请您加入Hi友局</p>
+                        <div class="home_container_qrcode"><image class="w100" src="{{qrcodePic}}" mode="widthFix" /></div>
+                    </div>
+                </div>
+                <div wx:elif="{{type=='store'}}" class="sharePic_store_container">
+                	<div class="store_container_headerPic">
+                    	<image class="w100" src="{{staticPath}}iconPic/textLogo.png" mode="widthFix" />
+                    </div>
+                    <div class="store_container_qrcode"><image class="w100" src="{{qrcodePic}}" mode="widthFix" /></div>
+                    <p class="p14 c666 mt10 tac">扫码买单</p>
+                </div>
+                <div wx:elif="{{type=='activity'}}" class="sharePic_home_container">
+                	<div class="home_container_headerPic"><image class="w100" src="{{data.pic}}" mode="widthFix" /></div>
+                    <div class="activity_container_inviteInfo">
+                        <p class="p14 c000">{{data.name}}</p>
+                        <p class="p12 c000">{{data.begintime}} | {{data.areaText}}</p>
+                        <p class="mt15 p12 c000">{{userInfo.username}} 邀约</p>
+                        <div class="activity_container_qrcode"><image class="w100" src="{{qrcodePic}}" mode="widthFix" /></div>
+                    </div>
+                </div>
+            </div>
+            <p class="sharePic_tips">长按图片保存到相册</p>
+            <div id="newPic" class="sharePic_container sharePic_container2"><image class="w100" src="{{pic}}" mode="widthFix" /></div>
+        </div>
+    </div>
+</div>

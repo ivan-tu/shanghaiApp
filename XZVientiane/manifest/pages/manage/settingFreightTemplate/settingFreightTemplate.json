@@ -1,0 +1,7 @@
+{
+    "usingComponents":
+    {
+		"nologin": "/components/common/nologin/nologin"
+    },
+    "navigationBarTitleText": "运费模板"
+}

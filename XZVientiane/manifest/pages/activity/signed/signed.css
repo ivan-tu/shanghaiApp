@@ -1,0 +1,21 @@
+.signed{
+  padding: 15px;
+}
+.size16{
+  font-size: 16px;
+}
+.signed .signedBtn{
+  width: 100%;
+  margin-top: 35px;
+  background: #FEE10B;
+  border-radius: 20px;
+  display: inline-block;
+  font-size: 14px;
+  color: #333;
+  padding: 10px 0;
+  text-align: center;
+}
+.signed .checked{
+  background: #ddd !important;
+  color: #555 !important;
+}

@@ -1,0 +1,36 @@
+<div class="app-wrapper">
+    <div class="app-main">
+    	<search-bar label="搜索名称" placeholder="搜索名称" keyword="{{form.keyword}}" bindchange="changeKeyword" bindclose="closeKeyword"></search-bar>
+        <div class="searchCategory-box clearfix bgfff">
+            <div class="searchCategory">
+                <div class="listBox">
+                    <span class="list {{(form.isexpert==''&&form.isagent==''&&form.ispartner==''?' active':'')}}" data-type="all" bindtap="screenType">全部</span>
+                    <span class="list {{(form.isexpert=='1'?' active':'')}}" data-type="isexpert" bindtap="screenType">达人</span>
+                    <span class="list {{(form.isagent=='1'?' active':'')}}" data-type="isagent" bindtap="screenType">代理</span>
+                    <span class="list {{(form.ispartner=='1'?' active':'')}}" data-type="ispartner" bindtap="screenType">合伙人</span>
+                </div>
+            </div>
+        </div>
+    	<p class="form-title">共 {{count}} 人</p>
+        <div class="pb20" wx:if="{{data&&data.length}}">
+            <div class="bgfff myInvite-box">
+                <div class="myInvite-list clearfix" wx:for="{{data}}">
+                    <div class="picBox hasLoading" bindtap="toDetail" data-id="{{item._id}}"><image src="{{item.headpic}}" mode="widthFix" class="round" /></div>
+                    <div class="textBox">
+                        <p class="c131 textOver" data-tel="{{item.account}}" bindtap="callTel">{{item.username}}/{{item.account}}<span class="levelSpan" wx:if="{{item.ispartner==1}}">合伙人</span><span class="levelSpan" wx:elif="{{item.isagent==1}}">代理</span><span class="levelSpan" wx:elif="{{item.isexpert==1}}">达人</span></p>
+                        <p class="c888 p12 mt5" wx:if="{{item.parentInfo&&item.parentInfo.account}}" data-tel="{{item.parentInfo.account}}" bindtap="callTel">推荐人：{{item.parentInfo.username}}/{{item.parentInfo.account}}</p>
+                    </div>
+                    <div class="getWxCodeBtn" wx:if="{{item.wxCodePic}}" data-pic="{{item.wxCodePic}}" bindtap="viewThisImage">
+                    	<div class="codePic"><image class="w100" mode="widthFix" src="https://statics.tuiya.cc/17494643574926281.png" /></div>
+                        <p class="codeTips">查看微信</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <view class="loadingBox mlr15" hidden="{{!showLoading}}">
+			<div class="xzicon-loading"></div>
+			<div class="xzui-loadmore__tips">正在加载</div>
+		</view>
+		<view class="noData mlr15" hidden="{{!showNoData}}">暂无数据</view>
+    </div>
+</div>

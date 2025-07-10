@@ -1,0 +1,105 @@
+.mt2{
+	margin-top:2px;
+}
+.activityIndex-activityBox .activityList{
+	padding:10px 15px;
+	display:block;
+}
+.activityIndex-activityBox .activityList + .activityList{
+	border-top:1px solid #eee;
+}
+.activityIndex-activityBox .activityList .picBox{
+	float:left;
+	width:120px;
+	height:96px;
+	border-radius:4px;
+	overflow:hidden;
+}
+.activityIndex-activityBox .activityList .picBox .pic{
+	border-radius:4px;
+}
+.activityIndex-activityBox .activityList .textBox{
+	margin-left:130px;
+}
+.activityIndex-activityBox .activityList .title{
+	font-size:16px;
+	color:#131313;
+}
+.activityIndex-activityBox .activityList .address{
+	font-size:12px;
+	color:#666;
+}
+.activityIndex-activityBox .activityList .userInfo .userPic{
+	width:20px;
+	height:20px;
+	border-radius:50%;
+}
+.activityIndex-activityBox .activityList .userInfo .userName{
+	display:inline-block;
+	margin-left:5px;
+	font-size:12px;
+	color:#313131;
+}
+.activityIndex-activityBox .activityList .textBox .price{
+	color:#D9001B;
+	font-size:15px;
+	font-weight:600;
+}
+.activityIndex-activityBox .activityList .signInfo{
+	font-size:12px;
+	color:#666;
+	line-height:21px;
+}
+/*nav*/
+.xzui-tabbar:before{
+  border-top: 0px none;
+}
+.xzui-tabbar_item.index{
+    background-image: url(/static/images/nav-index.png);
+}
+.xzui-bar_item_on.index,
+.xzui-tabbar_item.index:hover{
+    background-image: url(/static/images/nav-indexActive.png);
+}
+.xzui-tabbar_item.activity{
+    background-image: url(/static/images/nav-activity.png);
+}
+.xzui-bar_item_on.activity,
+.xzui-tabbar_item.activity:hover{
+    background-image: url(/static/images/nav-activityActive.png);
+}
+.xzui-tabbar_item.store{
+    background-image: url(/static/images/nav-store.png);
+}
+.xzui-bar_item_on.store,
+.xzui-tabbar_item.store:hover{
+    background-image: url(/static/images/nav-storeActive.png);
+}
+.xzui-tabbar_item.group{
+    background-image: url(/static/images/nav-group.png);
+}
+.xzui-bar_item_on.group,
+.xzui-tabbar_item.group:hover{
+    background-image: url(/static/images/nav-groupActive.png);
+}
+.xzui-tabbar_item.message{
+    background-image: url(/static/images/nav-message.png);
+}
+.xzui-bar_item_on.message,
+.xzui-tabbar_item.message:hover{
+    background-image: url(/static/images/nav-messageActive.png);
+}
+.xzui-tabbar_item.goods{
+    background-image: url(/static/images/nav-goods.png);
+}
+.xzui-bar_item_on.goods,
+.xzui-tabbar_item.goods:hover{
+    background-image: url(/static/images/nav-goodsActive.png);
+}
+.xzui-tabbar_item.my{
+    background-image: url(/static/images/nav-my.png);
+}
+.xzui-bar_item_on.my,
+.xzui-tabbar_item.my:hover{
+    background-image: url(/static/images/nav-myActive.png);
+}

@@ -1,0 +1,73 @@
+<div class="app-wrapper">
+    <div class="app-main">
+        <div class="finance-pay-main" wx:if="{{payStatus==1}}">
+            <div class="finance-pay setTopLine setBottomLine">
+                <div class="finance-pay-num cRed"><span>¥</span>{{data.total||0}}</div>
+                <div class="finance-pay-title">订单编号：{{data.ordernum}}</div>
+            </div>
+            <div class="mt10">
+            	<div class="bgfff payList" bindtap="selectBalancepay"  wx:if="{{showBalance2}}">
+                    <div class="form-list" style="cursor:pointer;">
+                        <div class="form-list-item"><i class="payIcon radio-icon xzicon-wallet" style="color:#faad14;"></i><p class="displayIB ml10 p16 c333">收入余额抵扣<span class="p14">（可用：¥{{balanceTotal}}）</span></p></div>
+                        <div class="form-list-item tar title short"><span class="xzui-radio-new {{(isBalancepay==1?' active':'')}}"></span></div>
+                    </div>
+                </div>
+                <div class="bgfff payList" wx:for="{{data.paytype}}" bindtap="selectPayType" data-id="{{item.id}}">
+                    <div class="form-list" style="cursor:pointer;">
+                        <div class="form-list-item"><i class="payIcon radio-icon {{item.icon}}"></i><span class="displayIB ml10 p16 c333">{{item.name}}</span></div>
+                        <div class="form-list-item tar title short"><span class="xzui-radio-new {{(payType==item.id?' active':'')}}"></span></div>
+                    </div>
+                </div>
+                <div class="bgfff payList" bindtap="selectPayType" data-id="balance" wx:if="{{showBalance}}">
+                    <div class="form-list" style="cursor:pointer;">
+                        <div class="form-list-item"><i class="payIcon radio-icon xzicon-wallet" style="color:#faad14;"></i><p class="displayIB ml10 p16 c333">收入余额支付<span class="p14">（可用：¥{{balanceTotal}}）</span></p></div>
+                        <div class="form-list-item tar title short"><span class="xzui-radio-new {{(payType=='balance'?' active':'')}}"></span></div>
+                    </div>
+                </div>
+                <div class="bgfff payList" bindtap="selectPayType" data-id="diamond" wx:if="{{showDiamond}}">
+                    <div class="form-list" style="cursor:pointer;">
+                        <div class="form-list-item"><image src="https://static.gedian.shop/16760116434004859.png" style="width:22px;" mode="widthFix" /><p class="displayIB ml10 p16 c333">钻石余额支付<span class="p14">（可用：¥{{diamondTotal}}）</span></p></div>
+                        <div class="form-list-item tar title short"><span class="xzui-radio-new {{(payType=='diamond'?' active':'')}}"></span></div>
+                    </div>
+                </div>
+                <div class="bgfff payList" bindtap="toHelpPay" wx:if="{{canreplacepay==1}}">
+                    <div class="form-list" style="cursor:pointer;">
+                        <div class="form-list-item rightIcon"><image style="width:24px;height:24px;" src="https://statics.tuiya.cc/17393524248677177.png" mode="widthFix" /><p class="displayIB ml10 p16 c333">找朋友代付</p></div>
+                    </div>
+                </div>
+            </div>
+            <!--
+            <div class="finance-pay-more" bindtap="getMorePay" wx:if="{{!showWeixinPay&&client=='app'}}">更多支付方式 <i class="xzicon-down"></i></div>-->
+            <div wx:if="{{!orderError||orderError}}">
+              <div class="xzui-btn-app" wx:if="{{payType=='alipay'&&!isWeixin}}">
+                  <navigator url="{{aliUrl}}" target="_blank">
+                  	<button type="button" class="xzui-btn xzui-btn_b primary blue" size="large" bindtap="submit">确认支付</button>
+                  </navigator>
+              </div>
+              <div class="xzui-btn-app" wx:else>
+                 <form wx:if="{{client=='wx'}}" action="javascript:;" bindsubmit="submit" report-submit='true'>
+                    <button type="button" class="xzui-btn xzui-btn_b primary" size="large" form-type="submit">确认支付</button>
+                 </form>
+                 <button wx:else type="button" class="xzui-btn xzui-btn_b primary" size="large" bindtap="submit">确认支付</button>
+              </div>
+            </div>
+        </div>
+        <div class="tac pd15 bgfff" wx:elif="{{payStatus==2}}">订单已支付</div>
+        <view hidden="{{!showPayDialog}}">
+          <div style="z-index:1000;" class="xzui-mask show"></div>
+            <div class="xzui-modal show" style="z-index:1001;">
+              <div class="xzui-modal_body">
+                  <div class="xzui-modal_main">
+                    <div>请在新窗口完成支付</div>
+                    </div>
+                </div>
+              <div class="xzui-modal_foot">
+                  <div class="xzui-modal_btnBox">
+                      <button class="xzui-btn cancel xzui-modal_btn" type="default" bindtap="payDialog_cancel">更换支付方式</button>
+                      <button class="xzui-btn confirm xzui-modal_btn" type="primary" bindtap="payDialog_success">已完成支付</button>
+                    </div>
+                </div>
+            </div>
+        </view>
+    </div>
+</div>

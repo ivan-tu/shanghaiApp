@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "search-bar": "/components/common/search-bar/search-bar",
+    "nologin": "/components/common/nologin/nologin"
+  },
+  "navigationBarTitleText": "选择快递公司"
+}

@@ -1,0 +1,51 @@
+.evaluate_userInfo .picBox {
+	float: left;
+	width: 28px;
+	height: 28px;
+	border-radius: 50%;
+	overflow: hidden;
+}
+
+.evaluate_userInfo .textBox {
+	margin-left: 35px;
+	margin-right: 40px;
+	line-height: 30px;
+}
+
+.evaluate_userInfo .rightBox {
+	line-height: 30px;
+	float: right;
+}
+
+.order_starList .xzicon-staro {
+	font-size: 16px;
+	color: #999;
+}
+
+.order_starList .xzicon-star2 {
+	font-size: 16px;
+	color: #F84438;
+}
+
+.order_starTips {
+	font-size: 14px;
+	color: #666;
+	margin-left: 5px;
+}
+
+.evaluate_picBox {
+	margin: -5px 0 0 -5px;
+}
+
+.evaluate_picBox .evaluate_picList {
+	width: 33.333333%;
+	float: left;
+}
+
+.evaluate_picList .list {
+	margin: 5px 0 0 5px;
+}
+
+.evaluate_list+.evaluate_list {
+	margin-top: 10px;
+}

@@ -1,0 +1,65 @@
+<div class="app-wrapper {{(client=='web'?' hasPageFrame':'')}}">
+    <div class="app-main">
+    	<div class="markWraper"></div>
+        <div class="bgfff ptb10">
+            <div class="searchCategory-box clearfix searchCategory-secretary">
+                <div class="searchCategory">
+                    <div class="listBox">
+                        <span class="list {{(getType==''?' active':'')}}" data-type="" bindtap="screenType">最新</span>
+                        <span class="list {{(getType=='free'?' active':'')}}" data-type="free" bindtap="screenType">免费</span>
+                        <span class="list {{(getType=='wallte'?' active':'')}}" data-type="wallte" bindtap="screenType">友币</span>
+                        <span class="list {{(getType=='join'?' active':'')}}" data-type="join" bindtap="screenType">我参加的</span>
+                        <span class="list {{(getType=='my'?' active':'')}}" data-type="my" bindtap="screenType">我组织的</span>
+                        <span class="list {{(getType=='over'?' active':'')}}" data-type="over" bindtap="screenType">已结束</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pb20" wx:if="{{data&&data.length}}">
+            <div class="activityIndex-activityBox bgfff">
+                <navigator url="../../activity/detail/detail?id={{item._id}}" class="activityList clearfix" wx:for="{{data}}">
+                    <div class="picBox hasLoading" style="height:{{picHeight}}px;">
+                    	<image class="w100 h100 pic" src="{{item.pic}}" mode="heightFix" />
+                    </div>
+                    <div class="textBox">
+                    	<p class="title">{{item.name}}</p>
+                        <p class="address mt2">{{item.begintime}}开始 | {{item.areaText}}</p>
+                        <div class="userInfo mt2"><image src="{{item.masterpic}}" class="userPic" mode="widthFix" /><span class="userName">{{item.mastername}}组织</span></div>
+                        <div class="clearfix mt2">
+                        	<p class="fl signInfo">限{{item.limitnum}}人，<span class="signBtn" wx:if="{{item.friendnum}}">{{item.friendnum}}好友已报名</span><span class="signBtn" wx:else>{{item.joinnum}}人已报名</span></p>
+                            <p class="fr price" wx:if="{{item.isfree==2&&item.price}}">{{item.price}}<span class="p12" wx:if="{{item.paytype=='wallte'}}"> 币</span><span class="p12" wx:elif="{{item.paytype=='cash'}}"> 元</span><span class="p12" wx:elif="{{item.paytype=='diamond'}}"> 钻</span></p>
+                        	<p class="fr price" wx:else>免费</p>
+                        </div>
+                    </div>
+                </navigator>
+            </div>
+        </div>
+        <view class="loadingBox mlr15" hidden="{{!showLoading}}">
+			<div class="xzicon-loading"></div>
+			<div class="xzui-loadmore__tips">正在加载</div>
+		</view>
+		<view class="noData mlr15" hidden="{{!showNoData}}">暂无数据</view>
+    </div>
+    <newShare id="newShareCon"></newShare>
+</div>
+<div class="xzui-tabbar app-nav max480" wx:if="{{client=='web'}}">
+	<navigator url="../../home/index/index" class="xzui-tabbar_item index">
+        <span class="xzui-tabbar_label">首页</span>
+    </navigator>
+    <navigator url="../../activity/index/index" class="xzui-tabbar_item activity xzui-bar_item_on">
+        <span class="xzui-tabbar_label">友局</span>
+    </navigator>
+    <navigator url="../../store/index/index" class="xzui-tabbar_item store">
+        <span class="xzui-tabbar_label">友店</span>
+    </navigator>
+    <navigator url="../../goods/index/index" class="xzui-tabbar_item goods">
+        <span class="xzui-tabbar_label">商城</span>
+    </navigator>
+    <!--
+    <navigator url="../../user/messageCategory/messageCategory" class="xzui-tabbar_item message">
+        <span class="xzui-tabbar_label">消息</span>
+    </navigator>-->
+    <navigator url="../../user/my/my" class="xzui-tabbar_item my">
+        <span class="xzui-tabbar_label">我的</span>
+    </navigator>
+</div>

@@ -1,0 +1,21 @@
+<div class="app-wrapper">
+	<div class="app-main bgfff pb20">
+    	<view class="loadingBox mlr14" wx:if="{{showLoading}}">
+            <div class="xzicon-loading"></div>
+            <div class="xzui-loadmore__tips">正在加载</div>
+        </view>
+        <view class="noData mlr14" wx:elif="{{showNoData}}">暂无类目</view>
+        <view class="selectCategoryBox" wx:else>
+        	<div class="selectCategoryList" wx:if="{{showAll}}">
+            	<div class="text"  bindtap="selectThis" data-id="" data-title="" data-type="parent">全部</div>
+            </div>
+            <div class="selectCategoryList {{(item.show?' active':'')}}" wx:for="{{data}}">
+            	<div class="text {{(options.id==item.id?' active':'')}}" bindtap="selectThis" data-type="parent" data-id="{{item.id}}" data-title="{{item.title}}" data-index="{{index}}"><span class="vMid displayIB">{{item.title}}</span></div>
+                <div class="selectCategoryList_son" wx:if="{{showSon==1&&item.child&&item.child.length}}">
+                	<div class="text  {{(options.id==g._id?' active':'')}}" wx:for="{{item.child}}" wx:for-index="l" wx:for-item="g" bindtap="selectThis" data-type="son" data-parent="{{index}}" data-id="{{g._id}}" data-title="{{g.title}}"><span class="vMid displayIB">{{g.title}}</span></div>
+                </div>
+                <span class="rightIcon {{(item.show?' active':'')}}" wx:if="{{showSon==1&&item.child&&item.child.length}}" data-index="{{index}}" bindtap="showThis"><i class="xzicon-down"></i></span>
+            </div>
+        </view>
+    </div>
+</div>

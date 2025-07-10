@@ -1,0 +1,94 @@
+<div class="app-wrapper">
+	<div wx:if="{{isUserLogin}}" class="app-main" style="padding-bottom:60px;">
+		<view class="markWraper"></view>
+		<view class="loadingBox mlr14" wx:if="{{showLoading}}">
+			<div class="xzicon-loading"></div>
+			<div class="xzui-loadmore__tips">正在加载</div>
+		</view>
+		<view wx:else>
+			<div class="activityTicket_box">
+				<p class="p12" style="color:#636363">选择票种</p>
+				<div wx:for="{{data.tickets}}" class="activityTicket_list {{(form.ticket==item.name?' active':'')}}"
+					data-index="{{index}}" bindtap="selectThis">
+					<div class="clearfix">
+						<p class="name fl p16">{{item.name}}</p>
+						<p class="price fr p16 bold" wx:if="{{form.usetype}}">¥{{item.price}}</p>
+                        <p class="price fr p16 bold" wx:else>¥{{item.price2}}</p>
+					</div>
+					<p class="content p12">{{item.content}}</p>
+                    <p class="mt5 p12">共{{item.quantity	}}张，剩余{{item.stock}}张</p>
+				</div>
+			</div>
+			<div class="plr15 mb20" wx:if="{{!data.myjoin}}">
+				<div class="displayIB" data-type="1" bindtap="screenType"><span
+						class="xzui-radio-new {{(form.usetype?' active':'')}}"></span><span class="xzui-radioTitle-new">自己使用</span>
+				</div>
+				<div class="displayIB ml15" data-type="0" bindtap="screenType"><span
+						class="xzui-radio-new  {{(!form.usetype?' active':'')}}"></span><span
+						class="xzui-radioTitle-new">送给好友</span></div>
+			</div>
+			<div class="plr15" wx:if="{{!form.usetype}}">
+				<p class="p12" style="color:#636363">选择数量（剩余:{{stock}}张）</p>
+				<div class="quantityControl mt10">
+					<span class="minusControl" catchtap="minusCount"><i class="xzicon-minus"></i></span><span
+						class="inputControl"><input class="xzui-input tac" pattern="[0-9]*" type="number" value="{{form.quantity}}"
+							bindinput="inputCount" /></span><span class="addControl" catchtap="addCount"><i
+							class="xzicon-plus"></i></span>
+				</div>
+			</div>
+			<div class="activityTicket_footBtn">
+				<div class="textBox">
+					<p class="p14">合计：<span class="p18 cRed bold">¥{{totalPrice}}</span></p>
+				</div>
+				<div class="btnBox">
+					<button class="toBuyBtn" type="button" bindtap="toBuy">{{totalPrice=='0.00'?'免费领取':'立即购买'}}</button>
+				</div>
+			</div>
+		</view>
+        <!--个人资料弹框-->
+        <div class="publicScroll_dialog showEditInfoDialog {{(showEditInfoDialog.show?' show':'')}}">
+            <div class="publicScroll_body" style="height:{{showEditInfoDialog.height}}px;">
+                <div class="publicScroll_main">
+                    <p class="tac plr15 c131">请完善个人资料</p>
+                    <div class="headPicBox">
+                        <div class="picBox hasLoading" wx:if="{{client=='wx'}}">
+                            <button class="wxUploadBtn" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
+                                <image class="round" src="{{showEditInfoDialog.avatarUrl}}" style="width:100%;height:100%;" mode="widthFix" />
+                            </button> 
+                        </div>
+                        <div class="picBox hasLoading" wx:else><upload value="{{showEditInfoDialog.headpic}}" class="user-upload" width="60" height="60" bindchange="uploadSuccess" id="uploadPic"></upload></div>
+                        <span class="cameraIcon"><i class="xzicon-camera"></i></span>
+                    </div>
+                    <div class="inputBox"><input type="nickname" class="textInput" bindinput="model" data-model="showEditInfoDialog.username" value="{{showEditInfoDialog.username}}" placeholder="请输入昵称" /></div>
+                    <div class="toSubmitBtn" bindtap="toConfirmEditInfoDialog">确定</div>
+                </div>
+            </div>
+        </div>
+        <!--确认弹框-->
+        <div class="publicScroll_dialog confirm_dialog {{(showBuyDialog.show?' show':'')}}">
+            <view class="publicScroll_body ptb5" style="height:{{showBuyDialog.height}}px;">
+            	<div class="publicScroll_head clearfix tac bgfff">
+                    <span class="p16 bold">确认支付</span>
+                    <span class="fr p16" bindtap="toHideBuyDialog"><i class="xzicon-close"></i></span>
+                </div>
+            	<div class="publicScroll_main bgfff">
+                    <p class="pd10 tac">{{showBuyDialog.content}}</p>
+                </div>
+                <view class="publicScroll_footBtn">
+                	<div class="displayFlex">
+                        <div class="list">
+                        	<button class="submitBtn" type="button" bindtap="toConfirmCash">现金支付</button>
+                        </div>
+                        <div class="list ml10" wx:if="{{showBuyDialog.change==1}}">
+                        	<button class="submitBtn" type="button" bindtap="toConfirmDiamond">钻石兑换</button>
+                        </div>
+                        <div class="list ml10" wx:else>
+                        	<button class="submitBtn" type="button" bindtap="toConfirmRecharge">钻石充值</button>
+                        </div>
+                    </div>
+                </view>
+            </view>
+        </div>
+	</div>
+    <nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

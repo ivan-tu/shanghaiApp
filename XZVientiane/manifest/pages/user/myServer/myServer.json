@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+	  "nologin": "/components/common/nologin/nologin",
+	  "upload": "/components/common/upload/upload"
+   },
+  "navigationBarTitleText": "服务商"
+}

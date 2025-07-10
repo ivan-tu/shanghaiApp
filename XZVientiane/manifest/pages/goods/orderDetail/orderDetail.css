@@ -1,0 +1,165 @@
+.orderDetail-addressBar{
+	padding:10px 15px 10px 50px;
+	position:relative;
+	color:#555;
+	font-size:13px;
+}
+.orderDetail-addressBar .addressIcon{
+	width:30px;
+	position:absolute;
+	left:10px;
+	top:50%;
+	margin-top:-14px;
+}
+.orderDetail-title{
+	padding-left:15px;
+	position:relative;
+	font-size:16px;
+	color:#333;
+}
+.orderDetail-title:before{
+	content:'';
+	width:3px;
+	position:absolute;
+	top:0;
+	bottom:0;
+	left:0;
+	background:#D81E06;
+}
+.orderDetail-footBtn{
+	background:transparent !important;
+}
+.orderDetail-footBtn .xzui-btn.xzui-btn_b{
+	border-radius:4px;
+}
+.shop-orderDetail-goodsList .goodsPic{
+	overflow:hidden;
+	width:50px;
+	height:50px;
+	float:left;
+	position:relative;
+}
+.shop-orderDetail-goodsList .goodsText{
+	margin-left:60px;
+	margin-right:90px;
+}
+.shop-orderDetail-goodsList .goodsSet{
+	float:right;
+	width:90px;
+}
+.shop-orderDetail-goodsList:last-child:after{
+	content:'';
+	display:none;
+}
+.xzui-btn_b.gray{
+	color: #888 !important;
+	font-weight: 500;
+	background-color: #eee !important;
+	display: block;
+	margin: 0;
+}
+.xzui-btn_b.red{
+	color: #fff;
+	font-weight: 500;
+	background-color:#D81E06;
+	display: block;
+	margin: 0;
+}
+.xzui-btn-app .displayFlex .list + .list{
+	margin-left:10px;
+}
+/*评价相关*/
+.order_starList .xzicon-staro {
+	font-size: 16px;
+	color: #999;
+}
+.order_starList .xzicon-star2 {
+	font-size: 16px;
+	color: #F84438;
+}
+.order_starTips {
+	font-size: 14px;
+	color: #666;
+	margin-left: 5px;
+}
+.evaluate_picBox {
+	margin: -5px 0 0 -5px;
+}
+.evaluate_picBox .evaluate_picList {
+	width: 33.333333%;
+	float: left;
+}
+.evaluate_picList .list {
+	margin: 5px 0 0 5px;
+}
+.evaluate_list+.evaluate_list {
+	margin-top: 10px;
+}
+
+/*话费提货弹框*/
+.mobileDialog-modal .closeBtn{
+	position:absolute;
+	right:15px;
+	font-size:18px;
+	top:18px;
+	line-height:26px;
+	z-index:8;
+}
+.mobileDialog-modal-form{
+	border-bottom:1px solid #eee;
+}
+.mobileDialog-modal-form .title{
+	float:left;
+	text-align:left;
+	font-size:14px;
+	color:#333;
+	width:70px;
+	line-height:40px;
+}
+.mobileDialog-modal-form .mobileDialog-modal-inputBox{
+	margin-left:80px;
+	height:40px;
+	background:#fff;
+}
+.mobileDialog-modal-input{
+	width:100%;
+	border:0 none;
+	outline:none;
+	line-height:38px;
+	font-size:16px;
+	color:#333;
+	margin:0;
+	padding:0;
+}
+.mobileDialog-modal-inputBox input:placeholder{
+	color:#999;
+	font-size:16px;
+}
+.mobileDialog-modal-foot{
+	margin-top:20px;
+}
+.mobileDialog-modal-foot .cancelBtn{
+	background: #fff;
+	color:#D81E06;
+	font-size:18px;
+	height:40px;
+	line-height:40px;
+	text-align:center;
+	border-radius:4px;
+	cursor:pointer;
+	border:1px solid #D81E06;
+}
+.mobileDialog-modal-foot .submitBtn{
+	background: #D81E06;
+	color:#fff;
+	font-size:18px;
+	height:40px;
+	line-height:40px;
+	text-align:center;
+	border-radius:4px;
+	margin-left:15px;
+	cursor:pointer;
+	border:1px solid #D81E06;
+}
+
+

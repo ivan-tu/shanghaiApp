@@ -1,0 +1,164 @@
+.cBlue:hover{
+	color:#1577FE;
+}
+.user-withdraw{
+	margin:20px 10px;
+	background-color: #fff;
+	border: 0.5px solid #E5E5E5;
+	padding-bottom: 20px;
+}
+.user-withdraw-head{
+}
+.user-withdraw-headRow{
+	padding:12px 0 12px 12px;
+	background-color: #FBFBFB;
+}
+.user-withdraw-headRow+.user-withdraw-headRow{
+	margin-top: 1px;
+}
+.user-withdraw-headRowL{
+	float: left;
+	color: #333;
+	width: 60px;
+	font-size: 13px;
+}
+.user-withdraw-headRowR{
+	float: right;
+	width: 36px;
+	text-align: center;
+	color: #666;
+}
+.user-withdraw-headRowR+.user-withdraw-headRowC{
+	margin-right: 36px;
+	padding-right: 0;
+}
+.user-withdraw-headRowC{
+	margin-left: 60px;
+	color: #666;
+	display: block;
+	text-align: right;
+	padding-right: 12px;
+}
+.user-withdraw-headRowC.primary{
+	color: #2b2b2b;
+}
+.user-withdraw-headRowR.primary{
+	color: #2b2b2b;
+}
+
+.user-withdraw-headRowC .radio-cells{
+	line-height: 1;
+}
+.user-withdraw-headRowC .radio-bar{
+	display: inline-block;
+	vertical-align: top;
+	margin-left: 0;
+}
+.user-withdraw-headRowC .radio-title{
+	padding-left: 28px;
+}
+.user-withdraw-headRowC .radio-bar+.radio-bar{
+	margin-left: 10px;
+}
+
+.user-withdraw-main{
+	padding:0 24px;
+}
+.user-withdraw-title{
+	margin-top: 24px;
+	font-size: 16px;
+	color: 000;
+}
+.user-withdraw-unit{
+	line-height: 70px;
+	color: #000;
+	font-size: 36px;
+	float: left;
+	width: 24px;
+	text-align: center;
+}
+.user-withdraw-all{
+	float: right;
+	width: 60px;
+	line-height: 70px;
+	color: #EF4F4D;
+	font-size: 13px;
+	font-weight: 500;
+}
+.user-withdraw-inputBar{
+	margin: 0 60px 0 24px;
+}
+.user-withdraw-input{
+	width: 100%;
+	height: 70px;
+	font-size: 36px;
+	padding-left: 12px;
+}
+.user-withdraw-tips{
+	padding-top:12px;
+	color: #888888;
+	font-size: 13px;
+	font-weight: 300;
+}
+.user-withdraw-submit{
+	width: 100%;
+	color: #2b2b2b;
+	line-height: 46px;
+	border-radius: 23px;
+	font-size: 18px;
+	font-weight: 500;
+	margin-top: 30px;
+}
+.user-withdraw-link{
+	text-align: center;
+	margin-top: 15px;
+}
+.user-withdraw-link .link{
+	color: #999;
+	border-bottom: 1px solid #999;
+}
+
+.withdraw-guide{
+    text-align: center;
+    background-color: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.withdraw-guide-text{
+    margin-top: 24px;
+    color: #000;
+    font-size: 16px;
+}
+
+.withdraw-guide-flow{
+    margin-top: 12px;
+    color: #888;
+    font-size: 12px;
+}
+.withdraw-guide-qrcodeBtn{
+    line-height: 36px;
+    border-radius: 18px;
+    font-size: 14px;
+    margin-top: 8px;
+}
+
+.withdraw-guide-official{
+    margin: 24px;
+}
+.user-withdraw-invoice{
+	margin-top: 8px;
+	text-align: center;
+}
+.user-withdraw-invoice .link{
+	color: #2b2b2b;
+	font-size: 12px;
+}
+.user-withdraw .xzui-btn{
+	max-width:180px;
+	margin:auto;
+	padding:0;
+	border-radius:6px;
+}

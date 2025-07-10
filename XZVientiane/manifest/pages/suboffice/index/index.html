@@ -1,0 +1,87 @@
+<div class="app-wrapper  {{(client=='web'?' hasPageFrame':'')}}">
+    <div class="app-main">
+    	<div class="markWraper"></div>
+        <div class="bgfff">
+        	<search-bar label="搜索关键词" placeholder="搜索关键词" keyword="{{form.keyword}}" bindchange="changeKeyword" bindclose="closeKeyword"></search-bar>
+        </div>
+        <!--我的俱乐部-->
+        <div class="club-index-myClub">
+        	<div class="clearfix pb10">
+        		<p class="p16 c333 bold fl">我的俱乐部</p>
+                <navigator url="../../suboffice/clubAdd/clubAdd" class="fr yellowBtn">创建俱乐部</navigator>
+            </div>
+            <div class="myClub-scrollBox" wx:if="{{myClubList&&myClubList.length}}">
+                <div class="scrollContainer">
+                    <div class="myClub-groupBox clearfix">
+                        <div class="myClub-groupList" wx:for="{{myClubList}}">
+                            <navigator url="../../suboffice/clubDetail/clubDetail?id={{item._id}}" class="list displayB tac" data-index="{{index}}">
+                                <div class="picBox hasLoading" style="width:{{groupPicWidth}}px;height:{{groupPicWidth}}px;">
+                                    <image src="{{item.pic}}" mode="widthFix" />
+                                </div>
+                                <p class="name textOver">{{item.name}}</p>
+                            </navigator>
+                        </div>
+                        <!--
+                        <div class="myClub-groupList">
+                            <navigator url="../../suboffice/clubAdd/clubAdd" class="list displayB tac">
+                                <div class="iconBox" style="width:{{groupPicWidth}}px;height:{{groupPicWidth}}px;">
+                                    <i class="xzicon-plus"></i>
+                                </div>
+                                <p class="name textOver">创建俱乐部</p>
+                            </navigator>
+                        </div>-->
+                    </div>
+                </div>
+            </div>   
+            <view class="c999 tac" wx:else>还没有俱乐部</view> 
+        </div>
+        <div class="searchCategory-box clearfix searchCategory-secretary positionR">
+            <div class="searchCategory">
+                <div class="listBox">
+                    <span class="list {{(form.sort=='active'&&form.gettype==''?' active':'')}}" data-type="sort" data-value="active" bindtap="screenType">活跃</span>
+                    <span class="list {{(form.sort==''&&form.gettype==''?' active':'')}}" data-type="sort" data-value="" bindtap="screenType">新开</span>
+                    <!--
+                    <span class="list {{(form.gettype=='my'?' active':'')}}" data-type="gettype" data-value="my" bindtap="screenType">我的</span>-->
+                </div>
+            </div>
+        </div>
+        <div class="clubBox bgfff pb20" wx:if="{{data&&data.length}}">
+        	<navigator url="../../suboffice/clubDetail/clubDetail?id={{item._id}}" class="clubList clearfix" wx:for="{{data}}">
+            	<div class="picBox hasLoading"><image class="w100 h100 pic" src="{{item.pic}}" mode="widthFix" /></div>
+                <div class="textBox">
+                	<p class="title">{{item.name}}</p>
+                    <p class="p12 c666 mt2 summary">{{item.slogan||''}}</p>
+                    <div class="userInfo mt5"><image src="{{item.headpic}}" class="userPic" mode="widthFix" /><span class="userName">{{item.username}}</span></div>
+                    <div class="clearfix mt2">
+                    	<p class="fl c666 p12" style="line-height:25px;">{{item.usernum}}位成员</p>
+                        <div class="fr userPicList" wx:if="{{item.userList&&item.userList.length}}"><image class="pic" src="{{g.headpic}}" wx:for="{{item.userList}}" wx:for-item="g" /><i class="xzicon-right"></i></div>
+                    </div>
+                </div>
+    		</navigator>
+        </div>
+        <view class="loadingBox mlr15" hidden="{{!showLoading}}">
+            <div class="xzicon-loading"></div>
+            <div class="xzui-loadmore__tips">正在加载</div>
+        </view>
+        <view class="c999 tac ptb20" hidden="{{!showNoData}}">还没有俱乐部</view>
+    </div>
+</div>
+<div class="xzui-tabbar app-nav max480" wx:if="{{client=='web'}}">
+	<navigator url="../../home/index/index" class="xzui-tabbar_item index">
+        <span class="xzui-tabbar_label">在局</span>
+    </navigator>
+    <!--
+    <navigator url="../../store/index/index" class="xzui-tabbar_item store">
+        <span class="xzui-tabbar_label">在店</span>
+    </navigator>-->
+    <navigator url="../../suboffice/index/index" class="xzui-tabbar_item group xzui-bar_item_on">
+        <span class="xzui-tabbar_label">俱乐部</span>
+    </navigator>
+    <!--
+    <navigator url="../../goods/index/index" class="xzui-tabbar_item goods">
+        <span class="xzui-tabbar_label">商城</span>
+    </navigator>-->
+    <navigator url="../../user/my/my" class="xzui-tabbar_item my">
+        <span class="xzui-tabbar_label">我的</span>
+    </navigator>
+</div>

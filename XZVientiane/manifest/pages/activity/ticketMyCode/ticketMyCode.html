@@ -1,0 +1,57 @@
+<div class="app-wrapper">
+	<div wx:if="{{isUserLogin}}" class="app-main" style="padding-bottom:80px;">
+    	<view class="markWraper" style="background:rgba(254,254,254)"></view>
+    	<div class="ticketMyCode_box bgfff">
+        	<div class="activityInfo clearfix">
+            	<div class="picBox hasLoading"><image src="{{data.pic}}" mode="widthFix" /></div>
+                <div class="textBox">
+                	<p class="title">{{data.name}}</p>
+                    <p class="tips mt10">{{data.realAddress}}</p>
+                    <p class="tips">{{data.activityTime}}</p>
+                </div>
+            </div>
+            <div class="activityMyCode_line"></div>
+            <div class="tac pb20" wx:if="{{data.myuseticket&&data.myuseticket.ticketinfo}}">
+            	<!--收集信息模块-->
+                <div class="pt15" wx:if="{{data.iscollect==1&&!data.myJoinInfo}}">
+                    <p class="p14 c888 mt5">请提交您的身份资料，完成后可获取签到二维码</p>
+                    <p wx:if="{{data.collectTips}}" class="p14 c333 mt5">{{data.collectTips}}</p>
+                    <div class="tac pt10"><span class="yellowBtn activity-submitInfoBtn" bindtap="toJoinInfo">前往提交</span></div>
+                </div>
+                <div wx:else>
+                    <p class="p16 bold cRed mt15">{{data.myuseticket.ticketinfo.name}}</p>
+                    <p class="p16 cGreen mt5" wx:if="{{data.joinData.signstatus==1}}">已签到</p>
+                    <p class="p16 c888 mt5" wx:else>未签到</p>
+                    <p class="p14 cRed mt5" wx:if="{{data.isfree==2&&data.signRefund==1}}">成功签到后，会进行退款</p>
+                    <div class="codeImage hasLoading">
+                        <image style="width:100%;" src="{{qrcodePic}}" mode="widthFix" />
+                    </div>
+                    <p class="codeText mt10">电子票二维码</p>
+                    <p class="codeText">到场后出示二维码签到</p>
+                </div>
+            </div>
+            <div class="tac pb20 c999 mt15" wx:else>您还没有自己使用的门票</div>
+            <div wx:if="{{data.myuseticket&&data.myuseticket.ticketinfo&&data.grouppic}}" class="tac pb20 hasBorder top pt20">
+                <p class="c666 p14">点击保存群二维码，微信扫码加入活动群</p>
+                <div class="tac" style="width:140px;margin:10px auto;">
+                    <image wx:if="{{client=='wx'}}" data-pic="{{data.grouppic}}" bindtap="viewThisImage"
+                            class="activityDetail_codeImage" src="{{data.grouppic}}" mode="widthFix" />
+                    <image wx:else class="activityDetail_codeImage" src="{{data.grouppic}}" mode="widthFix" />
+                </div>
+            </div>
+        </div>
+        <div class="activityMyCode_footBtn">
+            <div class="btnBox">
+                <div class="displayFlex" wx:if="{{data.isfree==2}}">
+                    <div class="list" >
+                    	<button type="button" bindtap="toMyTicket" class="btn detail_blueBtn">我的门票<span wx:if="{{data.myticketnum>0}}">（{{data.myticketnum}}张）</span></button>
+                    </div>
+                    <div class="list">
+                        <button type="button" bindtap="submit" class="btn detail_redBtn">购买门票</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

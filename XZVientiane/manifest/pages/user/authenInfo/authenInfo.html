@@ -1,0 +1,46 @@
+<div class="app-wrapper">
+    <div class="app-main pb20" wx:if="{{isUserLogin}}">
+    	<div class="markWraper"></div>
+        <div wx:if="{{faceAuthInfo.status==0}}">
+            <div class="pd15">
+                <p class="c333">请上传一张本人照片，进行颜值认证。</p>
+                <p class="c333">每个人最多验证三次。</p>
+            </div>
+            <div class="authenInfo_editForm tac" style="width:150px;margin:auto;">
+                <upload value="{{form.faceAuthPic}}" class="user-upload" width="150" height="150" bindchange="uploadSuccess" id="uploadPic"></upload>
+            </div>
+            <div class="xzui-btn-app authenInfo_footBtn">
+                <button type="button" bindtap="submitPic" class="xzui-btn xzui-btn_b" size="large">下一步</button>
+            </div>
+        </div>
+        <div wx:elif="{{faceAuthInfo.status==1}}">
+            <div class="authenInfo_editForm"  style="margin-top:50px;">
+                <p class="c333 tac p16"><i class="xzicon-loading"></i> 识别中，请稍后</p>
+            </div>
+        </div>
+        <div wx:elif="{{faceAuthInfo.status==2}}">
+            <div class="authenInfo_editForm"  style="margin-top:50px;">
+                <p class="c333 tac p16">您的颜值评分已达要求，为：{{data.faceBeauty}}分</p>
+            </div>
+            <div class="xzui-btn-app authenInfo_footBtn">
+                <div class="displayFlex">
+                    <div class="list">
+                        <button type="button" bindtap="reSubmitPic" class="xzui-btn xzui-btn_b" size="large">换张照片</button>
+                    </div>
+                    <div class="list ml15">
+                        <button type="button" bindtap="reBack" class="xzui-btn xzui-btn_b" size="large">返回</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div wx:elif="{{faceAuthInfo.status==3}}">
+            <div class="authenInfo_editForm" style="margin-top:50px;">
+                <p class="c333 tac p16">您的颜值评分不足，为：{{data.faceBeauty}}分</p>
+            </div>
+            <div class="xzui-btn-app authenInfo_footBtn">
+                <button type="button" bindtap="reSubmitPic" class="xzui-btn xzui-btn_b" size="large">换张照片试试</button>
+            </div>
+        </div>
+    </div>
+    <nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

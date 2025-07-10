@@ -1,0 +1,71 @@
+<div class="app-wrapper">
+    <div wx:if="{{isUserLogin}}" class="app-main">
+    	<view class="loadingBox mlr14" wx:if="{{ajaxLoading}}">
+            <div class="xzicon-loading"></div>
+        </view>
+    	<div wx:elif="{{withdrawSetWX}}">
+            <div class="bgfff">
+            	<div class="form-list" wx:if="{{options.clubid||options.shopid}}">
+                    <div class="form-list-item c666 title biglong">类型</div>
+                    <div class="form-list-item">
+                        <div class="displayIB" data-type="person" bindtap="screenType"><span class="xzui-radio-new {{(form.banktype=='person'?' active':'')}}"></span><span class="xzui-radioTitle-new">个人</span></div>
+                        <div class="displayIB ml10" data-type="company" bindtap="screenType"><span class="xzui-radio-new {{(form.banktype=='company'?' active':'')}}"></span><span class="xzui-radioTitle-new">企业</span></div>
+                    </div>
+                </div>
+                <div class="form-list" wx:if="{{form.banktype=='person'}}">
+                    <div class="form-list-item c666 title biglong">真实姓名</div>
+                    <div class="form-list-item">
+                        <input placeholder="请输入真实姓名" class="textInput" bindinput="model" value="{{form.real_name}}" data-model="form.real_name" type="text" />
+                    </div>
+                </div>
+                <div class="form-list" wx:if="{{form.banktype=='person'}}">
+                    <div class="form-list-item c666 title biglong">手机号码</div>
+                    <div class="form-list-item">
+                        <input placeholder="请输入手机号码" class="textInput" bindinput="model" value="{{form.mobile}}" data-model="form.mobile" type="tel" />
+                    </div>
+                </div>
+                <div class="form-list" wx:if="{{form.banktype=='person'}}">
+                    <div class="form-list-item c666 title biglong">身份证号</div>
+                    <div class="form-list-item">
+                        <input placeholder="请输入身份证号码" class="textInput" bindinput="model" value="{{form.id_card}}" data-model="form.id_card" type="text" />
+                    </div>
+                </div>
+                <div class="form-list" wx:if="{{form.banktype=='company'}}">
+                    <div class="form-list-item c666 title biglong">企业名称</div>
+                    <div class="form-list-item">
+                        <input placeholder="请输入真实姓名" class="textInput" bindinput="model" value="{{form.real_name}}" data-model="form.real_name" type="text" />
+                    </div>
+                </div>
+                <div class="form-list">
+                    <div class="form-list-item c666 title biglong">银行卡号</div>
+                    <div class="form-list-item">
+                        <input placeholder="请输入银行卡号" class="textInput" bindinput="model" value="{{form.bankcard}}" data-model="form.bankcard" type="tel" />
+                    </div>
+                </div>
+                <div class="form-list">
+                    <div class="form-list-item c666 title biglong">开户行</div>
+                    <div class="form-list-item">
+                        <input placeholder="请输入开户行" class="textInput" bindinput="model" value="{{form.bankname}}" data-model="form.bankname" type="text" />
+                    </div>
+                </div>
+            </div>
+            <div class="financeWithdraw_agreeMent"><span class="xzui-radio-new {{(agreeMent?' active':'')}}" bindtap="changeAgreement"></span><span class="xzui-radioTitle-new" bindtap="toViewAgreement">请阅读并同意《灵活就业合作伙伴协议》</span></div>
+            <div class="xzui-btn-app withdrawSet_footBtn">
+                <button type="button" bindtap="submit" class="xzui-btn xzui-btn_b primary" size="large">提交</button>
+            </div>
+        </div>
+        <div wx:else>
+        	<p class="tac p16" style="margin-top:60px;">非常抱歉，您暂时无权访问</p>
+            <div class="xzui-btn-app withdrawSet_footBtn">
+                <button type="button" bindtap="reBack" class="xzui-btn xzui-btn_b primary" size="large">返回</button>
+            </div>
+        </div>
+    </div>
+    <nologin bindloginsuccess="onShow" wx:else></nologin>
+    <div class="withdrawSet_dialog {{(showLoading?' show':'')}}">
+  		<view class="withdrawSet_dialog_body">
+        	<p class="xzicon-loading p16"></p>
+        	<p class="mt5 c666">信息审核中，请稍后...</p>
+        </view>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+<div class="app-wrapper">
+    <div class="app-main">
+    	<div class="user-editInfo mt12">
+            <div class="xzui-cells">
+                <div class="xzui-cell">
+                	<div class="xzui-cell__bd" wx:if="{{options.isName}}">
+                        <input placeholder="{{options.placeholder}}" class="xzui-input" bindinput="model" value="{{form.content}}" data-model="form.content" type="text" />
+                    </div>
+                    <div class="xzui-cell__bd" wx:elif="{{options.isNumber}}">
+                        <input placeholder="{{options.placeholder}}" class="xzui-input" bindinput="model" value="{{form.content}}" data-model="form.content" type="number" />
+                    </div>
+                    <div class="xzui-cell__bd" wx:elif="{{options.isTel}}">
+                        <input placeholder="{{options.placeholder}}" class="xzui-input" bindinput="model" value="{{form.content}}" data-model="form.content" type="tel" />
+                    </div>
+                    <div class="xzui-cell__bd" wx:else>
+                        <textarea class="xzui-textarea" placeholder="{{options.placeholder}}" bindinput="model" style="height:90px;" value="{{form.content}}" data-model="form.content"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="xzui-cells__tips">{{data.tips||''}}</div>
+            <div class="xzui-btn-app">
+                <button type="button" bindtap="submit" class="xzui-btn xzui-btn_b primary" size="large">提交</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,7 @@
+{
+    "usingComponents":
+    {
+		"nologin": "/components/common/nologin/nologin"
+    },
+    "navigationBarTitleText": "可配送区域模板"
+}

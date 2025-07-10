@@ -1,0 +1,20 @@
+<div class="app-wrapper">
+    <div class="app-main">
+    	<div class="punchRecord_box bgfff" wx:if="{{data&&data.length}}">
+        	<navigator url="../../store/detail/detail?id={{item.shopid}}" class="storeList clearfix" wx:for="{{data}}">
+            	<div class="picBox hasLoading"><image class="w100 h100 pic" src="{{item.shopdata.pic}}" mode="widthFix" /></div>
+                <div class="textBox">
+                	<p class="title">{{item.shopdata.name}}</p>
+                    <p class="address mt2">{{item.shopdata.areaText}}</p>
+                    <div class="p12 c666 mt2">{{item.shopdata.address}}</div>
+                    <div class="p12 c666 mt2">{{item.updateAt}}</div>
+                </div>
+    		</navigator>
+        </div>
+        <view class="loadingBox mlr15" hidden="{{!showLoading}}">
+			<div class="xzicon-loading"></div>
+			<div class="xzui-loadmore__tips">正在加载</div>
+		</view>
+		<view class="noData mlr15" hidden="{{!showNoData}}">暂无数据</view>
+    </div>
+</div>

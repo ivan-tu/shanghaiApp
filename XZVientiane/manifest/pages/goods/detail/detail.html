@@ -1,0 +1,57 @@
+<div class="app-wrapper">
+	<div class="app-main positionBottom" style="padding-bottom:62px;">
+		<div wx:if="{{data.name}}" class="positionR">
+			<view class="hasLoading" style="height:{{imgHeight}}px;" bindtap="viewThisImage" data-pic="{{data.pic}}">
+				<image src="{{data.pic}}" mode="widthFix" style="width:100%" />
+			</view>
+            <div class="guoyao-goodsDetail-header pd15">
+                <p class="p16 bold">{{data.name}}</p>
+                <p class="p12 c888" wx:if="{{data.abstract}}">{{data.abstract}}</p>
+                <div class="mt5 clearfix guoyao-goodsDetail-price">
+                    <div class="fl c03">
+                        <span class="p14">¥</span><span class="p24 bold">{{data.price}}</span>
+                    </div>
+                </div>
+                <p wx:if="{{data.isPushGift==1}}" class="p12 c888 mt5">此商品不支持退款</p>
+            </div>
+			<!--商品详情-->
+			<div class="guoyao-goodsDetail-content mt10 pd15">
+				<rich-text nodes="{{data.content}}"></rich-text>
+			</div>
+			<!--底部菜单-->
+			<div class="xzui-btn-app positionBottom max480 goodsDetail-footBtn">
+				<div class="displayFlex">
+                	<div class="list goodsDetail-homeBtn" bindtap="backIndex">
+                        <span class="guoyao-goodsDetail-icon"><i class="xzicon-home"></i></span>
+                        <span class="iconText">首页</span>
+                    </div>
+                    <button open-type="share" class="list goodsDetail-shareBtn" wx:if="{{client=='wx'}}">
+                        <span class="guoyao-goodsDetail-icon"><i class="xzicon-sharealt"></i></span>
+                        <span class="iconText">分享</span>
+                    </button>
+                    <div class="list goodsDetail-shareBtn" bindtap="toShare" wx:else>
+                        <span class="guoyao-goodsDetail-icon"><i class="xzicon-sharealt"></i></span>
+                        <span class="iconText">分享</span>
+                    </div>
+                    <div class="list">
+                        <div class="guoyao-goodsDetail-buyBtn" wx:if="{{!data.status}}">
+                            <div class="guoyao-goodsDetail-buyTicketBtn gray">已下架</div>
+                        </div>
+                        <div class="guoyao-goodsDetail-buyBtn" wx:else>
+                            <div class="guoyao-goodsDetail-buyTicketBtn" bindtap="toBuy">立即购买</div>
+                        </div>
+                    </div>
+				</div>
+			</div>
+		</div>
+		<div wx:elif="{{!showLoading}}" class="tac noGoodsBox">
+			<p class="p16 c666">商品不存在或已下架</p>
+			<div class="mt10"><button class="redBtn" bindtap="backIndex">去首页看看</button></div>
+		</div>
+		<view class="loadingBox mlr14" hidden="{{!showLoading}}">
+			<div class="xzicon-loading"></div>
+			<div class="xzui-loadmore__tips">正在加载</div>
+		</view>
+		<newShare id="newShareCon"></newShare>
+	</div>
+</div>

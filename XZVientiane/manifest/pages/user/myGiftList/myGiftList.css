@@ -1,0 +1,85 @@
+.myGiftList_footBtn .xzui-btn{
+	max-width:180px;
+	margin:auto;
+	color:#fff !important;
+	background:#DABB53 !important;
+	padding:0;
+	border-radius:6px;
+}
+.addList-list{
+	padding:15px;
+	position:relative;
+}
+.addList-list + .addList-list{
+	border-top:1px solid #F9F9F9;
+}
+.addList-list .picBox{
+	float:left;
+	border-radius:50%;
+	overflow:hidden;
+	width:70px;
+	height:70px;
+}
+.addList-list .textBox{
+	margin-left:80px;
+	margin-right:120px;
+}
+.addList-list .spanStatus{
+	position:absolute;
+	right:10px;
+	top:10px;
+}
+.addList-list .delBtn{
+	display:inline-block;
+	text-align:center;
+	line-height:32px;
+	padding:0 10px;
+	height: 30px;
+	background: #eee;
+	border-radius: 4px;
+	color:#444;
+	font-size:12px;
+	position:absolute;
+	z-index:2;
+	right:85px;
+	top:45px;
+}
+.addList-list  .bindBtn{
+	display:inline-block;
+	text-align:center;
+	line-height:32px;
+	padding:0 10px;
+	height: 30px;
+	background: #FEE10B;
+	border-radius: 4px;
+	color:#000;
+	font-size:12px;
+	position:absolute;
+	z-index:2;
+	right:10px;
+	top:45px;
+}
+.addList-dialog-inputBox{
+	border-bottom:1px solid #666;
+	padding:5px;
+}
+.addList-dialog-inputBox .textarea{
+	border:0 none;
+	height:80px;
+	color:#131313;
+	font-family:inherit;
+	outline:none;
+	font-size:14px;
+}
+.addList-dialog-inputBox textarea::-moz-placeholder{
+	color: #999;
+	opacity:1;
+}
+.addList-dialog-inputBox textarea:-ms-input-placeholder{
+	color: #999;
+	opacity:1;
+}
+.addList-dialog-inputBox textarea::-webkit-input-placeholder{
+	color: #999;
+	opacity:1;
+}

@@ -1,0 +1,117 @@
+.authenInfo_editForm{
+	border-radius:4px;
+	margin:0 15px;
+}
+.authenInfo_editForm .xzui-uploader.user-upload{
+	display:inline-block;
+}
+.authenInfo_editForm .xzui-uploader__input-box{
+	margin: auto;
+	float: inherit;
+}
+.authenInfo_editForm .form-list + .form-list:not(.noBorder):before{
+	content: '';
+	background: rgba(255,255,255,0.2);
+	position: absolute;
+	left: -50%;
+	top: 0;
+	right: -50%;
+	-webkit-transform: scale(0.5);
+	transform: scale(0.5);
+	height: 1px;
+	width: 200%;
+	margin-left: 15px;
+}
+.authenInfo_editForm .textInput,
+.authenInfo_editForm .textarea{
+	background:transparent !important;
+	color:#fff;
+	font-size:16px;
+}
+.authenInfo_editForm .textareaBox{
+	background:#eee;
+	border-radius:6px;
+	padding:10px;
+}
+.authenInfo_editForm_hasTips{
+	position:relative;
+	padding-bottom:16px;
+}
+.authenInfo_editForm_hasTips .tips{
+	position:absolute;
+	right:0;
+	bottom:0;
+}
+.authenInfo_footBtn .xzui-btn{
+	max-width:180px;
+	margin:auto;
+	color:#333 !important;
+	background:#FEE10B !important;
+	padding:0;
+	border-radius:6px;
+}
+.authenInfo_footBtn  .xzui-btn.disable{
+	background:#ccc !important;
+}
+.authenInfo_footBtn2{
+	margin: 30px 15px 20px;
+	text-align: center;
+}
+.authenInfo_footBtn2 .defaultbtn{
+	max-width:180px;
+	margin:auto;
+	color:#fff !important;
+	background:#DABB53 !important;
+	padding:0;
+	border-radius:6px;
+	line-height: 46px;
+	font-size: 16px;
+	display:block;
+}
+.authenInfo_codePic{
+	margin:15px 0;
+	background:#2a2a2a;
+	border-radius:4px;
+	padding:15px;
+	color:#fff;
+}
+.authenInfo_successIcon{
+	color:rgb(74,199,8);
+	font-size:45px;
+	text-align:center;
+}
+.authenInfo_waitIcon{
+	color:#FFCC33;
+	font-size:45px;
+	text-align:center;
+}
+.authenInfo_failIcon{
+	color:#DD0000;
+	font-size:45px;
+	text-align:center;
+}
+.authenInfo_uploadBtn{
+	width:120px;
+	height:120px;
+	border:1px solid #ddd;
+	color:#ccc;
+	font-size:36px;
+	line-height:120px;
+	text-align:center;
+	margin:30px auto;
+	border-radius:2px;
+}
+.authenInfo_video{
+	margin:15px 0;
+}
+.authenInfo_uploadBtn .text{
+	font-size:14px;
+	color:#eee;
+}
+.authenInfo_reBtn{
+	background:#DABB53;
+}
+.authenInfo_reBtn:hover{
+	background:#DABB53;
+	color:#fff !important;
+}

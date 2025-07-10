@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+	"picker": "/components/web/picker/picker",
+    "upload": "/components/common/upload/upload",
+	"nologin": "/components/common/nologin/nologin"
+  },
+  "enablePullDownRefresh": false,
+  "navigationBarTitleText": "添加活动"
+}

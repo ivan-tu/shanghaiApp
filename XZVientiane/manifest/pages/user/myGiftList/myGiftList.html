@@ -1,0 +1,29 @@
+<div class="app-wrapper">
+    <div class="app-main">
+    	<div class="markWraper"></div>
+        <div class="searchCategory-box clearfix pb20">
+            <div class="searchCategory">
+                <div class="listBox">
+                    <span class="list {{(form.fromtype=='addMe'?' active':'')}}" data-type="fromtype" data-value="addMe" bindtap="screen">收到的礼物</span>
+                    <span class="list {{(form.fromtype=='myAdd'?' active':'')}}" data-type="fromtype" data-value="myAdd" bindtap="screen">送出的礼物</span>
+                </div>
+            </div>
+        </div>
+    	<div class="bgfff addList-box pb20" wx:if="{{data&&data.length}}">
+            <div class="addList-list clearfix" wx:for="{{data}}" bindtap="toUserDetail" data-id="{{item.userid}}">
+                <div class="picBox hasLoading"><image src="{{item.giftdata.pic}}" mode="widthFix" class="round" /></div>
+                <div class="textBox">
+                	<p class="c131 p16 bold textOver">{{item.giftdata.name}} {{item.giftdata.diamond}}钻</p>
+                    <p class="p12 c666">{{item.createAt}}</p>
+                    <p class="p12 c666" wx:if="{{form.fromtype=='addMe'}}">{{item.username}}送</p>
+                    <p class="p12 c666" wx:if="{{form.fromtype=='myAdd'}}">{{item.username}}收</p>
+                </div>
+            </div>
+        </div>
+        <view class="loadingBox mlr15" hidden="{{!showLoading}}">
+			<div class="xzicon-loading"></div>
+			<div class="xzui-loadmore__tips">正在加载</div>
+		</view>
+		<view class="noData mlr15" hidden="{{!showNoData}}">暂无数据</view>
+    </div>
+</div>

@@ -1,0 +1,173 @@
+<div class="app-wrapper  {{(client=='web'?' hasPageFrame':' pb20')}}">
+	<div class="app-main">
+    	<div class="homeIndex-searchContainer">
+        	<div class="homeIndex-search">
+            	<form action="javascript:;" bindsubmit="toSearch">
+                    <i class="xzicon-search1"></i>
+                    <input type="search" placeholder="请输入搜索关键词" class="searchInput" bindconfirm="toSearch" bindinput="model" data-model="keyword" value="{{keyword}}" />
+                </form>
+            </div>
+        </div>
+        <!--banner1-->
+        <view wx:if="{{settingData.bannerList&&settingData.bannerList.length}}" class="homeIndex-banner hasLoading" style="height:{{bannerHeight}}px;">
+            <view class="homeIndex-bannerBox">
+              <swiper autoplay="true" indicator-dots="true" indicator-color="rgba(255,255,255,0.3)"
+                    indicator-active-color="rgba(255,255,255,0.8)" circular="true" wx:if="{{client=='wx'}}" style="height:{{bannerHeight}}px;">
+                  <block wx:for="{{settingData.bannerList}}" wx:for-item="item">
+                    <swiper-item>
+                      <image bindtap="openCustomLink" data-link="{{item.link}}" data-linktype="{{item.linktype}}" src="{{item.pic}}" class="slide-image"
+                        mode="widthFix" style="width:100%" />
+                    </swiper-item>
+                  </block>
+              </swiper>
+              <div class="swiper-container" id="swiperBanner" wx:else>
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide" wx:for="{{settingData.bannerList}}">
+                    <div class="openCustomLink" data-link="{{item.link}}" data-linktype="{{item.linktype}}">
+                        <image src="{{item.pic}}" class="slide-image" style="width:100%" mode="widthFix" />
+                    </div>
+                  </div>
+                </div>
+                <div class="pagination"></div>
+              </div>
+            </view>
+        </view>
+        <div class="bgfff pd10"  wx:if="{{settingData.menuList&&settingData.menuList.length}}">
+            <!--菜单menuList-->
+            <view class="bgfff marketCenter-menuContainer">
+                <swiper autoplay="true" indicator-dots="true" indicator-color="rgba(255,255,255,0.3)"
+                      indicator-active-color="rgba(255,255,255,0.8)" circular="true" wx:if="{{client=='wx'}}"  style="height:{{menuListHeight}}px;">
+                    <block wx:for="{{settingData.menuList}}" wx:for-item="item">
+                      <swiper-item>
+                            <view class="marketCenter-menu clearfix">
+                                <div class="marketCenter-menuBox" wx:for="{{item}}" wx:for-item="g" style="width:{{columnWidth}}">
+                                    <div data-link="{{g.link}}" data-linktype="{{g.linktype}}" class="marketCenter-menuList" bindtap="openCustomLink">
+                                        <div class="picBox"><image src="{{g.pic}}" mode="widthFix" /></div>
+                                        <p class="title">{{g.title}}</p>
+                                    </div>
+                                </div>
+                            </view>
+                      </swiper-item>
+                    </block>
+                </swiper>
+                <div class="swiper-container {{(settingData.menuList.length==1?' swiper-no-swiping':'')}}" id="swiperBannerE" wx:else>
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide" wx:for="{{settingData.menuList}}">
+                            <view class="marketCenter-menu clearfix">
+                                <div class="marketCenter-menuBox" wx:for="{{item}}" wx:for-item="g" style="width:{{columnWidth}}">
+                                    <div data-link="{{g.link}}" data-linktype="{{g.linktype}}" class="marketCenter-menuList openCustomLink">
+                                        <div class="picBox"><image src="{{g.pic}}" mode="widthFix" /></div>
+                                        <p class="title">{{g.title}}</p>
+                                    </div>
+                                </div>
+                            </view>
+                        </div>
+                    </div>
+                    <div class="pagination"></div>
+                </div>
+            </view>
+        </div>
+        <view class="marketCenter_div plr15 mt10" wx:if="{{hotGoodsList&&hotGoodsList.length}}">
+        	<div class="marketCenter_title clearfix">
+                <p class="fl text">热门商品</p>
+                <navigator class="fr moreBtn" url="../../shop/goodsList/goodsList?allhot=1">更多 <i class="xzicon-right"></i></navigator>
+            </div>
+            <div class="pt10">
+                <div class="public_goodsContainer2 clearfix">
+                    <div class="goodsList" wx:for="{{hotGoodsList}}">
+                        <div bindtap="toGoodsDetail" data-id="{{item.shortid}}" class="listBox clearfix">
+                            <div class="picBox hasLoading" style="width:{{goodsPicWidth}}px;height:{{goodsPicHeight}}px;"><image src="{{item.pic}}" mode="widthFix" /></div>
+                            <div class="textBox">
+                                <p class="title">{{item.name}}</p>
+                                <div class="priceBox clearfix">
+                                    <div class="nowPrice">¥<span class="number">{{item.price}}</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </view>
+        <!--广告图-->
+        <div class="marketCenter-picsBox mt10" wx:if="{{settingData.picsList&&settingData.picsList.length}}">
+            <div class="marketCenter-picsList" wx:for="{{settingData.picsList}}">
+                <div wx:for="{{item.data}}" wx:for-item="g" class="listBox">
+                    <div data-link="{{g.link}}" data-linktype="{{g.linktype}}" class="list" bindtap="openCustomLink">
+                        <div class="picBox">
+                            <image src="{{g.pic}}" mode="widthFix" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <view wx:if="{{settingData.tagsList&&settingData.tagsList.length}}">
+        	<!--标签列表-->
+            <view class="marketCenter_div plr15 mt10" wx:for="{{settingData.tagsList}}" wx:if="{{item.goodsList&&item.goodsList.length}}">
+                <div class="marketCenter_title clearfix">
+                    <p class="fl text">{{item.title}}<span class="tips" style="color:#4C4C4C;">{{item.tips}}</span></p>
+                    <navigator class="fr moreBtn" url="../../shop/goodsList/goodsList?tags={{item.title}}">更多 <i class="xzicon-right"></i></navigator>
+                </div>
+                <div class="pt10">
+                    <div class="public_goodsContainer2 clearfix">
+                        <div class="goodsList" wx:for="{{item.goodsList}}" wx:for-item="g">
+                            <div bindtap="toGoodsDetail" data-id="{{g.shortid}}" class="listBox clearfix">
+                                <div class="picBox hasLoading" style="width:{{goodsPicWidth}}px;height:{{goodsPicWidth}}px;"><image src="{{g.pic}}" mode="widthFix" /></div>
+                                <div class="textBox">
+                                    <p class="title">{{g.name}}</p>
+                                    <div class="priceBox clearfix">
+                                        <div class="nowPrice">¥<span class="number">{{g.price}}</span></div>
+                                    </div>
+                                </div>
+                            </div>
+               			</div>
+                    </div>
+                </div>
+            </view>
+        </view>
+        <view class="marketCenter_div plr15 mt10 pb20">
+        	<div class="marketCenter_title clearfix">
+                <p class="fl text">推荐商品</p>
+                <navigator class="fr moreBtn" url="../../shop/goodsList/goodsList?allrecommend=1">更多 <i class="xzicon-right"></i></navigator>
+            </div>
+            <div wx:if="{{goodsList&&goodsList.length}}" class="pt10">
+                <div class="public_goodsContainer2 clearfix">
+                    <div class="goodsList" wx:for="{{goodsList}}">
+                        <div bindtap="toGoodsDetail" data-id="{{item.shortid}}" class="listBox clearfix">
+                            <div class="picBox hasLoading" style="width:{{goodsPicWidth}}px;height:{{goodsPicHeight}}px;"><image src="{{item.pic}}" mode="widthFix" /></div>
+                            <div class="textBox">
+                                <p class="title">{{item.name}}</p>
+                                <div class="priceBox clearfix">
+                                    <div class="nowPrice">¥<span class="number">{{item.price}}</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <view class="loadingBox mlr14" hidden="{{!showLoading}}">
+                <div class="xzicon-loading"></div>
+                <div class="xzui-loadmore__tips">正在加载</div>
+            </view>
+            <view class="noData mlr14" hidden="{{!showNoData}}">暂无商品</view>
+        </view>
+		<newShare id="newShareCon"></newShare>
+	</div>
+</div>
+<div class="xzui-tabbar app-nav max480" wx:if="{{client=='web'}}">
+	<navigator url="../../home/index/index" class="xzui-tabbar_item index">
+        <span class="xzui-tabbar_label">在局</span>
+    </navigator>
+    <!--
+    <navigator url="../../store/index/index" class="xzui-tabbar_item store">
+        <span class="xzui-tabbar_label">在店</span>
+    </navigator>-->
+    <navigator url="../../suboffice/index/index" class="xzui-tabbar_item group">
+        <span class="xzui-tabbar_label">俱乐部</span>
+    </navigator>
+    <navigator url="../../goods/index/index" class="xzui-tabbar_item goods xzui-bar_item_on">
+        <span class="xzui-tabbar_label">商城</span>
+    </navigator>
+    <navigator url="../../user/my/my" class="xzui-tabbar_item my">
+        <span class="xzui-tabbar_label">我的</span>
+    </navigator>
+</div>

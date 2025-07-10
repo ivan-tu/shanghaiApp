@@ -1,0 +1,44 @@
+<div class="app-wrapper">
+    <div class="app-main">
+    	<search-bar label="搜索关键词" placeholder="搜索关键词" keyword="{{form.keyword}}" bindchange="changeKeyword" bindclose="closeKeyword"></search-bar>
+    	<div class="bgfff" wx:if="{{ismy==1}}">
+            <div class="searchCategory-box clearfix">
+                <div class="searchCategory">
+                    <div class="listBox">
+                        <span class="list {{(form.levelid==''?' active':'')}}"  data-type="levelid" data-value="" bindtap="screenType">全部</span>
+                        <span wx:for="{{levelList}}" class="list {{(form.levelid==item._id?' active':'')}}"  data-type="levelid" data-value="{{item._id}}" bindtap="screenType">{{item.name}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="searchCategory-box clearfix hasBorder top">
+                <div class="searchCategory">
+                    <div class="listBox">
+                    	<span class="list {{(form.sort==''?' active':'')}}" data-type="sort" data-value="" bindtap="screenType">最新加入</span>
+                        <span class="list {{(form.sort=='invitenum'?' active':'')}}" data-type="sort" data-value="invitenum" bindtap="screenType">最多邀请</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-title clearfix">
+        	<p class="fl">共 {{count}} 位</p>
+            <span class="yellowBtn fr" wx:if="{{ismy==1}}" bindtap="toAddUser">添加会员</span>
+        </div>
+    	<div class="bgfff officeUserList-box" wx:if="{{data&&data.length}}">
+            <div class="officeUserList-list clearfix" wx:for="{{data}}" bindtap="toDetail" data-index="{{index}}">
+                <div class="picBox hasLoading"><image src="{{item.headpic}}" mode="widthFix" class="round" /></div>
+                <div class="textBox">
+                	<p class="c131 p14 textOver">{{item.username}}<span wx:if="{{item.levelname}}" class="spanList small spanGrade color_{{item.level}}">{{item.levelname}}</span></p>
+                    <div class="mt5 p12">加入时间：{{item.createAt}}<span wx:if="{{item.expiretime&&ismy==1}}">，到期时间：{{item.expiretime}}</span></div>
+                    <div class="mt5 p12" wx:if="{{ismy==1}}">
+                    	邀请：{{item.invitenum}}人<span wx:if="{{item.parentUsername}}">，{{item.parentUsername}}邀请</span><span wx:if="{{item.commanderUsername}}">，团队长：{{item.commanderUsername}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <view class="loadingBox mlr15" hidden="{{!showLoading}}">
+			<div class="xzicon-loading"></div>
+			<div class="xzui-loadmore__tips">正在加载</div>
+		</view>
+		<view class="noData mlr15" hidden="{{!showNoData}}">暂无数据</view>
+    </div>
+</div>

@@ -1,0 +1,61 @@
+<div class="app-wrapper">
+	<div wx:if="{{isUserLogin}}" class="app-main pb20">
+    	<view class="markWraper"></view>
+        <div class="tac c888 pd20" wx:if="{{showLoading}}">加载中，请稍后...</div>
+    	<div wx:else>
+        	<!--如果还没有管理的店铺-->
+            <div class="manage-noStore" wx:if="{{noShop}}">
+          		<p class="manage-noStore-title">您还没有店铺</p>
+                <navigator class="manage-noStore-btn" url="../../manage/addShop/addShop">前往开通店铺</navigator>
+        	</div>
+            <!--有店铺-->
+            <div wx:elif="{{shopInfo.name}}" class="manageIndex-body {{(client=='app'?' isApp':'')}}">
+            	<div class="plr15 pb30">
+                    <div class="newManage_storeInfo clearfix mt20">
+                    	<navigator url="../../shop/index/index?id={{shopInfo.shortid}}" target="_blank" class="picBox"><image src="{{shopInfo.logo}}" mode="widthFix" /></navigator>
+                        <div class="textBox">
+                        	<navigator url="../../shop/index/index?id={{shopInfo.shortid}}" target="_blank" class="name textOver displayB">{{shopInfo.name}}</navigator>
+                        </div>
+                    </div>
+                    <div class="displayFlex newManage_numberInfo tac mt20">
+                        <navigator url="../../manage/orderList/orderList" class="list">
+                        	<p class="number">{{shopInfo.today.order||0}}</p>
+                            <p class="title">今日订单</p>
+                            <span class="roundSpan roundTransform" wx:if="{{shopInfo.orderwait}}">{{shopInfo.orderwait}}</span>
+                        </navigator>
+                        <navigator url="../../manage/finance/finance" class="list">
+                        	<p class="number">{{shopInfo.today.total||0}}</p>
+                            <p class="title">今日收入</p>
+                        </navigator>
+                        <navigator url="../../manage/finance/finance" class="list">
+                        	<p class="number">{{shopInfo.all.total||0}}</p>
+                            <p class="title">总收入</p>
+                        </navigator>
+                    </div>
+                    <!--系统菜单列表-->
+                    <div class="newManage_menuContainer" wx:if="{{shopInfo.system&&shopInfo.system.length}}">
+                    	<div class="list" wx:for="{{shopInfo.system}}">
+                        	<p class="titleHead">{{item.categoryName}}</p>
+                        	<div class="newManage_menuBox clearfix">
+                                <div class="newManage_menuList" wx:for="{{item.list}}" wx:for-item="g">
+                                    <navigator url="javascript:;" bindtap="scanCode" class="list" wx:if="{{g.id=='ticket'}}">
+                                        <div class="picBox"><image class="pic" src="{{g.icon}}" mode="widthFix" /></div>
+                                        <p class="title">{{g.name}}</p>
+                                    </navigator>
+                                    <navigator url="{{g.link}}" class="list" wx:else>
+                                        <div class="picBox">
+                                            <image class="pic" src="{{g.icon}}" mode="widthFix" />
+                                        </div>
+                                        <p class="title">{{g.name}}</p>
+                                    </navigator>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nologin bindloginsuccess="onShow" wx:else></nologin>
+  	<newShare id="newShareCon"></newShare>
+</div>

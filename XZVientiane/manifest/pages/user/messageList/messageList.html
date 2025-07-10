@@ -1,0 +1,28 @@
+<div class="app-wrapper">
+    <div wx:if="{{isUserLogin}}" class="app-main pb20">
+        <div class="message-details">
+        	<div class="plr15 pt10 clearfix">
+            	<span class="fr message-detail-readBtn" bindtap="readAll">标记为已读</span>
+            </div>
+            <div class="message-details_item" wx:for="{{data}}" bindtap="toPage" data-index="{{index}}" data-id="{{item.id}}" data-status="{{item.status}}">
+                <div class="message-details_time">{{item.createAt}}</div>
+                <div class="message-details_bar setTopLine setBottomLine">
+                    <div class="message-details_pic" wx:if="{{item.pic}}">
+                        <image src="{{item.pic}}" mode="widthFix" style="height:{{imageHeight}}px;" />
+                    </div>
+                    <div class="message-details_info">
+                        <div class="message-details_title"><span class="messageRedTips" wx:if="{{!item.status}}"></span>{{item.content}}</div>
+                    </div>
+                    <div class="message-details_view setTopLine" wx:if="{{item.link}}">查看详情<i class="xzicon-right"></i></div>
+                </div>
+            </div>
+            <div class="noData mlr15" wx:if="{{!data.length&&showLoading}}">还没有消息</div>   
+        </div>
+        <view class="loadingBox mlr15" hidden="{{!showLoading}}">
+			<div class="xzicon-loading"></div>
+			<div class="xzui-loadmore__tips">正在加载</div>
+		</view>
+		<view class="noData mlr15" hidden="{{!showNoData}}">暂无数据</view>
+    </div>
+    <nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

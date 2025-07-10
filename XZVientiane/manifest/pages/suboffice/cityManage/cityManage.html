@@ -1,0 +1,34 @@
+<div class="app-wrapper">
+    <div class="app-main pb20">
+    	<div class="markWraper"></div>
+        <div class="loadingBox mlr15" wx:if="{{ajaxLoading}}">
+			<div class="xzicon-loading"></div>
+		</div>
+		<div class="noData mlr15" wx:elif="{{ajaxNoData}}">暂无管理权限</div>
+        <div wx:else>
+            <div class="officeManage-infoBox mt10">
+                <navigator url="../../suboffice/officeFianceRecord/officeFianceRecord?subofficeid={{options.id}}&timestap=today" class="list">
+                	<p class="number">{{data.todayTotal}}</p>
+                    <p class="title">今日收入</p>
+                </navigator>
+                <navigator url="../../suboffice/officeFianceRecord/officeFianceRecord?subofficeid={{options.id}}" class="list">
+                	<p class="number">{{data.total}}</p>
+                    <p class="title">总收入</p>
+                </navigator>
+                <navigator url="../../finance/withdraw/withdraw?subofficeid={{options.id}}&type=cityoffice" class="list">
+                	<p class="number">{{data.balance}}</p>
+                    <p class="title">可提现</p>
+                </navigator>
+                <!--
+                <navigator url="../../suboffice/officeUserList/officeUserList?cityOfficeid={{options.id}}" class="list">
+                	<p class="number">{{data.rechargeMember}}</p>
+                    <p class="title">会员</p>
+                </navigator>-->
+                <navigator url="../../suboffice/officeGroupList/officeGroupList?cityOfficeid={{options.id}}" class="list">
+                    <p class="number">{{data.subofficenum}}</p>
+                    <p class="title">俱乐部</p>
+                </navigator>
+            </div>
+        </div>
+    </div>
+</div>

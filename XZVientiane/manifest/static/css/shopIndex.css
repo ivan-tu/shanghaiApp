@@ -1,0 +1,520 @@
+/************基础css************/
+.page-image-2{
+	float:left;
+	width:50%;
+}
+.page-image-3{
+	float:left;
+	width:33.33333333%;
+}
+.page-image-4{
+	float:left;
+	width:25%;
+}
+.page-image-5{
+	float:left;
+	width:20%;
+}
+.page-searchBar{
+	position:relative;
+}
+.page-searchBar-input{
+	border:1px solid #eee;
+	border-radius:36px;
+	color:#666;
+	line-height:36px !important;
+	height:36px !important;
+	font-size:14px;
+	padding:0 10px 0 30px;
+	position:relative;
+	box-shadow:none;
+	background:#fff;
+}
+.page-searchBar-icon{
+	position:absolute;
+	left:10px;
+	top:50%;
+	margin-top:-11px;
+	z-index:2;
+	color:#ccc;
+	font-size:14px;
+}
+.page-text-content{
+	padding:0;
+	margin:0;
+	white-space: pre-wrap;
+  word-wrap: break-word;
+}
+.page-module-content{
+	overflow:hidden;
+}
+.page-module-headTitle{
+	padding-bottom:10px;
+}
+.page-module-headTitle .title{
+	font-size: 16px;
+	color: #333;
+	position: relative;
+	font-weight: 600;
+}
+.page-module-headTitle .tips{
+	font-size: 12px;
+	display: inline-block;
+	color: #949494;
+	margin-left: 5px;
+	font-weight: 400;
+}
+.page-module-headTitle .moreBtn{
+    font-size: 12px;
+    color: #949494;
+    line-height: 25px;
+}
+.page-module-headTitleIcon{
+	float:left;
+	margin-right:10px;
+}
+.page-module-headTitleIcon .pic{
+	height:25px;
+}
+/*商品列表模板1*/
+.page-goods-template1-wrapper{
+	margin-left:-5px;
+	margin-top:-5px;
+}
+.page-goods-template1-list{
+	width:50%;
+	padding-left:5px;
+	padding-top:5px;
+	float:left;
+	box-sizing:border-box;
+}
+.page-goods-template1-box{
+	border-radius:5px;
+	background:#fff;
+	padding:5px;
+}
+.page-goods-template1-name{
+	margin-top:5px;
+	font-size:14px;
+	color:#333;
+	height:24px;
+	line-height:24px;
+}
+/*商品列表模板2*/
+.page-goods-template2-wrapper{
+	margin-top:-5px;
+}
+.page-goods-template2-list{
+	margin-top:5px;
+}
+.page-goods-template2-box{
+	border-radius:5px;
+	background:#fff;
+	padding:5px;
+}
+/*商品列表模板3*/
+.page-goods-template3-wrapper{
+	height:180px;
+	overflow:hidden;
+}
+.page-goods-template3-wrapper .page-goods-template3-box{
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+	height:195px;
+}
+.page-goods-template3-wrapper .goods_box{
+	display:table;
+}
+.page-goods-template3-wrapper .goods_list{
+	display:table-cell;
+}
+.page-goods-template3-wrapper .picBox{
+	width:100px;
+	height:100px;
+	border-radius:4px;
+	overflow:hidden;
+}
+.page-goods-template3-wrapper .goods_list + .goods_list{
+	padding-left:6px;
+}
+.page-goods-template3-wrapper .goods_list .goodsName{
+	font-size:12px;
+	color:#333;
+	line-height:24px;
+	max-width:95px;
+}
+.page-goods-template3-wrapper .goods_list .goodsPrice{
+	font-size:15px;
+	color:#02B1BA;
+}
+.page-goods-template3-wrapper .goods_list .buyBtn{
+	width: 80px;
+	height: 26px;
+	background: #FEB213;
+	font-size:12px;
+	color:#fff;
+	text-align:center;
+	line-height:26px;
+	border-radius: 13px;
+	margin:5px auto 0 auto;
+}
+.page-goods-template3-wrapper .goods_list .mark{
+	font-size:12px;
+}
+/*商品列表模板4*/
+.page-goods-template4-wrapper{
+	height:78px;
+	overflow:hidden;
+}
+.page-goods-template4-wrapper .page-goods-template4-box{
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+	height:90px;
+}
+.page-goods-template4-wrapper .goods_box{
+	display:table;
+}
+.page-goods-template4-wrapper .picBox{
+	width:108px;
+	height:78px;
+	border-radius:4px;
+	overflow:hidden;
+}
+.page-goods-template4-wrapper .goods_list{
+	display:table-cell;
+	position:relative;
+}
+.page-goods-template4-wrapper .goods_list + .goods_list{
+	padding-left:5px;
+}
+.page-goods-template4-wrapper .goods_list .oldPrice{
+	position:absolute;
+	z-index:2;
+	bottom:5px;
+	left:50%;
+	margin-left:-45px;
+	height: 18px;
+	line-height:18px;
+	background: #F3F2DE;
+	border-radius: 10px;
+	font-size:10px;
+	width:54px;
+	text-decoration:line-through;
+	color:#9a9a9a;
+	display:inline-block;
+}
+.page-goods-template4-wrapper .goods_list .price{
+	position:absolute;
+	z-index:2;
+	bottom:5px;
+	left:50%;
+	margin-left:-7px;
+	height: 18px;
+	line-height:18px;
+	background: linear-gradient(282deg, #FE365A 0%, #F28B8B 100%);
+	border-radius: 10px;
+	font-size:10px;
+	width:54px;
+	color:#fff;
+	display:inline-block;
+}
+.page-goods-template4-wrapper .goods_list + .goods_list .oldPrice{
+	margin-left:-35px;
+}
+.page-goods-template4-wrapper .goods_list + .goods_list .price{
+	margin-left:3px;
+}
+.page-goods-template4-wrapper .goods_list .xzicon-rightcircleo{
+	margin-left:3px;
+}
+.page-goods-template4-wrapper .goods_list .price.active{
+	margin-left:-27px;
+}
+.page-goods-template4-wrapper .goods_list + .goods_list .price.active{
+	margin-left:-17px;
+}
+/*商品列表模板5*/
+.page-goods-template5-box .goods_list{
+	position:relative;
+	display:block;
+}
+.page-goods-template5-box .goods_list + .goods_list{
+	margin-top:20px;
+}
+.page-goods-template5-box .goods_list .picBox{
+	float:left;
+	width:150px;
+	height:150px;
+	border-radius:4px;
+	overflow:hidden;
+}
+.page-goods-template5-box .goods_list .textBox{
+	margin-left:160px;
+	padding-top:10px;
+}
+.page-goods-template5-box .goods_list .goodsName{
+	line-height:21px;
+	font-size:15px;
+	height:43px;
+	overflow:hidden;
+	color:#333;
+}
+.page-goods-template5-box .goods_list .goodsTags{
+	margin-left:-3px;
+}
+.page-goods-template5-box .goods_list .tagsList{
+	display:inline-block;
+	background: rgba(0, 190, 175, 0.14);
+	font-size:10px;
+	color:#00BEAF;
+	padding:1px 5px;
+	margin:5px 0 0 5px;
+}
+.page-goods-template5-box .goods_list .btnBox{
+	border-bottom:1px solid #eee;
+	position:absolute;
+	bottom:-10px;
+	right:0;
+	padding-bottom:20px;
+	left:160px;
+}
+.page-goods-template5-box .goods_list:last-child .btnBox{
+	border-bottom:0 none;
+}
+.page-goods-template5-box .btnBox .price{
+	font-size:20px;
+	color:#F20000;
+	float:left;
+}
+.page-goods-template5-box .btnBox .price .mark{
+	font-size:14px;
+}
+.page-goods-template5-box .btnBox .buyBtn{
+	float:right;
+	width: 94px;
+	height: 30px;
+	text-align:center;
+	line-height:30px;
+	color:#fff;
+	font-size:14px;
+	background: #FEB213;
+	border-radius: 15px;
+	display:block;
+}
+/*商品列表模板6*/
+.page-goods-template6-box{
+	margin:-15px 0 0 -15px;
+}
+.page-goods-template6-box .goods_list{
+	float:left;
+	width:50%;
+}
+.page-goods-template6-box .listBox{
+	position:relative;
+	display:block;
+	margin:15px 0 0 15px;
+}
+.page-goods-template6-box .goods_list .picBox{
+}
+.page-goods-template6-box .goods_list .textBox{
+	margin-top:6px;
+}
+.page-goods-template6-box .goods_list .goodsName{
+	line-height:17px;
+	font-size:12px;
+	height:35px;
+	overflow:hidden;
+	color:#282828;
+}
+.page-goods-template6-box .goods_list .btnBox{
+	margin-top:10px;
+}
+.page-goods-template6-box .btnBox .price{
+	font-size:20px;
+	color:#F20000;
+	float:left;
+}
+.page-goods-template6-box .btnBox .price .mark{
+	font-size:14px;
+}
+.page-goods-template6-box .btnBox .buyBtn{
+	float:right;
+	width: 80px;
+	height: 30px;
+	text-align:center;
+	line-height:30px;
+	color:#fff;
+	font-size:14px;
+	background: #E50E11;
+	border-radius: 15px;
+	display:block;
+}
+/*文章列表模板1*/
+.page-article-template1-list{
+	line-height:44px;
+}
+/*文章列表模板2*/
+.page-article-template2-wrapper{
+	margin-top:-15px;
+}
+.page-article-template2-list{
+	margin-top:15px;
+}
+/*信息样式*/
+.page-info-box{
+	padding:15px;
+	position:relative;
+}
+.page-info-box .picBox{
+	width:60px;
+	height:60px;
+	float:left;
+}
+.page-info-box .textBox{
+	margin-left:70px;
+	margin-right:120px;
+	padding-top:5px;
+}
+.page-info-box .textBox .title{
+	font-weight: 400;
+	font-size: 17px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	word-wrap: break-word;
+	word-break: break-all;
+}
+.page-info-box .textBox .content{
+	color: #b2b2b2;
+	font-size: 13px;
+	line-height: 1.2;
+	margin-top: 4px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.page-info-box .btnBox{
+	position:absolute;
+	z-index:2;
+	right:15px;
+	top:50%;
+	margin-top:-14px;
+}
+.page-info-box .btnBox .listBtn{
+	display:inline-block;
+	padding:0 8px;
+	border-radius:20px;
+	background:#F84438;
+	height:28px;
+	line-height:28px;
+	font-size:12px;
+	color:#fff;
+}
+.page-info-box .btnBox .shareBtn{
+	background:#FF9933;
+}
+.page-info-box .btnBox .serviceBtn{
+	background:#1677FE;
+}
+.page-info-box .btnBox .listBtn + .listBtn{
+	margin-left:3px;
+}
+.page-info-box .page-info-logo{
+	border:1px solid #fff;
+	border-radius:5px;
+}
+.page-info-box pre{
+	padding:0;
+	margin:0;
+	white-space: pre-wrap;
+	word-wrap: break-word;
+}
+
+/*图片模板2*/
+.page-image-template2-wrapper .left{
+	float:left;
+}
+/*图片模板3*/
+.page-image-template3-wrapper .right{
+	float:right;
+}
+/*图片模板4*/
+.page-image-template4-list{
+	display:flex;
+}
+.page-image-template4-list .listBox{
+	display:block;
+	width:100%;
+}
+/*客服page-service-btn*/
+.page-service-btn{
+	width:45px;
+	height:45px;
+	border-radius:50%;
+	overflow:hidden;
+}
+.page-service-btn.active{
+	position:fixed;
+	right:15px;
+	bottom:120px;
+	z-index:10;
+}
+.page-service-btn .page-service-pic{
+	width:45px;
+	height:45px;
+	border-radius:50%;
+}
+/*选项卡page-tab-box*/
+.page-tab-box .searchCategory-box .searchCategory .list{
+	font-size:16px;
+}
+/* 客户店铺首页专用css */
+
+/*乐山一品*/
+#shop_18387662{
+	background-image:url(https://static.gedian.shop/16340245126964919.png);
+	background-repeat:no-repeat;
+	background-size:100% 400px;
+}
+#shop_18387662 .page-module-text_4,
+#shop_18387662 .page-module-text_6{
+	border-bottom:7px solid #f9f9f9;
+}
+#shop_18387662 .page-module-image_4{
+	border-top:7px solid #f9f9f9;
+	border-bottom:7px solid #f9f9f9;
+}
+#shop_18387662 .page-module-text_6{
+	position:relative;
+}
+#shop_18387662 .page-module-text_6 .page-module-content{
+	padding-left:48px;
+}
+#shop_18387662 .page-module-text_6:after{
+	content:'';
+	position:absolute;
+	top:50%;
+	left:10px;
+	margin-top:-8px;
+	width:33px;
+	height:16px;
+	background-image:url(https://static.gedian.shop/16340328673156227.png);
+	background-size:100% 100%;
+}
+#shop_18387662 .page-module-search_0{
+	padding-left:100px;
+	position:relative;
+}
+#shop_18387662 .page-module-search_0.wx{
+	padding-right:100px;
+}
+#shop_18387662 .page-module-search_0:before{
+	content:'';
+	position:absolute;
+	top:50%;
+	left:18px;
+	margin-top:-1px;
+	width:76px;
+	height:19px;
+	background-image:url(https://static.gedian.shop/16346138557982350.png);
+	background-size:100% 100%;
+}

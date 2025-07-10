@@ -1,0 +1,17 @@
+.myFriend-list{
+	padding:15px;
+	position:relative;
+}
+.myFriend-list + .myFriend-list{
+	border-top:1px solid #F9F9F9;
+}
+.myFriend-list .picBox{
+	float:left;
+	border-radius:50%;
+	overflow:hidden;
+	width:40px;
+	height:40px;
+}
+.myFriend-list .textBox{
+	margin-left:50px;
+}

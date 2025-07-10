@@ -1,0 +1,79 @@
+<div class="app-wrapper">
+	<div class="app-main positionBottom" wx:if="{{isUserLogin}}">
+    	<div class="markWraper"></div>
+    	<div class="client_recharge_header">
+        	<p class="money">{{balance}}</p>
+            <p class="title">钻石余额</p>
+        </div>
+        <div class="clearfix">
+        	<p class="form-title fl">我的礼包<span class="p12">（共{{count}}个）</span></p>
+            <div class="searchCategory-box fr">
+                <div class="searchCategory">
+                    <div class="listBox">
+                        <span class="list {{(form.gettype=='my'?' active':'')}}" data-type="gettype" data-value="my" bindtap="screen">我购买的</span>
+                        <span class="list {{(form.gettype=='revice'?' active':'')}}" data-type="gettype" data-value="revice" bindtap="screen">我领取的</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="client_recharge_box" wx:if="{{data&&data.length}}">
+        	<div class="client_recharge_list" wx:for="{{data}}">
+            	<span class="spanStatus cRed" wx:if="{{item.status==1}}">已打开</span>
+                <span class="spanStatus cGreen" wx:else>可打开</span>
+            	<p class="title">{{item.name}}</p>
+            	<div class="infoBox clearfix">
+                	<div class="fl">
+                		<p class="price">¥{{item.price}}</p>
+                        <span class="p12 c999" wx:if="{{item.status==1}}">{{item.updateAt}}【{{item.changeusername}}】打开</span>
+                        <span class="p12 c666" wx:if="{{item.status==0}}" data-index="{{index}}" bindtap="openThis">立即打开></span>
+                    </div>
+                    <div class="fr tar">
+                    	<p class="p12 c666">送钻：{{item.diamond}}，分红股：{{item.zjbcoin}}</p>
+                    	<div>
+                        	<span wx:if="{{item.canrefund==1}}" class="btnList cancelBtn2" data-index="{{index}}" bindtap="toCancel">申请退款</span>
+                        	<span wx:if="{{form.gettype=='my'}}" class="btnList copyBtn" data-content="{{item.changecode}}" bindtap="copyThis">复制兑换码</span><button wx:if="{{item.status==1&&item.usetype==2&&form.gettype=='revice'&&item.type=='white'}}" class="btnList cancelBtn" data-index="{{index}}" bindtap="toRefund">退回</button><button wx:elif="{{client=='wx'&&item.status==0}}" open-type="share" class="btnList shareBtn" data-index="{{index}}">送给好友</button></div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <view class="loadingBox mlr14" hidden="{{!showLoading}}">
+            <div class="xzicon-loading"></div>
+            <div class="xzui-loadmore__tips">正在加载</div>
+        </view>
+        <view class="noData mlr14" hidden="{{!showNoData}}">暂无礼包</view>
+        <!--确认弹框-->
+        <div class="publicScroll_dialog {{(openForm.show?' show':'')}}">
+            <view class="publicScroll_body" style="height:{{openForm.height}}px;">
+                <div class="publicScroll_head clearfix tac bgfff">
+                    <span class="p16">打开确认</span>
+                    <span class="fr p16" bindtap="toHideDialog"><i class="xzicon-close"></i></span>
+                </div>
+                <div class="publicScroll_main bgfff">
+                    <view class="bgfff">
+                        <div class="form-list" wx:if="{{openForm.data}}">
+                            <div class="form-list-item p12">
+                                <p style="white-space:pre-wrap;">{{openForm.data.confirmTips}}</p>
+                                <p>含{{openForm.data.diamond}}钻石</p>
+                                <p>赠送{{openForm.data.zjbcoin}}分红股</p>
+                            </div>
+                        </div>
+                        <div class="form-list" wx:else>
+                            <div class="form-list-item p12 c999 tac ptb20">暂无礼包数据</div>
+                        </div>
+                    </view>
+                </div>
+                <view class="publicScroll_footBtn">
+                	<div class="displayFlex">
+                    	<div class="list"><button class="cancelBtn" type="button" bindtap="toConfirmDialog">确认</button></div>
+                        <div class="list ml10"><button class="submitBtn" type="button" bindtap="toHideDialog">取消</button></div>
+                    </div>
+                </view>
+            </view>
+        </div>
+        <div class="client_recharge_footBtn">
+        	<navigator url="../../finance/diamondRecord/diamondRecord" class="c333 p14 displayIB fl" style="line-height:40px;">钻石记录 ></navigator>
+            <div class="client_recharge_submitBtn fr" bindtap="toBuy">充值钻石</div>
+        </div>
+    </div>
+    <nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

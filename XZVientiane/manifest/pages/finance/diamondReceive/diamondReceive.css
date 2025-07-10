@@ -1,0 +1,35 @@
+.diamondReceive_head{
+	text-align:center;
+	padding:40px 20px 20px 20px;
+}
+.diamondReceive_head .picBox{
+	width:72px;
+	height:72px;
+	border-radius:50%;
+	overflow:hidden;
+	margin:auto;
+	border:2px solid #fff;
+}
+.diamondReceive_head .iconBox .xzicon-checkcircle{
+	font-size:46px;
+}
+.diamondReceive_head .userName{
+	font-size:16px;
+}
+.diamondReceive_footBtn{
+	margin-top:30px;
+}
+.diamondReceive_getBtn{
+	margin:auto;
+	width:160px;
+	height: 44px;
+	background: #FF4040;
+	border-radius: 4px;
+	color:#fff;
+	font-size:16px;
+	line-height:44px;
+	border-radius:30px;
+}
+.diamondReceive_getBtn.disabled{
+	opacity:0.4;
+}

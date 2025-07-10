@@ -1,0 +1,151 @@
+.myExpertInfo-numberInfo{
+	background:#fff;
+	padding:15px 0px;
+}
+.myExpertInfo-numberInfo .number{
+	font-weight:bold;
+}
+.myExpertInfo-noData{
+	padding:15px;
+}
+.myExpertInfo-noData .title{
+	font-size:16px;
+	color:#333;
+}
+.myExpertInfo-userInfo{
+	padding:30px 0;
+}
+.myExpertInfo-quanyi{
+	color:#666;
+	text-decoration:underline;
+}
+.myExpertInfo-submitBtn{
+	color:#000;
+	height:42px;
+	line-height:42px;
+	text-align:center;
+	border-radius:25px;
+	width:200px;
+	margin:20px auto;
+	background:#FEE10B;
+}
+.myPartner-noData .myExpertInfo-submitBtn{
+	margin:15px auto;
+}
+
+.myExpertInfo-userBox .userList{
+	padding:10px 0;
+}
+.myExpertInfo-userBox .picBox{
+	float:left;
+	width:40px;
+	height:40px;
+	border-radius:50%;
+	overflow:hidden;
+}
+.myExpertInfo-userBox .textBox{
+	margin-left:50px;
+}
+.myExpertInfo-menu .list{
+	background:#E5E5E5;
+	color:#888;
+	height:38px;
+	line-height:38px;
+	text-align:center;
+	border-radius:4px;
+	font-size:15px;
+}
+.myExpertInfo-menu .list.active{
+	color:#333;
+	background:#FEE10B;
+}
+.searchCategory-more{
+	position:absolute;
+	right:15px;
+	top:0;
+	text-decoration:underline;
+}
+
+.contentTips_dialog .publicScroll_main{
+	bottom:0 !important;
+}
+
+.finance-agreeMent{
+	position:fixed;
+	bottom:80px;
+	left:0;
+	right:0;
+	text-align:center;
+	color:#888;
+}
+/*推荐人弹框*/
+.checkParentDialog .userInfoBox .picBox{
+	width:36px;
+	height:36px;
+	float:left;
+	border-radius:50%;
+	overflow:hidden;
+}
+.checkParentDialog .userInfoBox .textBox{
+	margin-left:42px;
+}
+
+/*myExpertInfo-userBox*/
+.myExpertInfo-titleDiv{
+	border-top:5px solid rgb(247,247,247);
+	margin-top:15px;
+}
+.myExpertInfo-userBox{
+	position:relative;
+	padding:0 15px;
+}
+
+.myExpertInfo-userBox .rightNum{
+	position:absolute;
+	right:10px;
+	top:50%;
+	line-height:16px;
+	margin-top:-8px;
+	font-size:14px;
+	color:#888;
+}
+.myExpertInfo-userBox .userBox{
+	display:inline-block;
+	width:210px;
+}
+.myExpertInfo-userBox .userBox .list{
+	float:left;
+	width:16.666666%;
+}
+.myExpertInfo-userBox .userBox .list + .list{
+	margin-left:-8px;
+}
+.myExpertInfo-userBox .userBox .list .picBox{
+	border-radius:50%;
+	border:2px solid #fff;
+	width:32px;
+	height:32px;
+	overflow:hidden;
+}
+
+/*myExpertInfo-infoItem*/
+.myExpertInfo-infoItem{
+	padding:10px 15px 15px 15px;
+}
+.myExpertInfo-infoItem .picBox{
+	width:45px;
+	height:45px;
+	float:left;
+	border-radius:50%;
+	overflow:hidden;
+}
+.myExpertInfo-infoItem .textBox{
+	margin-left:55px;
+}
+.myExpertInfo-infoItem .picContent{
+	margin-top:5px;
+}
+.myExpertInfo-infoItem .wxCodePic{
+	margin-left:45px;
+	width:100px;
+}

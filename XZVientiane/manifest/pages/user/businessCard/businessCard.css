@@ -1,0 +1,308 @@
+.businessCard_header{
+	padding:15px;
+	position:relative;
+}
+.businessCard_header .editBtn{
+	color: #131313;
+	position: absolute;
+	right: 15px;
+	top: 50%;
+	font-size: 24px;
+	line-height: 26px;
+	margin-top: -13px;
+	z-index:2;
+}
+.businessCard_header .friendBtn{
+	color: #131313;
+	background: #FEE10B;
+	display: inline-block;
+	padding: 0 6px;
+	position: absolute;
+	right: 15px;
+	top: 50%;
+	font-size: 12px;
+	line-height: 28px;
+	margin-top: -14px;
+	z-index: 2;
+	border-radius: 4px;
+}
+.businessCard_header .picBox{
+	width:60px;
+	height:60px;
+	overflow:hidden;
+	border-radius:50%;
+	float:left;
+	background:#fff;
+}
+.businessCard_header .textBox{
+	margin-left:70px;
+	padding-right:40px;
+	position:relative;
+}
+.businessCard_header .spanStatusList .spanStatus +.spanStatus{
+	margin-left:3px;
+}
+.businessCard_border{
+	border-top:1px solid #F9F9F9;
+}
+.businessCard_title .editBtn{
+	color: #131313;
+	font-size: 24px;
+	line-height: 26px;
+}
+.businessCard_tagsBox{
+	margin-left:-5px;
+}
+.businessCard_tagsBox .tagsList{
+	display:inline-block;
+	height: 28px;
+	background: #F9F9F9;
+	border-radius: 50px;
+	line-height:28px;
+	padding:0 12px;
+	font-size:14px;
+	text-align:center;
+	margin:5px 0 0 5px;
+}
+.businessCard_tagsBox .tagsList.a1{
+	color:#A23AD3;
+}
+.businessCard_tagsBox .tagsList:nth-child(3n+2){
+	color:#3A5CD3;
+}
+.businessCard_tagsBox .tagsList:nth-child(3n+3){
+	color:#E65050;
+}
+.businessCard_activityBox{
+	margin:0 0 0 -10px;
+}
+.businessCard_activityBox .listBox{
+	display:block;
+	float:left;
+	width:50%;
+}
+.businessCard_activityBox .businessCard_activityList{
+	display:block;
+	margin:10px 0 0 10px;
+	border-radius:4px;
+	overflow:hidden;
+}
+.businessCard_activityList .textBox{
+	background:#F9F9F9;
+	padding:6px 10px;
+}
+/*动态*/
+.businessCard_dynamicList{
+	padding-top:15px;
+}
+.businessCard_dynamicList + .businessCard_dynamicList{
+	margin-top:15px;
+	border-top:1px solid #F9F9F9;
+}
+.businessCard_dynamicList .content{
+	color:#131313;
+	line-height:18px;
+	font-size:14px;
+}
+.businessCard_dynamicList .addtime{
+	color:#131313;
+	font-size:12px;
+	margin-top:5px;
+}
+.businessCard_dynamicList .picContainer{
+	margin-left:-5px;
+}
+.businessCard_dynamicList .picContainer .picBox{
+	float:left;
+	display:block;
+	width:33.333333%;
+}
+.businessCard_dynamicList .picContainer.row1 .picBox{
+	width:100%;
+}
+.businessCard_dynamicList .picContainer.row2 .picBox{
+	width:50%;
+}
+.businessCard_dynamicList .picContainer .picBox .picList{
+	margin:5px 0 0 5px;
+	position:relative;
+}
+.businessCard_dynamicList .picContainer .videoPlay_image{
+	width: 30px;
+	height: 30px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -15px;
+	margin-left: -15px;
+}
+
+/*礼物相关*/
+.businessCard_sendGiftBtn .xzui-btn{
+	margin:auto;
+	color:#fff !important;
+	background:#DABB53 !important;
+	padding:0;
+	border-radius:30px;
+}
+.businessCard_sendGiftBtn .sendPic{
+	width:24px;
+}
+.publicScroll_giftBox{
+	margin:-10px 0 0 -10px;
+}
+.publicScroll_giftBox .publicScroll_giftList{
+	float:left;
+	width:25%;
+}
+.publicScroll_giftBox .publicScroll_giftList .list{
+	margin:10px 0 0 10px;
+	text-align:center;
+	height:90px;
+	position:relative;
+}
+.publicScroll_giftBox .publicScroll_giftList .list .topContainer{
+	padding:5px 0;
+}
+.publicScroll_giftBox .publicScroll_giftList .list.active .topContainer{
+	background:#FFFDEE;
+}
+.publicScroll_giftList .picBox{
+	margin:auto;
+}
+.publicScroll_giftList .picBox .pic{
+	width:100%;
+	height:100%;
+}
+.publicScroll_giftList .nameBox{
+	font-size:14px;
+	color:#000;
+	font-weight:600;
+}
+.publicScroll_giftList .priceBox .priceIcon{
+	width:12px;
+	height:11px;
+}
+.publicScroll_giftList .priceBox .priceText{
+	font-size:12px;
+	color:#000;
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 2px;
+}
+.publicScroll_giftList .quantityBox{
+	font-size:0px;
+	margin-top:5px;
+}
+.publicScroll_giftList .quantityBox .reduceBtn{
+	background:rgba(198,218,229,0.6);
+	color:#000;
+	font-size:12px;
+	border-radius:30px 0px 0px 30px;
+	display:inline-block;
+	width:23px;
+	height:20px;
+	text-align:center;
+	line-height:20px;
+	vertical-align:middle;
+}
+.publicScroll_giftList .quantityBox .numBtn{
+	background:rgba(198,218,229,0.6);
+	color:#000;
+	font-size:12px;
+	display:inline-block;
+	margin:0 2px;
+	width:20px;
+	height:20px;
+	text-align:center;
+	line-height:20px;
+	vertical-align:middle;
+}
+.publicScroll_giftList .quantityBox .addBtn{
+	background:rgba(198,218,229,0.6);
+	color:#000;
+	font-size:12px;
+	border-radius:0px 30px 30px 0px;
+	display:inline-block;
+	width:23px;
+	height:20px;
+	text-align:center;
+	line-height:20px;
+	vertical-align:middle;
+}
+.publicScroll_giftFoot{
+	position:relative;
+	height:45px;
+}
+.publicScroll_giftFoot .priceBox{
+	line-height:36px;
+}
+.publicScroll_giftFoot .priceBox .priceIcon{
+	width:20px;
+	height:19px;
+}
+.publicScroll_giftFoot .priceBox .priceText{
+	display:inline-block;
+	vertical-align:middle;
+	margin-left:5px;
+	color:#000;
+	font-size:16px;
+}
+.publicScroll_giftFoot .toSubmitBtn{
+	background:#FEE10B;
+	color:#000;
+	font-size:16px;
+	width:120px;
+	height:36px;
+	line-height:36px;
+	text-align:center;
+	display:inline-block;
+	border-radius:20px;
+	position:absolute;
+	right:0px;
+	top:50%;
+	margin-top:-18px;
+}
+.businessCard_receiveGiftBox{
+	overflow: hidden;
+}
+.businessCard_receiveGiftBox .scrollContainer{
+	overflow-x: auto;
+	overflow-y:hidden;
+	-webkit-overflow-scrolling: touch;
+}
+.businessCard_receiveGiftBox .businessCard_listBox{
+	display: table;
+}
+.businessCard_receiveGiftBox .businessCard_listBox .listBox{
+	white-space: nowrap;
+	display: table-cell;
+	width:auto;
+	float:none;
+}
+.businessCard_receiveGiftBox .businessCard_listBox .listBox + .listBox{
+	padding-left:10px;
+}
+.businessCard_receiveGiftBox .businessCard_listBox{
+	 margin:0px;
+}
+.businessCard_receiveGiftBox .businessCard_listBox .listBox .list{
+    margin:0px;
+}
+.businessCard_friendBtn{
+	padding:0 15px 10px 15px;
+	text-align:right;
+}
+.businessCard_friendBtn .btnList{
+	color: #000;
+	background-color: #FEE10B;
+	display: inline-block;
+	height: 32px;
+	line-height: 32px;
+	border-radius:4px;
+	width:90px;
+	text-align:center;
+}
+.businessCard_friendBtn .btnList +.btnList{
+	margin-left:5px;
+}

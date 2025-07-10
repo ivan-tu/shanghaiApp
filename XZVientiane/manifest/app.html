@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+        <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="format-detection" content="telephone=no" />
+            <meta content="email=no" name="format-detection" />
+                <meta id="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1,user-scalable=no" name="viewport">
+                <title>在局</title>
+					<link href="static/css/skin.css" rel="stylesheet" />
+                    <link href="static/css/xzicon.css" rel="stylesheet" />
+                    <link href="static/css/common.css" rel="stylesheet" />
+         <script>
+                var xzSystemConfig = {
+                    xzAppId:'hi3',
+                    checkUserSession:true,//需要验证用户session
+                    needBindAccount:true,//微信登录需要绑定账号
+                    clientMode: 'app', //客户端模式，app或web
+                    environment: 'production', //工作环境，test：测试，production：生产，devlop：开发
+                    pageType:'show',//页面类型，manage：管理，show：前台
+                    projectId: 'home', //项目id，
+                    independent: true,//是否独立项目
+                    qiniuRegion:'z0',//七牛存储区域
+                    staticPath:'static/',
+                    filePath:'https://statics.tuiya.cc/',//七牛云域名
+                    domain:'hi3.tuiya.cc',
+                };
+        </script>
+        <script src="static/js/config.js"></script>
+        <script src="static/js/jquery.js"></script>
+        <script src="static/js/xzp.js"></script>
+        <script src="static/js/xzSystem.js"></script>
+        <script src="static/js/webApp.js"></script>
+        <script src="static/common/xzApp.js"></script>
+        <script src="static/common/xzImage.js"></script>
+        <script src="static/language/zh-cn.js"></script>
+        <script src="static/js/xzParse.js"></script>
+        <script src="static/js/app.js"></script>
+        <script src="static/js/xzWX.js"></script>
+        <script src="static/app/xz-app.js"></script>
+        <script src="static/app/webviewbridge.js"></script>
+        </head>
+        <style>
+            body.iPhoneLiuHai{
+                background-color:#fff !important;
+                padding-top:24px;
+            }
+        </style>
+        <body style="background-color:#f4f4f4;" class="{{phoneClass}}">
+            <div id="lowerBrowser"></div>
+            <div id="pageWrapper">{{body}}</div>
+            <script src="static/js/fastClick.js"></script>
+            <script>
+                if ('addEventListener' in document) {
+                    document.addEventListener('DOMContentLoaded', function() {
+						FastClick.attach(document.body);
+					}, false);
+                };
+           </script>
+        </body>
+</html>

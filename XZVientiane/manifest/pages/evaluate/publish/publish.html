@@ -1,0 +1,126 @@
+<div class="app-wrapper">
+	<div class="app-main positionBottom">
+    	<div class="markWraper"></div>
+        <view class="loadingBox mlr14" wx:if="{{ajaxLoading}}">
+            <div class="xzicon-loading"></div>
+        </view>
+		<div class="dynamicPublish_main" wx:elif="{{dynamicPublishWX==1}}">
+        	<div class="evaluatePublish_headMain">
+                <div class="evaluatePublish_head">
+                    <div class="displayFlex">
+                        <div class="list {{(form.stars==1?' active':'')}}" data-num="1" bindtap="selectThis">
+                            <div class="iconBox">
+                                <image class="iconPic" src="{{staticPath}}iconPic/evaluate_1.png" mode="widthFix" />
+                                <span class="iconTitle">很糟糕</span>
+                            </div>
+                            <div class="starBox"><image class="w100" src="{{staticPath}}iconPic/{{(form.stars>=1?'evaluate_starActive.png':'evaluate_star.png')}}" mode="widthFix" /></div>
+                        </div>
+                        <div class="list  {{(form.stars==2?' active':'')}}" data-num="2" bindtap="selectThis">
+                            <div class="iconBox">
+                                <image class="iconPic" src="{{staticPath}}iconPic/evaluate_2.png" mode="widthFix" />
+                                <span class="iconTitle">较差</span>
+                            </div>
+                            <div class="starBox"><image class="w100" src="{{staticPath}}iconPic/{{(form.stars>=2?'evaluate_starActive.png':'evaluate_star.png')}}" mode="widthFix" /></div>
+                        </div>
+                        <div class="list  {{(form.stars==3?' active':'')}}" data-num="3" bindtap="selectThis">
+                            <div class="iconBox">
+                                <image class="iconPic" src="{{staticPath}}iconPic/evaluate_3.png" mode="widthFix" />
+                                <span class="iconTitle">一般</span>
+                            </div>
+                            <div class="starBox"><image class="w100" src="{{staticPath}}iconPic/{{(form.stars>=3?'evaluate_starActive.png':'evaluate_star.png')}}" mode="widthFix" /></div>
+                        </div>
+                        <div class="list  {{(form.stars==4?' active':'')}}" data-num="4" bindtap="selectThis">
+                            <div class="iconBox">
+                                <image class="iconPic" src="{{staticPath}}iconPic/evaluate_4.png" mode="widthFix" />
+                                <span class="iconTitle">还可以</span>
+                            </div>
+                            <div class="starBox"><image class="w100" src="{{staticPath}}iconPic/{{(form.stars>=4?'evaluate_starActive.png':'evaluate_star.png')}}" mode="widthFix" /></div>
+                        </div>
+                        <div class="list  {{(form.stars==5?' active':'')}}" data-num="5" bindtap="selectThis">
+                            <div class="iconBox">
+                                <image class="iconPic" src="{{staticPath}}iconPic/evaluate_5.png" mode="widthFix" />
+                                <span class="iconTitle">很棒</span>
+                            </div>
+                            <div class="starBox"><image class="w100" src="{{staticPath}}iconPic/{{(form.stars>=5?'evaluate_starActive.png':'evaluate_star.png')}}" mode="widthFix" /></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+			<div class="form-list" style="padding:30px 15px;">
+            	<div class="form-list-item"><textarea style="color:#333;height:240px;" class="textarea" placeholder="大家都在问：活动体验好吗？环境怎么样？" bindinput="model" data-model="form.content" value="{{form.content}}" maxlength="-1"></textarea></div>
+            </div>
+            <div class="plr15">
+            	<!--图片-->
+                <div class="dynamicPublish_picBox clearfix" wx:if="{{files&&files.length}}">
+                	<div class="goodsAddPic-container goodsAddPic-container-picture">
+                    	<div class="goodsAddPic-list clearfix">
+                        	<div class="goodsAddPic-item goodsAddPic-item-row5" wx:for="{{files}}">
+                            	<div class="goodsAddPic-bar" style="height:{{imageWidth}}px;" bindtap="showMenu" data-index="{{index}}">
+                                	<image src="{{item.src}}" mode="widthFix" />
+                                    <view class="xzui-uploader_progress" hidden="{{item.hidePercent}}">
+                                    	<span class="xzui-uploader_progressText">{{(item.percent||0)}}%</span>
+                                    </view>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+  				</div>
+                <!--视频-->
+                <div class="bgfff mt10" wx:if="{{videoData&&videoData.uploadStatus}}">
+                   <div class="xzui-uploader user-upload" wx:if="{{!videoData.file}}">
+                    	<div class="xzui-uploader__one">
+                        	<div class="xzui-uploader__files">
+                            	<div class="xzui-uploader__file xzui-uploader__one" style="width: 100%;height:auto;min-height:100px;">
+                                	<div class="xzui-uploader_progress">
+                                    	<span class="xzui-uploader_progressText">上传中...  已上传{{videoData.percent}}%</span>
+                                    </div>
+                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="xzui-uploader user-upload" wx:elif="{{videoData.error}}">
+                    	<div class="xzui-uploader__one">
+                        	<div class="xzui-uploader__files">
+                            	<div class="xzui-uploader__file xzui-uploader__one" style="width: 100%;height:auto;min-height:100px;">
+                                	<div class="xzui-uploader_progress">
+                                    	<span class="xzui-uploader_progressText">视频转码中...，请稍后</span>
+                                    </div>
+                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="xzui-uploader user-upload" wx:elif="{{videoData.file}}" bindtap="menuVideo">
+                    	<div class="xzui-uploader__one">
+                        	<div class="xzui-uploader__files">
+                            	<div class="xzui-uploader__file xzui-uploader__one" style="width: 100%;height:auto;min-height:100px;">
+                                	<image id="videoPic" mode="widthFix" src="{{videoData.poster}}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt10">
+                    <navigator url="javascript:;" bindtap="uploadPics" class="dynamicPublish_uploadBtn">
+                    	<div><image class="pic" src="https://statics.tuiya.cc/17327802577687847.png" mode="widthFix" /></div>
+                        <p class="dynamicPublish_uploadText">上传照片</p>
+                    </navigator>
+                    <navigator url="javascript:;" bindtap="uploadVideo" class="dynamicPublish_uploadBtn ml15">
+                    	<div><image class="pic" src="https://statics.tuiya.cc/17327802611862102.png" mode="widthFix" /></div>
+                        <p><span class="dynamicPublish_uploadText">上传视频</span></p>
+                    </navigator>
+                </div>
+            </div>
+            <div class="xzui-btn-app positionBottom dynamicPublish_btnBox">
+                <button type="button" bindtap="submit" class="xzui-btn xzui-btn_b primary" size="large">
+                	<span class="displayIB vMid ml5">发布</span>
+                </button>
+            </div>
+		</div>
+        <div wx:else>
+        	<p class="tac p16" style="margin-top:60px;">非常抱歉，您暂时无权访问</p>
+            <div class="xzui-btn-app publish_footBtn">
+                <button type="button" bindtap="reback" class="xzui-btn xzui-btn_b primary" size="large">返回</button>
+            </div>
+        </div>
+	</div>
+</div>

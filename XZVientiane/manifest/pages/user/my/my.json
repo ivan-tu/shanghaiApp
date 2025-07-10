@@ -1,0 +1,7 @@
+{
+	"usingComponents": {
+		"newShare": "/components/common/newShare/newShare",
+		"nologin": "/components/common/nologin/nologin"
+  },
+	"navigationBarTitleText": "我的"
+}

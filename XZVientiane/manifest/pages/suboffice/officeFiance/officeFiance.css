@@ -1,0 +1,14 @@
+.officeFiance-infoBox .list{
+	float:left;
+	width:33.333333%;
+	text-align:center;
+	padding:15px 0;
+}
+.officeFiance-infoBox .title{
+	font-size:14px;
+	color:#666;
+}
+.officeFiance-infoBox .number{
+	font-size:18px;
+	color:#131313;
+}

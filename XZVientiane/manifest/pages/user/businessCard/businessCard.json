@@ -1,0 +1,8 @@
+{
+	"usingComponents": {
+		"newShare": "/components/common/newShare/newShare",
+		"videoPlay":"/components/common/videoPlay/videoPlay",
+		"nologin": "/components/common/nologin/nologin"
+  },
+  "navigationBarTitleText": "名片"
+}

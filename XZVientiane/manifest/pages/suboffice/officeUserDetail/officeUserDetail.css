@@ -1,0 +1,47 @@
+.officeUserDetail-header{
+	padding:15px 15px;
+	position:relative;
+}
+.officeUserDetail-header .picBox{
+	width:60px;
+	height:60px;
+	border-radius:50%;
+	float:left;
+}
+.officeUserDetail-header .textBox{
+	margin-left:70px;
+}
+.officeUserDetail-header .spanList{
+	background:#FEE10B;
+	color:#333;
+	margin-left:5px;
+	display:inline-block;
+	padding:1px 4px;
+	border-radius:2px;
+	font-size:12px;
+	vertical-align:middle;
+}
+.officeUserDetail-header .xzicon-right{
+	position:absolute;
+	right:5px;
+	top:50%;
+	margin-top:-8px;
+	line-height:16px;
+	color:#888;
+	font-size:12px;
+}
+.officeUserDetail-footBtn{
+	padding:25px 45px;
+}
+.officeUserDetail-footBtn .btnList{
+	background:#FEE10B;
+	color:#333;
+	border-radius:4px;
+	height:42px;
+	line-height:42px;
+	text-align:center;
+	display:block;
+}
+.officeUserDetail-footBtn .btnList +.btnList{
+	margin-top:10px;
+}

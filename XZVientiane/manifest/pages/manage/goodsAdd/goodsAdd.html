@@ -1,0 +1,496 @@
+<div class="app-wrapper">
+	<div wx:if="{{isUserLogin}}" class="app-main positionBottom">
+    	<div wx:if="{{myAuthority&&myAuthority.goods}}">
+          	<!--商品基础信息-->
+            <div class="mt10">
+            	<div class="xzui-cells">
+                	<!--商品类型-->
+                    <view class="xzui-cell xzui-cell_access">
+                    	<div class="xzui-cell__hd must">商品类型</div>
+                        <div class="xzui-cell__bd">
+                        	<div class="displayIB" data-type="1" bindtap="selectGoodsType"><span class="xzui-radio-new {{(form.goodsCategoryType==1?' active':'')}}"></span><span class="xzui-radioTitle-new">实物</span></div>
+                            <div class="displayIB ml15" data-type="2" bindtap="selectGoodsType"><span class="xzui-radio-new  {{(form.goodsCategoryType==2?' active':'')}}"></span><span class="xzui-radioTitle-new">票券</span></div>
+                        </div>
+                    </view>
+                	<!--商品分类-->
+                    <view class="xzui-cell xzui-cell_access" bindtap="selectCategory">
+                    	<div class="xzui-cell__hd must">商品类目</div>
+                        <div class="xzui-cell__bd" wx:if="{{form.goodsTypeName&&form.goodsTypeName.length}}">{{form.goodsTypeName[0]}}<span wx:if="{{form.goodsTypeName.length>1}}">-{{form.goodsTypeName[1]}}</span></div>
+                        <div class="xzui-cell__bd c999" wx:else>选择商品类目</div>
+                        <div class="xzui-cell__ft xzui-cell__ft_in-access">
+                      		<i class="xzicon-right xzui-cell__ft_arrow"></i>
+                        </div>
+                    </view>
+                    <!--商品名称-->
+                    <view class="xzui-cell xzui-cell_access">
+                    	<div class="xzui-cell__hd must">商品名称</div>
+                    	<div class="xzui-cell__bd">
+                        	<input class="xzui-input"  placeholder="填写名称" value="{{form.name}}" bindinput="model" data-model="form.name" class="textInput p16 c666" type="text"  />
+                        </div>
+               		</view>
+                    <!--商品封面-->
+                    <div class="xzui-cell">
+                    	<div class="xzui-cell__hd must">商品封面</div>
+                        <div class="xzui-cell__bd">
+                            <upload value="{{form.pic}}" class="user-upload" width="65" height="65" bindchange="uploadPic" id="uploadPic"></upload>
+                        </div>
+                        <div class="xzui-cell__ft"><i class="xzicon-right xzui-cell__ft_arrow"></i></div>
+                    </div>
+                    <!--轮播图片-->
+                    <div class="xzui-cell">
+                      <div class="xzui-cell__hd">轮播图片</div>
+                      <div class="xzui-cell__bd">
+                          <div class="goodsAddPic-container goodsAddPic-container-picture">
+                            <div class="goodsAddPic-list clearfix">
+                              <div class="goodsAddPic-item goodsAddPic-item-row5" wx:for="{{pics_files}}">
+                                <div class="goodsAddPic-bar" style="height:{{imageWidth}}px;" bindtap="showMenu" data-id="{{item.id}}" data-index="{{index}}">
+                                  <image src="{{item.src}}" mode="widthFix" />
+                                  <view class="xzui-uploader_progress" hidden="{{item.hidePercent}}">
+                                    <span class="xzui-uploader_progressText">{{(item.percent||0)}}%</span>
+                                  </view>
+                                </div>
+                              </div>
+                              <view class="goodsAddPic-item goodsAddPic-item-row5" >
+                                <div class="goodsAddPic-bar" style="height:{{imageWidth}}px;">
+                                  <view class="xzui-uploader__input-box needsclick" style="height:{{imageWidth}}px;width:{{imageWidth}}px;" catchtap="uploadPics"></view>
+                                </div>
+                              </view>
+                            </div>
+                          </div>
+                      </div>
+                    </div>
+                    <!--商品详情-->
+                    <view class="xzui-cell xzui-cell_access" bindtap="setContent">
+                      <div class="xzui-cell__hd must">商品详情</div>
+                      <div class="xzui-cell__bd" wx:if="{{form.content}}">编辑商品详情</div>
+                      <div class="xzui-cell__bd c999" wx:else>添加商品详情</div>
+                      <div class="xzui-cell__ft xzui-cell__ft_in-access"><i class="xzicon-right xzui-cell__ft_arrow"></i></div>
+                    </view>
+                    <!--商品摘要-->
+                    <view class="xzui-cell xzui-cell_access"  data-placeholder="请输入摘要" data-tips="突出商品的卖点，分享商品时会显示摘要" data-name="abstract" data-title="编辑商品摘要" data-type="textarea" bindtap="setTextInput">
+                      <div class="xzui-cell__hd must">商品摘要</div>
+                      <div class="xzui-cell__bd textOver" wx:if="{{form.abstract}}">
+                        {{form.abstract}}
+                      </div>
+                      <div class="xzui-cell__bd c999" wx:else>
+                        填写商品的卖点
+                      </div>
+                      <div class="xzui-cell__ft xzui-cell__ft_in-access"><i class="xzicon-right xzui-cell__ft_arrow"></i></div>
+                    </view>
+                    <!--商品标签-->
+                    <view class="xzui-cell xzui-cell_access" data-placeholder="请输入标签" data-empty="1" data-tips="多个标签用,号分割，例：新品,特价" data-name="tags" data-title="编辑商品标签" data-type="textarea" bindtap="setTextInput">
+                      <div class="xzui-cell__hd">商品标签</div>
+                      <div class="xzui-cell__bd textOver" wx:if="{{form.tags}}">
+                        {{form.tags}}
+                      </div>
+                      <div class="xzui-cell__bd c999" wx:else>
+                        填写商品的标签
+                      </div>
+                      <div class="xzui-cell__ft xzui-cell__ft_in-access"><i class="xzicon-right xzui-cell__ft_arrow"></i></div>
+                    </view>
+                   <!--商品基础销量-->
+                  <!--<div class="xzui-cell xzui-cell_access">
+                      <div class="xzui-cell__hd">
+                          <label class="xzui-label">基础销量</label>
+                      </div>
+                      <div class="xzui-cell__bd">
+                          <input class="xzui-input" placeholder="填写基础销量" value="{{form.basicCount}}" bindinput="model" data-model="form.basicCount" class="textInput p16 c666" type="number"  />
+                      </div>
+                  </div>-->
+                  <!--sku编码-->
+                  <view class="xzui-cell xzui-cell_access">
+                      <div class="xzui-cell__hd">sku编码</div>
+                      <div class="xzui-cell__bd">
+                          <input class="xzui-input"  placeholder="填写sku编码" value="{{form.serialnumber}}" bindinput="model" data-model="form.serialnumber" class="textInput p16 c666" type="text"  />
+                      </div>
+                  </view>
+                </div>
+                <!--基础分组结束-->
+                <!--实物类商品设置开始-->
+                <div  wx:if="{{form.goodsCategoryType==1}}">
+                <!--规格分组开始-->
+                <div class="mt10" wx:if="{{form.sku&&form.sku.length}}">
+                	<div class="xzui-cells__title c666 bold">
+                     商品规格设置，可添加多个规格，购买时可选择
+                  </div>
+                  <div class="xzui-cells" wx:for="{{form.sku}}">
+                    <!--规格名称-->
+                    <view class="xzui-cell xzui-cell_access">
+                      <div class="xzui-cell__hd must">
+                          <label class="xzui-label">规格名称</label>
+                      </div>
+                      <div class="xzui-cell__bd">
+                          <input class="xzui-input" placeholder="填写名称" value="{{item.name}}" bindinput="setSku" data-index="{{index}}" data-name="name" type="text" />
+                      </div>
+                    </view>
+                    <view class="xzui-cell xzui-cell_access" wx:for="{{item.priceList}}" wx:for-item="g" wx:for-index="l">
+                      <div class="xzui-cell__hd must">
+                          <label class="xzui-label">{{l}}</label>
+                      </div>
+                      <div class="xzui-cell__bd">
+                      	  <input class="xzui-input" bindchange="changePrice"
+								data-index="{{index}}" data-type="{{l}}" placeholder="请输入" value="{{g}}" type="digit" />
+                      </div>
+                      <div class="xzui-cell__ft">元</div>
+                    </view>
+                    <!--规格封面-->
+                    <div class="xzui-cell">
+                        <div class="xzui-cell__hd">
+                            <label class="xzui-label">图片</label>
+                        </div>
+                        <div class="xzui-cell__bd">
+                            <upload value="{{item.pic}}" class="user-upload" width="65" height="65" bindchange="uploadSkuPic" index="{{index}}" id="uploadPic{{index}}"></upload>
+                        </div>
+                        <div class="xzui-cell__ft">
+                            可以不添加<i class="xzicon-right xzui-cell__ft_arrow"></i>
+                        </div>
+                    </div>
+                     <!--规格重量-->
+                    <div class="xzui-cell xzui-cell_access">
+                        <div class="xzui-cell__hd {{(form.freightType==3?' must':'')}}">
+                            <label class="xzui-label">重量</label>
+                        </div>
+                        <div class="xzui-cell__bd">
+                            <input class="xzui-input" placeholder="填写重量" value="{{item.weight}}" bindinput="setSku" data-index="{{index}}" data-name="weight" class="textInput p16 c666" type="number"  />
+                        </div>
+                        <div class="xzui-cell__ft">g</div>
+                    </div>
+                     <!--规格库存-->
+                    <div class="xzui-cell xzui-cell_access">
+                        <div class="xzui-cell__hd must">
+                            <label class="xzui-label">库存</label>
+                        </div>
+                        <div class="xzui-cell__bd">
+                            <input class="xzui-input" placeholder="填写库存量" value="{{item.stock}}" bindinput="setSku" data-index="{{index}}" data-name="stock" class="textInput p16 c666" type="number"  />
+                        </div>
+                        <div class="xzui-cell__ft">
+                            件
+                        </div>
+                    </div>
+                    <!--sku编码-->
+                    <div class="xzui-cell xzui-cell_access">
+                        <div class="xzui-cell__hd">
+                            <label class="xzui-label">sku编码</label>
+                        </div>
+                        <div class="xzui-cell__bd">
+                            <input class="xzui-input" placeholder="填写sku编码" value="{{item.serialnumber}}" bindinput="setSku" data-index="{{index}}" data-name="serialnumber" class="textInput p16 c666" type="text"  />
+                        </div>
+                    </div>
+                    <div class="xzui-form-preview__ft">
+                    	<div class="xzui-form-preview__btn xzui-form-preview__btn_primary" data-index="{{index}}" data-type="up" bindtap="moveSku">上移</div>
+                        <div class="xzui-form-preview__btn xzui-form-preview__btn_primary" data-index="{{index}}" data-type="down" bindtap="moveSku" >下移</div>
+                        <div class="xzui-form-preview__btn xzui-form-preview__btn_primary" data-index="{{index}}"  bindtap="removeSku" wx:if="{{index>0}}">删除规格</div>
+                    </div>
+                  </div>
+                </div>  
+                <view class="xzui-cells xzui-cells_form">
+                   <div class="xzui-cell xzui-cell_addlist ml15">
+                      <div class="xzui-cell__bd">
+                          <div class="xzui-addlist">
+                              <div class="xzui-addlist_addbox">
+                                  <button class="xzui-addlist_add" bindtap="addSku">
+                                      <i class="xzicon-pluscircle xzui-addlist_addicon"></i>
+                                      <div class="xzui-addlist_addtitle">添加规格</div>
+                                  </button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                </view>
+                <!--规格分组结束-->
+                <!--运费设置开始-->
+                <div class="mt10 xzui-cells">
+                	<div class="xzui-cell xzui-cell_access" bindtap="selectDeliveryAreaTemplate">
+                      <div class="xzui-cell__hd must">配送区域</div>
+                        <div class="xzui-cell__bd" wx:if="{{form.deliveryTempId}}">
+                          {{showInfoData.deliveryTempName}}
+                        </div>
+                        <div class="xzui-cell__bd c999" wx:else>
+                          选择配送区域模板
+                        </div>
+                        <div class="xzui-cell__ft xzui-cell__ft_in-access">
+                        <i class="xzicon-right xzui-cell__ft_arrow"></i>
+                        </div>
+                    </div>
+                	 <div class="xzui-cell xzui-cell_access">
+                      <div class="xzui-cell__hd must" style="min-width:80px;">
+                          <label class="xzui-label">商品运费</label>
+                      </div>
+                      <div class="xzui-cell__bd">
+                          <radio-group data-model="form.freightType" bindchange="model">
+                           <label class="radio">
+                              <radio class="radio-input radio-cells_input" name="radiofreightType" value="0" checked="{{form.freightType==0}}"></radio>
+                              <span class="radio-title radio-cells_title">包邮</span>
+                          </label>
+                          <label class="radio ml5">
+                              <radio class="radio-input radio-cells_input" name="radiofreightType" value="1" checked="{{form.freightType==1}}"></radio>
+                              <span class="radio-title radio-cells_title">按单</span>
+                          </label>
+                          <label class="radio ml5">
+                              <radio class="radio-input radio-cells_input" name="radiofreightType" value="2" checked="{{form.freightType==2}}"></radio>
+                              <span class="radio-title radio-cells_title">按件</span>
+                          </label>
+                          <label class="radio ml5">
+                              <radio class="radio-input radio-cells_input" name="radiofreightType" value="3" checked="{{form.freightType==3}}"></radio>
+                              <span class="radio-title radio-cells_title">按重</span>
+                          </label>
+                      </radio-group>
+                      </div>
+                  </div>
+                  <!--运费模板-->
+                  <div class="xzui-cell xzui-cell_access" bindtap="selectFreightTemplate" wx:if="{{form.freightType!=0}}">
+                      <div class="xzui-cell__hd must">运费模板</div>
+                        <div class="xzui-cell__bd" wx:if="{{form.freightTempId}}">
+                          {{showInfoData.freightTempName}}
+                        </div>
+                        <div class="xzui-cell__bd c999" wx:else>
+                          选择运费模板
+                        </div>
+                        <div class="xzui-cell__ft xzui-cell__ft_in-access">
+                        <i class="xzicon-right xzui-cell__ft_arrow"></i>
+                        </div>
+                   </div>
+                </div>
+                <!--运费设置结束-->
+                </div>
+                <!--实物类商品设置结束-->
+                <!--票券类商品设置开始-->
+                <div  wx:if="{{form.goodsCategoryType==2}}">
+                	<div class="xzui-cells__title c666 bold">商品规格设置，可添加多个规格，购买时可选择</div>
+                	<div class="xzui-cells" wx:for="{{form.sku}}">
+                    <view class="xzui-cell xzui-cell_access">
+                      <div class="xzui-cell__hd must">
+                          <label class="xzui-label">票券名称</label>
+                      </div>
+                      <div class="xzui-cell__bd">
+                          <input class="xzui-input" placeholder="填写名称" value="{{item.name}}" bindinput="setSku" data-index="{{index}}" data-name="name" type="text" />
+                      </div>
+                    </view>
+                    <view class="xzui-cell xzui-cell_access">
+                      <div class="xzui-cell__hd must">
+                          <label class="xzui-label">售价</label>
+                      </div>
+                      <div class="xzui-cell__bd">
+                          <input class="xzui-input" placeholder="填写售价" value="{{item.price}}" bindinput="setSku" data-index="{{index}}" data-name="price" type="number" />
+                      </div>
+                      <div class="xzui-cell__ft xzui-cell__ft_in-access">元</div>
+                    </view>
+                    <div class="xzui-cell xzui-cell_access">
+                        <div class="xzui-cell__hd must">
+                            <label class="xzui-label">库存</label>
+                        </div>
+                        <div class="xzui-cell__bd">
+                            <input class="xzui-input" placeholder="填写库存量" value="{{item.stock}}" bindinput="setSku" data-index="{{index}}" data-name="stock"  type="number"  />
+                        </div>
+                        <div class="xzui-cell__ft">
+                            件
+                        </div>
+                    </div>
+                    <view class="xzui-cell xzui-cell_access" data-index="{{index}}" data-name="content" data-title="编辑使用规则" data-type="textarea" bindtap="setTicketContent">
+                        <div class="xzui-cell__hd">使用规则</div>
+                        <div class="xzui-cell__bd textOver">{{item.content}}</div>
+                        <div class="xzui-cell__ft xzui-cell__ft_in-access"><i class="xzicon-right xzui-cell__ft_arrow"></i></div>
+                    </view>
+                    <view class="xzui-cell xzui-cell_access">
+                        <div class="xzui-cell__hd must">
+                            <label class="xzui-label">数量</label>
+                        </div>
+                        <div class="xzui-cell__bd c666">
+                            <input class="xzui-input" placeholder="商品里含有几张本类票券" value="{{item.count}}" bindinput="setSku" data-index="{{index}}" data-name="count" type="number"  />
+                        </div>
+                        <div class="xzui-cell__ft">
+                            张
+                        </div>
+                    </view>
+                    <view class="xzui-cell xzui-cell_access">
+                        <div class="xzui-cell__hd">
+                            <label class="xzui-label">有效天数</label>
+                        </div>
+                        <div class="xzui-cell__bd">
+                            <input class="xzui-input" placeholder="填写有效天数" value="{{item.days}}" bindinput="setSku" data-index="{{index}}" data-name="days" type="number"  />
+                        </div>
+                        <div class="xzui-cell__ft xzui-cell__ft_in-access">天</div>
+                    </view>
+                   </div>
+                   <div class="xzui-cells__title">
+                     购买后开始计算有效期，到期后不能再使用
+                  </div>
+                	<!--票券分组开始-->
+                  <div class="mt10" style="display:none;">
+                      <div class="xzui-cells" wx:for="{{form.ticket}}" wx:if="{{form.ticket&&form.ticket.length}}">
+                        <!--规格名称-->
+                        <view class="xzui-cell xzui-cell_access">
+                          <div class="xzui-cell__hd must">
+                              <label class="xzui-label">票券名称</label>
+                          </div>
+                          <div class="xzui-cell__bd">
+                              <input class="xzui-input" placeholder="例：10元现金券、8折券" value="{{item.name}}" bindinput="setTicket" data-index="{{index}}" data-name="name"  type="text" />
+                          </div>
+                        </view>
+                         <!--使用规则-->
+                          <view class="xzui-cell xzui-cell_access" data-index="{{index}}" data-name="content" data-title="编辑使用规则" data-type="textarea" bindtap="setTicketContent">
+                              <div class="xzui-cell__hd">使用规则	</div>
+                              <div class="xzui-cell__bd textOver">
+                                {{item.content}}
+                              </div>
+                              <div class="xzui-cell__ft xzui-cell__ft_in-access"><i class="xzicon-right xzui-cell__ft_arrow"></i></div>
+                          </view>
+                          <div class="xzui-cell xzui-cell_access">
+                            <div class="xzui-cell__hd must">
+                                <label class="xzui-label">数量</label>
+                            </div>
+                            <div class="xzui-cell__bd c666">
+                                <input class="xzui-input" placeholder="商品里含有几张本类票券" value="{{item.count}}" bindinput="setTicket" data-index="{{index}}" data-name="count" type="number"  />
+                            </div>
+                            <div class="xzui-cell__ft">
+                                张
+                            </div>
+                        </div>
+                        <div class="xzui-cell xzui-cell_access">
+                            <div class="xzui-cell__hd must">
+                                <label class="xzui-label">单价</label>
+                            </div>
+                            <div class="xzui-cell__bd c666">
+                                <input class="xzui-input" placeholder="每张的价格" value="{{item.price}}" bindinput="setTicket" data-index="{{index}}" data-name="price" type="number"  />
+                            </div>
+                            <div class="xzui-cell__ft">
+                                元
+                            </div>
+                        </div>
+                        <div class="xzui-form-preview__ft" >
+                            <div class="xzui-form-preview__btn xzui-form-preview__btn_primary" data-index="{{index}}"  bindtap="removeTicket" wx:if="{{index>0}}">删除票券</div>
+                        </div>
+                      </div>
+                </div> 
+                <!--暂时不允许添加多规格票券--> 
+                <!--
+                  <view class="xzui-cells xzui-cells_form">
+                   <div class="xzui-cell xzui-cell_addlist ml15">
+                      <div class="xzui-cell__bd">
+                          <div class="xzui-addlist">
+                              <div class="xzui-addlist_addbox">
+                                  <button class="xzui-addlist_add" bindtap="addTicket">
+                                      <i class="xzicon-pluscircle xzui-addlist_addicon"></i>
+                                      <div class="xzui-addlist_addtitle">添加票券</div>
+                                  </button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                </view>-->
+                  <!--票券分组结束-->
+                </div>
+                <!--票券类商品设置结束-->
+                <!--退款设置开始-->
+                <div class="mt15">
+                  <div class="xzui-cells">
+                  	 <div class="xzui-cell xzui-cell_access" wx:if="{{form.goodsCategoryType==2}}">
+                        <div class="xzui-cell__hd must">
+                            <label class="xzui-label">票券类型</label>
+                        </div>
+                        <div class="xzui-cell__bd">
+                            <radio-group data-model="form.ticketsType" bindchange="model">
+                             <label class="radio">
+                                <radio class="radio-input radio-cells_input" name="ticketsType" value="1" checked="{{form.ticketsType==1}}"></radio>
+                                <span class="radio-title radio-cells_title">核销券</span>
+                            </label>
+                            <label class="radio ml5">
+                                <radio class="radio-input radio-cells_input" name="ticketsType" value="2" checked="{{form.ticketsType==2}}"></radio>
+                                <span class="radio-title radio-cells_title">提货券</span>
+                            </label>
+                        </radio-group>
+                        </div>
+                     </div>
+                     <div class="xzui-cell xzui-cell_access" wx:if="{{form.goodsCategoryType==2&&form.ticketsType==2}}">
+                     	<div class="xzui-cell__hd must">
+                            <label class="xzui-label">可提日期</label>
+                        </div>
+                        <div class="xzui-cell__bd">
+                        	<div class="displayIB addGoodsPicker" style="width:45%;">
+                                <picker mode="date" class="picker-region" bindchange="bindBeginDate" value="{{pickBeginDate}}"
+                                    id="pickerBeginDate">
+                                    <view class="picker c666 tac" wx:if="{{form.pickBeginDate}}">{{form.pickBeginDate}}</view>
+                                    <view class="picker c999 tac" wx:else>开始日期</view>
+                                </picker>
+                     		</div>
+                            <span class="displayIB p18 c999 tac" style="width:10%;">-</span>
+                            <div class="displayIB addGoodsPicker" style="width:45%;">
+                                <picker mode="date" class="picker-region" bindchange="bindEndDate" value="{{pickEndDate}}"
+                                    id="pickerEndDate">
+                                    <view class="picker c666 tac" wx:if="{{form.pickEndDate}}">{{form.pickEndDate}}</view>
+                                    <view class="picker c999 tac" wx:else>结束日期</view>
+                                </picker>
+                            </div>
+                        </div>
+          			</div>
+                     <div class="xzui-cell xzui-cell_access">
+                        <div class="xzui-cell__hd must">
+                            <label class="xzui-label">7天退款</label>
+                        </div>
+                        <div class="xzui-cell__bd">
+                            <radio-group data-model="form.refundType" bindchange="model">
+                             <label class="radio">
+                                <radio class="radio-input radio-cells_input" name="radiorefundType" value="1" checked="{{form.refundType==1}}"></radio>
+                                <span class="radio-title radio-cells_title">可退款</span>
+                            </label>
+                            <label class="radio ml5">
+                                <radio class="radio-input radio-cells_input" name="radiorefundType" value="2" checked="{{form.refundType==2}}"></radio>
+                                <span class="radio-title radio-cells_title">不可退款</span>
+                            </label>
+                        </radio-group>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="xzui-cells__title">可退款时间为发货后7天</div>
+                </div>
+                <!--退款设置结束-->
+                 <!--购买权限设置开始-->
+                 <!--
+                <div class="mt10">
+                 <div class="xzui-cells">
+                    <view class="xzui-cell xzui-cell_access" bindtap="selectSalesLevel">
+                        <div class="xzui-cell__hd">允许购买	</div>
+                        <div class="xzui-cell__bd" wx:if="{{form.canBuyUser}}">
+                          {{form.canBuyUser}}
+                        </div>
+                        <div class="xzui-cell__bd c999" wx:else>
+                          所有用户
+                        </div>
+                        <div class="xzui-cell__ft xzui-cell__ft_in-access">
+                        <i class="xzicon-right xzui-cell__ft_arrow"></i>
+                        </div>
+                    </view>
+                  </div>
+                  <div class="xzui-cells__title">
+                     设置购买权限后，只有已选等级的用户可购买
+                  </div>
+                </div>-->
+                <!--购买权限设置结束-->
+                <!--限购数量设置开始-->
+                <div class="mt10">
+                 <div class="xzui-cells">
+                    <view class="xzui-cell xzui-cell_access">
+                        <div class="xzui-cell__hd">限购数量	</div>
+                        <div class="xzui-cell__bd">
+                            <input class="xzui-input" placeholder="填写最多可购买几件" value="{{form.limitCount}}" bindinput="model" data-model="form.limitCount"  type="number"  />
+                        </div>
+                        <div class="xzui-cell__ft">
+                            件
+                        </div>
+                    </view>
+                  </div>
+                  <div class="xzui-cells__title">
+                     设置用户最多可以购买的数量，为空或0则不限制
+                  </div>
+                </div>
+                <!--限购数量设置结束-->
+            </div>
+           <!--保存按钮-->
+            <div class="xzui-btn-app {{(options.type=='addSupply'?'':' positionBottom')}}">
+              <button type="button" bindtap="submit" class="xzui-btn xzui-btn_b primary" size="large">保存</button>
+           </div>
+     </div> 
+     <div class="tac pd20 p14 c888 bgfff" wx:else>暂无权限</div>                
+    </div>
+    <nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

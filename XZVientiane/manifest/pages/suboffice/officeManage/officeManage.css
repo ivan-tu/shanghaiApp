@@ -1,0 +1,82 @@
+.officeManage-header{
+	padding:15px;
+	position:relative;
+	border-bottom:5px solid #f1f1f1;
+}
+.officeManage-header .picBox{
+	width:60px;
+	height:60px;
+	float:left;
+	border-radius:4px;
+	overflow:hidden;
+}
+.officeManage-header .textBox{
+	margin-left:70px;
+	margin-right:40px;
+}
+.officeManage-header .manageBtn{
+	position: absolute;
+	z-index: 2;
+	right: 0px;
+	top: 50%;
+	height: 30px;
+	line-height:30px;
+	margin-top: -15px;
+	background: #FEE10B;
+	color: #000;
+	padding: 0px 12px;
+	border-radius: 4px;
+	font-size: 16px;
+	cursor:pointer;
+}
+.officeManage-header .manageBtn +.manageBtn{
+	margin-top:24px;
+}
+.officeManage-header .manageBtn i{
+	font-size:12px;
+	margin-right:5px;
+}
+.officeManage-infoBox .list{
+	float:left;
+	width:25%;
+	text-align:center;
+	padding:10px 0;
+}
+.officeManage-infoBox .title{
+	font-size:14px;
+	color:#666;
+}
+.officeManage-infoBox .number{
+	font-size:18px;
+	color:#131313;
+}
+
+/*邀请弹框*/
+.inviteDialog .publicScroll_body{
+	background:#fff;
+	left:40px;
+	right:40px;
+}
+.inviteDialog .publicScroll_main{
+	top:20px;
+	bottom:10px;
+}
+.inviteDialog .publicScroll_body{
+	margin-bottom:-90px;
+}
+.inviteDialog.show .publicScroll_body{
+	bottom: 50%;
+}
+.inviteDialog .toSubmitBtn{
+	display:block;
+	color:#000;
+	text-align:center;
+	height:42px;
+	line-height:42px;
+	border-radius:4px;
+	font-size:16px;
+	background-color: #FEE10B;
+	width:180px;
+	margin:20px auto 0 auto;
+	padding:0;
+}

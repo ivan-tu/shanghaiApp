@@ -1,0 +1,17 @@
+<div class="app-wrapper">
+    <div  class="app-main">
+        <div class="mt10" wx:if="{{myAuthority&&myAuthority.setting}}">
+        	<div class="xzui-cells xzui-cells_after-title">
+                <div wx:for="{{modules}}" data-index="{{index}}" class="xzui-cell xzui-cell_access" bindtap="onSelect">
+                    <div class="xzui-cell__bd">{{item.name}}</div>
+                    <div class="xzui-cell__ft xzui-cell__ft_in-access"><i class="xzicon-right xzui-cell__ft_arrow"></i></div>
+                </div>
+                            
+            </div>
+        </div>
+        <div class="tac pd20 p14 c888 bgfff" wx:else>
+        暂无权限
+        </div>
+                      
+    </div>
+</div>

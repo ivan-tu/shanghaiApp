@@ -1,0 +1,11 @@
+.officeUserAdd-userInfo .picBox{
+	width:35px;
+	height:35px;
+	border-radius:50%;
+	float:left;
+	overflow:hidden;
+}
+.officeUserAdd-userInfo .textBox{
+	margin-left:45px;
+	line-height:35px;
+}

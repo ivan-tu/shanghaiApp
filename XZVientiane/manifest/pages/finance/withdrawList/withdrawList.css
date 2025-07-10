@@ -1,0 +1,33 @@
+.user-withdrawList{
+	background-color: #fff;
+	margin-top: 12px;
+	padding-left: 12px;
+}
+.user-withdrawList-item{
+	padding:15px 15px 15px 0;
+}
+.user-withdrawList-title{
+	font-size: 15px;
+	font-weight: 500;
+	color: #666666;
+}
+.user-withdrawList-title.red{
+	color: #FF3535;
+}
+.user-withdrawList-title.yellow{
+	color: #FDD000;
+}
+.user-withdrawList-time,
+.user-withdrawList-num{
+	color: #888;
+	font-weight: 300;
+}
+.user-withdrawList-money{
+	font-weight: 300;
+	font-size: 15px;
+	color: #333;
+}
+.user-withdrawList-money span,
+.user-withdrawList-num span{
+	font-size: 12px;
+}

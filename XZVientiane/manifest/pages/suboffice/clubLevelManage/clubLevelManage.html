@@ -1,0 +1,41 @@
+<div class="app-wrapper">
+    <div class="app-main positionBottom">
+        <div class="clubLevel-box" wx:if="{{data&&data.length}}">
+            <div class="clubLevel-list" wx:for="{{data}}" data-index="{{index}}" bindtap="setMore">
+            	<p class="title">{{item.name}}</p>
+                <!--<span class="spanStatus" wx:if="{{item.treamRewardStatus==1}}">团队长</span>
+                <span class="spanStatus" wx:if="{{item.partnerRewardStatus==1}}">合伙人</span>-->
+                <div class="clubLevel-reward">
+                	<!--<div class="clubLevel-rewardList">
+                        <p class="p14 c333">推荐奖励</p>
+                        <div class="clearfix c666 p12" wx:for="{{item.directReward}}" wx:for-item="g">推荐<span class="cRed">{{g.name}}</span>奖励<span class="cRed">{{g.total}}</span>元</div>
+                    </div>
+                    <div class="clubLevel-rewardList" wx:if="{{item.treamRewardStatus==1}}"> 
+                        <p class="p14 c333">团队奖励</p>
+                        <div class="c666 p12" wx:for="{{item.treamReward}}" wx:for-item="g">团队推荐<span class="cRed">{{g.name}}</span>奖励<span class="cRed">{{g.total}}</span>元</div>
+                    </div>
+                    <div class="clubLevel-rewardList" wx:if="{{item.partnerRewardStatus==1}}"> 
+                        <p class="p14 c333">合伙人奖励</p>
+                        <div class="c666 p12">培育<span class="cRed">团队长</span>提成<span class="cRed">{{item.partnerRewardRatio}}%</span></div>
+                    </div>-->
+                    <div class="clubLevel-rewardList">
+                    	<p class="p12 c666">排序：{{item.taix}}</p>
+                        <p class="p14 c333">升级方式</p>
+                        <p wx:if="{{item.payUpgradeStatus==1&&item.payUpgradePrice==0}}" class="c666 p12">免费升级</p>
+                        <p wx:elif="{{item.payUpgradeStatus==1&&item.payUpgradePrice}}" class="c666 p12">支付{{item.payUpgradePrice}}元升级</p>
+                        <p wx:else class="c666 p12">管理员手动升级</p>
+                        <p wx:if="{{item.remUpgradeStatus==1}}" class="c666 p12">推荐{{item.remUpgradeLevelNum}}名{{item.remUpgradeLevelName}}升级</p>
+                        <p wx:if="{{item.remUpgradeStatus==2}}" class="c666 p12">团队{{item.remUpgradeLevelNum}}名{{item.remUpgradeLevelName}}升级</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="loadingBox mlr15" wx:if="{{ajaxLoading}}">
+			<div class="xzicon-loading"></div>
+		</div>
+        <div class="noData mlr15" wx:if="{{ajaxNoData}}">暂无等级</div>
+        <div class="xzui-btn-app positionBottom">
+            <button type="button" bindtap="toAdd" class="xzui-btn xzui-btn_b primary yellow" size="large">添加等级</button>
+        </div>
+    </div>
+</div>

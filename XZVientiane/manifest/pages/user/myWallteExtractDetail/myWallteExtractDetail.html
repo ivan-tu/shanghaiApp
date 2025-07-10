@@ -1,0 +1,63 @@
+<div class="app-wrapper">
+    <div wx:if="{{isUserLogin}}" class="app-main">
+        <div class="user-withdrawDetail">
+            <div class="user-withdrawDetail-top">
+                <div class="user-withdrawDetail-pic">
+                    <image wx:if="{{data.status==0}}" mode="widthfix" src="https://static.gedian.shop/15408057259855341.png" style="height:84px;" />
+                    <image wx:elif="{{data.status==1}}" mode="widthfix" src="https://static.gedian.shop/15408057266774284.png" style="height:84px;" />
+                    <image wx:elif="{{data.status==2}}" mode="widthfix" src="https://static.gedian.shop/15408057266184904.png" style="height:84px;" />
+                </div>
+                <p class="user-withdrawDetail-title" wx:if="{{data.status==0}}">待审核</p>
+                <p class="user-withdrawDetail-title" wx:elif="{{data.status==1}}">已通过</p>
+                <p class="user-withdrawDetail-title" wx:elif="{{data.status==2}}">{{data.rfcontent=='用户撤回'?'同意撤回':'已拒绝'}}</p>
+                <p class="user-withdrawDetail-title" wx:elif="{{data.status==3}}">提币成功</p>
+                <div class="user-withdrawDetail-desc" wx:if="{{data.status==0}}">
+                	<p>提币申请已提交，请等待审核</p>
+                    <p wx:if="{{checkTimeText}}">{{checkTimeText}}</p>
+                </div>
+                <p class="user-withdrawDetail-desc" wx:elif="{{data.status==1}}">提币申请已通过</p>
+                <p class="user-withdrawDetail-desc" wx:elif="{{data.status==2}}">拒绝理由：{{data.rfcontent}}</p>
+                <p class="user-withdrawDetail-desc" wx:elif="{{data.status==3}}">提币申请已通过</p>
+            </div>
+            <div class="user-withdrawDetail-main">
+                <div class="xzui-cells__title">提币信息</div>
+                <div class="xzui-cells">
+                    <div class="xzui-cell">
+                        <div class="xzui-cell__bd">
+                            <div class="xzui-cell__title">提币编号</div>
+                        </div>
+                        <div class="xzui-cell__ft">{{data.ordernum}}</div>
+                    </div>
+                    <div class="xzui-cell">
+                        <div class="xzui-cell__bd">
+                            <div class="xzui-cell__title">提币数量</div>
+                        </div>
+                        <div class="xzui-cell__ft">{{data.total}}</div>
+                    </div>
+                    <div class="xzui-cell">
+                        <div class="xzui-cell__bd">
+                            <div class="xzui-cell__title">接收地址</div>
+                        </div>
+                        <div class="xzui-cell__ft">{{data.solAddress}}</div>
+                    </div>
+                    <div class="xzui-cell">
+                        <div class="xzui-cell__bd">
+                            <div class="xzui-cell__title">提币时间</div>
+                        </div>
+                        <div class="xzui-cell__ft">{{data.addtime}}</div>
+                    </div>
+                    <div class="xzui-cell" wx:if="{{data.dotime}}">
+                        <div class="xzui-cell__bd">
+                            <div class="xzui-cell__title">审核时间</div>
+                        </div>
+                        <div class="xzui-cell__ft">{{data.dotime}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="xzui-btn-app" wx:if="{{data.status==0}}">
+                <button type="button" size="large" class="xzui-btn primary xzui-btn_b" bindtap="toCancel">撤销提币</button>
+            </div>
+        </div>
+    </div>
+    <nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

@@ -1,0 +1,49 @@
+<div class="app-wrapper pb20">
+	<div class="app-main">
+  		<!--<search-bar label="搜索商品名称" placeholder="搜索商品名称" keyword="{{form.keyword}}" bindchange="changeKeyword" bindclose="closeKeyword"></search-bar>
+  		<div class="searchCategory-box clearfix bgfff">
+            <div class="searchCategory">
+                <div class="listBox">
+                    <span class="list {{(form.goodsCategoryId==item.id?' active':'')}}" wx:for="{{categoryData}}" bindtap="screenType" data-id="{{item.id}}">{{item.title}}</span>
+                </div>
+            </div>
+        </div>-->
+        <view class="shopGoodsList_headBox">
+            <div class="shopGoodsList_head">
+                <div class="searchBox">
+                	<form action="javascript:;" bindsubmit="toSearch">
+                    	<i class="xzicon-search1"></i><input class="searchInput" placeholder="搜索" type="search" value="{{form.keyword}}" bindconfirm="toSearch" bindinput="model" data-model="form.keyword" confirm-type="search" />
+                    </form>
+                    <span wx:if="{{form.keyword}}" class="closeBtn" bindtap="closeSearch"><i class="xzicon-closecircle"></i></span>
+                </div>
+                <button type="button" class="screenBtn" bindtap="selectCateogry"><image class="pic" src="https://statics.tuiya.cc/17432519964923349.png" mode="widthFix" /></button>
+            </div>
+            <div class="shopGoodsList-menu displayFlex plr15" style="padding-right:30px;">
+                <div class="list first {{(showType=='top'?' active':'')}}" data-type="top" bindtap="setType">综合排序</div>
+                <div class="list {{(showType=='salecount'?' active':'')}}" data-type="salecount" bindtap="setType">销量</div>
+                <div class="list no {{(showType=='price'?' active':'')}}" data-type="price" bindtap="setType">价格<i class="xzicon-caretup {{(form.sort=='priceasc'?' active':'')}}"></i><i class="xzicon-caretdown {{(form.sort=='pricedesc'?' active':'')}}"></i></div>
+                <div class="list last {{(showType=='timedesc'?' active':'')}}" data-type="timedesc" bindtap="setType">新品</div>
+            </div>
+        </view>
+        <view class="plr10 shopGoodsList-container pb20 mt10">
+            <view wx:if="{{data&&data.length}}" class="public_goodsContainer2 clearfix">
+                <div class="goodsList" wx:for="{{data}}">
+                    <navigator url="../../shop/goodsDetail/goodsDetail?id={{item.shortid}}" class="listBox clearfix">
+                        <div class="picBox hasLoading" style="width:{{goodsPicWidth}}px;height:{{goodsPicHeight}}px;"><image src="{{item.pic}}" mode="widthFix" /></div>
+                        <div class="textBox">
+                            <p class="title">{{item.name}}</p>
+                            <div class="priceBox clearfix">
+                            	<div class="nowPrice">¥<span class="number">{{item.price}}</span></div>
+                    		</div>
+                        </div>
+                    </navigator>
+                </div>
+            </view>
+            <view class="loadingBox mlr14" hidden="{{!showLoading}}">
+                <div class="xzicon-loading"></div>
+                <div class="xzui-loadmore__tips">正在加载</div>
+            </view>
+            <view class="noData mlr14" hidden="{{!showNoData}}">暂无商品</view>
+        </view>
+	</div>
+</div>

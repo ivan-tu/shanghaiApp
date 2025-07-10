@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+	"picker": "/components/web/picker/picker",
+    "nologin": "/components/common/nologin/nologin"
+  },
+  "navigationBarTitleText": "收入"
+}

@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "upload": "/components/common/upload/upload",
+	"nologin": "/components/common/nologin/nologin"
+  },
+  "enablePullDownRefresh": false,
+  "navigationBarTitleText": "添加系列"
+}

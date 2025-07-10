@@ -1,0 +1,127 @@
+<div class="app-wrapper">
+	<div wx:if="{{isUserLogin}}" class="app-main">
+		<div class="bgfff">
+			<div class="form-list">
+                <div class="form-list-item title c333 p14 long">名称</div>
+				<div class="form-list-item">
+					<input type="text" class="textInput" placeholder="请输入" bindinput="model" data-model="form.name" value="{{form.name}}" />
+				</div>
+			</div>
+            <div class="form-list">
+                <div class="form-list-item title c333 p14 long">排序</div>
+				<div class="form-list-item">
+					<input type="number" class="textInput" placeholder="数字越小越靠前" bindinput="model" data-model="form.taix" value="{{form.taix}}" />
+				</div>
+			</div>
+            <!--
+			<div class="form-list">
+				<div class="form-list-item title c333 p14 long">简介</div>
+				<div class="form-list-item"><textarea class="textarea" placeholder="请输入" bindinput="model"
+						data-model="form.summary" value="{{form.summary}}"></textarea></div>
+			</div>
+            <div class="form-list">
+                <div class="form-list-item title c333 p14 long">详情</div>
+				<div class="form-list-item"><upload value="{{form.content}}" class="user-upload" width="80" height="80" bindchange="uploadPic" id="uploadPic"></upload>
+                </div>
+			</div>-->
+		</div>
+        <!--
+        <p class="form-title">推荐奖励</p>
+        <div class="bgfff">
+			<div class="form-list" wx:for="{{form.directReward}}">
+                <div class="form-list-item title c333 p14 max">推荐{{item.name}}奖励</div>
+				<div class="form-list-item">
+					<input type="digit" class="textInput" placeholder="请输入" bindinput="changeInput" data-index="{{index}}" data-type="directReward" value="{{item.total}}" />
+				</div>
+                <div class="form-list-item title short tar c999">元</div>
+			</div>
+            <p class="tac p12 c999 ptb10" wx:if="{{!levelList.length}}">请先添加会员等级</p>
+		</div>
+        <div class="form-title clearfix">
+        	<p class="fl">团队长</p>
+            <span catchtap="switchThis" data-type="treamRewardStatus" class="fr xzui-switch-new yellow {{(form.treamRewardStatus==1?' active':'')}}"></span>
+        </div>
+        <div class="bgfff" wx:if="{{form.treamRewardStatus==1}}">
+            <div class="form-list" wx:for="{{form.treamReward}}">
+                <div class="form-list-item title c333 p14 max">团队推荐{{item.name}}奖励</div>
+				<div class="form-list-item">
+					<input type="digit" class="textInput" placeholder="请输入" bindinput="changeInput" data-index="{{index}}" data-type="treamReward" value="{{item.total}}" />
+				</div>
+                <div class="form-list-item title short tar c999">元</div>
+			</div>
+            <p class="tac p12 c999 ptb10" wx:if="{{!levelList.length}}">请先添加会员等级</p>
+		</div>
+        <div class="form-title clearfix">
+        	<p class="fl">合伙人</p>
+            <span catchtap="switchThis" data-type="partnerRewardStatus" class="fr xzui-switch-new yellow {{(form.partnerRewardStatus==1?' active':'')}}"></span>
+        </div>
+        <div class="bgfff" wx:if="{{form.partnerRewardStatus==1}}">
+            <div class="form-list">
+                <div class="form-list-item title c333 p14 max">培育团队长提成</div>
+				<div class="form-list-item">
+					<input type="digit" class="textInput" placeholder="请输入" bindinput="model" data-model="form.partnerRewardRatio" value="{{form.partnerRewardRatio}}" />
+				</div>
+                <div class="form-list-item title short tar c999">%</div>
+			</div>
+		</div>
+        <div class="form-title clearfix">
+        	<p class="fl">主动升级</p>
+            <span catchtap="switchThis" data-type="payUpgradeStatus" class="fr xzui-switch-new yellow {{(form.payUpgradeStatus==1?' active':'')}}"></span>
+        </div>
+        <div class="bgfff" wx:if="{{form.payUpgradeStatus!=0}}">
+            <div class="form-list">
+                <div class="form-list-item title c333 p14 max">升级费用</div>
+				<div class="form-list-item">
+					<input type="digit" class="textInput" placeholder="请输入，0为免费" bindinput="model" data-model="form.payUpgradePrice" value="{{form.payUpgradePrice}}" />
+				</div>
+                <div class="form-list-item title short tar c999">元</div>
+			</div>
+            <div class="form-list">
+                <div class="form-list-item title c333 p14 max">会员天数</div>
+				<div class="form-list-item">
+					<input type="number" class="textInput" placeholder="请输入，0为永久" bindinput="model" data-model="form.payUpgradeDays" value="{{form.payUpgradeDays}}" />
+				</div>
+                <div class="form-list-item title short tar c999">天</div>
+			</div>
+        </div>-->
+        <div class="form-title clearfix">
+        	<p class="fl">免费升级</p>
+            <span catchtap="switchThis" data-type="payUpgradeStatus" class="fr xzui-switch-new yellow {{(form.payUpgradeStatus==1?' active':'')}}"></span>
+        </div>
+        <p class="form-title">推广升级</p>
+        <div class="bgfff">
+            <div class="form-list">
+                <div class="form-list-item c333 p14 title">升级方式</div>
+                <div class="form-list-item tar">
+                    <div class="displayIB" data-type="remUpgradeStatus" bindtap="selectThis" data-value="0"><span class="xzui-radio-new small {{(form.remUpgradeStatus==0?' active':'')}}"></span><span class="xzui-radioTitle-new small">关闭</span></div>
+                    <div class="displayIB ml5" data-type="remUpgradeStatus" bindtap="selectThis" data-value="1"><span class="xzui-radio-new small {{(form.remUpgradeStatus==1?' active':'')}}"></span><span class="xzui-radioTitle-new small">推荐升级</span></div>
+                    <div class="displayIB ml5" data-type="remUpgradeStatus" bindtap="selectThis" data-value="2"><span class="xzui-radio-new small {{(form.remUpgradeStatus==2?' active':'')}}"></span><span class="xzui-radioTitle-new small">团队升级</span></div>
+                    
+                </div>
+            </div>
+            <div class="form-list" wx:if="{{form.remUpgradeStatus!=0}}">
+                <div class="form-list-item title c333 p14 max" wx:if="{{form.remUpgradeStatus==1}}">推荐会员等级</div>
+                <div class="form-list-item title c333 p14 max" wx:if="{{form.remUpgradeStatus==2}}">团队会员等级</div>
+				<div class="form-list-item">
+                	<picker range="{{levelList}}" class="picker-region" bindchange="bindLevelChange" value="{{levelIndex}}" range-key="name" 
+						id="pickerLevel">
+						<view class="picker c666" wx:if="{{form.remUpgradeLevelName}}">{{form.remUpgradeLevelName}}</view>
+						<view class="picker c999" wx:else>请选择</view>
+					</picker>
+                </div>
+			</div>
+            <div class="form-list" wx:if="{{form.remUpgradeStatus!=0}}">
+                <div class="form-list-item title c333 p14 max" wx:if="{{form.remUpgradeStatus==1}}">推荐会员数量</div>
+                <div class="form-list-item title c333 p14 max" wx:if="{{form.remUpgradeStatus==2}}">团队会员数量</div>
+				<div class="form-list-item">
+					<input type="number" class="textInput" placeholder="请输入" bindinput="model" data-model="form.remUpgradeLevelNum" value="{{form.remUpgradeLevelNum}}" />
+				</div>
+                <div class="form-list-item title short tar c999">位</div>
+			</div>
+        </div>
+		<div class="xzui-btn-app">
+			<button type="button" bindtap="submit" class="xzui-btn xzui-btn_b primary yellow" size="large">提交</button>
+		</div>
+	</div>
+	<nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

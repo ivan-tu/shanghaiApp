@@ -1,0 +1,7 @@
+{
+	"usingComponents": {
+		"newShare": "/components/common/newShare/newShare"
+  },
+  "enablePullDownRefresh":false,
+  "navigationBarTitleText": "详情"
+}

@@ -1,0 +1,39 @@
+<div class="app-wrapper">
+    <div class="app-main">
+    	<search-bar label="搜索名称" placeholder="搜索名称" keyword="{{form.keyword}}" bindchange="changeKeyword" bindclose="closeKeyword"></search-bar>
+        <div class="searchCategory-box clearfix bgfff">
+            <div class="searchCategory">
+                <div class="listBox">
+                	<span class="list {{(form.gettype=='parent'?' active':'')}}"  data-type="gettype" data-value="parent" bindtap="screen">直接邀请</span>
+                    <span wx:if="{{myClubInfo.iscommander==1}}" class="list {{(form.gettype=='commander'?' active':'')}}"  data-type="gettype" data-value="commander" bindtap="screen">团队长团队</span>
+                    <span wx:if="{{myClubInfo.ispartner==1}}" class="list {{(form.gettype=='partner'?' active':'')}}"  data-type="gettype" data-value="partner" bindtap="screen">合伙人团队</span>
+                </div>
+            </div>
+        </div>
+        <div class="searchCategory-box clearfix bgfff hasBorder top">
+            <div class="searchCategory">
+                <div class="listBox">
+                	<span class="list {{(form.levelid==''?' active':'')}}"  data-type="levelid" data-value="" bindtap="screen">全部</span>
+                    <span wx:for="{{levelList}}" class="list {{(form.levelid==item._id?' active':'')}}"  data-type="levelid" data-value="{{item._id}}" data-index="{{index}}" bindtap="screen">{{item.name}}</span>
+                </div>
+            </div>
+        </div>
+    	<p class="form-title">共 {{count}} 人</p>
+        <div class="pb20" wx:if="{{data&&data.length}}">
+            <div class="bgfff clubInvite-box">
+                <div class="clubInvite-list clearfix" wx:for="{{data}}" bindtap="toDetail" data-id="{{item.userid}}">
+                    <div class="picBox hasLoading"><image src="{{item.headpic}}" mode="widthFix" class="round" /></div>
+                    <div class="textBox">
+                        <p class="c131 textOver">{{item.username}}<span wx:if="{{item.levelname}}" class="spanList small spanGrade">{{item.levelname}}</span></p>
+                        <div class="mt5 p12 c999">{{item.createAt}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <view class="loadingBox mlr15" hidden="{{!showLoading}}">
+			<div class="xzicon-loading"></div>
+			<div class="xzui-loadmore__tips">正在加载</div>
+		</view>
+		<view class="noData mlr15" hidden="{{!showNoData}}">暂无数据</view>
+    </div>
+</div>

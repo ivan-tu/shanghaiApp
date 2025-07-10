@@ -1,0 +1,75 @@
+.myTicket-list{
+	position:relative;
+}
+.myTicket-list .picBox{
+	width:50px;
+	height:50px;
+	float:left;
+}
+.myTicket-list .textBox{
+	margin:0 70px 0 60px;
+	min-height:70px;
+}
+.myTicket-list .textBox.hasBtn{
+	margin-right:100px;
+	height:80px;
+}
+.myTicket-list .btnBox{
+	position:absolute;
+	right:0px;
+	top:0;
+	width:60px;
+}
+.myTicket-list .btnBox button + button{
+	margin-top:5px;
+}
+.myTicket-list .sendBtn{
+	height:30px;
+	line-height:30px;
+	color:#fff;
+	text-align:center;
+	width:60px;
+	background:#05C234;
+	font-size:12px;
+	border-radius:4px;
+}
+.myTicket-list .sendBtn:hover{
+	color:#fff;
+}
+.myTicket-list .changeBtn{
+	height:30px;
+	line-height:30px;
+	color:#fff;
+	text-align:center;
+	width:60px;
+	background:#f90022;
+	font-size:12px;
+	border-radius:4px;
+}
+.myTicket-list .changeBtn:hover{
+	color:#fff;
+}
+.myTicket-list .codeBtn{
+	width:80px;
+	height:80px;
+	position:absolute;
+	right:0px;
+	top:50%;
+	color:#fff;
+	text-align:center;
+	margin:-40px 0 0 0;
+}
+.myTicket-listBox + .myTicket-listBox{
+	margin-top:10px;
+}
+.orderList_storeInfo .picBox{
+	float:left;
+	width:24px;
+	height:24px;
+	border-radius:50%;
+	overflow:hidden;
+}
+.orderList_storeInfo .textBox{
+	margin-left:30px;
+	line-height:24px;
+}

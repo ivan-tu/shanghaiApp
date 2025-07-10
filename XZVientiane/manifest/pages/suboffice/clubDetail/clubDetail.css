@@ -1,0 +1,305 @@
+.suboffice-header{
+	padding:15px;
+	position:relative;
+}
+.suboffice-header .picBox{
+	width:70px;
+	height:70px;
+	float:left;
+	border-radius:4px;
+	overflow:hidden;
+}
+.suboffice-header .textBox{
+	margin-left:80px;
+	margin-right:40px;
+}
+.suboffice-header .manageBtn{
+	position: absolute;
+	z-index: 2;
+	right: 0px;
+	top: 50%;
+	height: 30px;
+	line-height:30px;
+	margin-top: -15px;
+	background: #FEE10B;
+	color: #000;
+	padding: 0px 12px;
+	border-radius: 4px;
+	font-size: 14px;
+	cursor:pointer;
+	width:auto;
+	display:inline-block;
+}
+.suboffice-titleDiv{
+	padding:12px 15px;
+}
+.suboffice-titleDiv .text{
+	float:left;
+	font-size:16px;
+	color:#131313;
+	font-weight:600;
+}
+.suboffice-titleDiv .moreBtn{
+	float:right;
+	font-size:14px;
+	color:#666;
+}
+.suboffice-userList{
+	margin-left:-10px;
+	padding:0 15px;
+}
+.suboffice-userList .listBox{
+	float:left;
+	width:20%;
+}
+.suboffice-userList .listBox .list{
+	margin:0px 0 0 10px;
+	text-align:center;
+}
+.suboffice-userList .picBox{
+	border-radius:50%;
+	overflow:hidden;
+	margin:auto;
+}
+.suboffice-userList .picBox .pic{
+	border-radius:50%;
+	width:100%;
+	height:100%;
+}
+.suboffice-userList .positionText{
+	font-size:10px;
+	text-align:center;
+}
+.cDAB{
+	color:#DABB53;
+}
+.summaryContent{
+	display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2; /* 限制显示两行 */
+}
+.summaryContent.active{
+	-webkit-line-clamp: 1000;
+}
+/*友局*/
+.mt2{
+	margin-top:2px;
+}
+.clubDetail_activityBox .activityList{
+	padding:10px 15px;
+	display:block;
+}
+.clubDetail_activityBox .activityList + .activityList{
+	border-top:1px solid #eee;
+}
+.clubDetail_activityBox .activityList .picBox{
+	float:left;
+	width:120px;
+	height:96px;
+	border-radius:4px;
+	overflow:hidden;
+}
+.clubDetail_activityBox .activityList .picBox .pic{
+	border-radius:4px;
+}
+.clubDetail_activityBox .activityList .textBox{
+	margin-left:130px;
+}
+.clubDetail_activityBox .activityList .title{
+	font-size:16px;
+	color:#131313;
+}
+.clubDetail_activityBox .activityList .address{
+	font-size:12px;
+	color:#666;
+}
+.clubDetail_activityBox .activityList .userInfo .userPic{
+	width:20px;
+	height:20px;
+	border-radius:50%;
+}
+.clubDetail_activityBox .activityList .userInfo .userName{
+	display:inline-block;
+	margin-left:5px;
+	font-size:12px;
+	color:#313131;
+}
+.clubDetail_activityBox .activityList .textBox .price{
+	color:#D9001B;
+	font-size:15px;
+	font-weight:600;
+}
+.clubDetail_activityBox .activityList .signInfo{
+	font-size:12px;
+	color:#666;
+	line-height:21px;
+}
+/*动态*/
+.dynamicList_dynamicList{
+	padding-top:15px;
+}
+.dynamicList_dynamicList + .dynamicList_dynamicList{
+	margin-top:15px;
+	border-top:1px solid #F9F9F9;
+}
+.dynamicList_dynamicList .content{
+	color:#131313;
+	line-height:18px;
+	font-size:14px;
+}
+.dynamicList_dynamicList .addtime{
+	color:#131313;
+	font-size:12px;
+	margin-top:5px;
+}
+.dynamicList_dynamicList .picContainer{
+	margin-left:-5px;
+}
+.dynamicList_dynamicList .picContainer .picBox{
+	float:left;
+	display:block;
+	width:33.333333%;
+}
+.dynamicList_dynamicList .picContainer.row1 .picBox{
+	width:100%;
+}
+.dynamicList_dynamicList .picContainer.row2 .picBox{
+	width:50%;
+}
+.dynamicList_dynamicList .picContainer .picBox .picList{
+	margin:5px 0 0 5px;
+	position:relative;
+}
+.dynamicList_dynamicList .picContainer .videoPlay_image{
+	width: 30px;
+	height: 30px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -15px;
+	margin-left: -15px;
+}
+.dynamicList_dynamicList .userPicBox{
+	width:35px;
+	height:35px;
+	border-radius:50%;
+	overflow:hidden;
+	float:left;
+}
+.dynamicList_dynamicList .contentBox{
+	margin-left:45px;
+}
+.dynamicList_dynamicList .userName{
+	color:#336699;
+	font-size:16px;
+}
+.dynamicList_dynamicList .content{
+	margin-top:10px;
+}
+
+
+.suboffice-controlBtn{
+	padding:0px 15px;
+}
+.suboffice-controlBtn.positionBottom{
+	position: fixed;
+	z-index: 2;
+	left: 15px;
+	right: 15px;
+	bottom: 15px;
+	line-height: 46px;
+	font-size: 16px;
+	border-radius: 23px;
+	max-width: 100%;
+	height: 46px;
+	width:auto;
+}
+.suboffice-controlBtn .joinBtn{
+	background: #FEE10B;
+	color: #000;
+	border-radius:23px;
+	height:40px;
+	line-height:40px;
+	text-align:center;
+	margin:auto;
+	width:100%;
+	max-width:200px;
+	padding:0;
+}
+.suboffice-controlBtn .joinBtn.gray{
+	background: #F6F6F6;
+	color: #999;
+}
+.club_waitTips{
+	display:block;
+	margin:10px 15px;
+	color:#fff;
+	background:rgb(236,128,141);
+	padding:8px 0;
+	text-align:center;
+	border-radius:23px;
+	font-size:16px;
+}
+.club_waitTips:hover{
+	color:#fff;
+}
+
+.suboffice-menu{
+	padding:10px 15px 15px 15px;
+	text-align:center;
+}
+.suboffice-menu .list +.list{
+	margin-left:10px;
+}
+.suboffice-menu .iconBox{
+	width:40px;
+	margin:auto;
+}
+.suboffice-menu .text{
+	font-size:16px;
+	color:#000;
+	margin-top:3px;
+}
+.suboffice-menu .title{
+	font-size:12px;
+	color:#333;
+	margin-top:3px;
+}
+
+/*商品部分*/
+.clubDetail_goodsBox{
+	margin-left:-10px;
+	margin-top:-10px;
+	padding:0 15px;
+}
+.clubDetail_goodsBox .goodsList{
+	float:left;
+	width:50%;
+	display:block;
+}
+.clubDetail_goodsBox .goodsList .listBox{
+	margin:10px 0 0 10px;
+	box-shadow: 0 0 1px 1px #eee;
+  	border-radius: 0 0 6px 6px;
+  	overflow: hidden;
+}
+.clubDetail_goodsBox .goodsList .textBox{
+	padding:5px 10px;
+	background:#fff;	
+}
+.clubDetail_goodsBox .goodsList .textBox .title{
+	font-size: 14px;
+	line-height:21px;
+	height:43px;
+	overflow:hidden;
+	color: #333;
+}
+.clubDetail_goodsBox .goodsList .textBox .price{
+  	color: #D2161F;
+  	font-size: 18px;
+}
+.clubDetail_goodsBox .goodsList .textBox .unit{
+  	font-size: 12px;
+}

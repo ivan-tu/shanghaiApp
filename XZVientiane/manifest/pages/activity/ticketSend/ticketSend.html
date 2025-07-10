@@ -1,0 +1,66 @@
+<div class="app-wrapper">
+	<div class="app-main pb20">
+		<div class="app-wrapper">
+			<view class="loadingBox mlr14" wx:if="{{showLoading}}">
+				<div class="xzicon-loading"></div>
+				<div class="xzui-loadmore__tips">正在加载</div>
+			</view>
+			<view wx:else>
+                <div class="searchCategory-box clearfix bgfff positionR">
+                    <div class="searchCategory">
+                        <div class="listBox">
+                        	<span class="list {{(shareType=='share'?' active':'')}}" data-type="share"
+                                bindtap="screenType">分享门票赠送</span>
+                            <span class="list {{(shareType=='account'?' active':'')}}" data-type="account" bindtap="screenType">指定账号赠送</span> 
+                        </div>
+                        
+                    </div>
+                </div>
+				<div class="bgfff pb10">
+					<div class="activityTicket_box">
+						<p class="p12" style="color:#636363">选择票种</p>
+						<div wx:for="{{data.tickets}}" class="activityTicket_list {{(form.ticketname==item.name?' active':'')}}"
+							data-index="{{index}}" bindtap="selectThis">
+							<div class="clearfix">
+								<p class="name fl p16">{{item.name}}</p>
+								<p class="price fr">剩余：{{item.stock}}张</p>
+							</div>
+							<p class="content p12">{{item.content}}</p>
+						</div>
+					</div>
+					<div class="plr15">
+						<p class="p12" style="color:#636363">选择数量</p>
+						<div class="quantityControl mt10">
+							<span class="minusControl" catchtap="minusCount"><i class="xzicon-minus"></i></span><span
+								class="inputControl"><input class="xzui-input tac" pattern="[0-9]*" type="number" value="{{form.num}}"
+									bindinput="inputCount" /></span><span class="addControl" catchtap="addCount"><i
+									class="xzicon-plus"></i></span>
+						</div>
+					</div>
+				</div>
+				<div class="bgfff mt10" wx:if="{{shareType=='account'}}">
+					<div class="form-list">
+						<div class="form-list-item title long">赠送账号</div>
+						<div class="form-list-item"><input type="tel" class="textInput" placeholder="请输入" bindinput="model"
+								data-model="form.account" value="{{form.account}}" /></div>
+						<div class="form-list-item title tar long"><button style="padding:0 3px;" type="button" class="redBtn"
+								bindtap="checkAccount">确认</button></div>
+					</div>
+				</div>
+				<div class="bgfff mt5" wx:if="{{userInfo}}">
+					<div class="activitySendTicket_userBox clearfix">
+						<div class="picBox">
+							<image class="round" src="{{userInfo.headpic}}" mode="widthFix" />
+						</div>
+						<div class="textBox p16 textOver">{{userInfo.username}}</div>
+					</div>
+				</div>
+				<view class="xzui-btn-app">
+					<button type="button" class="xzui-btn xzui-btn_b primary" size="large" bindtap="submit">{{shareType=='share'?'生成赠票':'确定赠送'}}</button>
+                    <button type="button" class="xzui-btn xzui-btn_b primary gray" size="large" bindtap="toTicketMy" wx:if="{{shareType=='share'}}">查看赠票</button>
+                    <button type="button" class="xzui-btn xzui-btn_b primary gray" size="large" bindtap="toTicketRecord" wx:else>赠票记录</button>
+				</view>
+			</view>
+		</div>
+	</div>
+</div>

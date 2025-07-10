@@ -1,0 +1,139 @@
+<div class="app-wrapper">
+	<div class="app-main pb20" wx:if="{{isUserLogin}}">
+        <div class="ptb15 clearfix bgfff">
+            <div class="displayFlex tac">
+                <div class="list">
+                    <p class="p16">{{data.credit||0}}</p>
+                    <p class="p12 c666">总积分</p>
+                </div>
+                <div class="list">
+                    <p class="p16">{{data.waitrelease||0}}</p>
+                    <p class="p12 c666">待释放</p>
+                </div>
+                <div class="list">
+                    <p class="p16">{{data.reviceed||0}}</p>
+                    <p class="p12 c666">已领取</p>
+                </div>
+            </div>
+            <div class="displayFlex tac mt15">
+                <div class="list">
+                    <p class="p16">{{data.canrevice||0}}</p>
+                    <p class="p12 c666">可领取</p>
+                </div>
+                <div class="list">
+                    <p class="p16">{{data.truned||0}}</p>
+                    <p class="p12 c666">已转让</p>
+                </div>
+                <div class="list"></div>
+            </div>
+        </div>
+        <div class="mt10 bgfff clearfix gedianCredit-info">
+            <p class="p12">已满<span class="cRed">{{data.expert}}</span>位达人，距离下次领取还差<span class="cRed">{{data.needexpert}}</span>人</p>
+            <span class="gedianCredit-btnList" bindtap="toReceive" wx:if="{{data.canrevice>0}}">立即领取</span>
+            <span class="gedianCredit-btnList disable" wx:else>等待领取</span>
+        </div>
+        <div class="bgfff ptb5 mt10">
+            <div class="searchCategory-box clearfix positionR">
+                <div class="searchCategory">
+                    <div class="listBox">
+                        <span class="list {{(showType=='receive'?' active':'')}}" data-type="receive" bindtap="screenType">领取记录</span>
+                        <span class="list {{(showType=='truend'?' active':'')}}" data-type="truend" bindtap="screenType">转让记录</span>
+                    </div>
+                </div>
+                <span class="gedianCredit-btnList" bindtap="showTrun" wx:if="{{data.waitrelease>0}}">转让积分</span>
+            </div>
+        </div>
+        <!--领取记录-->
+        <div wx:if="{{showType=='receive'}}" class="mt10">
+            <div class="bgfff plr15" wx:if="{{data.revicelogs&&data.revicelogs.length}}">
+                <div class="tuige-myAchievement-item" wx:for="{{data.revicelogs}}">
+                    <div class="clearfix">
+                        <div class="fl" style="max-width:70%;">
+                            <p class="c333 p14 textOver">{{item.time}}</p>
+                        </div>
+                        <div class="fr tar">
+                            <p class="tuige-myAchievement-money" style="line-height:24px;">+{{item.total}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <view class="noData mlr14" wx:else>暂无记录</view>
+        </div>
+        <!--转让记录-->
+        <div wx:if="{{showType=='truend'}}" class="mt10">
+            <div class="bgfff plr15" wx:if="{{data.trunlogs&&data.trunlogs.length}}">
+                <div class="tuige-myAchievement-item" wx:for="{{data.trunlogs}}">
+                    <div class="clearfix" wx:if="{{item.type==2}}">
+                        <div class="fl" style="max-width:70%;">
+                            <p class="c333 p14 textOver">转让人：{{item.username}}/{{item.account}}</p>
+                            <p class="c666 p12">{{item.time}}</p>
+                        </div>
+                        <div class="fr tar">
+                            <p class="tuige-myAchievement-money" style="line-height:24px;">+{{item.total}}</p>
+                        </div>
+                    </div>
+                    <div class="clearfix" wx:else>
+                        <div class="fl" style="max-width:70%;">
+                            <p class="c333 p14 textOver">转让给：{{item.username}}/{{item.account}}</p>
+                            <p class="c666 p12">{{item.time}}</p>
+                        </div>
+                        <div class="fr tar">
+                            <p class="tuige-myAchievement-money" style="line-height:24px;">-{{item.total}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <view class="noData mlr14" wx:else>暂无记录</view>
+        </div>
+        <div class="publicScroll_dialog checkParentDialog {{(trunDialog.show?' show':'')}}">
+            <div class="publicScroll_body" style="height:{{trunDialog.height}}px;">
+                <div class="publicScroll_head clearfix tac bgfff">
+                    <span class="p16">转让积分</span>
+                    <span class="fr p16" bindtap="toHideDialog"><i class="xzicon-close"></i></span>
+                </div>
+                <div class="publicScroll_main">
+                    <view class="bgfff">
+                        <div class="form-list">
+                            <div class="form-list-item title">接收账号</div>
+                            <div class="form-list-item">
+                            	<input placeholder="请输入账号" class="textInput" bindinput="model" value="{{trunDialog.account}}" data-model="trunDialog.account" type="tel" />
+                            </div>
+                            <div class="form-list-item title long tar">
+                            	<span class="redBtn" bindtap="checkAccount">确认接收人</span>
+                            </div>
+                        </div>
+                        <div class="form-list">
+                            <div class="form-list-item" wx:if="{{trunDialog.userInfo&&trunDialog.userInfo._id}}">
+                                <div class="userInfoBox clearfix">
+                                    <div class="picBox"><image src="{{trunDialog.userInfo.headpic}}" class="w100 h100" mode="widthFix" /></div>
+                                    <div class="textBox">
+                                        <p>{{trunDialog.userInfo.account}}</p>
+                                        <p class="p12 c666 textOver">{{trunDialog.userInfo.username}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-list-item c999 tac" wx:else>请先确认接收人</div>
+                        </div>
+                        <div class="form-list">
+                            <div class="form-list-item title">积分数量</div>
+                            <div class="form-list-item">
+                            	<input placeholder="请输入积分数量" class="textInput" bindinput="model" value="{{trunDialog.total}}" data-model="trunDialog.total" type="number" />
+                            </div>
+                        </div>
+                    </view>
+                </div>
+                <div class="publicScroll_footBtn">
+                	<div class="displayFlex">
+                    	<div class="list">
+                        	<button class="cancelBtn" type="button" bindtap="toHideDialog">取消</button>
+                        </div>
+                        <div class="list ml10">
+                        	<button class="submitBtn" type="button" bindtap="toConfirmDialog">确定</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+    <nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

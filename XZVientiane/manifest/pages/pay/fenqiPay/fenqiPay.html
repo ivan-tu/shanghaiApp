@@ -1,0 +1,27 @@
+<div class="app-wrapper">
+    <div class="app-main">
+    	<div class="markWraper"></div>
+    	<p class="fenqiPay-title">选择付款方式</p>
+        <div class="fenqiPay-box">
+        	<div class="fenqiPay-list" data-type="1" bindtap="screenType">
+            	<span class="xzui-radio-new {{(payType==1?' active':'')}}"></span>
+            	<p class="title">付全款（送{{data.zjbCoin}}股）</p>
+                <p class="tips">一次性支付{{data.price}}元</p>
+            </div>
+            <div class="fenqiPay-list" data-type="2" bindtap="screenType" wx:if="{{data.dinjinPrice}}">
+            	<span class="xzui-radio-new {{(payType==2?' active':'')}}"></span>
+            	<p class="title">付定金（送{{data.dingjinZjbCoin}}股<span wx:if="{{data.dingjinZjbCoinPercent}}">，少{{data.dingjinZjbCoinPercent}}%）</span></p>
+                <p class="tips">先付定金{{data.dinjinPrice}}元，余款30天内付清</p>
+			</div>
+            <div class="fenqiPay-list" data-type="3" data-num="{{item.num}}" bindtap="screenType" wx:for="{{data.fenqiList}}">
+            	<span class="xzui-radio-new {{(payType==3&&stagesnum==item.num?' active':'')}}"></span>
+            	<p class="title">分{{item.num}}期付（送{{item.zjbcoin}}股，少{{item.zjbcoinPercent}}%）</p>
+                <p class="tips">先付{{item.firstPrice}}元，余款分{{item.num-1}}次付，每个月付{{item.otherPrice}}元</p>
+            </div>     
+        </div>
+        <div class="xzui-btn-app">
+            <button type="button" bindtap="submit" class="xzui-btn xzui-btn_b primary yellow" size="large">确定</button>
+            <span bindtap="reback" class="fenqiPay-reback">返回</span>
+        </div>
+    </div>
+</div>

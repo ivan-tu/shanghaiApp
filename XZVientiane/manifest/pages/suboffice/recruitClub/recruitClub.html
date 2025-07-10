@@ -1,0 +1,39 @@
+<div class="app-wrapper">
+    <div class="app-main positionBottom">
+    	<div class="markWraper"></div>
+        <div class="displayFlex mt20 pb15 clearfix tac">
+            <div class="list">
+                <p class="c333 p20">{{count||0}}</p>
+                <p class="c666 p14">已招俱乐部</p>
+            </div>
+            <navigator url="../../suboffice/recruitClubFinance/recruitClubFinance" class="list">
+                <p class="c333 p20"><span class="p12">¥</span>{{total||0}}</p>
+                <p class="c666 p14">已获奖励</p>
+            </navigator>
+        </div>
+        <p class="form-title">已招俱乐部</p>
+        <div class="recruitClub-box" wx:if="{{data&&data.length}}">
+        	<navigator url="../../suboffice/clubDetail/clubDetail?id={{item._id}}" class="recruitClub-list displayB clearfix" wx:for="{{data}}">
+            	<div class="picBox hasLoading"><image class="w100 h100" src="{{item.pic}}" mode="widthFix" /></div>
+                <div class="textBox">
+                	<p class="c333 p16">{{item.name}}</p>
+                    <div class="mt5" wx:if="{{item.userData}}"><image class="round" style="width:24px;height:24px;" src="{{item.userData.headpic}}" /><span class="displayIB vMild ml5">{{item.userData.username}}</span></div>
+                    <p class="mt10 c333 p12">成员:{{item.usernum||0}}，活动:{{item.activity||0}}，收入:¥{{item.total||0}}</p>
+                </div>
+            </navigator>
+        </div>
+        <view class="loadingBox mlr14" hidden="{{!showLoading}}">
+            <div class="xzicon-loading"></div>
+            <div class="xzui-loadmore__tips">正在加载</div>
+        </view>
+        <view class="noData mlr14" hidden="{{!showNoData}}">暂无记录</view>
+        <div class="xzui-btn-app positionBottom">
+            <div class="displayFlex">
+                <div class="list">
+                    <button type="button" bindtap="toShare" class="xzui-btn xzui-btn_b primary yellow" size="large">招募俱乐部</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <newShare id="newShareCon"></newShare>
+</div>

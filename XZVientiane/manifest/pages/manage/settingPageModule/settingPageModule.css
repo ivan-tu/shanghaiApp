@@ -1,0 +1,19 @@
+.manage-settingPageModule-selectColor{
+	display:inline-block;
+	height:32px;
+	width:60px;
+	margin-left:5px;
+	margin-top:5px;
+	border:1px solid #fff;
+}
+.manage-settingPageModule-selectColor.selected{
+	border-color:#333;
+}
+#uploadTitleIcon .xzui-uploader__input-box:before{
+	width: 20px;
+	height: 2px;
+}
+#uploadTitleIcon .xzui-uploader__input-box:after{
+	width: 2px;
+	height: 20px;
+}

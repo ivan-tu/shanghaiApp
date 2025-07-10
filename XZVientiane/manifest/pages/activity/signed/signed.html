@@ -1,0 +1,24 @@
+<div class="app-wrapper">
+	<div wx:if="{{isUserLogin}}" class="app-main">
+    	<view class="markWraper"></view>
+		<div class="signed tac">
+			<div class="p16 mt30">{{data.title}}</div>
+			<div wx:if="{{data.auth==0}}" class="p16 mt5">你还不是签到员</div>
+			<div wx:else>
+				<div class="hasLoading round" style="width: 80px;height: 80px;margin:10px auto;"><image src="{{userdata.headpic}}" class="round w100 h100" mode="widthFix" /></div>
+				<div class="p16">{{userdata.username}}</div>
+                <p class="cBlue bold mt5 p16" wx:if="{{data.ticketinfo&&data.ticketinfo.name}}">{{data.ticketinfo.name}}</p>
+                <p wx:if="{{data.formList&&data.formList.length}}"><span class="displayIB plr5 cRed p16" wx:for="{{data.formList}}">{{item}}</span></p>
+				<div wx:if="{{data.signstatus=='1'}}" class="signedBtn checked">已签到</div>
+				<div wx:elif="{{data.signstatus=='0'}}" bindtap="submit" class="signedBtn">确认签到</div>
+				<div wx:elif="{{data.signstatus=='-1'}}" class="signedBtn checked">未报名</div>
+			</div>
+		</div>
+		<view class="loadingBox mlr14" hidden="{{!showLoading}}">
+			<div class="xzicon-loading"></div>
+			<div class="xzui-loadmore__tips">正在加载</div>
+		</view>
+		<view class="noData mlr14" hidden="{{!showNoData}}">暂无数据</view>
+	</div>
+	<nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

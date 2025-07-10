@@ -1,0 +1,632 @@
+<div class="app-wrapper">
+    <div  class="app-main">
+        <div wx:if="{{myAuthority&&myAuthority.setting}}">
+        	<div class="mt10" wx:if="{{type=='service'}}">
+            	<div class="xzui-cells__title">设置按钮图片</div>
+                <div class="xzui-cells">
+                    <div class="xzui-cell xzui-cell_access">
+                    	<div class="xzui-cell__hd"><label class="xzui-label">图片样式</label></div>
+                        <div class="xzui-cell__bd"><upload value="{{form.serviceBtnPic}}" class="user-upload" width="60" height="60" bindchange="uploadServiceBtnPic" id="upload_serviceBtnPic"></upload></div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt10" wx:elif="{{type=='tab'}}">
+            	<div class="xzui-cells__title">添加选项</div>
+                <view class="xzui-cells" wx:if="{{form.tabOptions&&form.tabOptions.length}}">
+                    <view class="xzui-cell xzui-cell_access"  wx:for="{{form.tabOptions}}">
+                        <div class="xzui-cell__hd"><label class="xzui-label">选项名称</label></div>
+                        <div class="xzui-cell__bd">
+                            <input class="xzui-input" placeholder="填写名称" value="{{item}}" bindinput="changeTabInput" data-index="{{index}}" class="textInput p16 c666"  />
+                        </div>
+                        <div class="xzui-cell__ft c888" data-index="{{index}}" bindtap="delTabOptions">删除</div>
+                    </view>
+                </view>
+                <view class="xzui-cells xzui-cells_form">
+                	<div class="xzui-cell xzui-cell_addlist ml15">
+                        <div class="xzui-cell__bd">
+                            <div class="xzui-addlist">
+                                <div class="xzui-addlist_addbox">
+                                    <button class="xzui-addlist_add" bindtap="addTabOptions">
+                                        <i class="xzicon-pluscircle xzui-addlist_addicon"></i>
+                                        <div class="xzui-addlist_addtitle">添加选项</div>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </view>
+                <p class="cRed plr15 mt10">注意：添加几个选项，则在这个模块后面同数量的模块会形成选项卡，例如点击第一个选项，在选项菜单后面的第一个模块则显示，其他隐藏。</p>
+            </div>
+        	<div class="mt10" wx:else>
+            	<div class="xzui-cells__title">设置模块标题</div>
+                <div class="xzui-cells">
+                    <div class="xzui-cell xzui-cell_access">
+                    	<div class="xzui-cell__hd"><label class="xzui-label">模块标题</label></div>
+                        <div class="xzui-cell__bd">
+                            <input class="xzui-input" placeholder="空为不显示" value="{{form.moduleTitle}}" bindinput="model" data-model="form.moduleTitle" class="textInput p16 c666"  type="text" />
+                        </div>
+                    </div>
+                    <div class="xzui-cell xzui-cell_access">
+                    	<div class="xzui-cell__hd"><label class="xzui-label">标题颜色</label></div>
+                        <div class="xzui-cell__bd">
+                            <input class="xzui-input" placeholder="默认：#333333" value="{{form.moduleTitleColor}}" bindinput="model" data-model="form.moduleTitleColor" class="textInput p16 c666" type="text" />
+                        </div>
+                    </div>
+                    <div class="xzui-cell xzui-cell_access">
+                    	<div class="xzui-cell__hd"><label class="xzui-label">模块副标题</label></div>
+                        <div class="xzui-cell__bd">
+                            <input class="xzui-input" placeholder="空为不显示" value="{{form.moduleTips}}" bindinput="model" data-model="form.moduleTips" class="textInput p16 c666" type="text" />
+                        </div>
+                    </div>
+                    <div class="xzui-cell xzui-cell_access">
+                    	<div class="xzui-cell__hd"><label class="xzui-label">副标题颜色</label></div>
+                        <div class="xzui-cell__bd">
+                            <input class="xzui-input" placeholder="默认：#949494" value="{{form.moduleTipsColor}}" bindinput="model" data-model="form.moduleTipsColor" class="textInput p16 c666" type="text" />
+                        </div>
+                    </div>
+                    <div class="xzui-cell xzui-cell_access">
+                    	<div class="xzui-cell__hd"><label class="xzui-label">更多文字</label></div>
+                        <div class="xzui-cell__bd">
+                            <input class="xzui-input" placeholder="空为不显示" value="{{form.moduleMoreText}}" bindinput="model" data-model="form.moduleMoreText" class="textInput p16 c666" type="text" />
+                        </div>
+                    </div>
+                    <div class="xzui-cell xzui-cell_access" bindtap="selectModuleLink">
+                    	<div class="xzui-cell__hd"><label class="xzui-label">更多跳转链接</label></div>
+                        <div class="xzui-cell__bd textOver c666" wx:if="{{form.moduleMoreLink}}">{{form.moduleMoreLink}}</div>
+                         <div class="xzui-cell__bd textOver c999" wx:else>空为不跳转</div>
+                        <div class="xzui-cell__ft xzui-cell__ft_in-access"><i class="xzicon-right xzui-cell__ft_arrow"></i></div>
+    				</div>
+                    <div class="xzui-cell xzui-cell_access">
+                    	<div class="xzui-cell__hd"><label class="xzui-label">更多文字颜色</label></div>
+                        <div class="xzui-cell__bd">
+                            <input class="xzui-input" placeholder="默认：#949494" value="{{form.moduleMoreTextColor}}" bindinput="model" data-model="form.moduleMoreTextColor" class="textInput p16 c666" type="text" />
+                        </div>
+                    </div>
+                    <div class="xzui-cell xzui-cell_access">
+                    	<div class="xzui-cell__hd"><label class="xzui-label">标题小图标</label></div>
+                        <div class="xzui-cell__bd"><upload value="{{form.moduleTitleIcon}}" class="user-upload" width="40" height="40" bindchange="uploadTitleIcon" id="uploadTitleIcon"></upload></div>
+                    </div>
+                </div>
+                <div class="xzui-cells__title" wx:if="{{type=='info'}}">设置部分隐藏</div>
+            	<div class="xzui-cells" wx:if="{{type=='info'}}">
+                    <!--隐藏背景图片-->
+                    <view class="xzui-cell xzui-cell_access">
+                    	<div class="xzui-cell__bd"><label class="xzui-label">隐藏封面图片</label></div>
+                        <div class="xzui-cell__ft">
+                        	<label class="xzui-switch-cp">
+                            	<switch class="xzui-switch-cp__input" data-model="form.hideCover" bindchange="model" checked="{{form.hideCover==1}}"></switch>
+                            </label>
+                        </div>
+                  	</view>
+                    <!--隐藏背景图片-->
+                    <view class="xzui-cell xzui-cell_access">
+                    	<div class="xzui-cell__bd"><label class="xzui-label">隐藏店铺信息</label></div>
+                        <div class="xzui-cell__ft">
+                        	<label class="xzui-switch-cp">
+                            	<switch class="xzui-switch-cp__input" data-model="form.hideStoreInfo" bindchange="model" checked="{{form.hideStoreInfo==1}}"></switch>
+                            </label>
+                      	</div>
+                  	</view>
+                    <!--隐藏关注按钮-->
+                    <!--
+                    <view class="xzui-cell xzui-cell_access">
+                    	<div class="xzui-cell__bd"><label class="xzui-label">隐藏关注按钮</label></div>
+                        <div class="xzui-cell__ft">
+                        	<label class="xzui-switch-cp">
+                            	<switch class="xzui-switch-cp__input" data-model="form.hideStoreFocus" bindchange="model" checked="{{form.hideStoreFocus==1}}"></switch>
+                            </label>
+                      	</div>
+                  	</view>-->
+                    <!--隐藏分享按钮-->
+                    <view class="xzui-cell xzui-cell_access">
+                    	<div class="xzui-cell__bd"><label class="xzui-label">隐藏分享按钮</label></div>
+                        <div class="xzui-cell__ft">
+                        	<label class="xzui-switch-cp">
+                            	<switch class="xzui-switch-cp__input" data-model="form.hideStoreShare" bindchange="model" checked="{{form.hideStoreShare==1}}"></switch>
+                            </label>
+                      	</div>
+                  	</view>
+                    <!--显示客服按钮-->
+                    <view class="xzui-cell xzui-cell_access">
+                    	<div class="xzui-cell__bd"><label class="xzui-label">显示客服按钮</label></div>
+                        <div class="xzui-cell__ft">
+                        	<label class="xzui-switch-cp">
+                            	<switch class="xzui-switch-cp__input" data-model="form.showStoreService" bindchange="model" checked="{{form.showStoreService==1}}"></switch>
+                            </label>
+                      	</div>
+                  	</view>
+      			</div>
+                <!--设置文字样式-->
+                <div wx:if="{{type=='text'}}">
+                	<div class="xzui-cells  xzui-cell_access">
+                        <!--文字大小-->
+                        <div class="xzui-cell pt0 pb0">
+                            <div class="xzui-cell__hd"><label class="xzui-label">文字大小</label></div>
+                            <div class="xzui-cell__bd">
+                            	<picker class="xzui-picker xzui-cell_picker" bindchange="model" data-model="fontSizeIndex" value="{{fontSizeIndex}}" range="{{fontSizeList}}" id="pickerFontSize">
+                                	<div class="picker"><span class="fr">{{fontSizeList[fontSizeIndex]}}</span></div>
+                                </picker>
+                            </div>
+                        </div>
+                        <!--文字粗细-->
+                        <view class="xzui-cell xzui-cell_access">
+                              <div class="xzui-cell__hd"><label class="xzui-label">文字粗细</label></div>
+                              <div class="xzui-cell__bd">
+                                    <radio-group data-model="form.fontWeight" bindchange="model">
+                                       <label class="radio">
+                                          <radio class="radio-input radio-cells_input" name="radio1" value="" checked="{{!form.fontWeight}}"></radio>
+                                          <span class="radio-title radio-cells_title">正常</span>
+                                      </label>
+                                      <label class="radio ml5">
+                                          <radio class="radio-input radio-cells_input" name="radio1" value="1" checked="{{form.fontWeight==1}}"></radio>
+                                          <span class="radio-title radio-cells_title">加粗</span>
+                                      </label>
+                                      <label class="radio ml5">
+                                          <radio class="radio-input radio-cells_input" name="radio1" value="2" checked="{{form.fontWeight==2}}"></radio>
+                                          <span class="radio-title radio-cells_title">特粗</span>
+                                      </label>
+                                      
+                                  </radio-group>
+                                </div>
+                          </view>
+                          <!--文字颜色-->
+                          <view class="xzui-cell xzui-cell_access">
+                              <div class="xzui-cell__hd"><label class="xzui-label">文字颜色</label></div>
+                              <div>
+                                  <span class="manage-settingPageModule-selectColor {{(form.color==item?'selected':'')}}" wx:for="{{colorList}}" style="background:{{item}};" data-color="{{item}}" bindtap="selectColor"></span>
+                              </div>
+                          </view>
+                          <!--自定义颜色-->
+                          <view class="xzui-cell xzui-cell_access">
+                              <div class="xzui-cell__hd"><label class="xzui-label">自定义颜色</label></div>
+                              <div class="xzui-cell__bd">
+                            	  <input class="xzui-input" placeholder="填写色值例:#333333" value="{{form.color}}" bindinput="model" data-model="form.color" class="textInput p16 c666" type="text" />
+                              </div>
+                          </view>
+                      </div>  
+                </div>
+                <!--设置图片的列数-->
+                <div wx:if="{{type=='image'}}">
+                	<div class="xzui-cells__title">设置图片显示方式</div>
+                  	<div class="xzui-cells">
+                    	<view class="xzui-cell xzui-cell_access">
+                        	<div class="xzui-cell__hd"><label class="xzui-label">显示方式</label></div>
+                            <div class="xzui-cell__bd">
+                                <radio-group data-model="form.showType" bindchange="model">
+                                	<div>
+                                    	<label class="radio">
+                                        	<radio class="radio-input radio-cells_input" name="showType" value="0" checked="{{!form.showType}}"></radio><span class="radio-title radio-cells_title">平铺显示</span>
+                                        </label>
+                                        <label class="radio">
+                                        	<radio class="radio-input radio-cells_input" name="showType" value="1" checked="{{form.showType==1}}"></radio><span class="radio-title radio-cells_title">轮播显示</span>
+                                        </label>
+                                    </div>
+                                    <div class="mt5">
+                                    	<label class="radio">
+                                        	<radio class="radio-input radio-cells_input" name="showType" value="2" checked="{{form.showType==2}}"></radio><span class="radio-title radio-cells_title">左一右多</span>
+                                        </label>
+                                        <label class="radio">
+                                        	<radio class="radio-input radio-cells_input" name="showType" value="3" checked="{{form.showType==3}}"></radio><span class="radio-title radio-cells_title">左多右一</span>
+                                        </label>
+                                    </div>
+                                    <div class="mt5">
+                                    	<label class="radio">
+                                        	<radio class="radio-input radio-cells_input" name="showType" value="4" checked="{{form.showType==4}}"></radio><span class="radio-title radio-cells_title">自定义</span>
+                                        </label>
+                                    </div>
+                                </radio-group>
+                            </div>
+                        </view>
+                    </div>
+                    <div class="xzui-cells__title" wx:if="{{form.showType==1}}">设置图片宽高比(1:1为正方形,宽比高大就是长方形)</div>
+                    <div class="xzui-cells" wx:if="{{form.showType==1}}">
+                    	<view class="xzui-cell xzui-cell_access">
+                        	<div class="xzui-cell__hd"><label class="xzui-label">轮播图宽比 </label></div>
+                            <div class="xzui-cell__bd">
+                            	<input class="xzui-input" placeholder="输入图片宽的比例" value="{{form.widthScale}}" bindinput="model" data-model="form.widthScale" class="textInput p16 c666" type="text"   />
+                            </div>
+                        </view>
+                        <view class="xzui-cell xzui-cell_access">
+                        	<div class="xzui-cell__hd"><label class="xzui-label">轮播图高比 </label></div>
+                      		<div class="xzui-cell__bd">
+                            	<input class="xzui-input" placeholder="输入图片高的比例" value="{{form.heightScale}}" bindinput="model" data-model="form.heightScale" class="textInput p16 c666" type="text"   />
+                            </div>
+                        </view>
+                    </div>
+                    <div class="xzui-cells__title" wx:if="{{form.showType==2||form.showType==3}}">设置宽度</div>
+                    <div class="xzui-cells" wx:if="{{form.showType==2}}">
+                    	<view class="xzui-cell xzui-cell_access">
+                        	<div class="xzui-cell__hd"><label class="xzui-label">左边宽度 </label></div>
+                            <div class="xzui-cell__bd">
+                            	<input class="xzui-input" placeholder="不填为默认" value="{{form.imageLeftWidth}}" bindinput="model" data-model="form.imageLeftWidth" class="textInput p16 c666" type="text"   />
+                            </div>
+                            <div class="xzui-cell__ft">px</div>
+                        </view>
+                    </div>
+                    <div class="xzui-cells" wx:if="{{form.showType==3}}">
+                    	<view class="xzui-cell xzui-cell_access">
+                        	<div class="xzui-cell__hd"><label class="xzui-label">右边宽度 </label></div>
+                            <div class="xzui-cell__bd">
+                            	<input class="xzui-input" placeholder="不填为默认" value="{{form.imageRightWidth}}" bindinput="model" data-model="form.imageRightWidth" class="textInput p16 c666" type="text"   />
+                            </div>
+                            <div class="xzui-cell__ft">px</div>
+                        </view>
+                    </div>
+                    <div class="xzui-cells__title" wx:if="{{form.showType==4}}">设置每行显示几个图片</div>
+                    <div class="xzui-cells" wx:if="{{form.showType==4}}">
+                    	<view class="xzui-cell xzui-cell_access">
+                        	<div class="xzui-cell__hd"><label class="xzui-label">排列规则 </label></div>
+                      		<div class="xzui-cell__bd">
+                            	<input class="xzui-input" placeholder="不填为默认一行一个" value="{{form.picsColumn}}" bindinput="model" data-model="form.picsColumn" class="textInput p16 c666" type="text"   />
+                            </div>
+                        </view> 
+                    </div>
+                    <p class="p12 plr15 cRed mt10" wx:if="{{form.showType==4}}">第一行1个，第二行2个，第三行3个，就填1-2-3 例如: 2-1意思就是第一行2个，第二行1个（用-号分隔）</p>
+                    <div class="xzui-cells__title" wx:if="{{form.showType==2||form.showType==3||form.showType==4}}">设置间距</div>
+                    <div class="xzui-cells" wx:if="{{form.showType==2||form.showType==3||form.showType==4}}">
+                        <view class="xzui-cell xzui-cell_access">
+                        	<div class="xzui-cell__hd"><label class="xzui-label">图片上下间距 </label></div>
+                      		<div class="xzui-cell__bd">
+                            	<input class="xzui-input" placeholder="不填为0" value="{{form.picsColumnMargintb}}" bindinput="model" data-model="form.picsColumnMargintb" class="textInput p16 c666" type="text"   />
+                            </div>
+                            <div class="xzui-cell__ft">px</div>
+                        </view> 
+                        <view class="xzui-cell xzui-cell_access">
+                        	<div class="xzui-cell__hd"><label class="xzui-label">图片左右间距 </label></div>
+                      		<div class="xzui-cell__bd">
+                            	<input class="xzui-input" placeholder="不填为0" value="{{form.picsColumnMarginlr}}" bindinput="model" data-model="form.picsColumnMarginlr" class="textInput p16 c666" type="text"   />
+                            </div>
+                            <div class="xzui-cell__ft">px</div>
+                        </view>  
+                    </div>
+                  	<div class="xzui-cells__title" wx:if="{{form.showType!=4}}">设置一行显示几个图片</div>
+                    <div class="xzui-cells" wx:if="{{form.showType!=4}}">
+                    	<view class="xzui-cell xzui-cell_access bgfff"  bindtap="setColumn">
+                        	<div class="xzui-cell__bd">一行个数</div>
+                            <div class="xzui-cell__ft xzui-cell__ft_in-access">{{form.column||1}}<i class="xzicon-right xzui-cell__ft_arrow"></i></div>
+                        </view>
+                        <!--图片之间的间距-->
+                        <view class="xzui-cell xzui-cell_access" hidden="{{form.column==1}}">
+                        	<div class="xzui-cell__hd"><label class="xzui-label">图片间距</label></div>
+                            <div class="xzui-cell__bd">
+                                <radio-group data-model="form.imageMargin" bindchange="model">
+                                   <label class="radio">
+                                      <radio class="radio-input radio-cells_input" name="radio2" value="0" checked="{{!form.imageMargin}}"></radio>
+                                      <span class="radio-title radio-cells_title">无</span>
+                                  </label>
+                                  <label class="radio ml5">
+                                      <radio class="radio-input radio-cells_input" name="radio2" value="1" checked="{{form.imageMargin==1}}"></radio>
+                                      <span class="radio-title radio-cells_title">小</span>
+                                  </label>
+                                  <label class="radio ml5">
+                                      <radio class="radio-input radio-cells_input" name="radio2" value="2" checked="{{form.imageMargin==2}}"></radio>
+                                      <span class="radio-title radio-cells_title">中</span>
+                                  </label>
+                                  <label class="radio ml5">
+                                      <radio class="radio-input radio-cells_input" name="radio2" value="3" checked="{{form.imageMargin==3}}"></radio>
+                                      <span class="radio-title radio-cells_title">大</span>
+                                  </label>
+                              </radio-group>
+                            </div>
+                        </view>
+                	</div>
+                    <div class="xzui-cells__title">是否可点击放大</div>
+                    <div class="xzui-cells">
+                    	<view class="xzui-cell xzui-cell_access">
+                            <div class="xzui-cell__bd">
+                                <radio-group data-model="form.imageView" bindchange="model">
+                                   <label class="radio">
+                                      <radio class="radio-input radio-cells_input" name="radio3" value="0" checked="{{!form.imageView}}"></radio>
+                                      <span class="radio-title radio-cells_title">可以</span>
+                                  </label>
+                                  <label class="radio ml5">
+                                      <radio class="radio-input radio-cells_input" name="radio3" value="1" checked="{{form.imageView==1}}"></radio>
+                                      <span class="radio-title radio-cells_title">不可以</span>
+                                  </label>
+                              </radio-group>
+                            </div>
+                        </view>
+                    </div>
+                </div>
+                <!--设置商品和文章-->
+                <div wx:if="{{type=='article'||type=='goods'}}">
+                	<div class="xzui-cells__title">设置显示几条数据</div>
+                    <div class="xzui-cells">
+                    	<div class="xzui-cell xzui-cell_access">
+                        	<div class="xzui-cell__hd"><label class="xzui-label">显示条数</label></div>
+                        	<div class="xzui-cell__bd"><input class="xzui-input" placeholder="填写条数" value="{{form.size||1}}" bindinput="model" data-model="form.size" class="textInput p16 c666"  type="number" /></div>
+                    	</div>
+                    </div>
+                    <div class="xzui-cells__title">设置要显示的{{type=='goods'?'商品':'文章'}}</div>
+                    <div class="xzui-cells">
+                    	<div class="xzui-cell xzui-cell_access">
+                            <div class="xzui-cell__hd"><label class="xzui-label">显示{{type=='goods'?'商品':'文章'}}</label></div>
+                            <div class="xzui-cell__bd">
+                                <radio-group data-model="form.dataLimit" bindchange="model">
+                                	<div class="">
+                                        <label class="radio">
+                                            <radio class="radio-input radio-cells_input" name="radio4" value="0" checked="{{!form.dataLimit}}"></radio><span class="radio-title radio-cells_title">全部</span>
+                                        </label>
+                                        <label class="radio ml5">
+                                            <radio class="radio-input radio-cells_input" name="radio4" value="2" checked="{{form.dataLimit==2}}"></radio><span class="radio-title radio-cells_title">商品标签</span>
+                                        </label>
+                                    </div>
+                                </radio-group>
+                            </div>
+                        </div>
+                        <view class="xzui-cell xzui-cell_access" bindtap="selectCategory" hidden="{{form.dataLimit!=1}}">
+                        	<div class="xzui-cell__hd">指定分类</div>
+                        	<div class="xzui-cell__bd">{{form.categoryName?form.categoryName:'选择分类'}}</div>
+                        	<div class="xzui-cell__ft xzui-cell__ft_in-access"><i class="xzicon-right xzui-cell__ft_arrow"></i></div>
+                    	</view>
+                        <view class="xzui-cell xzui-cell_access" hidden="{{form.dataLimit!=2}}">
+                        	<div class="xzui-cell__hd"><label class="xzui-label">指定标签</label></div>
+                      		<div class="xzui-cell__bd"><input class="xzui-input" placeholder="填写标签名称" value="{{form.tags}}" bindinput="model" data-model="form.tags" class="textInput p16 c666" type="text"  /></div>
+                        </view>
+                        <view class="xzui-cell xzui-cell_access" hidden="{{form.dataLimit!=3}}">
+                        	<div class="xzui-cell__hd">指定项目</div>
+                        	<div class="xzui-cell__bd" style="white-space:normal;">
+                            	<div style="margin:-5px 0 0 -10px">
+                                	<div class="displayIB ml10 mt5" wx:for="{{myProjectList}}" bindtap="selectThisProject" data-id="{{item.shopid}}"><span class="xzui-radio-new {{(form.projectShopid==item.shopid?' active':'')}}"></span><span class="xzui-radioTitle-new">{{item.title}}</span></div>
+                                </div>
+                            </div>
+                    	</view>
+                        <view class="xzui-cell xzui-cell_access" hidden="{{form.dataLimit!=4}}">
+                        	<div class="xzui-cell__hd">指定入驻店铺</div>
+                        	<div class="xzui-cell__bd" style="white-space:normal;">
+                            	<div style="margin:-5px 0 0 -10px">
+                                	<div class="displayIB ml10 mt5" wx:for="{{mySettledShopList}}" bindtap="selectThisStore" data-id="{{item.shopid}}"><span class="xzui-radio-new {{(form.settledShopid==item.shopid?' active':'')}}"></span><span class="xzui-radioTitle-new">{{item.shopName}}</span></div>
+                                </div>
+                            </div>
+                    	</view>
+                        <view class="xzui-cell xzui-cell_access" hidden="{{form.dataLimit!=5}}">
+                        	<div class="xzui-cell__hd"><label class="xzui-label">指定标签</label></div>
+                      		<div class="xzui-cell__bd"><input class="xzui-input" placeholder="填写标签名称" value="{{form.pointTag}}" bindinput="model" data-model="form.pointTag" class="textInput p16 c666" type="text"  /></div>
+                        </view>
+                    </div>
+                </div>
+                <!--设置商品版式-->
+                <div wx:if="{{type=='goods'}}">
+                	<div class="xzui-cells__title">设置商品的显示版式</div>
+                    <div class="xzui-cells">
+                    	 <div class="xzui-cell xzui-cell_access">
+                         	<div class="xzui-cell__hd"><label class="xzui-label">显示版式</label></div>
+                            <div class="xzui-cell__bd">
+                            	<radio-group data-model="form.template" bindchange="template">
+                                	<div>
+                                    	<label class="radio">
+                                        	<radio class="radio-input radio-cells_input" name="radio5" value="1" checked="{{form.template==1}}"></radio><span class="radio-title radio-cells_title">双列版</span>
+                                        </label>
+                                        <label class="radio ml5">
+                                        	<radio class="radio-input radio-cells_input" name="radio5" value="6" checked="{{form.template==6}}"></radio><span class="radio-title radio-cells_title">双列版2</span>
+                                        </label>
+                                    </div>
+                                    <div class="mt5">
+                                  		<label class="radio">
+                                        	<radio class="radio-input radio-cells_input" name="radio5" value="2" checked="{{form.template==2}}"></radio><span class="radio-title radio-cells_title">单列版</span>
+                                        </label>
+                                    	<label class="radio ml5">
+                                        	<radio class="radio-input radio-cells_input" name="radio5" value="5" checked="{{form.template==5}}"></radio><span class="radio-title radio-cells_title">单列版2</span>
+                                        </label>
+                                    </div>
+                                    <div class="mt5">
+                                    	<label class="radio">
+                                        	<radio class="radio-input radio-cells_input" name="radio5" value="3" checked="{{form.template==3}}"></radio><span class="radio-title radio-cells_title">滑动版</span>
+                                        </label>
+                                  		<label class="radio ml5">
+                                        	<radio class="radio-input radio-cells_input" name="radio5" value="4" checked="{{form.template==4}}"></radio><span class="radio-title radio-cells_title">滑动版2</span>
+                                        </label>
+                                    </div>
+                              </radio-group>
+                      		</div>
+                  		</div>
+                    </div>
+                </div>
+                <!--设置文章版式-->
+                <div wx:if="{{type=='article'}}">
+                	<div class="xzui-cells__title">设置文章的显示版式</div>
+                    <div class="xzui-cells">
+                    	 <div class="xzui-cell xzui-cell_access">
+                         	<div class="xzui-cell__hd"><label class="xzui-label">显示版式</label></div>
+                            <div class="xzui-cell__bd">
+                            	<radio-group data-model="form.template" bindchange="template">
+                                    <label class="radio">
+                                        <radio class="radio-input radio-cells_input" name="radio6" value="1" checked="{{form.template==1}}"></radio>
+                                        <span class="radio-title radio-cells_title">文字版</span>
+                                    </label>
+                                    <label class="radio ml5">
+                                        <radio class="radio-input radio-cells_input" name="radio6" value="2" checked="{{form.template==2}}"></radio>
+                                        <span class="radio-title radio-cells_title">图文版</span>
+                                    </label>
+                                </radio-group>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--设置模块四周的外边距-->
+                <div class="xzui-cells__title">设置模块四周的外边距</div>
+                <div class="xzui-cells">
+                    <div class="xzui-cell xzui-cell_access">
+                        <div class="xzui-cell__hd"><label class="xzui-label">边距大小</label></div>
+                        <div class="xzui-cell__bd">
+                            <radio-group data-model="form.marginSize" bindchange="model">
+                               <label class="radio">
+                                  <radio class="radio-input radio-cells_input" name="radio7" value="" checked="{{form.marginSize==''}}"></radio>
+                                  <span class="radio-title radio-cells_title">无</span>
+                              </label>
+                               <label class="radio">
+                                  <radio class="radio-input radio-cells_input" name="radio7" value="5" checked="{{form.marginSize==5}}"></radio>
+                                  <span class="radio-title radio-cells_title">小</span>
+                              </label>
+                              <label class="radio ml5">
+                                  <radio class="radio-input radio-cells_input" name="radio7" value="10" checked="{{form.marginSize==10}}"></radio>
+                                  <span class="radio-title radio-cells_title">中</span>
+                              </label>
+                              <label class="radio ml5">
+                                  <radio class="radio-input radio-cells_input" name="radio7" value="15" checked="{{form.marginSize==15}}"></radio>
+                                  <span class="radio-title radio-cells_title">大</span>
+                              </label>
+                            </radio-group>
+                        </div>
+                    </div>
+                    <view class="xzui-cell xzui-cell_access" hidden="{{!form.marginSize}}">
+                        <div class="xzui-cell__bd"><label class="xzui-label">上边距</label></div>
+                        <div class="xzui-cell__ft">
+                            <label class="xzui-switch-cp">
+                                <switch class="xzui-switch-cp__input" data-model="form.marginTop" bindchange="model" checked="{{form.marginTop==1}}"></switch></label>
+                        </div>
+                    </view>
+                    <view class="xzui-cell xzui-cell_access"  hidden="{{!form.marginSize}}">
+                        <div class="xzui-cell__bd"><label class="xzui-label">右边距</label></div>
+                        <div class="xzui-cell__ft">
+                            <label class="xzui-switch-cp"><switch class="xzui-switch-cp__input" data-model="form.marginRight" bindchange="model" checked="{{form.marginRight==1}}"></switch></label>
+                        </div>
+                    </view>
+                    <view class="xzui-cell xzui-cell_access"  hidden="{{!form.marginSize}}">
+                        <div class="xzui-cell__bd"><label class="xzui-label">下边距</label></div>
+                        <div class="xzui-cell__ft">
+                            <label class="xzui-switch-cp"><switch class="xzui-switch-cp__input" data-model="form.marginBottom" bindchange="model" checked="{{form.marginBottom==1}}"></switch></label>
+                        </div>
+                    </view>
+                    <view class="xzui-cell xzui-cell_access"  hidden="{{!form.marginSize}}">
+                        <div class="xzui-cell__bd"> <label class="xzui-label">左边距</label></div>
+                        <div class="xzui-cell__ft">
+                            <label class="xzui-switch-cp">
+                                <switch class="xzui-switch-cp__input" data-model="form.marginLeft" bindchange="model" checked="{{form.marginLeft==1}}"></switch>
+                            </label>
+                        </div>
+                    </view>
+                </div>
+                <!--设置模块四周的内边距-->
+                <div class="xzui-cells__title">设置模块四周的内边距</div>
+                <div class="xzui-cells">
+                	<div class="xzui-cell xzui-cell_access">
+                    	<div class="xzui-cell__hd"><label class="xzui-label">边距大小</label></div>
+                        <div class="xzui-cell__bd">
+                        	<radio-group data-model="form.paddingSize" bindchange="model">
+                                <label class="radio">
+                                    <radio class="radio-input radio-cells_input" name="radio8" value="" checked="{{form.paddingSize==''}}"></radio>
+                                    <span class="radio-title radio-cells_title">无</span>
+                                </label>
+                                <label class="radio">
+                                    <radio class="radio-input radio-cells_input" name="radio8" value="5" checked="{{form.paddingSize==5}}"></radio>
+                                    <span class="radio-title radio-cells_title">小</span>
+                                </label>
+                                <label class="radio ml5">
+                                    <radio class="radio-input radio-cells_input" name="radio8" value="10" checked="{{form.paddingSize==10}}"></radio>
+                                    <span class="radio-title radio-cells_title">中</span>
+                                </label>
+                                <label class="radio ml5" >
+                                    <radio class="radio-input radio-cells_input" name="radio8" value="15" checked="{{form.paddingSize==15}}"></radio>
+                                    <span class="radio-title radio-cells_title">大</span>
+                                </label>
+                            </radio-group>
+                        </div>
+                    </div>
+                    <view class="xzui-cell xzui-cell_access"  hidden="{{!form.paddingSize}}">
+                    	<div class="xzui-cell__bd"><label class="xzui-label">上边距</label></div>
+                        <div class="xzui-cell__ft">
+                            <label class="xzui-switch-cp">
+                                <switch class="xzui-switch-cp__input" data-model="form.paddingTop" bindchange="model" checked="{{form.paddingTop==1}}"></switch>
+                            </label>
+                        </div>
+                  	</view>
+                    <view class="xzui-cell xzui-cell_access"  hidden="{{!form.paddingSize}}">
+                    	<div class="xzui-cell__bd"><label class="xzui-label">右边距</label></div>
+                        <div class="xzui-cell__ft">
+                            <label class="xzui-switch-cp">
+                                <switch class="xzui-switch-cp__input" data-model="form.paddingRight" bindchange="model" checked="{{form.paddingRight==1}}"></switch>
+                            </label>
+                        </div>
+                    </view>
+                    <view class="xzui-cell xzui-cell_access"  hidden="{{!form.paddingSize}}">
+                    	<div class="xzui-cell__bd"><label class="xzui-label">下边距</label></div>
+                        <div class="xzui-cell__ft">
+                            <label class="xzui-switch-cp">
+                                <switch class="xzui-switch-cp__input" data-model="form.paddingBottom" bindchange="model" checked="{{form.paddingBottom==1}}"></switch>
+                            </label>
+                        </div>
+                    </view>
+                    <view class="xzui-cell xzui-cell_access"  hidden="{{!form.paddingSize}}">
+                    	<div class="xzui-cell__bd"><label class="xzui-label">左边距</label></div>
+                        <div class="xzui-cell__ft">
+                            <label class="xzui-switch-cp">
+                                <switch class="xzui-switch-cp__input" data-model="form.paddingLeft" bindchange="model" checked="{{form.paddingLeft==1}}"></switch>
+                            </label>
+                        </div>
+                    </view>
+                </div>
+                <!--设置模块圆角-->
+                <div class="xzui-cells__title">设置模块圆角</div>
+                <div class="xzui-cells">
+                	<view class="xzui-cell xzui-cell_access">
+                    	<div class="xzui-cell__hd"><label class="xzui-label">左上圆角</label></div>
+                        <div class="xzui-cell__bd"><input class="xzui-input" placeholder="填写数字" value="{{form.radiusTopLeft}}" bindinput="model" data-model="form.radiusTopLeft" class="textInput p16 c666" type="number" /></div>
+                        <div class="xzui-cell__ft">px</div>
+                    </view>
+                    <view class="xzui-cell xzui-cell_access">
+                    	<div class="xzui-cell__hd"><label class="xzui-label">右上圆角</label></div>
+                        <div class="xzui-cell__bd"><input class="xzui-input" placeholder="填写数字" value="{{form.radiusTopRight}}" bindinput="model" data-model="form.radiusTopRight" class="textInput p16 c666" type="number" /></div>
+                        <div class="xzui-cell__ft">px</div>
+                    </view>
+                    <view class="xzui-cell xzui-cell_access">
+                    	<div class="xzui-cell__hd"><label class="xzui-label">左下圆角</label></div>
+                        <div class="xzui-cell__bd"><input class="xzui-input" placeholder="填写数字" value="{{form.radiusBottomLeft}}" bindinput="model" data-model="form.radiusBottomLeft" class="textInput p16 c666" type="number" /></div>
+                        <div class="xzui-cell__ft">px</div>
+                    </view>
+                    <view class="xzui-cell xzui-cell_access">
+                    	<div class="xzui-cell__hd"><label class="xzui-label">右下圆角</label></div>
+                        <div class="xzui-cell__bd"><input class="xzui-input" placeholder="填写数字" value="{{form.radiusBottomRight}}" bindinput="model" data-model="form.radiusBottomRight" class="textInput p16 c666" type="number" /></div>
+                        <div class="xzui-cell__ft">px</div>
+                    </view>
+                </div>
+                <!--设置底部分割线-->
+                <div class="xzui-cells__title">设置模块底部分割线</div>
+                <div class="xzui-cells">
+                    <div class="xzui-cell xzui-cell_access">
+                        <div class="xzui-cell__bd">
+                            <label class="xzui-label">底部分割线</label>
+                        </div>
+                        <div class="xzui-cell__ft">
+                            <label class="xzui-switch-cp">
+                                <switch class="xzui-switch-cp__input" data-model="form.bottomLine" bindchange="model" checked="{{form.bottomLine==1}}"></switch>
+                            </label>
+                        </div>
+                    </div>
+                </div> 
+                <!--设置背景颜色-->
+                <div class="xzui-cells">
+                	<view class="xzui-cell xzui-cell_access">
+                    	<div class="xzui-cell__hd">
+                        	<label class="xzui-label">背景颜色</label>
+                        </div>
+                        <div>
+                        	<span class="manage-settingPageModule-selectColor {{(form.backgroundColor==item?'selected':'')}}" wx:for="{{colorList}}" style="background:{{item}};" data-color="{{item}}" bindtap="selectBackgroundColor"></span>
+                        </div>
+                    </view>
+                    <!--自定义颜色-->
+                    <view class="xzui-cell xzui-cell_access">
+                    	<div class="xzui-cell__hd"><label class="xzui-label">自定义颜色</label></div>
+                        <div class="xzui-cell__bd">
+                        	<input class="xzui-input" placeholder="填写色值例:#333333" value="{{form.backgroundColor}}" bindinput="model" data-model="form.backgroundColor" class="textInput p16 c666" type="text" />
+                        </div>
+                    </view>
+                </div>
+                <!--自定义css-->
+                <div class="xzui-cells__title">设置模块自定义css</div>
+                <div class="xzui-cells">
+                	<view class="xzui-cell xzui-cell_access">
+                    	<div class="xzui-cell__hd">
+                        	<label class="xzui-label">自定义css</label>
+                        </div>
+                        <div class="xzui-cell__bd"><textarea class="xzui-textarea" placeholder="请输入规范的css" data-model="form.customCss" bindinput="model" value="{{form.customCss}}"></textarea></div>
+                    </view>
+                </div>
+            </div>
+            <div class="xzui-btn-app mt20">
+            	<button type="button" bindtap="submit" class="xzui-btn xzui-btn_b primary" size="large">保存</button>
+            </div>
+        </div>
+        <div class="tac pd20 p14 c888 bgfff" wx:else>暂无权限</div>               
+    </div>
+</div>

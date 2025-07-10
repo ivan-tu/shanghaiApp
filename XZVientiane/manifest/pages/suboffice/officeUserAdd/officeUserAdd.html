@@ -1,0 +1,66 @@
+<div class="app-wrapper">
+	<div wx:if="{{isUserLogin}}" class="app-main">
+		<div class="bgfff activity_form">
+			<div class="form-list">
+                <div class="form-list-item title c333 p14 long">会员账号</div>
+				<div class="form-list-item">
+                	<input class="textInput" placeholder="请输入" bindinput="model"
+						data-model="form.account" value="{{form.account}}" type="tel" />
+				</div>
+                <div class="form-list-item tar title"><span class="yellowBtn" bindtap="checkThisUser">验证账号</span></div>
+			</div>
+            <div class="form-list" wx:if="{{userInfo&&userInfo.username}}">
+                <div class="form-list-item title c666 p14 long" style="line-height:35px;">会员信息</div>
+				<div class="form-list-item">
+                	<div class="officeUserAdd-userInfo clearfix">
+                    	<div class="picBox hasLoading"><image class="w100 h100 round" src="{{userInfo.headpic}}" mode="widthFix" /></div>
+                        <div class="textBox">{{userInfo.username}}</div>
+                    </div>
+                </div>
+			</div>
+            <div class="form-list">
+                <div class="form-list-item title c333 p14 long">邀请人账号</div>
+				<div class="form-list-item">
+                	<input class="textInput" placeholder="请输入" bindinput="model"
+						data-model="form.parentAccount" value="{{form.parentAccount}}"  type="tel" />
+				</div>
+                <div class="form-list-item tar title"><span class="yellowBtn" bindtap="checkThisParent">验证账号</span></div>
+			</div>
+            <div class="form-list" wx:if="{{parentInfo&&parentInfo.username}}">
+                <div class="form-list-item title c666 p14 long" style="line-height:35px;">邀请人信息</div>
+				<div class="form-list-item">
+                	<div class="officeUserAdd-userInfo clearfix">
+                    	<div class="picBox hasLoading"><image class="w100 h100 round" src="{{parentInfo.headpic}}" mode="widthFix" /></div>
+                        <div class="textBox">{{parentInfo.username}}</div>
+                    </div>
+                </div>
+			</div>
+			<div class="form-list">
+                <div class="form-list-item title c333 p14 long">会员级别</div>
+				<div class="form-list-item">
+                	<div class="mb5" wx:for="{{levelList}}" bindtap="selectThis" data-type="levelid" data-value="{{item._id}}">
+                    	<span class="xzui-checkbox-new {{(form.levelid==item._id?' active':'')}}"></span><span class="xzui-checkboxTitle-new">{{item.name}}</span>
+                    </div>
+				</div>
+			</div>
+            <div class="form-list">
+                <div class="form-list-item title c333 p14 long">到期时间</div>
+				<div class="form-list-item">
+                	<picker mode="date" class="picker-region" bindchange="bindTimeChange" value="{{date}}"
+                        id="bindTimeChange">
+                        <view class="picker c333" wx:if="{{form.date}}">{{form.date}}</view>
+                        <view class="picker c999" wx:else>请选择</view>
+                    </picker>
+				</div>
+			</div>
+            <div class="form-list">
+                <div class="form-list-item title c333 p14 long">备注</div>
+                <div class="form-list-item"><input class="textInput" placeholder="请输入" bindinput="model" type="text" data-model="form.summary" value="{{form.summary}}" /></div>
+            </div>
+		</div>
+		<div class="xzui-btn-app">
+			<button type="button" bindtap="submit" class="xzui-btn xzui-btn_b primary yellow" size="large">提交</button>
+		</div>
+	</div>
+	<nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

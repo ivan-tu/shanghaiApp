@@ -1,0 +1,6 @@
+{
+	"usingComponents": {
+			"noLogin": "/components/common/noLogin/noLogin"
+   },
+    "navigationBarTitleText": "绑定账号"
+}

@@ -1,0 +1,181 @@
+.club-index-myClub{
+	padding:15px;
+}
+/*一排滑动模式*/
+/*.myClub-scrollBox{
+	overflow: hidden;
+}
+.myClub-scrollBox .scrollContainer{
+	overflow-x: auto;
+	overflow-y:hidden;
+	-webkit-overflow-scrolling: touch;
+}
+.myClub-scrollBox .myClub-groupBox{
+	display: table;
+}
+.myClub-scrollBox .myClub-groupBox .myClub-groupList{
+	white-space: nowrap;
+	display: table-cell;
+	width:auto;
+	vertical-align:middle;
+}
+.myClub-scrollBox .myClub-groupBox .myClub-groupList + .myClub-groupList{
+	padding-left:10px;
+}*/
+.myClub-groupBox{
+	margin-left:-5px;
+	margin-top:-5px;
+}
+.myClub-scrollBox .myClub-groupBox .myClub-groupList{
+	width:33.333333%;
+	float:left;
+}
+.myClub-scrollBox .myClub-groupBox .myClub-groupList .list{
+	margin-left:5px;
+	margin-top:5px;
+}
+.myClub-groupList .picBox{
+	margin:auto;
+	border-radius:4px;
+	overflow:hidden;
+}
+.myClub-groupList .name{
+	font-size:12px;
+	margin-top:3px;
+	color:#333;
+	text-align:center;
+	max-width:110px;
+}
+.myClub-groupList .iconBox{
+	background:#fafafa;
+	font-size:30px;
+	color:#999;
+	line-height:110px;
+	border-radius:4px;
+	overflow:hidden;
+}
+.club-addBtn{
+	position: absolute;
+	right: 10px;
+	top: 6px;
+	height: 30px;
+	line-height: 30px;
+	padding: 0 6px;
+}
+/*clubList*/
+.mt2{
+	margin-top:2px;
+}
+.clubBox .clubList{
+	padding:10px 15px;
+	display:block;
+}
+.clubBox .clubList + .clubList{
+	border-top:1px solid #eee;
+}
+.clubBox .clubList .picBox{
+	float:left;
+	width:110px;
+	height:110px;
+	border-radius:4px;
+	overflow:hidden;
+}
+.clubBox .clubList .picBox .pic{
+	border-radius:4px;
+}
+.clubBox .clubList .textBox{
+	margin-left:120px;
+}
+.clubBox .clubList .textBox .summary{
+	text-overflow:-o-ellipsis-lastline;
+	text-overflow:ellipsis;
+	overflow:hidden;
+	display:-webkit-box;
+	-webkit-line-clamp:2;
+	line-clamp:2;
+	-webkit-box-orient:vertical;
+	line-height:20px;
+}
+.clubBox .clubList .title{
+	font-size:16px;
+	color:#131313;
+}
+.clubBox .clubList .userInfo .userPic{
+	width:20px;
+	height:20px;
+	border-radius:50%;
+}
+.clubBox .clubList .userInfo .userName{
+	display:inline-block;
+	margin-left:5px;
+	font-size:12px;
+	color:#313131;
+	vertical-align:middle;
+}
+.clubBox .clubList .userPicList .pic{
+	width:25px;
+	height:25px;
+	border-radius:50%;
+}
+.clubBox .clubList .userPicList .pic+.pic{
+	margin-left:-3px;
+}
+.clubBox .clubList .userPicList i{
+	margin-left:2px;
+	font-size:12px;
+	color:#999;
+	line-height:25px;
+}
+/*nav*/
+.xzui-tabbar:before{
+  border-top: 0px none;
+}
+.xzui-tabbar_item.index{
+    background-image: url(/static/images/nav-index.png);
+}
+.xzui-bar_item_on.index,
+.xzui-tabbar_item.index:hover{
+    background-image: url(/static/images/nav-indexActive.png);
+}
+.xzui-tabbar_item.activity{
+    background-image: url(/static/images/nav-activity.png);
+}
+.xzui-bar_item_on.activity,
+.xzui-tabbar_item.activity:hover{
+    background-image: url(/static/images/nav-activityActive.png);
+}
+.xzui-tabbar_item.store{
+    background-image: url(/static/images/nav-store.png);
+}
+.xzui-bar_item_on.store,
+.xzui-tabbar_item.store:hover{
+    background-image: url(/static/images/nav-storeActive.png);
+}
+.xzui-tabbar_item.group{
+    background-image: url(/static/images/nav-group.png);
+}
+.xzui-bar_item_on.group,
+.xzui-tabbar_item.group:hover{
+    background-image: url(/static/images/nav-groupActive.png);
+}
+.xzui-tabbar_item.message{
+    background-image: url(/static/images/nav-message.png);
+}
+.xzui-bar_item_on.message,
+.xzui-tabbar_item.message:hover{
+    background-image: url(/static/images/nav-messageActive.png);
+}
+.xzui-tabbar_item.goods{
+    background-image: url(/static/images/nav-goods.png);
+}
+.xzui-bar_item_on.goods,
+.xzui-tabbar_item.goods:hover{
+    background-image: url(/static/images/nav-goodsActive.png);
+}
+.xzui-tabbar_item.my{
+    background-image: url(/static/images/nav-my.png);
+}
+.xzui-bar_item_on.my,
+.xzui-tabbar_item.my:hover{
+    background-image: url(/static/images/nav-myActive.png);
+}

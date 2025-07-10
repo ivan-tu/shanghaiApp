@@ -1,0 +1,24 @@
+<div class="app-wrapper">
+	<div class="app-main positionBottom" wx:if="{{isUserLogin}}">
+    	<div class="markWraper"></div>
+    	<div class="client_myBeans_header">
+        	<p class="money">{{balance}}</p>
+            <p class="title">钻石余额</p>
+        </div>
+        <div class="plr15">
+            <div class="client_myBeans_price clearfix" wx:if="{{list&&list.length}}">
+                <div class="listBox" wx:for="{{list}}">
+                    <div class="list {{(form.selectPrice==item.diamond?' active':'')}}" data-value="{{item.diamond}}" bindtap="selectThisPrice">
+                    	<p class="beans">{{item.diamond}}钻石</p>
+                        <p class="money">¥{{item.price}}</p>
+                        <p class="info" wx:if="{{item.zjbcoin}}">送{{item.zjbcoin}}分红股</p>
+                        <p class="info" wx:if="{{item.senddiamond}}">送{{item.senddiamond}}钻</p>
+                    </div>
+                </div>
+            </div>
+            <p class="noData" wx:else>暂无充值选项</p>
+        </div>
+        <div class="mt20"><span class="client_myBeans_submitBtn" bindtap="toBuy">确认充值</span></div>
+    </div>
+    <nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

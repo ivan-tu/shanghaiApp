@@ -1,0 +1,35 @@
+.myPartner-numberInfo{
+	background:#fff;
+	padding:15px 0px;
+}
+.myPartner-numberInfo .number{
+	font-weight:bold;
+}
+.myPartner-noData{
+	padding:150px 0;
+	text-align:center;
+}
+.myPartner-noData .title{
+	font-size:16px;
+	color:#333;
+}
+.myPartner-userInfo{
+	padding:50px 0;
+}
+.myPartner-quanyi{
+	color:#666;
+	text-decoration:underline;
+}
+.myPartner-submitBtn{
+	color:#000;
+	height:42px;
+	line-height:42px;
+	text-align:center;
+	border-radius:25px;
+	width:200px;
+	margin:10px auto;
+	background:#FEE10B;
+}
+.myPartner-noData .myPartner-submitBtn{
+	margin:15px auto;
+}

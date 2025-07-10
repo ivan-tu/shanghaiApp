@@ -1,0 +1,26 @@
+.userMsgDetail-list{
+	padding:10px 15px;
+	position:relative;
+	display:block;
+}
+.userMsgDetail-list .picBox{
+	float:left;
+	border-radius:50%;
+	overflow:hidden;
+	width:30px;
+	height:30px;
+}
+.userMsgDetail-list .textBox{
+	margin-left:40px;
+	margin-right:60px;
+}
+.userMsgDetail-list .time{
+	font-size:12px;
+	color:#999;
+	margin-left:10px;
+}
+.userMsgDetail-list .content{
+	background:#fff;
+	padding:12px;
+	border-radius:4px;
+}

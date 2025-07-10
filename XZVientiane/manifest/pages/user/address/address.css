@@ -1,0 +1,64 @@
+.user-address-item{
+	margin-top: 12px;
+	background-color: #fff;
+	padding: 0 15px;
+	position:relative;
+}
+.user-address-item:after{
+	content: "\e61f";
+	font-family: 'xzicon';
+	position: absolute;
+	right: 5px;
+	color:#888;
+	top: 50%;
+	height: 40px;
+	line-height: 40px;
+	margin-top: -20px;
+}
+.user-address-main{
+	padding:15px 0;
+	position: relative;
+}
+.user-address-title{
+	font-size: 15px;
+	color: #333;
+	line-height: 22px;
+}
+.user-address-phone{
+	color: #666;
+	font-size: 12px;
+	margin-top: 8px;
+	line-height: 18px;
+}
+.user-address-default{
+	float: right;
+	line-height: 44px;
+}
+.user-address-default .title,
+.user-address-default .xzui-switch-cp{
+	display: inline-block;
+	vertical-align: middle;
+}
+.user-address-default .title{
+	color: #666;
+	margin-right: 12px;
+}
+.user-address-btn{
+	display: inline-block;
+	vertical-align: top;
+	width: 40px;
+	line-height: 44px;
+	text-align: center;
+	font-size: 18px;
+	color: #666;
+}
+.user-address-add{
+	line-height: 40px;
+	color: #fff;
+	font-size: 14px;
+	max-width: 180px;
+	margin: auto;
+	background: #D81E06 !important;
+	padding: 0;
+	border-radius: 6px !important;
+}

@@ -1,0 +1,140 @@
+<div>
+  <div class="xzui-share {{(open?' show':'')}} {{(noanimation==1?' noanimation':'')}}">
+    <view class="xzui-share_body" hidden="{{showSharePic}}">
+      <div class="xzui-share_wrap">
+        <div class="xzui-share_list">
+          <view class="xzui-share_item" wx:if="{{client=='app'&&shareData.showMini}}">
+            <button class="xzui-share_bar weixin" bindtap="toShare" data-type="weixin">
+              <div class="xzui-share_icon"></div>
+              <p class="xzui-share_title">微信</p>
+            </button>
+          </view>
+          <view class="xzui-share_item" wx:elif="{{client=='app'&&!shareData.hideH5}}">
+            <button class="xzui-share_bar weixin" bindtap="toShare" data-type="h5">
+              <div class="xzui-share_icon"></div>
+              <p class="xzui-share_title">微信</p>
+            </button>
+          </view>
+          <view class="xzui-share_item" wx:if="{{client=='web'&&!shareData.hideWeixin}}">
+            <button class="xzui-share_bar weixin" bindtap="toShare" data-type="weixin">
+              <div class="xzui-share_icon"></div>
+              <p class="xzui-share_title">微信</p>
+            </button>
+          </view>
+          <view class="xzui-share_item" wx:if="{{client!='wx'&&!shareData.hideMoments}}">
+            <button class="xzui-share_bar moments" bindtap="toShare" data-type="moments">
+              <div class="xzui-share_icon"></div>
+              <p class="xzui-share_title">朋友圈</p>
+            </button>
+          </view>
+          <!--<view class="xzui-share_item" wx:if="{{client=='app'&&shareData.showQQ}}">
+            <button class="xzui-share_bar qq" bindtap="toShare" data-type="qq">
+              <div class="xzui-share_icon"></div>
+              <p class="xzui-share_title">QQ</p>
+            </button>
+          </view>
+          <view class="xzui-share_item" wx:if="{{client=='web'&&shareData.showQQ}}">
+            <navigator
+              url="http://connect.qq.com/widget/shareqq/index.html?{{urLink}}={{shareData.ePath}}&title={{shareData.title}}&source=&desc={{(shareData.content||'')}}&pics={{(shareData.img||'')}}&summary="
+              target="_blank" class="xzui-share_bar qq">
+              <div class="xzui-share_icon"></div>
+              <p class="xzui-share_title">QQ</p>
+            </navigator>
+          </view>
+          <view class="xzui-share_item" wx:if="{{client=='app'&&shareData.showWeibo}}">
+            <button class="xzui-share_bar weibo" bindtap="toShare" data-type="weibo">
+              <div class="xzui-share_icon"></div>
+              <p class="xzui-share_title">微博</p>
+            </button>
+          </view>
+          <view class="xzui-share_item" wx:if="{{client=='web'&&shareData.showWeibo}}">
+            <navigator
+              url="http://service.weibo.com/share/share.php?{{urLink}}={{shareData.ePath}}&title={{shareData.fullTitle}}&source=&pic={{shareData.img}}"
+              target="_blank" class="xzui-share_bar weibo">
+              <div class="xzui-share_icon"></div>
+              <p class="xzui-share_title">微博</p>
+            </navigator>
+          </view>-->
+          <view class="xzui-share_item" wx:if="{{client=='wx'}}">
+            <button class="xzui-share_bar" open-type="share" bindtap="toShare" data-type="weixin">
+              <div class="xzui-share_icon"></div>
+              <p class="xzui-share_title">微信好友</p>
+            </button>
+          </view>
+          <view class="xzui-share_item" wx:if="{{!shareData.hideCopy}}">
+            <button class="xzui-share_bar copy" bindtap="toShare" data-type="copy">
+              <div class="xzui-share_icon saveImage"></div>
+              <p class="xzui-share_title">复制链接</p>
+            </button>
+          </view>
+          <view class="xzui-share_item" wx:if="{{loadPicData.ajaxURL||loadPicData.pageURL}}">
+            <button class="xzui-share_bar saveImage" bindtap="toSave" data-type="saveImage">
+              <div class="xzui-share_icon saveImage"></div>
+              <p class="xzui-share_title">分享海报</p>
+            </button>
+          </view>
+          <view class="xzui-share_item" wx:if="{{loadCodeData.ajaxURL}}">
+            <button class="xzui-share_bar qrCode" bindtap="getCode" data-type="getCode">
+              <div class="xzui-share_icon qrCode"></div>
+              <p class="xzui-share_title">小程序码</p>
+            </button>
+          </view>
+          <view class="xzui-share_item" wx:if="{{client=='app'&&!shareData.hideFriend}}">
+            <button class="xzui-share_bar friend" bindtap="toShare" data-type="friend">
+              <div class="xzui-share_icon friend"></div>
+              <p class="xzui-share_title">通讯录</p>
+            </button>
+          </view>
+          <view class="xzui-share_item" wx:if="{{shareData.showGoodsQrcode}}">
+            <button class="xzui-share_bar qrCode" bindtap="getGoodsCode" data-type="qrCode">
+              <div class="xzui-share_icon qrCode"></div>
+              <p class="xzui-share_title">商品码</p>
+            </button>
+          </view>
+        </div>
+      </div>
+      <button class="xzui-share_cancel" type="button" bindtap="closeShare">取消</button>
+    </view>
+    <!--分享海报-->
+    <view class="share_pic_wrapper tac p14" hidden="{{!showSharePic}}"
+      style="width:{{picWidth}}px;margin-left:{{((picWidth+40)/2*-1)}}px;" data-title="分享海报">
+      <view hidden="{{loadOk}}" class="mt20 pd20">图片生成中，请稍后...</view>
+      <view hidden="{{!loadOk}}">
+        <image src="{{loadPicUrl}}" bindload="loadSuccess" mode="widthFix" style="width:100%;padding-bottom:10px;"
+          wx:if="{{client=='web'}}" />
+        <image src="{{loadPicUrl}}" bindload="loadSuccess" mode="widthFix" style="width:100%;padding-bottom:10px;"
+          bindtap="saveImage" wx:else />
+        <div wx:if="{{client=='web'}}">长按图片保存到相册</div>
+        <button type="button" class="xzui-btn primary" style="margin-right:0;" bindtap="saveImage"
+          wx:else>点击保存图片</button>
+      </view>
+      <div bindtap="closeShare" class="share_close_button">关闭</div>
+    </view>
+    <!--小程序码-->
+    <view class="share_pic_wrapper tac p14" hidden="{{!showShareCode}}"
+      style="width:{{codeWidth}}px;margin-left:{{((codeWidth+40)/2*-1)}}px;" data-title="小程序码">
+      <view hidden="{{loadOk}}" class="mt20 pd20">图片生成中，请稍后...</view>
+      <view hidden="{{!loadOk}}">
+        <image src="{{loadCodeUrl}}" bindload="loadSuccess" mode="widthFix" style="width:100%;padding-bottom:10px;"
+          wx:if="{{client=='web'}}" />
+        <image src="{{loadCodeUrl}}" bindload="loadSuccess" mode="widthFix" style="width:100%;padding-bottom:10px;"
+          bindtap="saveCodeImage" wx:else />
+        <div wx:if="{{client=='web'}}">长按图片保存到相册</div>
+        <button type="button" class="xzui-btn primary" style="margin-right:0;" bindtap="saveCodeImage"
+          wx:else>点击保存图片</button>
+      </view>
+      <div bindtap="closeShareCode" class="share_close_button">关闭</div>
+    </view>
+    <!--商品码-->
+    <view class="share_pic_wrapper tac p14" hidden="{{!showShareGoodsCode}}"
+      style="width:{{codeWidth}}px;margin-left:{{((codeWidth+40)/2*-1)}}px;" data-title="商品码">
+      <view>
+        <image src="{{loadGoodsCodeUrl}}" bindload="loadSuccess" mode="widthFix" style="width:100%;padding-bottom:10px;"
+          bindtap="saveGoodsCodeImage" />
+        <button type="button" class="xzui-btn primary" style="margin-right:0;"
+          bindtap="saveGoodsCodeImage">点击保存图片</button>
+      </view>
+      <div bindtap="closeGoodsCodeImage" class="share_close_button">关闭</div>
+    </view>
+  </div>
+</div>

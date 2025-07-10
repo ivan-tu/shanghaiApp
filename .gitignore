@@ -1,0 +1,65 @@
+# 系统文件
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Xcode 生成文件
+build/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata
+profile
+*.moved-aside
+DerivedData
+.idea/
+*.hmap
+*.ipa
+*.xcuserstate
+
+# CocoaPods 依赖
+Pods/
+Podfile.lock
+
+# Carthage 依赖
+Carthage/Checkouts
+Carthage/Build
+
+# 日志文件和临时文件
+*.log
+*.swp
+*.swo
+*.swn
+*.bak
+*.orig
+*.rej
+
+# 测试报告和覆盖率
+Reports/
+*.xccoverage
+
+# 本地配置文件
+*.xcconfig
+!default.xcconfig
+
+# 第三方工具
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/test_output
+fastlane/README.md
+
+# 自定义配置文件（根据项目需求调整）
+config.plist
+secrets.json

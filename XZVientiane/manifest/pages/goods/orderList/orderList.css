@@ -1,0 +1,159 @@
+.orderList-list{
+	margin-left:5px;
+	margin-right:5px;
+	border-radius:8px;
+}
+.orderList_btn{
+	margin:0;
+	display:inline-block;
+	border-radius:4px;
+	text-align:center;
+	height:30px;
+	line-height:30px;
+	font-size:12px;
+	width:65px;
+}
+.orderList_btn.b1{
+	border:1px solid #999;
+	background:#fff;
+	color:#666;
+}
+.orderList_btn.b1:hover{
+	color:#666;
+}
+.orderList_btn.b2{
+	border:1px solid #D81E06;
+	background:#D81E06;
+	color:#fff;
+}
+.orderList_btn.b2:hover{
+	color:#fff;
+}
+.orderList_btn + .orderList_btn{
+	margin-left:10px;
+}
+.orderListGoods{
+	position:relative;
+	padding-right:40px;
+	margin-left:-5px;
+}
+.orderListGoods .picList{
+	width:25%;
+	float:left;
+}
+.orderListGoods .picList .list{
+	margin-left:5px;
+}
+.orderListGoods .quantityText{
+	width:15px;
+	font-size:12px;
+	color:#666;
+	position:absolute;
+	right:10px;
+	top:50%;
+	line-height:20px;
+	height:60px;
+	margin-top:-30px;
+	text-align:center;
+	padding-left:10px;
+	border-left:1px solid #eee;
+}
+.orderList_storeInfo .picBox{
+	float:left;
+	width:24px;
+	height:24px;
+	border-radius:50%;
+	overflow:hidden;
+}
+.orderList_storeInfo .textBox{
+	margin-left:30px;
+	line-height:24px;
+}
+/*话费提货弹框*/
+.mobileDialog-modal .closeBtn{
+	position:absolute;
+	right:15px;
+	font-size:18px;
+	top:18px;
+	line-height:26px;
+	z-index:8;
+}
+.mobileDialog-modal-form{
+	border-bottom:1px solid #eee;
+}
+.mobileDialog-modal-form .title{
+	float:left;
+	text-align:left;
+	font-size:14px;
+	color:#333;
+	width:70px;
+	line-height:40px;
+}
+.mobileDialog-modal-form .mobileDialog-modal-inputBox{
+	margin-left:80px;
+	height:40px;
+	background:#fff;
+}
+.mobileDialog-modal-input{
+	width:100%;
+	border:0 none;
+	outline:none;
+	line-height:38px;
+	font-size:16px;
+	color:#333;
+	margin:0;
+	padding:0;
+}
+.mobileDialog-modal-inputBox input:placeholder{
+	color:#999;
+	font-size:16px;
+}
+.mobileDialog-modal-foot{
+	margin-top:20px;
+}
+.mobileDialog-modal-foot .cancelBtn{
+	background: #fff;
+	color:#D81E06;
+	font-size:18px;
+	height:40px;
+	line-height:40px;
+	text-align:center;
+	border-radius:4px;
+	cursor:pointer;
+	border:1px solid #D81E06;
+}
+.mobileDialog-modal-foot .submitBtn{
+	background: #D81E06;
+	color:#fff;
+	font-size:18px;
+	height:40px;
+	line-height:40px;
+	text-align:center;
+	border-radius:4px;
+	margin-left:15px;
+	cursor:pointer;
+	border:1px solid #D81E06;
+}
+/*nav*/
+.xzui-tabbar_item.index{
+    background-image: url(/static/images/nav-home.png);
+}
+.xzui-bar_item_on.index,
+.xzui-tabbar_item.index:hover{
+    background-image: url(/static/images/nav-homeActive.png);
+}
+.xzui-tabbar_item.order{
+    background-image: url(/static/images/nav-order.png);
+}
+.xzui-bar_item_on.order,
+.xzui-tabbar_item.order:hover{
+    background-image: url(/static/images/nav-orderActive.png);
+}
+.xzui-tabbar_item.my{
+    background-image: url(/static/images/nav-my.png);
+}
+.xzui-bar_item_on.my,
+.xzui-tabbar_item.my:hover{
+    background-image: url(/static/images/nav-myActive.png);
+}
+

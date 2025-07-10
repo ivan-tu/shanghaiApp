@@ -1,0 +1,55 @@
+<div class="app-wrapper  {{(client=='web'?' hasPageFrame':'')}}">
+	<div wx:if="{{isUserLogin}}" class="app-main">
+  <search-bar label="搜索订单" placeholder="搜索订单号/手机号" keyword="{{form.keyword}}" bindchange="changeKeyword" bindclose="closeKeyword"></search-bar>
+        <div class="searchCategory-box clearfix bgfff">
+            <div class="searchCategory">
+                <div class="listBox">
+                    <div class="list {{(form.status==''?' active':'')}}"  bindtap="screenStatus" data-status=""><span class="spanList">全部</span></div>
+                    <div class="list {{(form.status==1?' active':'')}}"  bindtap="screenStatus" data-status="1"><span class="spanList">待付款</span></div>
+                    <div class="list {{(form.status==2?' active':'')}}"  bindtap="screenStatus" data-status="2"><span class="spanList">待发货</span></div>
+                    <div class="list {{(form.status==3?' active':'')}}"  bindtap="screenStatus" data-status="3"><span class="spanList">待收货</span></div>
+                    <div class="list {{(form.status==4?' active':'')}}"  bindtap="screenStatus" data-status="4"><span class="spanList">已完成</span></div>
+                </div>
+            </div>
+        </div>
+		<div class="form-title">共{{count}}个订单</div>
+        <div class="mb10" wx:if="{{data.length}}">
+            <div class="xzui-cells orderList-list" wx:for="{{data}}">
+            	<div class="clearfix pr15 ml15 ptb10 hasBorder bottom">
+                	<p class="fl p12">{{item.createAt}}</p>
+                    <p class="fr p12" style="line-height:24px;">{{item.statusName}}</p>
+                </div>
+                <div class="xzui-panel__bd">
+                    <navigator url="../../goods/orderDetail/orderDetail?id={{item.id}}" class="xzui-media-box xzui-media-box_appmsg">
+                        <div class="xzui-media-box__hd xzui-media-box__hd_in-appmsg hasLoading" style="width:80px;height:80px;">
+                            <image src="{{item.goodsinfo.pic}}" mode="widthFix" />
+                        </div>
+                        <div class="xzui-media-box__bd xzui-media-box__bd_in-appmsg">
+                            <div class="xzui-media-box__title">{{item.goodsinfo.name}}</div>
+                            <div class="xzui-media-box__desc">
+                                <div class="cRed p12 mt5">
+                                    ¥<span class="p14">{{item.goodsinfo.price}}<span class="c999 fr">x{{item.quantity}}</span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </navigator>
+                </div>
+                <div class="clearfix pr15 ml15 ptb10 hasBorder top">
+                    <p class="fl c666 p14" style="line-height:30px;">实付：<span class="cRed">¥</span><span class="p16 cRed"> {{item.totalPrice}}</span></p>
+                    <div class="fr" wx:if="{{item.status==1}}">
+                    	<button type="button" class="orderList_btn b2" bindtap="payOrder" data-ordernum="{{item.ordernum}}">立即付款</button>
+                    </div>
+                    <div class="fr" wx:elif="{{item.status==3}}">
+                    	<button type="button" class="orderList_btn b2" bindtap="reveiveOrder" data-id="{{item.id}}" data-index="{{index}}">确认收货</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <view class="loadingBox mlr14" hidden="{{!showLoading}}">
+            <div class="xzicon-loading"></div>
+            <div class="xzui-loadmore__tips">正在加载</div>
+        </view>
+        <view class="noData mlr14" hidden="{{!showNoData}}">暂无订单</view>
+	</div>
+	<nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

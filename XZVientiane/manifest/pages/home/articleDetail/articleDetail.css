@@ -1,0 +1,13 @@
+.articleTitle{
+	color:#231815;
+	font-size:18px;
+	text-align:center;
+}
+.articleTime{
+	font-size:14px;
+	color:#999;
+	margin:10px 0 15px 0;
+}
+.articleMain{
+	padding:10px 14px 20px 14px;
+}

@@ -1,0 +1,7 @@
+.recruitClubFinance-list{
+	padding-top:10px;
+}
+.recruitClubFinance-list +.recruitClubFinance-list{
+	margin-top:10px;
+	border-top:1px solid #F6F6F6;
+}

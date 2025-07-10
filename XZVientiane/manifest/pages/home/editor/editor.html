@@ -1,0 +1,73 @@
+<div class="app-wrapper">
+    <div class="app-main positionBottom">
+      <div class="editorContent-box" style="padding-bottom:50px;" wx:if="{{contentData&&contentData.length}}">
+            <div class="editorContent-list {{(index===selectedIndex?'editor-selected':'')}}" wx:for="{{contentData}}" data-index="{{index}}" bindtap="selectedItem">
+                    <view  wx:if="{{item.type=='text'}}">
+                      <textarea maxlength="-1" wx:if="{{index===selectedIndex}}" class="xzui-textarea editor_textarea publicTextarea" placeholder="选中后输入文字"  data-index="{{index}}" value="{{item.content}}" style="border:none;overflow: hidden;height:{{item.textareaHeight}}" bindinput="inputTextarea" bindkeyup="keyup" bindfocus="focusText"></textarea>
+                        <div style="{{(index===selectedIndex)?'height:0;overflow:hidden;margin-top:10px;':''}}">
+                         <view class="textContent_wrapper_{{index}}">
+                         		<rich-text class="editor_textContent publicTextarea"  nodes="{{item.wContent}}"></rich-text>
+                         </view>
+                        </div>
+                    </view>
+                    <view wx:elif="{{item.type=='image'}}">
+                        <div class="xzicon-loading" wx:if="{{!item.file}}">上传中...  已上传{{item.percent}}%</div>
+                        <image mode="widthFix" class="imageIcon" src="{{item.file}}" wx:else />
+                    </view>
+                    <view wx:elif="{{item.type=='video'}}">
+                        <div class="editor-videoMaskTop"></div>
+                        <div class="editor-videoMaskRight"></div>
+                        <div class="editor-videoMaskbottom"></div>
+                        <div class="editor-videoMaskLeft"></div>
+                        <div class="xzicon-loading" wx:if="{{!item.file}}">上传中...  已上传{{item.percent}}%</div>
+                        <div class="xzicon-loading" wx:elif="{{item.error}}">视频转码中...，你可以保存或先做其他事</div>
+                        <video data-index="{{index}}" src="{{item.file}}" poster="{{item.poster}}"  style="width:{{videoWidth}}px;"  controls  wx:else></video>
+                    </view>
+                    <view wx:elif="{{item.type=='audio'}}">
+                        <div class="xzicon-loading" wx:if="{{!item.file}}">上传中...  已上传{{item.percent}}%</div>
+                        <div wx:else class="editor-audio">
+                        	<div class="editor-audio-main">
+                            	<div class="editor-audio-progress"><span class="editor-audio-progressSpeed"></span></div>
+                                <div class="clearfix mt5">
+                                    <span class="fl c666 p12">00:00</span>
+                                </div>
+                            </div>
+                            <div class="editor-audio-playBtn">
+                            	<div class="editor-audio-playVoice"><div class="editor-audio-playVoice-play"></div></div>
+                            </div>
+                        </div>
+                    </view>
+                    <!--
+                    <view catchtap="selectLink" data-index="{{index}}" class="editorContent-list-link {{(item.link?'active':'')}}"  hidden="{{index!==selectedIndex&&!item.link}}" wx:if="{{item.type=='text'||item.type=='image'}}">
+                    		<span class="xzicon-link"></span>
+                    </view>-->
+            </div>
+        </div>
+        <view class="addText-selectType hasBorder top" style="position:fixed;">
+          <view class="addText-selectType-editor">
+                <radio-group bindchange="selecteditType" class="displayFlex addText-selectType-editorLeft">
+                    <div class="list tac" bindtap="addContent">
+                        <div class="displayIB">
+                            <i class="xzicon-pluscircleo"></i>
+                            <div class="p12">添加</div>
+                        </div>
+                    </div>
+                    <div class="list tac" bindtap="delThis">
+                        <div class="displayIB ml5 list tac {{(selectedIndex===''?'disable':'')}}">
+                            <i class="xzicon-delete"></i>
+                            <div class="p12">删除</div>
+                        </div>
+                    </div>
+                     <div class="list tac"  bindtap="move">
+                        <div class="displayIB ml5 list tac {{(selectedIndex===''?'disable':'')}}">
+                            <i class="xzicon-totop"></i>
+                            <div class="p12">排序</div>
+                        </div>
+                    </div>
+                </radio-group>
+                <button class="submitBtn_round" type="button" bindtap="submit">保存</button>
+            </view>
+        </view>
+        
+    </div>
+</div>

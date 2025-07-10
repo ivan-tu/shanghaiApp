@@ -1,0 +1,70 @@
+<div class="app-wrapper positionBottom">
+    <div wx:if="{{isUserLogin}}" class="app-main">
+    	<div class="bgfff">
+            <div class="searchCategory-box clearfix">
+                <div class="searchCategory">
+                    <div class="listBox">
+                        <span class="list {{(form.type=='1'?' active':'')}}" data-type="type" data-value="1" bindtap="screen">收入</span>
+                        <span class="list {{(form.type=='2'?' active':'')}}" data-type="type" data-value="2" bindtap="screen">支出</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p class="form-title">共 {{count}} 条记录，共{{total}} </p>
+        <div class="pb15">
+            <div class="bgfff plr15" wx:if="{{data&&data.length}}">
+                <div class="tuige-myAchievement-item" wx:for="{{data}}">
+                    <div class="clearfix">
+                        <div class="fl" style="max-width:70%;">
+                            <p class="c333 p14 textOver">{{item.title}}</p>
+                            <p class="c666 p12">{{item.addtime}}<span class="p12 c666 displayIB ml5" wx:if="{{item.status==0}}">冻结中</span></p>
+                        </div>
+                        <div class="fr tar">
+                            <p class="tuige-myAchievement-money" style="line-height:24px;"><span wx:if="{{form.type==1}}">+</span><span wx:elif="{{form.type==2}}">-</span>{{item.total}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <view class="loadingBox mlr14" hidden="{{!showLoading}}">
+                <div class="xzicon-loading"></div>
+                <div class="xzui-loadmore__tips">正在加载</div>
+            </view>
+            <view class="noData mlr14" hidden="{{!showNoData}}">暂无记录</view>
+        </div>
+        <div class="xzui-btn-app positionBottom">
+        	<div class="displayFlex">
+            	<!--
+            	<div class="list">
+                	<button type="button" bindtap="toChange" class="xzui-btn xzui-btn_b primary yellow" size="large">转入个人账户</button>
+                </div>-->
+                <div class="list">
+                	<button type="button" bindtap="toWidthdraw" class="xzui-btn xzui-btn_b primary yellow" size="large">钻石提现</button>
+                </div>
+            </div>
+		</div>
+        <!--兑换弹框-->
+        <div class="publicScroll_dialog {{(changeForm.show?' show':'')}}">
+            <view class="publicScroll_body" style="height:{{changeForm.height}}px;">
+                <div class="publicScroll_head clearfix tac bgfff">
+                    <span class="p16">转入个人账户</span>
+                    <span class="fr p16" bindtap="toHideDialog"><i class="xzicon-close"></i></span>
+                </div>
+                <div class="publicScroll_main">
+                    <view class="bgfff">
+                        <div class="form-list" wx:if="{{changeForm.show}}">
+                            <div class="form-list-item title">数量</div>
+                            <div class="form-list-item">
+                                <input placeholder="请输入" bindinput="model" data-model="changeForm.total" value="{{changeForm.total}}" class="textInput" type="number" />
+                            </div>
+                            <div class="form-list-item title large tar c666 p12">可转数量：{{changeForm.maxTotal}}</div>
+                        </div>
+                    </view>
+                </div>
+                <view class="publicScroll_footBtn">
+                    <button class="submitBtn" type="button" bindtap="toConfirmDialog">确定</button>
+                </view>
+            </view>
+        </div>
+    </div>
+    <nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

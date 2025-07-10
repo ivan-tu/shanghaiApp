@@ -1,0 +1,50 @@
+.payOrderRecord_List{
+	background:#fff;
+	display:block;
+}
+.payOrderRecord_List +.payOrderRecord_List{
+	margin-top:10px;
+}
+.payOrderRecord_List .header{
+	padding:10px 15px;
+	position:relative;
+}
+.payOrderRecord_List .header .picBox{
+	width:35px;
+	height:35px;
+	border-radius:50%;
+	overflow:hidden;
+	float:left;
+}
+.payOrderRecord_List .header .shopName{
+	margin-left:45px;
+	line-height:35px;
+}
+.payOrderRecord_List .header .shopName .text{
+	display:inline-block;
+	color:#131313;
+	font-size:14px;
+	max-width:130px;
+	white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+	vertical-align:middle;
+}
+.payOrderRecord_List .header .detailBtn{
+	position:absolute;
+	right:10px;
+	top:50%;
+	line-height:24px;
+	margin-top:-12px;
+	font-size:12px;
+	color:#999;
+}
+.payOrderRecord_List .xzicon-right{
+	font-size:12px;
+	color:#999;
+	vertical-align:middle;
+}
+.payOrderRecord_List .container{
+	border-top:1px solid #F5F5F5;
+	padding:10px 15px;
+}

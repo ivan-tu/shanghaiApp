@@ -1,0 +1,34 @@
+<div class="app-wrapper">
+	<div class="app-main" wx:if="{{isUserLogin}}">
+    	<view class="markWraper"></view>
+        <view class="loadingBox mlr14" wx:if="{{showLoading}}">
+            <div class="xzicon-loading"></div>
+        </view>
+        <view class="noData mlr14" wx:elif="{{showNoData}}">暂无记录</view>
+        <div wx:else>
+            <div class="diamondReceive_head" wx:if="{{data.status==0}}">
+                <div class="picBox hasLoading"><image class="round" src="{{data.userinfo.headpic}}" mode="widthFix" /></div>
+                <div class="mt10">
+                    <p class="userName">您的好友 {{data.userinfo.username}} 送你一个{{data.name}}</p>
+                </div>
+                <div class="diamondReceive_footBtn tac">
+                    <div class="diamondReceive_getBtn" bindtap="submit" wx:if="{{isUserLogin}}">立即领取</div>
+                    <div class="diamondReceive_getBtn" bindtap="toLogin" wx:else>登录领取</div>
+                </div>
+            </div>
+            <div class="diamondReceive_head" wx:elif="{{data.status==1}}">
+                <div class="tac iconBox cGreen"><i class="xzicon-checkcircle"></i></div>
+                <div class="mt10">
+                    <p class="userName">礼包已经被兑换</p>
+                </div>
+                <div class="diamondReceive_footBtn tac">
+                    <div class="diamondReceive_getBtn" bindtap="toHome">回到首页</div>
+                </div>
+            </div>
+            <div class="hasBorder top left pd15">
+            	<p style="white-space:pre-wrap;">{{data.confirmTips}}</p>
+            </div>
+        </div>
+	</div>
+    <nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

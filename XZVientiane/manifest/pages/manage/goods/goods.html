@@ -1,0 +1,104 @@
+<div class="app-wrapper">
+	<div wx:if="{{isUserLogin}}" class="app-main positionBottom">
+		<div wx:if="{{myAuthority&&myAuthority.goods}}">
+			<search-bar label="搜索商品名称" placeholder="搜索商品名称" keyword="{{form.keyword}}" bindchange="changeKeyword"
+				bindclose="closeKeyword"></search-bar>
+			<div class="searchCategory-box clearfix bgfff">
+				<div class="searchCategory">
+					<div class="listBox">
+						<span class="list {{(form.status==1?' active':'')}}" bindtap="selectStatus"
+							data-status="1">出售中</span>
+						<span class="list {{(form.status==1?'':' active')}}" bindtap="selectStatus"
+							data-status="0">已下架</span>
+					</div>
+				</div>
+			</div>
+			<div class="form-title">
+				<span>{{count}}个商品</span>
+				<div class="fr">
+					<div class="c666" bindtap="selectCategory">{{categoryName}} <i class="xzicon-right"></i></div>
+					<!-- <picker mode="selector" class="goodsPickerType" range="{{categoryData}}" range-key="title"
+						bindchange="screenType" value="{{categoryIndex}}" id="pickerType">
+						<view class="picker c666">{{categoryName}}</view>
+					</picker>-->
+				</div>
+			</div>
+			<div class="mb10" wx:if="{{data.length}}">
+				<div class="xzui-cells" wx:for="{{data}}">
+					<div class="xzui-panel__bd">
+						<navigator url="../../shop/goodsDetail/goodsDetail?id={{item.shortid}}&shopShortid={{shopShortid}}" target="_blank"
+							class="xzui-media-box xzui-media-box_appmsg">
+							<div class="xzui-media-box__hd xzui-media-box__hd_in-appmsg hasLoading" style="width:80px;height:80px;">
+								<image src="{{item.pic}}" mode="widthFix" />
+							</div>
+							<div class="xzui-media-box__bd xzui-media-box__bd_in-appmsg">
+								<div class="xzui-media-box__title">{{item.name}}</div>
+								<div class="xzui-media-box__desc">
+									<div class="cRed p12" wx:if="{{item.price}}">¥<span class="p18 bold">{{item.price}}</span></div>
+									<div class="c999 p12 mt5">
+										销量：<span class="c666 displayIB mr5">{{item.salesvolume||0}}</span>
+										库存：<span wx:if="{{item.sellOut}}" class="c666 displayIB mr5">售罄</span><span wx:else
+											class="c666 displayIB mr5">{{item.stocks||0}}</span>
+										排序：<span class="c666">{{item.taix}}</span>
+									</div>
+								</div>
+							</div>
+						</navigator>
+					</div>
+					<div class="xzui-form-preview__ft" wx:if="{{options.select}}">
+						<navigator class="xzui-form-preview__btn xzui-form-preview__btn_default" url="javascript:;"
+							bindtap="onSelect" data-index="{{index}}">选择</navigator>
+					</div>
+					<div class="xzui-form-preview__ft" wx:else>
+						<navigator class="xzui-form-preview__btn xzui-form-preview__btn_default p14"
+							url="../../manage/goodsAdd/goodsAdd?id={{item.id}}">编辑</navigator>
+						<navigator class="xzui-form-preview__btn xzui-form-preview__btn_default p14" wx:if="{{!item.status}}"
+							url="javascript:;" bindtap="del" data-index="{{index}}">删除</navigator>
+						<navigator class="xzui-form-preview__btn xzui-form-preview__btn_default p14" url="javascript:;"
+							bindtap="setStaus" data-index="{{index}}">{{item.status?'下架':'上架'}}
+						</navigator>
+						<navigator class="xzui-form-preview__btn xzui-form-preview__btn_default p14" url="javascript:;"
+							bindtap="setMore" data-index="{{index}}">更多</navigator>
+
+					</div>
+				</div>
+			</div>
+			<view class="loadingBox mlr14" hidden="{{!showLoading}}">
+				<div class="xzicon-loading"></div>
+				<div class="xzui-loadmore__tips">正在加载</div>
+			</view>
+			<view class="noData mlr14" hidden="{{!showNoData}}">暂无数据</view>
+			<div class="xzui-btn-app positionBottom" wx:if="{{!options.select}}">
+				<button type="button" bindtap="toPage" data-page="../../manage/goodsAdd/goodsAdd" class="xzui-btn xzui-btn_b primary yellow" size="large">添加商品</button>
+			</div>
+		</div>
+		<div class="tac pd20 p14 c888 bgfff" wx:else>暂无权限</div>
+	</div>
+	<nologin bindloginsuccess="onShow" wx:else></nologin>
+	<!--编辑排序弹框-->
+	<view class="" hidden="{{!showTaixDialog}}">
+		<div style="z-index:20;" class="xzui-mask show" bindtap="toHideDialog"></div>
+		<div class="xzui-modal show" style="z-index:21;">
+			<div class="xzui-modal_body" style="padding:10px 14px 0px 14px;">
+				<div class="xzui-modal_main">
+					<div class="form-list tal" style="margin-top:1px;">
+						<div class="form-list-item title c666">排序</div>
+						<div class="form-list-item">
+							<div style="padding:0 5px;border:1px solid #eee;">
+								<input type="number" value="{{taixForm.taix}}" bindinput="model" data-model="taixForm.taix"
+									class="textInput" placeholder="请输入数字" />
+							</div>
+							<p class="mt5 p12 c666">数字越大排序越前</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="xzui-modal_foot">
+				<div class="xzui-modal_btnBox">
+					<button class="xzui-btn confirm xzui-modal_btn" type="primary" bindtap="toHideDialog">取消</button>
+					<button class="xzui-btn confirm xzui-modal_btn" type="primary" bindtap="toConfirmDialog">确定</button>
+				</div>
+			</div>
+		</div>
+	</view>
+</div>

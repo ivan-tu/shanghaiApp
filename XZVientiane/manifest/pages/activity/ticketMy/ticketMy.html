@@ -1,0 +1,95 @@
+<div class="app-wrapper">
+	<div class="app-main pb20 positionBottom" wx:if="{{isUserLogin}}">
+		<view class="markWraper" style="background:rgba(254,254,254)"></view>
+		<div class="searchCategory-box clearfix bgfff" wx:if="{{!options.select}}">
+			<div class="searchCategory">
+				<div class="listBox">
+					<span class="list {{(form.gettype=='my'?'active':'')}}" data-type="my" bindtap="screenStatus">我的门票</span>
+					<span class="list {{(form.gettype=='mysend'?'active':'')}}" data-type="mysend"
+						bindtap="screenStatus">我的赠票</span>
+				</div>
+			</div>
+			<div class="activityMyTicket_count">共<span class="cRed">{{count}}</span>张票</div>
+		</div>
+		<div class="activityMyTicket_box" wx:if="{{data&&data.length}}">
+			<view class="listBox" wx:for="{{data}}">
+            	<div data-index="{{index}}" bindtap="toMyDetail">
+                    <div class="activityInfo clearfix">
+                        <div class="picBox hasLoading">
+                            <image src="{{item.activity.pic}}" mode="widthFix" />
+                        </div>
+                        <div class="textBox">
+                            <p class="title">{{item.activity.name}}</p>
+                            <p class="tips mt10">{{item.activity.realAddress}}</p>
+                            <p class="tips">{{item.activity.activityTime}}</p>
+                            <p class="price">¥{{item.price}}<span class="cBlue ml5 displayIB" wx:if="{{item.ticketinfo&&item.ticketinfo.name}}">{{item.ticketinfo.name}}</span></p>
+                        </div>
+                    </div>
+                    <div class="activityMyTicket_line"></div>
+                    <div class="clearfix pt15 plr15" wx:if="{{item.reviceuser}}">
+                        <div class="fl">
+                            <span class="displayIB mr5 vMid">领取人：</span>
+                            <image style="width:28px;height:28px;" src="{{item.reviceuser.headpic}}" mode="widthFix" class="round" />
+                            <span class="textOver ml5 vMid"
+                                style="max-width:120px;display:inline-block;">{{item.reviceuser.username}}</span>
+                        </div>
+                        <p class="c333 fr" style="line-height:28px;">{{item.signstatus==1?'已签到':'未签到'}}</p>
+                    </div>
+                    <div class="clearfix pt15 plr15" wx:elif="{{item.sendtype==1&&item.senduser}}">
+                        <div class="fl">
+                            <span class="displayIB mr5 vMid">赠送人：</span>
+                            <image style="width:28px;height:28px;" src="{{item.senduser.headpic}}" mode="widthFix" class="round" />
+                            <span class="textOver ml5 vMid"
+                                style="max-width:120px;display:inline-block;">{{item.senduser.username}}</span>
+                        </div>
+                    </div>
+                </div>
+				<div class="activityMyTicket_footBtn clearfix">
+					<div class="fl">
+                    	<div wx:if="{{item.status==2}}">
+							<span class="spanStatus c999">已退票</span>
+						</div>
+						<div wx:elif="{{item.isshare==1}}">
+							<span class="spanStatus cRed">已赠送未领取</span>
+						</div>
+						<div wx:elif="{{item.isshare==2}}">
+							<span class="spanStatus cRed">已领取</span>
+						</div>
+                        <div wx:elif="{{item.isshare==3}}">
+							<span class="spanStatus c999">已退回</span>
+						</div>
+						<div wx:else>
+							<span class="spanStatus cGreen" wx:if="{{item.status==1}}">自用</span>
+							<span class="spanStatus cRed" wx:elif="{{item.mastersend==1}}">活动方赠送</span>
+							<span class="spanStatus cRed" wx:elif="{{item.sendtype==1}}">已赠送</span>
+							<span class="spanStatus cRed" wx:elif="{{item.status==0}}">未使用</span>
+							<span class="spanStatus c999" wx:elif="{{item.status==2}}">已退票</span>
+						</div>
+					</div>
+					<div class="fr tar" wx:if="{{form.gettype=='my'}}">
+						<navigator wx:if="{{!item.myjoin&&item.status==0}}" url="javascript:;" class="btn detail_blueBtn"
+							data-index="{{index}}" bindtap="toSetMyself">设为自用</navigator>
+						<navigator wx:if="{{item.status==0}}" url="javascript:;" class="btn detail_redBtn" data-index="{{index}}"
+							bindtap="toShare">赠送给好友</navigator>
+						<navigator wx:if="{{item.signstatus!=1&&item.status!=2&&item.isshare!=2}}" url="javascript:;"
+							class="btn detail_grayBtn" data-index="{{index}}" bindtap="toRefund">申请退票</navigator>
+					</div>
+				</div>
+			</view>
+		</div>
+		<view class="loadingBox mlr14" hidden="{{!showLoading}}">
+			<div class="xzicon-loading"></div>
+			<div class="xzui-loadmore__tips">正在加载</div>
+		</view>
+		<view class="noData mlr14" hidden="{{!showNoData}}">暂无数据</view>
+		<view class="xzui-btn-app positionBottom" wx:if="{{options.id&&!options.hideAdd}}">
+        	<div class="displayFlex">
+                <div class="list">
+                    <button type="button" class="xzui-btn xzui-btn_b primary E03D45" size="large" bindtap="toAdd">购买门票</button>
+                </div>
+            </div>
+		</view>
+	</div>
+	<nologin bindloginsuccess="onShow" wx:else></nologin>
+	<newShare id="newShareCon"></newShare>
+</div>

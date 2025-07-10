@@ -1,0 +1,62 @@
+<div class="app-wrapper">
+    <div wx:if="{{isUserLogin}}" class="app-main mb20 positionBottom">
+        <div wx:if="{{myAuthority&&myAuthority.setting}}">
+        	<div class="bgfff">
+            	<div class="form-list">
+                    <div class="form-list-item title large" style="min-width:130px;max-width:130px;">模板名称</div>
+                    <div class="form-list-item tar"><input type="text" placeholder="请输入模板名称" class="textInput" bindinput="model" data-model="form.name" value="{{form.name}}" /></div>                           
+                </div>
+                <div class="form-list">
+                    <div class="form-list-item title large" style="min-width:130px;max-width:130px;">批量设置按件运费</div>
+                    <div class="form-list-item"><input type="number" placeholder="请输入价格" class="textInput" bindinput="model" data-model="allNum" value="{{allNum}}" /></div>
+                    <div class="form-list-item tar"><button class="redBtn" bindtap="changeAll" type="button">确定</button></div>                           
+                </div>
+                <div class="form-list">
+                    <div class="form-list-item title large" style="min-width:130px;max-width:130px;">批量设置首重</div>
+                    <div class="form-list-item"><input type="number" placeholder="请输入价格" class="textInput" bindinput="model" data-model="allWeight" value="{{allWeight}}" /></div>
+                    <div class="form-list-item tar"><button class="redBtn" bindtap="changeAllWeight" type="button">确定</button></div>                           
+                </div>
+                <div class="form-list">
+                    <div class="form-list-item title large" style="min-width:130px;max-width:130px;">批量设置续重</div>
+                    <div class="form-list-item"><input type="number" placeholder="请输入价格" class="textInput" bindinput="model" data-model="allConWeight" value="{{allConWeight}}" /></div>
+                    <div class="form-list-item tar"><button class="redBtn" bindtap="changeConWeight" type="button">确定</button></div>                           
+                </div>
+                <div class="form-list">
+                    <div class="form-list-item title large" style="min-width:130px;max-width:130px;">批量设置满包邮</div>
+                    <div class="form-list-item"><input type="number" placeholder="请输入价格" class="textInput" bindinput="model" data-model="allFree" value="{{allFree}}" /></div>
+                    <div class="form-list-item tar"><button class="redBtn" bindtap="changeAllFree" type="button">确定</button></div>                           
+                </div>
+                <!--<div class="form-list">
+                    <div class="form-list-item title long">默认包邮</div>
+                    <div class="form-list-item">
+                    	<input type="number" placeholder="满多少包邮，0或空不包邮" class="textInput" bindinput="model" data-model="form.freeShipping" value="{{form.freeShipping}}" />
+                    </div>                     
+                </div>-->
+            </div>
+            <div class="form-list p12">
+                <div class="form-list-item">地区</div>
+                <div class="form-list-item tac">按件运费</div> 
+                <div class="form-list-item tac">首重1kg内</div>
+                <div class="form-list-item tac">续重1kg起</div>
+                <div class="form-list-item tac">满包邮</div>                          
+            </div>
+        	<div class="bgfff">
+                <div class="form-list" wx:for="{{data}}">
+                    <div class="form-list-item p12">{{item.area}}</div>
+                    <div class="form-list-item tac" style="border:1px solid #eee;height:26px;" ><input type="number" placeholder="输入运费" data-index="{{index}}" class="textInput tac" value="{{item.price}}" bindchange="changeInput" data-type="price" /></div> 
+                    <div class="form-list-item tac ml5" style="border:1px solid #eee;height:26px;" ><input type="number" placeholder="输入运费" data-index="{{index}}" class="textInput tac" value="{{item.weight}}" bindchange="changeInput" data-type="weight" /></div>
+                    <div class="form-list-item tac ml5" style="border:1px solid #eee;height:26px;" ><input type="number" placeholder="输入运费" data-index="{{index}}" class="textInput tac" value="{{item.conweight}}" bindchange="changeInput" data-type="conweight" /></div>
+                    <div class="form-list-item tac ml5" style="border:1px solid #eee;height:26px;" ><input type="number" placeholder="输入包邮" data-index="{{index}}" class="textInput tac" value="{{item.free}}" bindchange="changeInput" data-type="free" /></div>                          
+                </div>
+            </div>
+            <div class="xzui-btn-app positionBottom">
+            	<div class="displayFlex">
+                	<div class="list" wx:if="{{form.id}}"><button type="button" bindtap="delThis" class="xzui-btn xzui-btn_b primary grayBtn" size="large">删除</button></div>
+                    <div class="list {{(form.id?' ml10':'')}}"><button type="button" bindtap="submit" class="xzui-btn xzui-btn_b primary" size="large">提交</button></div>
+                </div>
+           </div>
+        </div>
+        <div class="tac pd20 p14 c888 bgfff" wx:else>暂无权限</div>               
+    </div>
+    <nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

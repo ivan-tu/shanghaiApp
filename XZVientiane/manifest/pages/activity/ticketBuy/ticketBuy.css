@@ -1,0 +1,208 @@
+.activityTicket_box{
+	padding:20px 15px;
+}
+.activityTicket_list{
+	border-radius: 8px;
+	border: 1px solid #737373;
+	padding:10px;
+	color:#737373;
+	margin-top:10px;
+}
+.activityTicket_list.active{
+	border:1px solid #E53737;
+}
+.activityTicket_list.active .name{
+	color:#222;
+}
+.activityTicket_list.active .price{
+	color:#E53737;
+}
+.confirm_dialog.show .publicScroll_body{
+	bottom:220px !important;
+}
+/*数量控制quantityControl*/
+.quantityControl .minusControl{
+	display:inline-block;
+	width: 32px;
+	height: 30px;
+	border: 1px solid #C4D5ED;
+	text-align:center;
+	line-height:29px;
+	font-size:18px;
+	color:#A9B9D1;
+	vertical-align:middle;
+}
+.quantityControl .addControl{
+	display:inline-block;
+	width: 32px;
+	height: 30px;
+	border: 1px solid #C4D5ED;
+	text-align:center;
+	line-height:29px;
+	font-size:18px;
+	color:#A9B9D1;
+	vertical-align:middle;
+}
+.quantityControl .inputControl{
+	display:inline-block;
+	width: 36px;
+	height: 30px;
+	border: 1px solid #C4D5ED;
+	text-align:center;
+	margin:0 5px;
+	vertical-align:middle;
+}
+.quantityControl .inputControl .xzui-input{
+	height:100%;
+	vertical-align:top;
+	text-align:center;
+	width:100%;
+	padding:0;
+	margin:0;
+}
+/*foot*/
+.activityTicket_footBtn{
+	background: #FFFFFF;
+	box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.5);
+	position:fixed;
+	bottom:0;
+	left:0;
+	right:0;
+	z-index:5;
+	padding:10px 120px 20px 15px;
+}
+.activityTicket_footBtn .btnBox{
+	position:absolute;
+	right:15px;
+	top:10px;
+}
+.activityTicket_footBtn .textBox{
+	margin-top:8px;
+}
+.activityTicket_footBtn .toBuyBtn{
+	font-size:16px;
+	text-align:center;
+	color:#333;
+	background: #ffee16;
+	border-radius: 22px;
+	height:44px;
+	line-height:44px;
+	padding:0 60px;
+	margin:0;
+}
+.activityTicket_footBtn .toBuyBtn:hover{
+	color:#333;
+	background: #ffee16;
+}
+/*个人资料弹框*/
+.showEditInfoDialog .publicScroll_body{
+	left:0;
+	right:0;
+	background:#fff;
+	border-radius:10px 10px 0 0;
+}
+.showEditInfoDialog .publicScroll_main{
+	top:15px;
+	bottom:0px;
+}
+.showEditInfoDialog.show .publicScroll_body{
+	bottom:0;
+}
+.showEditInfoDialog .headPicBox{
+	width:60px;
+	height:60px;
+	margin:10px auto;
+	position:relative;
+}
+.showEditInfoDialog .picBox{
+	width:60px;
+	height:60px;
+	border-radius:50%;
+	overflow:hidden;
+	margin:auto;
+}
+.showEditInfoDialog .headPicBox .cameraIcon{
+	display: inline-block;
+	background: #339933;
+	position: absolute;
+	right: 0px;
+	bottom: 0px;
+	z-index: 2;
+	border-radius: 50%;
+	border: 1px solid #fff;
+	width: 18px;
+	height: 18px;
+	text-align: center;
+	line-height: 13px;
+	color: #fff;
+}
+.showEditInfoDialog .headPicBox .cameraIcon i{
+	font-size:10px;
+}
+.showEditInfoDialog .wxUploadBtn{
+	margin:0;
+	padding:0;
+	display:block;
+	background: #bbb;
+	border-radius:50%;
+	width:60px;
+	height:60px;
+	overflow:hidden;
+}
+.showEditInfoDialog .xzui-uploader__file{
+	margin:0;
+	background: #bbb;
+}
+.showEditInfoDialog .xzui-uploader{
+	display: inline-block;
+	vertical-align: middle;
+}
+.showEditInfoDialog .user-upload{
+    display: inline-block;
+    vertical-align: middle;
+}
+.showEditInfoDialog .inputBox{
+	height:35px;
+	border-radius:20px;
+	background:#F4F4F4;
+}
+.showEditInfoDialog .inputBox{
+	border:1px solid #eee;
+	border-radius:20px;
+	margin:15px 35px;
+	padding:0 10px;
+	background:#f9f9f9;
+}
+.showEditInfoDialog .textInput{
+	border:0 none;
+	height:35px;
+	color:#000;
+	vertical-align:top;
+	font-family:inherit;
+	font-size:14px;
+	background:transparent;
+	outline:none;
+	text-align:center;
+	width:100%;
+}
+.showEditInfoDialog input::-moz-placeholder{
+	color: #999;
+	opacity:1;
+}
+.showEditInfoDialog input:-ms-input-placeholder{
+	color: #999;
+	opacity:1;
+}
+.showEditInfoDialog input::-webkit-input-placeholder{
+	color: #999;
+	opacity:1;
+}
+.showEditInfoDialog  .toSubmitBtn{
+	background:#FEE10B;
+	border-radius:20px;
+	margin:15px 35px;
+	color:#000;
+	height:35px;
+	text-align:center;
+	line-height:35px;
+}

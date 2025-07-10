@@ -1,0 +1,292 @@
+<div class="app-wrapper {{(client=='web'?' hasPageFrame':'')}}">
+    <div class="app-main">
+    	<div class="markWraper"></div>
+        <div wx:if="{{showCollect}}" class="collectTip" bindtap="closeCollect">添加到我的小程序，打开更方便 <i class="xzicon-closecircleo"></i></div>
+        <!--
+    	<div class="homeIndex-header" wx:if="{{isUserLogin}}">
+        	<div class="picBox hasLoading" bindtap="toMyDetail"><image src="{{userInfo.headpic}}" mode="widthFix" /></div>
+            <div class="textBox">
+            	<div class="clearfix" style="overflow:hidden;">
+            		<div class="fl" bindtap="toMyDetail"><span class="userName">{{userInfo.username}}</span><span class="spanLevel" wx:if="{{userInfo.level>0}}">{{userInfo.levelName}}</span></div>
+                    <span class="fr searchBtn" bindtap="toPage" data-page="../../home/search/search"><i class="xzicon-search1"></i> 找人/找局</span>
+                </div>
+                <div class="rechargeBox mt5">
+                	<div class="rechargeList" bindtap="toLoginPage" data-page="../../finance/recharge/recharge"><image class="iconPic" src="{{staticPath}}iconPic/homeIndex-zuanshi.png" mode="widthFix" /><span class="number">{{userInfo.diamond}}</span><span class="addBtn">+</span></div>
+                    <div class="rechargeList" bindtap="toLoginPage" data-page="../../user/myWallte/myWallte"><image class="iconPic" src="{{staticPath}}iconPic/homeIndex-coin.png" mode="widthFix" /><span class="number">{{userInfo.wallte}}</span><span class="addBtn">+</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="homeIndex-header" wx:else>
+        	<div class="picBox hasLoading"><image src="https://statics.tuiya.cc/16873296996073902.jpg" mode="widthFix" /></div>
+            <div class="textBox">
+            	<div class="clearfix" style="overflow:hidden;">
+            		<div class="fl"><span class="userName">您还没有登录</span></div>
+                    <span class="fr searchBtn"><i class="xzicon-search1"></i> 找人/找局</span>
+                </div>
+                <div class="loginBtn mt5" bindtap="toLogin">请先登录</div>
+            </div>
+        </div>-->
+        <div class="homeIndex-header homeIndex-header2">
+            <picker mode="region" custom-item="" level="city" bindchange="bindRegionChange" value="{{region}}">
+                <div class="areaBox"><image style="width:22px;" src="https://statics.tuiya.cc/16996362572232707.png" mode="widthFix" /><span class="displayIB vMid ml5 p16 c666">{{areaname||'上海市'}}</span></div>
+            </picker>
+            <div class="textBox">
+            	<div class="clearfix" style="overflow:hidden;" bindtap="toPage" data-page="../../home/search/search">
+                    <span class="fr searchBtn"><i class="xzicon-search1"></i> 搜索俱乐部/活动</span>
+                </div>
+            </div>
+        </div>
+        <!--
+        <div class="homeIndex-menu">
+        	<div class="displayFlex">
+            	<div class="list" bindtap="toAddActivity">
+                	<div class="iconBox"><image class="w100" src="{{staticPath}}iconPic/homeIndex-activity.png" mode="widthFix" /></div>
+                    <p class="title">组局</p>
+   				</div>
+                <div class="list" bindtap="addMineWallte">
+                	<div class="iconBox"><image class="w100" src="{{staticPath}}iconPic/homeIndex-wallet.png" mode="widthFix" /></div>
+                    <p class="title">挖币</p>
+        		</div>
+                <div class="list" bindtap="toLoginPage" data-page="../../user/invite/invite">
+                	<div class="iconBox"><image class="w100" src="{{staticPath}}iconPic/homeIndex-invite.png" mode="widthFix" /></div>
+                    <p class="title">邀请</p>
+                </div>
+                <div class="list" bindtap="toLoginPage" data-page="../../user/upGrade/upGrade">
+                	<div class="iconBox"><image class="w100" src="{{staticPath}}iconPic/homeIndex-member.png" mode="widthFix" /></div>
+                    <p class="title">会员</p>
+       			</div>
+                <div class="list" bindtap="toLoginPage" data-page="../../user/myFriend/myFriend">
+                	<div class="iconBox"><image class="w100" src="{{staticPath}}iconPic/homeIndex-friend.png" mode="widthFix" /></div>
+                    <p class="title">好友</p>
+                </div>
+            </div>
+        </div>-->
+        <div class="home-index-banner hasLoading" wx:if="{{bannerList&&bannerList.length}}" style="height:{{bannerHeight}}px;">
+            <div class="home-index-bannerBox">
+                <swiper autoplay="true" indicator-dots="true" indicator-color="rgba(255,255,255,0.3)"
+                    indicator-active-color="rgba(255,255,255,0.8)" circular="true" style="height:{{bannerHeight}}px;"
+                    wx:if="{{client=='wx'}}">
+                    <block wx:for="{{bannerList}}">
+                        <swiper-item>
+                            <image style="border-radius:8px;" data-page="{{item.link}}" bindtap="toPage" src="{{item.pic}}" class="slide-image w100 h100" mode="heightFix" />
+                        </swiper-item>
+                    </block>
+                </swiper>
+                <div class="swiper-container" id="swiperBanner" wx:else>
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide" wx:for="{{bannerList}}">
+                            <image style="border-radius:8px;" data-page="{{item.link}}" bindtap="toPage" src="{{item.pic}}" class="slide-image w100 h100" mode="heightFix" />
+                        </div>
+                    </div>
+                    <div class="pagination"></div>
+                </div>
+            </div>
+        </div>
+        <!--俱乐部-->
+        <!--
+        <div class="searchCategory-box clearfix searchCategory-secretary hasMore">
+            <div class="searchCategory">
+                <div class="listBox">
+                    <span class="list {{(clubForm.recommend=='1'?' active':'')}}" data-type="clubForm" data-key="recommend" data-value="1" bindtap="screenAll">推荐俱乐部</span>
+                    <span class="list {{(clubForm.recommend==''&&clubForm.sort==''?' active':'')}}" data-type="clubForm" data-key="" data-value="" bindtap="screenAll">新开俱乐部</span>
+                    <span class="list {{(clubForm.sort=='active'?' active':'')}}" data-type="clubForm" data-key="sort" data-value="active" bindtap="screenAll">热门俱乐部</span>
+                </div>
+                <span class="moreBtn" bindtap="toPage" data-type="1" data-page="../../suboffice/index/index">更多 ></span>
+            </div>
+        </div>-->
+        <!--
+        <div class="pb10 plr15" wx:if="{{clubList&&clubList.length}}">
+        	<div class="homeIndex-listBox clearfix">
+            	<div class="listBox item3" wx:for="{{clubList}}">
+                    <navigator url="../../suboffice/clubDetail/clubDetail?id={{item.id}}" class="list clearfix">
+                        <div class="picBox hasLoading" style="width:{{clubPicWidth}}px;height:{{clubPicWidth}}px;">
+                            <image class="w100 h100" src="{{item.pic}}" mode="heightFix" />
+                        </div>
+                        <div class="textBox">
+                            <p class="c333 p14 textOver tac">{{item.name}}</p>
+                        </div>
+                    </navigator>
+                </div>
+            </div>
+        </div>
+        <view class="c999 tac ptb20" wx:else>暂无数据</view>-->
+        <!--友局-->
+        <div class="searchCategory-box clearfix homeIndex-searchCategory">
+            <div class="searchCategory">
+                <div class="listBox">
+                	<div class="list">
+                    	<span class="spanList {{(activityForm.recommend=='1'?' active':'')}}" data-type="activityForm" data-key="recommend" data-value="1" bindtap="screenAll">热门</span>
+                    </div>
+                    <div class="list">
+                    	<span class="spanList {{(activityForm.gettype=='my'?' active':'')}}" data-type="activityForm" data-key="gettype" data-value="my" bindtap="screenAll">我的</span>
+                    </div>
+                    <div class="list" wx:for="{{activityCategory}}">
+                    	<span class="spanList {{(activityForm.recommend!='1'&&activityForm.hot!='1'&&activityForm.category==item.name?' active':'')}}" data-type="activityForm" data-key="category" data-value="{{item.name}}" bindtap="screenAll">{{item.name}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pb10 plr15 mt10" wx:if="{{activityList&&activityList.length}}">
+        	<div class="homeIndex-activityBox clearfix">
+            	<div class="listBox" wx:for="{{activityList}}" data-id="{{item.id}}" bindtap="toActivityDetail">
+                	
+                	<p class="p18 bold">{{item.name}}</p>
+                    <div class="infoBox mt5">
+                    	<span wx:if="{{item.category}}" class="displayIB p12 vMid" style="color:#BFBF00;">#{{item.category}}</span>
+                        <span class="displayIB ml5 p14 vMid c666">{{item.begintime}} | {{item.area[1]}}-{{item.area[2]}}</span>
+                    </div>
+                    <div class="bannerPicBox mt10" style="width:{{activityPicWidth}}px;height:{{activityPicHeight}}px;">
+                    	<div class="gradient-overlay"></div>
+                    	<image class="w100 h100" src="{{item.pic}}" mode="widthFix" />
+                        <p class="describe" wx:if="{{item.describe}}">{{item.describe}}</p>
+                        <div class="joinBox">
+                        	<div class="clearfix positionR">
+                                <div class="masterPic" wx:if="{{item.clubData&&item.clubData.name}}">
+                                    <image class="round4 w100 h100" src="{{item.clubData.pic}}" mode="heightFix" />
+                                </div>
+                                <div class="masterPic" wx:else>
+                                    <image class="round4 w100 h100" src="{{item.masterpic}}" mode="heightFix" />
+                                </div>
+                                <div class="masterText">
+                                    <p wx:if="{{item.clubData&&item.clubData.name}}" class="cfff p12">{{item.clubData.name}}</p>
+                                    <p wx:else  class="cfff p12">{{item.mastername}}</p>
+                                    <div class="userBox mt5" wx:if="{{item.joinlist&&item.joinlist.count}}">
+                                        <div class="userList clearfix">
+                                            <div class="list" wx:for="{{item.joinlist.data}}" wx:for-item="g">
+                                                <div class="picBox hasLoading">
+                                                    <image class="round vTop" src="{{g.headpic}}" mode="widthFix" />
+                                                </div>
+                                            </div>
+                                            <p class="userNum">{{item.joinlist.count}}人已入局</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span wx:if="{{item.status==2}}" class="joinBtn disable">已结束</span>
+                                <span wx:else class="joinBtn">入局</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!--
+                    <div class="picsBox clearfix">
+                    	<div class="picsList" wx:for="{{item.pics}}" wx:for-item="g">
+                        	<div class="picsList_box" style="width:{{activityPicWidth}}px;height:{{activityPicHeight}}px;"><image class="w100 h100" src="{{g.src}}" mode="widthFix" /></div>
+                        </div>
+                    </div>-->
+                    <ad-custom wx:if="{{client=='wx'&&index>0&index%10==0}}" style="margin-top:10px;" unit-id="adunit-cc6a61319423a76a"></ad-custom>
+                </div>
+            </div>
+        </div>
+        <view class="loadingBox mlr15" hidden="{{!showLoading}}">
+			<div class="xzicon-loading"></div>
+			<div class="xzui-loadmore__tips">正在加载</div>
+		</view>
+		<view class="noData mlr15" hidden="{{!showNoData}}">暂无数据</view>
+        <!--友店-->
+        <!--
+        <div class="searchCategory-box clearfix searchCategory-secretary hasMore">
+            <div class="searchCategory">
+                <div class="listBox">
+                    <span class="list {{(storeForm.recommend=='1'?' active':'')}}" data-type="storeForm" data-key="recommend" data-value="1" bindtap="screenAll">推荐友店</span>
+                    <span class="list {{(storeForm.recommend!='1'&&storeForm.hot!='1'?' active':'')}}" data-type="storeForm" data-key="" data-value="" bindtap="screenAll">新店入驻</span>
+                    <span class="list {{(storeForm.hot=='1'?' active':'')}}" data-type="storeForm" data-key="hot" data-value="1" bindtap="screenAll">人气友店</span>
+                </div>
+                <span class="moreBtn" bindtap="toPage" data-type="2" data-page="../../store/index/index">更多 ></span>
+            </div>
+        </div>
+        <div class="pb10 plr15" wx:if="{{storeList&&storeList.length}}">
+        	<div class="homeIndex-listBox clearfix">
+            	<div class="listBox" wx:for="{{storeList}}">
+                    <navigator url="../../store/detail/detail?id={{item.id}}" class="list clearfix">
+                        <div class="picBox hasLoading" style="width:{{storePicWidth}}px;height:{{storePicWidth}}px;">
+                            <image class="w100 h100" src="{{item.pic}}" mode="heightFix" />
+                        </div>
+                        <div class="textBox">
+                            <p class="c333 p14 textOver">{{item.name}}</p>
+                            <p class="c666 p12 textOver">{{item.category}} | {{item.area[2]}}</p>
+                        </div>
+                    </navigator>
+                </div>
+            </div>
+        </div>
+        <view class="c999 tac ptb20" wx:else>暂无数据</view>-->
+        <div class="ptb10 tac" wx:if="{{client=='web'}}"><navigator class="c999 p12" url="https://beian.miit.gov.cn/">沪ICP备2023015155号-1</navigator></div>
+        <!--挖币-->
+        <div class="publicScroll_dialog ingotDialog {{(ingotDialog.show?' show':'')}}">
+            <div class="publicScroll_body" style="height:{{ingotDialog.height}}px;">
+            	<span class="closeBtn" bindtap="toHideDialog"><i class="xzicon-closecircleo"></i></span>
+                <div class="publicScroll_main">
+                	<div wx:if="{{ingotDialog.status==1}}">
+                        <p class="contentTitle">恭喜您挖到了</p>
+                        <p class="contentPrice">{{ingotDialog.total}}友币</p>
+                    </div>
+                    <div wx:else>
+                        <p class="contentTitle">距离下次挖币还有</p>
+                        <p class="contentPrice">{{ingotDialog.counDownTime}}</p>
+                    </div>
+                    <div class="contentTips">
+                        <p>每间隔1小时挖1次，随机得1-5友币</p>
+                        <p>连续5天挖币奖励50友币</p>
+                        <p>连续15天挖币奖励200友币</p>
+                        <p>连续30天挖币奖励500友币</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--关注公众号-->
+        <div class="showWxGZHDialog {{(showWxGZHDialog.show?' show':'')}} {{(client)}}">
+            <div class="textBox">关注“在局”公众号接收通知</div>
+            <div class="tar mt15">
+            	<span class="closeBtn" bindtap="toCloseWxGZH">关闭</span>
+                <span class="focusBtn" bindtap="toFocusWxGZH">去关注</span>
+            </div>
+        </div>
+        <div class="publicScroll_dialog showWxDialog {{(showWxDialog.show?' show':'')}}">
+            <div class="publicScroll_body" style="height:{{showWxDialog.height}}px;">
+                <div class="publicScroll_main">
+                	<p class="tac p16 c131">点击后长按二维码关注在局公众号</p>
+                    <div class="picBox"><image bindtap="viewThisImage" data-pic="{{showWxDialog.pic}}" src="{{showWxDialog.pic}}" mode="widthFix" /></div>
+                    <div class="toSubmitBtn" style="color:#999;" bindtap="toHideWxDialog">我已关注</div>
+                </div>
+            </div>
+        </div>
+        <!--个人资料弹框-->
+        <div class="publicScroll_dialog showEditInfoDialog {{(showEditInfoDialog.show?' show':'')}}">
+            <div class="publicScroll_body" style="height:{{showEditInfoDialog.height}}px;">
+                <div class="publicScroll_main">
+                	<p class="tac plr15 c131">请完善个人资料</p>
+                    <div class="headPicBox">
+                        <div class="picBox hasLoading" wx:if="{{client=='wx'}}">
+                            <button class="wxUploadBtn" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
+                                <image class="round" src="{{showEditInfoDialog.avatarUrl}}" style="width:100%;height:100%;" mode="widthFix" />
+                            </button> 
+                        </div>
+                        <div class="picBox hasLoading" wx:else><upload value="{{showEditInfoDialog.headpic}}" class="user-upload" width="60" height="60" bindchange="uploadSuccess" id="uploadPic"></upload></div>
+                        <span class="cameraIcon"><i class="xzicon-camera"></i></span>
+                    </div>
+                    <div class="inputBox" wx:if="{{showEditInfoDialog.show}}"><input type="nickname" class="textInput" bindinput="model" data-model="showEditInfoDialog.username" value="{{showEditInfoDialog.username}}" placeholder="请输入昵称" /></div>
+                    <div class="toSubmitBtn" bindtap="toConfirmEditInfoDialog">确定</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <newShare id="newShareCon"></newShare>
+</div>
+<div class="xzui-tabbar app-nav max480" wx:if="{{client=='web'}}">
+	<navigator url="../../home/index/index" class="xzui-tabbar_item index xzui-bar_item_on">
+        <span class="xzui-tabbar_label">在局</span>
+    </navigator>
+    <!--
+    <navigator url="../../store/index/index" class="xzui-tabbar_item store">
+        <span class="xzui-tabbar_label">在店</span>
+    </navigator>-->
+    <navigator url="../../suboffice/index/index" class="xzui-tabbar_item group">
+        <span class="xzui-tabbar_label">俱乐部</span>
+    </navigator>
+    <!--
+    <navigator url="../../goods/index/index" class="xzui-tabbar_item goods">
+        <span class="xzui-tabbar_label">商城</span>
+    </navigator>-->
+    <navigator url="../../user/my/my" class="xzui-tabbar_item my">
+        <span class="xzui-tabbar_label">我的</span>
+    </navigator>
+</div>

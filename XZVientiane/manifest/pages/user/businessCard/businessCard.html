@@ -1,0 +1,196 @@
+<div class="app-wrapper">
+    <div class="app-main positionBottom">
+    	<div class="markWraper"></div>
+        <div class="loadingBox mlr14" wx:if="{{ajaxLoading}}">
+            <div class="xzicon-loading"></div>
+        </div>
+        <div wx:else>
+            <div class="businessCard_header">
+                <div class="clearfix">
+                    <div class="picBox hasLoading"><image data-pic="{{data.headpic}}" bindtap="viewThisImage" src="{{data.headpic}}" mode="widthFix" /></div>
+                    <div class="textBox">
+                        <p class="c131 bold p18">{{data.username}}</p>
+                        <p class="c131 p14" wx:if="{{data.identity}}">{{data.identity}}</p>
+                    </div>
+                </div>
+                <span class="editBtn" wx:if="{{data.ismy==1}}" data-page="../../user/info/info" bindtap="toPage"><i class="xzicon-form"></i></span>
+                <p wx:if="{{data.desctext}}" class="p12 c666 mt15">{{data.desctext}}</p>
+            </div>
+            <div class="businessCard_friendBtn" wx:if="{{data.ismy!=1}}">
+            	<span bindtap="toSendGift" class="btnList">赠送礼物</span>
+                <span wx:if="{{!data.isfriend}}" bindtap="addFriend" class="btnList">加为好友</span>
+                <span wx:else bindtap="sendMsg" class="btnList">发送私信</span>
+            </div>
+            <div class="plr15 pb20">
+                <div class="businessCard_border pt15" wx:if="{{data.ismy==1||(data.tags&&data.tags.length)}}">
+                    <div class="businessCard_title clearfix">
+                        <p class="fl c131 bold p16" style="line-height:26px;">我的标签</p>
+                        <span class="fr editBtn" wx:if="{{data.ismy==1}}" data-page="../../user/businessCard_editTag/businessCard_editTag" bindtap="toPage"><i class="xzicon-form"></i></span>
+                    </div>
+                    <div class="businessCard_tagsBox" wx:if="{{data.tags&&data.tags.length}}">
+                        <span class="tagsList a1" wx:for="{{data.tags}}">{{item}}</span>
+                    </div>
+                    <p class="c999 tac ptb20" wx:else>还没有标签</p>
+                </div>
+                <div class="businessCard_border pt15 mt15" wx:if="{{data.giftLogs&&data.giftLogs.length}}">
+                    <div class="businessCard_title clearfix">
+                        <p class="c131 bold p16" style="line-height:26px;">收到的礼物</p>
+                    </div>
+                    <div class="businessCard_receiveGiftBox mt15" style="height: 70.5px;">
+                        <div class="scrollContainer" style="height: 90.5px;">
+                            <div class="businessCard_listBox clearfix">
+                                <div class="listBox" wx:for="{{data.giftLogs}}">
+                                    <div class="list displayB tac">
+                                        <div class="picBox" style="width: 50px; height: 50px;"><image mode="widthFix" src="{{item.pic}}" /></div>
+                                        <p>x{{item.num}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="businessCard_border pt15 mt15" wx:if="{{myClubList&&myClubList.length}}">
+                    <div class="businessCard_title clearfix">
+                        <p class="fl c131 bold p16" style="line-height:26px;">俱乐部</p>
+                    </div>
+                    <div class="businessCard_activityBox clearfix">
+                        <div class="listBox" wx:for="{{myClubList}}">
+                            <navigator url="../../suboffice/clubDetail/clubDetail?id={{item._id}}" class="businessCard_activityList">
+                                <div class="picBox hasLoading" style="width:{{clubPicWidth}}px;height:{{clubPicWidth}}px;"><image src="{{item.pic}}" mode="widthFix" /></div>
+                                <div class="textBox">
+                                    <p class="p14 c131 textOver">{{item.name}}</p>
+                                </div>
+                            </navigator>
+                        </div>
+                    </div>
+                </div>
+                <div class="businessCard_border pt15 mt15" wx:if="{{data.activityList&&data.activityList.length}}">
+                    <div class="businessCard_title clearfix">
+                        <p class="fl c131 bold p16" style="line-height:26px;">活动</p>
+                    </div>
+                    <div class="businessCard_activityBox clearfix">
+                        <div class="listBox" wx:for="{{data.activityList}}">
+                            <navigator url="../../activity/detail/detail?id={{item.activityid}}" class="businessCard_activityList">
+                                <div class="picBox hasLoading" style="width:{{activityPicW}}px;height:{{activityPicH}}px;"><image src="{{item.pic}}" mode="widthFix" /></div>
+                                <div class="textBox">
+                                    <p class="p14 c131 textOver">{{item.name}}</p>
+                                </div>
+                            </navigator>
+                        </div>
+                    </div>
+                </div>
+                <div class="businessCard_border pt15 mt15">
+                    <div class="businessCard_title clearfix">
+                        <p class="fl c131 bold p16" style="line-height:26px;">动态</p>
+                    </div>
+                    <div class="businessCard_dynamicBox" wx:if="{{dynamicList&&dynamicList.length}}">
+                        <div class="businessCard_dynamicList" wx:for="{{dynamicList}}">
+                            <p class="content" style="white-space:pre-wrap;">{{item.content}}</p>
+                            <div class="picContainer row1 clearfix mt10" wx:if="{{item.videos&&item.videos.file}}">
+                                <div class="picBox">
+                                    <div class="picList" style="width:170px;" data-index="{{index}}" catchtap="viewDynamicVideo" wx:if="{{client=='wx'}}">
+                                        <video data-index="{{index}}" bindfullscreenchange="fullScreenChange" id="myVideo_{{index}}" poster="{{item.videos.pic}}" src="{{item.videos.file}}" controls></video>
+                                    </div>
+                                    <div wx:else class="picList" style="width:170px;" data-index="{{index}}" catchtap="viewDynamicVideo">
+                                        <image mode="widthFix" src="{{item.videos.pic}}"/>
+                                        <image mode="widthFix" src="https://static.gedian.shop/16492353454154144.png" class="videoPlay_image" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="picContainer row1 clearfix mt10" wx:elif="{{item.pics&&item.pics.length==1}}">
+                                <div class="picBox" wx:for="{{item.pics}}" wx:for-item="g" wx:for-index="l">
+                                    <div class="picList hasLoading" style="width:170px;height:187px;" data-index="{{l}}" data-parent="{{index}}" bindtap="viewImage">
+                                        <image src="{{g.src}}" class="pic" mode="widthFix" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="picContainer row2 clearfix mt10" wx:elif="{{item.pics&&item.pics.length==2}}">
+                                <div class="picBox" wx:for="{{item.pics}}" wx:for-item="g" wx:for-index="l">
+                                    <div class="picList hasLoading" style="width:{{dynamicPicW_a}}px;height:{{dynamicPicH_a}}px;" data-index="{{l}}" data-parent="{{index}}" bindtap="viewImage">
+                                        <image src="{{g.src}}" class="pic" mode="widthFix" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="picContainer row3 clearfix mt10" wx:elif="{{item.pics&&item.pics.length>2}}">
+                                <div class="picBox" wx:for="{{item.pics}}" wx:for-item="g" wx:for-index="l">
+                                    <div class="picList hasLoading" style="width:{{dynamicPicW_b}}px;height:{{dynamicPicH_b}}px;" data-index="{{l}}" data-parent="{{index}}" bindtap="viewImage">
+                                        <image src="{{g.src}}" class="pic" mode="widthFix" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt10 clearfix" style="overflow:hidden;">
+                                <div class="fl addtime">{{item.createAt}}</div>
+                                <div class="fr p12 c888">
+                                    <span wx:if="{{data.ismy==1}}" class="displayIB mr10" catchtap="delThisDynamic" data-index="{{index}}"><i class="xzicon-delete p14"></i> 删除</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <view class="loadingBox mlr15" hidden="{{!showLoading}}">
+                    <div class="xzicon-loading"></div>
+                    <div class="xzui-loadmore__tips">正在加载</div>
+                </view>
+                <view class="noData mlr15" hidden="{{!showNoData}}">还没有动态</view>
+                <div class="xzui-btn-app positionBottom businessCard_sendGiftBtn" wx:if="{{data.ismy==1}}">
+                	<div class="displayFlex">
+                    	<div class="list">
+                            <button wx:if="{{client=='wx'}}" type="button" open-type="share" class="xzui-btn xzui-btn_b primary" size="large">分享名片</button>
+                            <button wx:else type="button" bindtap="toShare" class="xzui-btn xzui-btn_b primary" size="large">分享名片</button>
+                        </div>
+                        <div class="list ml10">
+                            <button type="button" bindtap="toPublishDybamic" class="xzui-btn xzui-btn_b primary" size="large">发布动态</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="xzui-btn-app positionBottom businessCard_sendGiftBtn" wx:elif="{{options.pocode}}">
+                    <div class="displayFlex">
+                        <div class="list">
+                            <button type="button" bindtap="toIndexMenu" data-page="../../home/index/index" class="xzui-btn xzui-btn_b primary" size="large">在局</button>
+                        </div>
+                        <div class="list ml10">
+                            <button type="button" bindtap="toIndexMenu" data-page="../../suboffice/index/index" class="xzui-btn xzui-btn_b primary" size="large">俱乐部</button>
+                        </div>
+                        <div class="list ml10">
+                            <button type="button" bindtap="toIndexMenu" data-page="../../user/my/my" class="xzui-btn xzui-btn_b primary" size="large">我的</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--礼物弹框-->
+        <div class="publicScroll_dialog {{(giftDialog.show?' show':'')}}">
+            <div class="publicScroll_body" style="height:{{giftDialog.height}}px;">
+                <div class="publicScroll_head clearfix tac bgfff">
+                    <span class="p16" style="color:#3B3B3B;">赠送礼物</span>
+                    <span class="fr p16" bindtap="toHideGiftDialog"><i class="xzicon-close"></i></span>
+                </div>
+                <div class="publicScroll_main pd15 bgfff">
+                    <div class="publicScroll_giftBox clearfix">
+                        <div class="publicScroll_giftList" wx:for="{{giftDialog.data}}">
+                            <div class="list {{(item.giftid==giftDialog.giftid?' active':'')}}" data-id="{{item.giftid}}" data-index="{{index}}" bindtap="selectThisGift">
+                                <div class="topContainer">
+                                    <div class="picBox" style="width:{{giftDialog.picWidth}}px;height:{{giftDialog.picWidth}}px;"><image src="{{item.pic}}" mode="widthFix" class="pic" /></div>
+                                    <div class="priceBox"><span class="priceText">{{item.diamond}}钻石</span></div>
+                                </div>
+                                <div class="quantityBox mt5" wx:if="{{item.selectCount>0}}">
+                                    <span class="reduceBtn" catchtap="changeGiftNum" data-type="reduce" data-index="{{index}}"><i class="xzicon-minus"></i></span>
+                                    <span class="numBtn">{{item.selectCount}}</span>
+                                    <span class="addBtn" catchtap="changeGiftNum" data-type="add"  data-index="{{index}}"><i class="xzicon-plus"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="publicScroll_footBtn">
+                    <div class="publicScroll_giftFoot">
+                        <div class="priceBox"><image class="priceIcon" src="https://statics.tuiya.cc/17364224209748687.png" mode="widthFix" /><span class="priceText">{{giftDialog.total}}</span><span class="displayIB vMid p12 ml5 c888">(余额：{{giftDialog.balance}})</span></div>
+                        <span class="toSubmitBtn" bindtap="toSubmitGift">赠送</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <newShare id="newShareCon"></newShare>
+    <videoPlay id="videoPlay"></videoPlay>
+</div>

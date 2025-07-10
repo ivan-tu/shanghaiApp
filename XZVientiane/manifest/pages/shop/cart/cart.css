@@ -1,0 +1,76 @@
+.shop-cart-listBox +.shop-cart-listBox{
+	border-top:5px solid #F5F5F5;
+}
+.shop-cart-storeInfo{
+	padding:10px 12px;
+	border-bottom:1px solid #eee;
+}
+.shop-cart-storeInfo .picBox{
+	float:left;
+	width:26px;
+	height:26px;
+	border-radius:4px;
+	overflow:hidden;
+}
+.shop-cart-storeInfo .textBox{
+	line-height:26px;
+	margin-left:36px;
+	font-size:14px;
+	color:#555;
+}
+
+.shop-noData-linkBtn{
+	background:#f90022;
+	color:#fff;
+	display:inline-block;
+	width:100px;
+	text-align:center;
+	height:35px;
+	line-height:35px;
+	margin:20px 10px;
+	border-radius:4px;
+}
+.shop-noData-linkBtn:hover{
+	color:#fff;
+}
+.shop-noData-icon{
+	font-size:80px;
+	line-height:80px;
+	color:#aaa;
+}
+/**
+	商品列表模板1
+ */
+.page-goods-template1-wrapper{
+	margin-left:-5px;
+	margin-top:-5px;
+}
+.page-goods-template1-list{
+	width:50%;
+	padding-left:5px;
+	padding-top:5px;
+	float:left;
+	box-sizing:border-box;
+}
+.page-goods-template1-box{
+	border-radius:5px;
+	background:#fff;
+	padding:5px;
+}
+.page-goods-template1-name{
+	margin-top:5px;
+	font-size:14px;
+	color:#333;
+	height:24px;
+	line-height:24px;
+}
+.client_cart_bottom.web{
+	/*bottom:52px !important;*/
+}
+.client_cart_appMain.positionBottom {
+	padding-bottom:105px !important;
+}
+.checkbox-title:after{
+	background-color: #ffee16 !important;
+	color:#333 !important;
+}

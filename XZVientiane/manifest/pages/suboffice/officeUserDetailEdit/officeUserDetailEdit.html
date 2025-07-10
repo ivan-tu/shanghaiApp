@@ -1,0 +1,35 @@
+<div class="app-wrapper">
+	<div class="app-main">
+        <div class="bgfff mt5">
+            <div class="form-list" wx:if="{{options.type=='editParent'}}">
+                <div class="form-list-item title c333 p14 long">账号</div>
+                <div class="form-list-item"><input class="textInput" placeholder="请输入" bindinput="model" type="tel" data-model="form.content" value="{{form.content}}" /></div>
+            </div>
+            <div class="form-list" wx:elif="{{options.type=='editTime'}}">
+                <div class="form-list-item title c333 p14 long">到期时间</div>
+                <div class="form-list-item">
+                    <picker mode="date" class="picker-region" bindchange="bindTimeChange" value="{{date}}"
+                        id="bindTimeChange">
+                        <view class="picker c333" wx:if="{{form.content}}">{{form.content}}</view>
+                        <view class="picker c999" wx:else>请选择</view>
+                    </picker>
+                </div>
+            </div>
+            <div class="form-list" wx:elif="{{options.type=='editSummary'}}">
+                <div class="form-list-item title c333 p14 long">备注</div>
+                <div class="form-list-item"><input class="textInput" placeholder="请输入" bindinput="model" type="text" data-model="form.content" value="{{form.content}}" /></div>
+            </div>
+            <div class="form-list" wx:elif="{{options.type=='editLevel'}}">
+                <div class="form-list-item title c333 p14 long">会员级别</div>
+                <div class="form-list-item">
+                	<div class="mb5" wx:for="{{levelList}}" bindtap="selectThis" data-type="content" data-value="{{item._id}}">
+                    	<span class="xzui-checkbox-new {{(form.content==item._id?' active':'')}}"></span><span class="xzui-checkboxTitle-new">{{item.name}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="xzui-btn-app">
+            <button type="button" bindtap="submit" class="xzui-btn xzui-btn_b primary yellow" size="large">提交</button>
+        </div>
+	</div>
+</div>

@@ -1,0 +1,303 @@
+<div class="app-wrapper" id="shop_{{shopInfo.shortid}}">
+	<div wx:if="{{isUserLogin}}" class="app-main positionBottom">
+        <div wx:if="{{myAuthority&&myAuthority.setting}}">
+              <!--模块定制-->
+              <view wx:if="{{showModel&&form.tempversion==1}}">
+              	<view class="markWraper"></view>
+                <div wx:if="{{modules.length}}">
+                    <div class="page-module page-module-{{item.type}} page-module-{{item.type}}_{{index}} {{client}}" wx:for="{{modules}}" style="{{item.settings.customCss||''}}">
+                        <div class="page-module-content {{(item.addClass||'')}}" style="{{item.style||''}}">
+                            <!--模块头部-->
+                            <div class="page-module-headTitle clearfix" wx:if="{{item.settings.moduleTitle||item.settings.moduleTips||item.settings.moduleMoreText}}">
+                            	<div class="page-module-headTitleIcon" wx:if="{{item.settings.moduleTitleIcon}}"><image src="{{item.settings.moduleTitleIcon}}" class="pic" mode="heightFix" /></div>
+                                <p class="fl title" style="color:{{item.settings.moduleTitleColor||''}}" wx:if="{{item.settings.moduleTitle||item.settings.moduleTips}}">{{item.settings.moduleTitle}}<span class="tips" style="color:{{item.settings.moduleTipsColor||''}}">{{item.settings.moduleTips}}</span></p>
+                                <navigator wx:if="{{item.settings.moduleMoreText}}" style="color:{{item.settings.moduleMoreTextColor||''}}" url="{{item.settings.moduleMoreLink||'javascript:;'}}" class="fr moreBtn">{{item.settings.moduleMoreText}}</navigator>
+                            </div>
+                          <!--信息-->
+                          <div wx:if="{{item.type=='info'}}">
+                          	  <!--
+                              <div wx:if="{{!item.settings.hideCover||item.settings.hideCover=='0'}}"><image src="{{shopInfo.cover}}" data-image="{{shopInfo.cover}}" bindtap="viewImage" mode="widthFix" style="width:100%" /></div>-->
+                              <div wx:if="{{!item.settings.hideStoreInfo||item.settings.hideStoreInfo=='0'}}" class="page-info-box clearfix">
+                                  <div class="picBox hasLoading round4"><image class="page-info-logo" src="{{shopInfo.logo}}" data-image="{{shopInfo.logo}}" bindtap="viewImage"  mode="widthFix"  /></div>
+                                  <div class="textBox">
+                                      <div class="title textOver">{{shopInfo.name}}</div>
+                                      <div class="content"><pre>{{shopInfo.content}}</pre></div>
+                                  </div>
+                                  <div class="btnBox">
+                                      <span class="listBtn shareBtn" wx:if="{{!item.settings.hideStoreShare||item.settings.hideStoreShare=='0'}}"><i class="xzicon-sharealt"></i> 分享</span>
+                                      <span class="listBtn serviceBtn" wx:if="{{item.settings.showStoreService==1}}"><i class="xzicon-customerservice"></i> 客服</span>
+                                  </div>
+                              </div>	
+                          </div>
+                          <!--文字-->
+                          <div wx:if="{{item.type=='text'}}">
+                           <pre class="page-text-content" style="{{item.fontStyle||''}}" >{{item.content}}</pre>
+                          </div>
+                          <!--图片-->
+                          <div wx:if="{{item.type=='image'}}">
+                              <!--自定义板式-->
+                          	  <div wx:if="{{item.showType==4}}" class="page-image-template4-wrapper" style="margin-top:-{{item.picsColumnMargintb}};">
+                                  <div class="page-image-template4-list" wx:for="{{item.picsList}}" wx:for-item="item1" wx:for-index="index1" style="margin-top:{{item.picsColumnMargintb}};margin-left:-{{item.picsColumnMarginlr}};">
+                                      <div wx:for="{{item1.data}}" wx:for-item="item2" class="listBox" style="margin-left:{{item.picsColumnMarginlr}};">
+                                          <div class="list">
+                                              <div class="picBox">
+                                                  <image src="{{item2.file}}" mode="widthFix"  data-index="{{index}}"  data-index1="{{index1}}" bindtap="tapImage" />
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                              <!--左多右一板式-->
+                              <div wx:elif="{{item.showType==3}}" class="clearfix page-image-template3-wrapper">
+                                  <div class="right" style="width:{{item.imageRightWidth}}" wx:if="{{item.content&&item.content.length}}"><image src="{{item.content[0].file}}" mode="widthFix" data-index="{{index}}"  data-index1="0" bindtap="tapImage" /></div>
+                                  <div class="left" style="margin-right:{{item.picsColumnMarginlr}};margin-top:-{{item.picsColumnMargintb}};">
+                                      <div style="margin-top:{{item.picsColumnMargintb}};" wx:for="{{item.content}}" wx:if="{{index1>0}}" wx:for-item="item1" wx:for-index="index1">
+                                          <image src="{{item1.file}}" mode="widthFix"  data-index="{{index}}"  data-index1="{{index1}}" bindtap="tapImage" />
+                                      </div>
+                                  </div>
+                              </div>
+                              <!--左一右多板式-->
+                              <div wx:elif="{{item.showType==2}}" class="clearfix page-image-template2-wrapper">
+                                  <div class="left" style="width:{{item.imageLeftWidth}}" wx:if="{{item.content&&item.content.length}}"><image src="{{item.content[0].file}}" mode="widthFix"  data-index="{{index}}"  data-index1="0" bindtap="tapImage" /></div>
+                                  <div class="right" style="margin-left:{{item.picsColumnMarginlr}};margin-top:-{{item.picsColumnMargintb}};">
+                                      <div style="margin-top:{{item.picsColumnMargintb}};" wx:for="{{item.content}}" wx:if="{{index1>0}}" wx:for-item="item1" wx:for-index="index1">
+                                          <image src="{{item1.file}}" mode="widthFix"  data-index="{{index}}"  data-index1="{{index1}}" bindtap="tapImage" />
+                                      </div>
+                                  </div>
+                              </div>
+                              <!--滑动板式-->
+                              <div wx:elif="{{item.showType==1}}" class="page-image-template1-wrapper">
+                                 <image wx:if="{{item.content&&item.content.length}}" src="{{item.content[0].file}}" mode="widthFix" data-index="{{index}}"  data-index1="0" bindtap="tapImage" />
+                              </div>
+                              <!--默认板式-->
+                              <div wx:else class="clearfix" style="{{item.imageMarginStyle}}">
+                                <div wx:for="{{item.content}}" wx:for-item="item1" wx:for-index="index1" class="page-image-{{item.settings.column}} {{item.imageMarginClass}}">
+                                  <image src="{{item1.file}}" mode="widthFix"  data-index="{{index}}"  data-index1="{{index1}}" bindtap="tapImage" />
+                                </div>
+                              </div>
+                          </div>
+                          <!--视频-->
+                          <div wx:if="{{item.type=='video'}}">
+                              <video src="{{item.file}}"  poster="{{item.posterFile}}" style="width:{{item.width}}px"  controls>
+                              </video>
+                          </div>
+                          <!--搜索框-->
+                          <div class="page-searchBar" wx:if="{{item.type=='search'}}">
+                            <i class="xzicon-search1 page-searchBar-icon"></i>
+                            <form bindsubmit="searchSubmit" data-index="{{index}}">
+                            <input type="text" placeholder="{{item.content}}" data-index="{{index}}" bindinput="searchInput" class="xzui-input page-searchBar-input"></input>
+                            </form>
+                          </div>
+                          <!--文章-->
+                          <div wx:if="{{item.type=='article'}}">
+                            <div wx:if="{{item.content.length}}">
+                            <!--文章版式1-->
+                             <div class="page-article-template1-wrapper" wx:if="{{item.settings.template==1}}">
+                                 <div class="page-article-template1-list hasBorder bottom"  wx:for="{{item.content}}">
+                                    <navigator url="../../shop/articleDetail/articleDetail?id={{item.id}}" target="_blank" >
+                                        <div class="textOver">{{item.title}}</div>
+                                    </navigator>
+                                </div>
+                              </div>
+                               <!--文章版式2-->
+                              <div class="page-article-template2-wrapper" wx:elif="{{item.settings.template==2}}">
+                               <div class="page-article-template2-list"  wx:for="{{item.content}}">
+                                      <navigator url="../../shop/articleDetail/articleDetail?id={{item.id}}" target="_blank" class="xzui-media-box xzui-media-box_appmsg pd0">
+                                          <div class="xzui-media-box__hd xzui-media-box__hd_in-appmsg hasLoading" style="width:80px;height:80px;">
+                                              <image src="{{item.pic}}"  mode="widthFix" />
+                                          </div>
+                                          <div class="xzui-media-box__bd xzui-media-box__bd_in-appmsg">
+                                              <div class="xzui-media-box__title">{{item.title}}</div>
+                                              <div class="xzui-media-box__desc">
+                                                {{item.viewnum}}阅读
+                                              </div>
+                                          </div>
+                                      </navigator>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="c999 tac pd15" wx:else>暂无数据</div>
+                          </div>
+                          <!--商品-->
+                          <div wx:if="{{item.type=='goods'}}">
+                              <div class="clearfix" wx:if="{{item.content.length}}">
+                               <!--商品模板1开始-->
+                                <div class="page-goods-template1-wrapper" wx:if="{{item.settings.template==1}}">
+                                    <div class="page-goods-template1-list" wx:for="{{item.content}}">
+                                    <div class="page-goods-template1-box">
+                                      <navigator url="../../shop/goodsDetail/goodsDetail?id={{item.shortid}}" target="_blank">
+                                        <div class="round4"><image src="{{item.pic}}" class="round4"  mode="widthFix" /></div>
+                                        <div class="page-goods-template1-name textOver">
+                                            {{item.name}}
+                                        </div>
+                                        <div class="cRed">
+                                        <span class="p12">¥</span>{{item.realPrice}} <span class="p12 c999 textDL" wx:if="{{item.oldPrice}}">¥</span><span class="c999 textDL" wx:if="{{item.oldPrice}}">{{item.oldPrice}}</span>
+                                        </div>
+                                      </navigator>
+                                      </div>
+                                    </div>
+                                 </div>
+                               <!--商品模板1结束--> 
+                               <!--商品模板2开始-->
+                                <div class="page-goods-template2-wrapper" wx:if="{{item.settings.template==2}}">
+                                    <div class="page-goods-template2-list clearfix" wx:for="{{item.content}}">
+                                        <div class="page-goods-template2-box">
+                                          <navigator url="../../shop/goodsDetail/goodsDetail?id={{item.shortid}}" target="_blank" class="xzui-media-box xzui-media-box_appmsg pd0">
+                                            <div class="xzui-media-box__hd xzui-media-box__hd_in-appmsg hasLoading round4" style="width:100px;height:100px;">
+                                                <image src="{{item.pic}}" class="round4"  mode="widthFix" />
+                                            </div>
+                                            <div class="xzui-media-box__bd xzui-media-box__bd_in-appmsg">
+                                                <div class="xzui-media-box__title">{{item.name}}</div>
+                                                <div class="xzui-media-box__desc">
+                                                <div class="cRed">
+                                                  <span class="p12">¥</span>{{item.realPrice}} <span class="p12 c999 textDL" wx:if="{{item.oldPrice}}">¥</span><span class="c999 textDL" wx:if="{{item.oldPrice}}">{{item.oldPrice}}</span>
+                                                  </div>
+                                                  <div class="p12 mt5" wx:if="{{item.discountText}}">{{item.discountText}}</div>
+                                                </div>
+                                            </div>
+                                        </navigator>
+                                        </div>
+                                    </div>
+                                </div>
+                               <!--商品模板2结束-->
+                               <!--商品模板3滑动板式开始-->
+                               <div class="page-goods-template3-wrapper" wx:if="{{item.settings.template==3}}">
+                                   <div class="page-goods-template3-box">
+                                       <div class="goods_box tac">
+                                           <navigator url="../../shop/goodsDetail/goodsDetail?id={{item.shortid}}" target="_blank"
+											class="goods_list" wx:for="{{item.content}}">
+                                               <div class="picBox hasLoading">
+                                                   <image class="round4" src="{{item.pic_3}}" mode="widthFix" />
+                                               </div>
+                                               <p class="goodsName textOver">{{item.name}}</p>
+                                               <p class="goodsPrice"><span class="mark">¥</span>{{item.price}}</p>
+                                               <div class="buyBtn">立即购买</div>
+                                           </navigator>
+                                       </div>
+                                   </div>
+                               </div>    
+                               <!--商品模板3滑动板式结束--> 
+                               <!--商品模板4滑动板式开始-->
+                               <div class="page-goods-template4-wrapper" wx:if="{{item.settings.template==4}}">
+                                   <div class="page-goods-template4-box">
+                                       <div class="goods_box tac">
+                                           <navigator url="../../shop/goodsDetail/goodsDetail?id={{item.shortid}}" target="_blank"
+											class="goods_list" wx:for="{{item.content}}">
+                                               <div class="picBox hasLoading">
+                                                   <image class="round4" src="{{item.pic_4}}" mode="widthFix" />
+                                               </div>
+                                               <div class="oldPrice" wx:if="{{item.oldPrice}}">¥{{item.oldPrice}}</div>
+                                               <div class="price {{(item.oldPrice?'':' active')}}">¥{{item.price}} <i class="xzicon-rightcircleo"></i></div>
+                                           </navigator>
+                                       </div>
+                                   </div>
+                               </div>    
+                               <!--商品模板4板式结束-->
+                               <!--商品模板5板式开始-->
+                               <div class="page-goods-template5-wrapper" wx:if="{{item.settings.template==5}}">
+                                   <div class="page-goods-template5-box">
+                                       <navigator url="../../shop/goodsDetail/goodsDetail?id={{item.shortid}}" target="_blank"
+                                        class="goods_list clearfix" wx:for="{{item.content}}">
+                                           <div class="picBox hasLoading">
+                                               <image class="round4" src="{{item.pic_5}}" mode="widthFix" />
+                                           </div>
+                                           <div class="textBox">
+                                               <p class="goodsName">{{item.name}}</p>
+                                               <div class="goodsTags" wx:if="{{item.tags&&item.tags.length}}">
+                                                   <span class="tagsList" wx:for="{{item.tags}}" wx:for-item="g">{{g}}</span>
+                                               </div>
+                                           </div>
+                                           <div class="btnBox clearfix">
+                                               <div class="price"><span class="mark">¥</span>{{item.price}}</div>
+                                               <span class="buyBtn">立即购买</span>
+                                           </div>
+                                       </navigator>
+                                   </div>
+                               </div>    
+                               <!--商品模板5板式结束--> 
+                               <!--商品模板6板式开始-->
+                               <div class="page-goods-template6-wrapper" wx:if="{{item.settings.template==6}}">
+                                   <div class="page-goods-template6-box">
+                                       <navigator url="../../shop/goodsDetail/goodsDetail?id={{item.shortid}}" target="_blank"
+                                        class="goods_list clearfix" wx:for="{{item.content}}">
+                                           <div class="listBox">
+                                               <div class="picBox hasLoading">
+                                                   <image class="round4" src="{{item.pic_5}}" mode="widthFix" />
+                                               </div>
+                                               <div class="textBox">
+                                                   <p class="goodsName">{{item.name}}</p>
+                                               </div>
+                                               <div class="btnBox clearfix">
+                                                   <div class="price"><span class="mark">¥</span>{{item.price}}</div>
+                                                   <span class="buyBtn">立即购买</span>
+                                               </div>
+                                           </div>
+                                       </navigator>
+                                   </div>
+                               </div>    
+                               <!--商品模板6板式结束-->   
+                            </div>
+                            <div class="c999 tac pd15" wx:else>暂无商品</div>
+                          </div>
+                          <!--客服按钮-->
+                          <div wx:if="{{item.type=='service'}}">
+                              <div class="page-service-btn {{(editType==2? 'active':'')}}"><image class="page-service-pic" src="{{item.settings.serviceBtnPic}}" mode="widthFix" /></div>
+                          </div>
+                          <!--选项卡-->
+                          <div wx:if="{{item.type=='tab'}}">
+                              <div class="page-tab-box">
+                                  <div class="searchCategory-box clearfix">
+                                      <div class="searchCategory">
+                                          <div class="listBox">
+                                              <span class="list" wx:for="{{item.settings.tabOptions}}" wx:for-index="l" wx:for-item="g">{{g}}</span>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                        </div>
+                        <view class="displayFlex  hasBorder top pt10 mt10" hidden="{{editType!=1}}">
+                            <button class="list editBtn p14 c666" data-index="{{index}}" bindtap="setModule">
+                              <i class="xzicon-setting"></i> 设置</button>
+                            <button class="list editBtn p14 c666" data-index="{{index}}" bindtap="editModule">
+                              <i class="xzicon-form"></i> 编辑</button>
+                            <button class="list editBtn p14 c666" data-index="{{index}}" bindtap="delModule">
+                              <i class="xzicon-delete"></i> 删除</button>
+                            <button class="list editBtn p14 c666" data-index="{{index}}" bindtap="sortModule">
+                              <i class="xzicon-totop"></i> 排序</button>
+                          </view>
+                          <button class="manage-settingPage-addModelBtn" bindtap="addModule" data-index="{{index}}" type="button" hidden="{{editType!=1}}">+ 添加模块</button>
+                  </div>
+              </div>
+              <view class="" wx:else>
+                <button class="manage-settingPage-addModelBtn bgfff" bindtap="addModule" data-order="0" type="button" hidden="{{editType!=1}}">+ 添加模块</button>
+              </view>
+              <view class="xz-bottomBox-fixed max480 hasBorder top">
+              <radio-group bindchange="selecteditType" class="displayFlex">
+                <div class="list tac">
+                  <div class="displayIB">
+                    <label class="radio">
+                      <radio class="radio-input radio-cells_input" name="editType" checked="{{editType==1}}" value="1"></radio>
+                      <span class="radio-title radio-cells_title p14 {{(editType!=1?' c666':'')}}">编辑模式</span>
+                    </label>
+                  </div>
+                </div>
+                <div class="list tac">
+                  <div class="displayIB ml5 list tac">
+                    <label class="radio">
+                      <radio class="radio-input radio-cells_input" name="editType" checked="{{editType==2}}" value="2"></radio>
+                      <span class="radio-title radio-cells_title p14 {{(editType!=2?' c666':'')}}">预览模式</span>
+                    </label>
+                  </div>
+                </div>
+                <div class="list tac">
+                    <span class="manage-settingPage-publishBtn" bindtap="publish">发布</span>
+                </div>
+              </radio-group>
+             </view>
+            </view>
+        </div>
+        <div class="tac pd20 p14 c888 bgfff" wx:else>暂无权限</div> 
+  	</div>
+  <nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

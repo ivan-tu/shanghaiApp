@@ -1,0 +1,96 @@
+<div class="app-wrapper">
+    <div class="app-main positionBottom">
+    	<div class="markWraper"></div>
+        <div class="loadingBox mlr15" wx:if="{{ajaxLoading}}">
+			<div class="xzicon-loading"></div>
+		</div>
+		<div class="noData mlr15" wx:elif="{{ajaxNoData}}">暂无管理权限</div>
+        <div wx:else>
+            <div class="officeManage-header">
+                <div class="clearfix positionR">
+                    <div class="picBox hasLoading">
+                        <image src="{{data.pic}}" class="round4" mode="widthFix" />
+                    </div>
+                    <div class="textBox">
+                        <p class="p16 c333 textOver">{{data.name}}</p>
+                        <p class="p14 c888 mt5" wx:if="{{data.area.length==2}}">{{data.area[1]}}</p>
+                        <p class="p14 c888 mt5" wx:else>{{data.area[1]}}-{{data.area[2]}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="officeManage-infoBox mt10 clearfix">
+                <navigator url="../../suboffice/officeFianceRecord/officeFianceRecord?clubid={{options.id}}" class="list">
+                	<p class="number">{{data.total||0}}</p>
+                    <p class="title">收入</p>
+                </navigator>
+                <navigator url="../../suboffice/officeDiamondRecord/officeDiamondRecord?clubid={{options.id}}" class="list">
+                	<p class="number">{{data.diamond||0}}</p>
+                    <p class="title">钻石</p>
+                </navigator>
+                <navigator url="../../suboffice/officeUserList/officeUserList?clubid={{options.id}}" class="list">
+                	<p class="number">{{data.rechargeMember||0}}</p>
+                    <p class="title">会员</p>
+                </navigator>
+                <navigator url="../../activity/list/list?clubid={{options.id}}&from=manage" class="list">
+                	<p class="number">{{data.activity||0}}</p>
+                    <p class="title">活动</p>
+                </navigator>
+            </div>
+            <div>
+            	<navigator wx:if="{{data.shopid}}" url="../../manage/index/index?id={{data.shopid}}" class="form-list">
+                	<div class="form-list-item rightIcon">店铺管理</div>
+                </navigator>
+                <navigator wx:elif="{{options.type!='manage'}}" url="../../manage/addShop/addShop?clubid={{options.id}}" class="form-list">
+                	<div class="form-list-item rightIcon">开通店铺</div>
+                </navigator>
+            	<navigator wx:if="{{options.type!='manage'}}" url="../../suboffice/officeFiance/officeFiance?id={{options.id}}" class="form-list">
+                	<div class="form-list-item rightIcon">财务管理</div>
+                </navigator>
+                <navigator url="../../suboffice/clubAdd/clubAdd?id={{options.id}}" class="form-list">
+                	<div class="form-list-item rightIcon">编辑资料</div>
+                </navigator>
+                <navigator wx:if="{{options.type!='manage'}}" url="../../suboffice/clubLevelManage/clubLevelManage?clubid={{options.id}}" class="form-list">
+                	<div class="form-list-item rightIcon">会员等级</div>
+                </navigator>
+                <navigator url="../../suboffice/clubPrivacySet/clubPrivacySet?clubid={{options.id}}" class="form-list">
+                	<div class="form-list-item rightIcon">隐私设置</div>
+                </navigator>
+                <navigator url="../../suboffice/clubSharePicSet/clubSharePicSet?clubid={{options.id}}" class="form-list">
+                	<div class="form-list-item rightIcon">邀请海报</div>
+                </navigator>
+                <navigator url="../../activity/typeManage/typeManage?clubid={{options.id}}" class="form-list">
+                	<div class="form-list-item rightIcon">活动系列管理</div>
+                </navigator>
+                <navigator wx:if="{{options.type!='manage'}}" url="../../suboffice/setManager/setManager?clubid={{options.id}}" class="form-list">
+                	<div class="form-list-item rightIcon">管理员设置</div>
+                </navigator>
+                <navigator wx:if="{{options.type!='manage'}}" url="../../suboffice/setSigner/setSigner?clubid={{options.id}}" class="form-list">
+                	<div class="form-list-item rightIcon">签到员设置</div>
+                </navigator>
+            </div>
+            <!--
+            <div class="xzui-btn-app positionBottom">
+            	<div class="displayFlex">
+                	<div class="list">
+                    	<button type="button" bindtap="toActivity" class="xzui-btn xzui-btn_b primary yellow" size="large">组局</button>
+                    </div>
+                    <div class="list ml10" wx:if="{{userInfo.level==4}}">
+                    	<button type="button" bindtap="toFreeInvite" class="xzui-btn xzui-btn_b primary yellow" size="large">邀请免费加入</button>
+                    </div>
+                </div>
+            </div>-->
+            <!--生成邀请链接成功-->
+            <div class="publicScroll_dialog inviteDialog {{(inviteDialog.show?' show':'')}}">
+                <div class="publicScroll_body" style="height:{{inviteDialog.height}}px;">
+                    <div class="publicScroll_main">
+                    	<p class="tac p16 c131">专属链接已生成</p>
+                        <p class="p14 c333 plr15 mt10">通过此链接即可免费加入俱乐部，一个链接只能邀请一位好友。</p>
+                        <button wx:if="{{client=='wx'}}" open-type="share" class="toSubmitBtn">立即分享</button>
+                    	<button wx:else bindtap="toShare" class="toSubmitBtn">立即分享</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <newShare id="newShareCon"></newShare>
+</div>

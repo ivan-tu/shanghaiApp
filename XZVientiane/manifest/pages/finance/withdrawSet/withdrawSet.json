@@ -1,0 +1,9 @@
+{
+    "enablePullDownRefresh": false,
+    "usingComponents":{
+		"picker": "/components/web/picker/picker",
+		"upload": "/components/common/upload/upload",
+		"nologin": "/components/common/nologin/nologin"
+    },
+    "navigationBarTitleText": "提现方式设置"
+}

@@ -1,0 +1,8 @@
+{
+    "usingComponents":
+    {
+		"upload": "/components/common/upload/upload",
+		"nologin": "/components/common/nologin/nologin"
+    },
+    "navigationBarTitleText": "购买门票"
+}

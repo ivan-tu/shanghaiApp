@@ -1,0 +1,21 @@
+<div class="app-wrapper">
+	<div wx:if="{{isUserLogin}}" class="app-main" style="background-color:#e5e5e5;">
+		<div class="p14 c888 bgfff">
+			<div class="mailList-userList_bd">
+				<div class="items" wx:for="{{list}}" wx:for-index="index" wx:for-index="parent" wx:for-item="items">
+					<div class="items-title" id="index{{index}}">{{index}}</div>
+					<div class="items-cantent">
+						<div class="items-li" wx:for="{{items}}" wx:for-item="child" bindtap="setCompany"
+							data-name="{{child.name}}" data-type="{{child.type}}">
+							<p class="name">{{child.name}}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="mailList-userList_option" wx:if="{{client=='web'&&listNav.length}}">
+				<div><navigator class="userLisr-index" wx:for="{{listNav}}" style="line-height:{{height}}px" url="#index{{item}}">{{item}}</navigator></div>
+			</div>
+		</div>
+	</div>
+	<nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

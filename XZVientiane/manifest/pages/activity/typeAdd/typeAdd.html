@@ -1,0 +1,26 @@
+<div class="app-wrapper">
+	<div wx:if="{{isUserLogin}}" class="app-main">
+        <div class="bgfff">
+            <div class="form-list">
+                <div class="form-list-item title c333 p14">封面</div>
+                <div class="form-list-item">
+                    <upload value="{{form.pic}}" class="user-upload" width="65" height="65" bindchange="uploadPic" id="uploadPic">
+                    </upload>
+                </div>
+            </div>
+            <div class="form-list">
+                <div class="form-list-item title c333 p14">名称</div>
+                <div class="form-list-item"><input class="textInput" placeholder="请输入名称" bindinput="model" type="text" data-model="form.name" value="{{form.name}}" /></div>
+            </div>
+            <div class="form-list">
+                <div class="form-list-item title c333 p14">简介</div>
+                <div class="form-list-item"><textarea maxlength="-1" class="textarea" placeholder="请输入简介" bindinput="model"
+                        data-model="form.content" value="{{form.content}}"></textarea></div>
+            </div>
+        </div>
+        <div class="xzui-btn-app">
+            <button type="button" bindtap="submit" class="xzui-btn xzui-btn_b primary yellow" size="large">提交</button>
+        </div>
+	</div>
+	<nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

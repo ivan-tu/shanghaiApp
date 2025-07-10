@@ -1,0 +1,22 @@
+<div class="app-wrapper">
+	<div wx:if="{{isUserLogin}}" class="app-main mb20">
+		<div>
+			<div class="form-title">共{{data.length||0}}个签到员</div>
+			<div class="form-list bgfff" wx:for="{{data}}">
+				<div class="form-list-item">{{item}}</div>
+				<div class="form-list-item-title long"><span class="redBtn" data-index="{{index}}" bindtap="signinDel">删除</span></div>
+			</div>
+			<view class="noData mlr14" hidden="{{!showNoData}}">暂无签到员</view>
+            <div class="form-list bgfff mt10">
+				<div class="form-list-item"><input class="textInput" bindinput="model" data-model="account" value="{{account}}"
+						placeholder="请输入签到员账号" /></div>
+				<div class="form-list-item-title long"><span class="redBtn" bindtap="addSignin">添加</span></div>
+			</div>
+		</div>
+		<view class="loadingBox mlr14" hidden="{{!showLoading}}">
+			<div class="xzicon-loading"></div>
+			<div class="xzui-loadmore__tips">正在加载</div>
+		</view>
+	</div>
+	<nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

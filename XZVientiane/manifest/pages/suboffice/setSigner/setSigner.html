@@ -1,0 +1,45 @@
+<div class="app-wrapper">
+    <div class="app-main">
+        <div class="form-title clearfix">
+        	<div class="fl">
+            	<p style="line-height:40px;">签到员可以处理扫码签到</p>
+            </div>
+            <span class="fr table_addBtn" bindtap="addThis">添加签到员</span>
+        </div>
+        <div class="bgfff manageSetWaiter-box" wx:if="{{data&&data.length}}">
+            <div class="manageSetWaiter-list clearfix" wx:for="{{data}}" data-index="{{index}}" bindtap="toMore">
+                <div class="picBox hasLoading"><image src="{{item.headpic}}" mode="widthFix" class="round" /></div>
+                <div class="textBox">
+                	<p class="c131 p14 textOver" style="line-height:35px;">{{item.username}}</p>
+                </div>
+            </div>
+        </div>
+        <view class="loadingBox mlr15" hidden="{{!showLoading}}">
+			<div class="xzicon-loading"></div>
+			<div class="xzui-loadmore__tips">正在加载</div>
+		</view>
+		<view class="noData mlr15" hidden="{{!showNoData}}">暂无数据</view>
+        <!--添加弹框-->
+        <div class="publicScroll_dialog {{(sendForm.show?' show':'')}}">
+            <view class="publicScroll_body" style="height:180px;">
+                <div class="publicScroll_head clearfix tac bgfff">
+                    <span class="p16" style="color:#3B3B3B;">添加签到员</span>
+                    <span class="fr p16" bindtap="toHideDialog"><i class="xzicon-close"></i></span>
+                </div>
+                <div class="publicScroll_main">
+                    <view class="bgfff">
+                        <div class="form-list">
+                            <div class="form-list-item title long">账号</div>
+                            <div class="form-list-item">
+                                <input placeholder="请输入" bindinput="model" data-model="sendForm.account" value="{{sendForm.account}}" class="textInput" type="tel" />
+                            </div>
+                        </div>
+                    </view>
+                </div>
+                <view class="publicScroll_footBtn">
+                    <button class="submitBtn" type="button" bindtap="toConfirmDialog">确定</button>
+                </view>
+            </view>
+        </div>
+    </div>
+</div>

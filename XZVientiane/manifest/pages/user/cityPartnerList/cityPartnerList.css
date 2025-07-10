@@ -1,0 +1,88 @@
+.myIdentity_list{
+	padding:15px;
+	background:#fff;
+}
+.myIdentity_list +.myIdentity_list{
+	margin-top:10px;
+}
+.myIdentity_list .title{
+	font-size:16px;
+}
+.myIdentity_list .submitBtn{
+	display:inline-block;
+	color:#000;
+	height:36px;
+	line-height:36px;
+	text-align:center;
+	border-radius:25px;
+	width:100px;
+	background:#FEE10B;
+}
+.myIdentity_list .price{
+	font-size:20px;
+}
+/*弹框*/
+.addDialog .publicScroll_body{
+	background:#fff;
+}
+.addDialog .publicScroll_main{
+	top:20px;
+	bottom:15px;
+}
+.addDialog .publicScroll_body{
+	margin-bottom:-200px;
+}
+.addDialog.show .publicScroll_body{
+	bottom: 50%;
+}
+.addDialog .closeBtn{
+	position:absolute;
+	right:15px;
+	top:5px;
+	font-size:24px;
+}
+.addDialog .submitBtn,
+.addDialog .submitBtn:hover{
+	background:#FEE10B;
+	color:#000;
+}
+.addDialog .selectNumBox{
+	justify-content:space-around;
+}
+.addDialog .selectNumBox .list{
+	background:#eee;
+	color:#888;
+	width:24px;
+	height:24px;
+	line-height:24px;
+	font-size:12px;
+	text-align:center;
+	border-radius:50%;
+}
+.addDialog .contentBox{
+	padding:0 15px;
+}
+.addDialog .selectNumBox{
+	margin-left:-10px;
+	text-align:center;
+}
+.addDialog .selectNumBox .listBox{
+	width:20%;
+	float:left;
+}
+.addDialog .selectNumBox .listBox .list{
+	display:inline-block;
+	color:#fff;
+	background:#ccc;
+	border-radius:50%;
+	width:42px;
+	height:42px;
+	line-height:42px;
+	margin:15px 0 0 10px;
+	text-align:center;
+	font-size:22px;
+}
+.addDialog .selectNumBox .listBox .list.active{
+	background:#FEE10B;
+	color:#000;
+}

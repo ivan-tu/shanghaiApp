@@ -1,0 +1,18 @@
+.typeManage-list{
+	background:#fff;
+}
+.typeManage-list +.typeManage-list{
+	margin-top:10px;
+}
+.typeManage-list .picBox{
+	width:60px;
+	height:60px;
+	float:left;
+	background:#EEEEEE;
+}
+.typeManage-list .textBox{
+	margin-left:70px;
+}
+.typeManage-list .displayFlex .list +.list{
+	border-left:1px solid #eee;
+}

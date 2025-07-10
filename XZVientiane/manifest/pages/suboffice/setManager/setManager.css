@@ -1,0 +1,26 @@
+.table_addBtn{
+	display:inline-block;
+	padding:6px 10px;
+	color:#333;
+	background:#FEE10B;
+	border-radius:4px;
+	font-size:14px;
+	margin-top:5px;
+}
+.manageSetWaiter-list{
+	padding:10px 15px;
+	position:relative;
+}
+.manageSetWaiter-list + .manageSetWaiter-list{
+	border-top:1px solid #F9F9F9;
+}
+.manageSetWaiter-list .picBox{
+	float:left;
+	border-radius:50%;
+	overflow:hidden;
+	width:35px;
+	height:35px;
+}
+.manageSetWaiter-list .textBox{
+	margin-left:45px;
+}

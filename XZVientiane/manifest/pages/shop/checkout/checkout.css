@@ -1,0 +1,122 @@
+.shop-cart-listBox{
+	border-top:5px solid #F5F5F5;
+}
+.shop-cart-storeInfo{
+	padding:10px 12px;
+	border-bottom:1px solid #eee;
+}
+.shop-cart-storeInfo .picBox{
+	float:left;
+	width:26px;
+	height:26px;
+	border-radius:4px;
+	overflow:hidden;
+}
+.shop-cart-storeInfo .textBox{
+	line-height:26px;
+	margin-left:36px;
+	font-size:14px;
+	color:#555;
+}
+
+
+
+.shop-checkout-address{
+	position:relative;
+}
+.shop-checkout-address-middle{
+	margin:0 20px;
+}
+.shop-checkout-address-left{
+	position:absolute;
+	top:50%;
+	bottom:0;
+	left:0;
+	margin-top:-8px;
+}
+.shop-checkout-address-right{
+	position:absolute;
+	right:0;
+	top:50%;
+	bottom:0;
+	margin-top:-8px;
+}
+.shop-noData-linkBtn{
+	background:#f90022;
+	color:#fff;
+	display:inline-block;
+	width:100px;
+	text-align:center;
+	height:35px;
+	line-height:35px;
+	margin:20px 10px;
+	border-radius:4px;
+}
+.shop-noData-linkBtn:hover{
+	color:#fff;
+}
+.shop-noData-icon{
+	font-size:80px;
+	line-height:80px;
+	color:#aaa;
+}
+.shop-ok-icon{
+	font-size:80px;
+	line-height:80px;
+	color:#f90022;
+}
+
+/**
+	商品列表模板1
+ */
+.page-goods-template1-wrapper{
+	margin-left:-5px;
+	margin-top:-5px;
+}
+.page-goods-template1-list{
+	width:50%;
+	padding-left:5px;
+	padding-top:5px;
+	float:left;
+	box-sizing:border-box;
+}
+.page-goods-template1-box{
+	border-radius:5px;
+	background:#fff;
+	padding:5px;
+}
+.page-goods-template1-name{
+	margin-top:5px;
+	font-size:14px;
+	color:#333;
+	height:24px;
+	line-height:24px;
+}
+
+
+/*新增*/
+.shop-checkout-takeaddress + .shop-checkout-takeaddress{
+	border-top:1px solid #eee;
+}
+.shop-checkout-takeaddress .shop-checkout-address-left{
+	left:10px;
+	margin-top:-9px;
+}
+.checkout-radio-new .xzui-radio-new{
+	width:18px;
+	height:18px;
+	line-height:17px;
+}
+.checkout-radio-new .xzui-radioTitle-new{
+	font-size:13px;
+}
+.shop-checkout-takeaddress.hide{
+	display:none;
+}
+.shop-checkout-priceSelect .picker{
+	height:auto !important;
+	line-height:24px !important;
+}
+.shop-checkout-priceSelect .picker-region:after{
+	display:none !important;
+}

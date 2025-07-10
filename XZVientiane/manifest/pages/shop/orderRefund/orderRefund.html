@@ -1,0 +1,84 @@
+<div class="app-wrapper">
+    <div class="app-main positionBottom">
+        <div class="form-title">商品</div>
+        <div class="bgfff">
+            <div class="shop-orderDetail-goodsList  hasBorder bottom left" wx:for="{{data.goodslist}}" >
+                <div class="displayB clearfix positionR plr14 pt15 pb15">
+                    <div class="goodsPic hasLoading"><image class="pic" src="{{item.pic}}"  mode="widthFix" /></div>
+                    <div class="goodsSet tar">
+                        <div class="cRed p16">¥{{item.totalPrice}}</div>
+                        <div class="c666 p14 mt30">x{{item.quantity}}</div>
+                    </div>
+                    <div class="goodsText">
+                        <div class="c333 p16 textOver">{{item.goodsname}}</div>
+                        <div class="c666 p12 textLine mt15">{{item.format}}</div>
+                        <div class="c666 p12 textLine">¥{{item.price}}</div>
+                    </div>     
+                </div>
+            </div>
+        </div>
+        <div class="bgfff mt12" wx:if="{{data.goodsTotalPrice}}">
+            <div class="form-list">
+                <div class="form-list-item c666 p14">商品金额</div>
+                <div class="form-list-item c666 p14 tar">{{data.goodsTotalPrice-(data.discountTotalprice||0)}}</div>
+            </div>
+            <div class="form-list">
+                <div class="form-list-item c666 p14">运费</div>
+                <div class="form-list-item c666 p14 tar">{{data.freightTotal}}</div>
+            </div>
+            <div class="form-list" wx:if="{{data.revisionTotal}}">
+                <div class="form-list-item c666 p14">调整金额</div>
+                <div class="form-list-item c666 p14 tar">{{data.revisionTotal}}</div>
+			</div>
+            <div class="form-list">
+                <div class="form-list-item c666 p14">总金额</div>
+                <div class="form-list-item c666 p14 tar">¥{{data.totalPrice}}</div>
+            </div>
+            <div class="form-list">
+            	<div class="form-list-item c666 p14">可退金额</div>
+                <div class="form-list-item cRed p16 tar">¥{{data.returnTotal}}</div>
+            </div>
+        </div>
+        <div class="form-title" wx:if="{{returnAddress.address}}">退货地址</div>
+        <div class="form-list bgfff" wx:if="{{returnAddress.address}}">
+            <div class="form-list-item c666 p12">
+                <div>姓名：{{returnAddress.name}}</div>
+                <div>电话：{{returnAddress.mobile}}</div>
+                <div>地址：{{returnAddress.areaname}} {{returnAddress.address}}</div>
+                <div>备注：{{returnAddress.content}}</div>
+            </div>
+        </div>
+        <div class="mt12 bgfff">
+        	<div class="form-title">退款原因</div>
+            <div class="form-list">
+                <div class="form-list-item"><textarea class="xzui-textarea c666 p14" placeholder="请输入退款原因" bindinput="model" style="height:90px;" value="{{form.content}}" data-model="form.content"></textarea></div>
+            </div>
+            <div class="form-list">
+            	<div class="form-list-item c666 p14">上传凭证（最多三张）</div>
+            </div>
+            <div class="album-container">
+                <div class="album-list clearfix">
+                    <div class="album-item" wx:for="{{files}}">
+                        <div class="album-bar" style="height:{{imageHeight}}px;">
+                            <image src="{{item.src}}" mode="widthFix" />
+                            <view class="xzui-uploader_progress" hidden="{{item.hidePercent}}">
+                                <span class="xzui-uploader_progressText">{{(item.percent||0)}}%</span>
+                            </view>
+                            <button type="button" class="album-del" bindtap="del" data-index="{{index}}"><i class="xzicon-minuscircle"></i></button>
+                        </div>
+                    </div>
+                    <div class="album-item">
+                        <div class="album-bar">
+                            <view class="xzui-uploader__input-box" style="height:{{imageHeight}}px;width:{{imageWidth}}px;" catchtap="upload"></view>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <view class="xzui-btn-app positionBottom displayFlex">
+            <div class="list ml10">
+        		<button type="button" class="xzui-btn xzui-btn_b primary" size="large" bindtap="confirmOrder">提交申请</button>
+            </div>
+        </view>
+    </div>
+</div>

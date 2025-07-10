@@ -1,0 +1,426 @@
+/*搜索框*/
+.homeIndex-searchContainer{
+	padding:15px;
+}
+.homeIndex-search {
+	background: #fff;
+	border-radius: 4px;
+	position: relative;
+	display: block;
+	padding: 4px 15px 4px 35px;
+}
+.homeIndex-search .xzicon-search1 {
+	position: absolute;
+	left: 13px;
+	top: 8px;
+	color: #7A797B;
+	font-size: 14px;
+}
+.homeIndex-search .searchInput {
+	width: 100%;
+	border: 0 none;
+	background-color: #fff;
+	font-size: 14px;
+	color: #7A797B;
+	height: 26px;
+	line-height: 26px;
+	border-radius: 20px;
+	outline: 0;
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+}
+.homeIndex-search .closeBtn {
+	position: absolute;
+	z-index: 2;
+	right: 10px;
+	font-size: 14px;
+	line-height: 14px;
+	top: 50%;
+	margin-top: -7px;
+	color: #888;
+}
+/*marketCenter_divTitle*/
+.marketCenter_divTitle .text {
+	font-size: 16px;
+	color: #000;
+	position: relative;
+	font-weight: 600;
+}
+.marketCenter_divTitle .tips {
+	font-size: 12px;
+	display: inline-block;
+	color: #666;
+	margin-left: 5px;
+	font-weight: 400;
+	padding: 0px 3px;
+	border-radius: 2px;
+}
+.marketCenter_divTitle .moreBtn{
+	font-size: 12px;
+	color: #666;
+	margin-top: 4px;
+}
+/*banner*/
+.homeIndex-banner{
+	background:#fff;
+	overflow:hidden;
+}
+.homeIndex-bannerBox{
+	overflow:hidden;
+}
+.homeIndex-banner .pagination{
+    position: absolute;
+    bottom: 0 !important;
+    z-index: 2;
+    text-align: center;
+}
+.homeIndex-banner .pagination .swiper-pagination-bullet{
+	opacity: 0.6;
+	background:#fff;
+	width:5px;
+	height:3px;
+	border-radius:4px;
+	transition:all 0.2s;
+}
+.homeIndex-banner .pagination .swiper-pagination-bullet-active{
+	opacity: 1;
+	width:8px;
+	background: #fff;
+	border-radius:4px;
+}
+.homeIndex-picList +.homeIndex-picList{
+	margin-top:15px;
+}
+/*menu*/
+.marketCenter-menuContainer{
+}
+.marketCenter-menuContainer .swiper-container{
+	padding-bottom:20px;
+}
+.marketCenter-menu{
+	margin-left:-10px;
+}
+.marketCenter-menuBox{
+	width:25%;
+	float:left;
+	text-align:center;
+}
+.marketCenter-menuList{
+	display:block;
+	margin:10px 0 0 10px;
+}
+.marketCenter-menuList .picBox{
+	width:46px;
+	height:46px;
+	margin:auto;
+}
+.marketCenter-menuList .title{
+	color:#595959;
+	font-size:13px;
+	margin-top:2px;
+}
+.marketCenter-menuContainer .pagination{
+    position: absolute;
+    bottom: 0 !important;
+    z-index: 2;
+    text-align: center;
+}
+.marketCenter-menuContainer .pagination .swiper-pagination-bullet{
+	opacity: 0.6;
+	background:#ccc;
+	width:5px;
+	height:3px;
+	border-radius:4px;
+	transition:all 0.2s;
+}
+.marketCenter-menuContainer .pagination .swiper-pagination-bullet-active{
+	opacity: 1;
+	width:8px;
+	background: #ccc;
+	border-radius:4px;
+}
+
+.marketCenter_divTitle .text {
+	font-size: 16px;
+	color: #000;
+	position: relative;
+	font-weight: 600;
+}
+.marketCenter_divTitle .tips {
+	font-size: 12px;
+	display: inline-block;
+	color: #666;
+	margin-left: 5px;
+	font-weight: 400;
+	padding: 0px 3px;
+	border-radius: 2px;
+}
+.marketCenter_divTitle .moreBtn{
+	font-size: 12px;
+	color: #666;
+	margin-top: 4px;
+}
+/*pics*/
+.marketCenter-picsBox{
+}
+.marketCenter-picsList{
+	display:flex;
+}
+.marketCenter-picsList + .marketCenter-picsList{
+	margin-top:8px;
+}
+.marketCenter-picsList .listBox{
+	display:block;
+	width:100%;
+}
+.marketCenter-picsList .listBox + .listBox{
+	margin-left:8px;
+}
+
+
+
+/*marketCenter_title*/
+
+.marketCenter_title .text{
+	font-size:16px;
+	color:#000;
+	position:relative;
+	font-weight:600;
+}
+.marketCenter_title .tips{
+	font-size:12px;
+	display:inline-block;
+	color:#fff;
+	margin-left:5px;
+	font-weight:400;
+	padding:0px 3px;
+	border-radius:2px;
+}
+.marketCenter_title .tips.day{
+	background:#FF0B48;
+}
+.marketCenter_title .tips.week{
+	background:#FE4200;
+}
+.marketCenter_title .tips.month{
+	background:#D50A1C;
+}
+.marketCenter_title .moreBtn{
+	font-size:12px;
+	color:#000;
+	line-height:27px;
+}
+/*接龙购*/
+.solitaireHome-goodsBox .goodsList{
+	display:block;
+	padding:5px;
+	background:#fff;
+	box-shadow: 0 0 7px 0 rgba(220,220,220,0.50);
+	border-radius: 8px;
+}
+.solitaireHome-goodsBox .goodsList + .goodsList{
+	margin-top:15px;
+}
+.solitaireHome-goodsBox .shopInfo{
+	position:relative;
+	padding:15px;
+}
+.solitaireHome-goodsBox .shopInfo .picBox{
+	position:absolute;
+	left:15px;
+	top:50%;
+	margin-top:-18px;
+	width:36px;
+	height:36px;
+	border-radius:4px;
+	overflow:hidden;
+}
+.solitaireHome-goodsBox .shopInfo .textBox{
+	color:#232323;
+	font-size:16px;
+	padding:0 80px 0 45px;
+}
+.solitaireHome-goodsBox .shopInfo .statusImage{
+	position:absolute;
+	right:-10px;
+	top:50%;
+	margin-top:-16px;
+	display:inline-block;
+	width:100px;
+}
+.solitaireHome-goodsBox .shopInfo .picBox .pic{
+	border-radius:4px;
+}
+.solitaireHome-goodsBox .goodsInfo{
+	padding:10px 15px;
+}
+.solitaireHome-goodsBox .goodsInfo .picBox{
+	float:left;
+	width:135px;
+	height:135px;
+}
+.solitaireHome-goodsBox .goodsInfo .textBox{
+	margin-left:145px;
+}
+.solitaireHome-goodsBox .goodsInfo .textBox .name{
+	color:#232323;
+	font-size:16px;
+	line-height:22px;
+	height:44px;
+	overflow:hidden;
+}
+.solitaireHome-goodsBox .goodsInfo .textBox .price{
+	color:#232323;
+	font-size:13px;
+	line-height:30px;
+}
+.solitaireHome-goodsBox .goodsInfo .textBox .number{
+	color:#FF2A06;
+	font-size:16px;
+}
+.solitaireHome-goodsBox .goodsInfo .textBox .unit{
+	color:#FF2A06;
+	font-size:12px;
+}
+.solitaireHome-goodsBox .goodsInfo .oldPrice{
+	color:#B8B8B8;
+	font-size:13px;
+	text-decoration:line-through;
+	line-height:30px;
+}
+.solitaireHome-goodsBox .moreInfo{
+	position:relative;
+	padding:15px 110px 15px 15px;
+}
+.solitaireHome-goodsBox .moreInfo .userList{
+	margin-left:-5px;
+}
+.solitaireHome-goodsBox .moreInfo .userList{
+	margin-left:-5px;
+}
+.solitaireHome-goodsBox .moreInfo .list{
+	float:left;
+	width:16.666666%;
+}
+.solitaireHome-goodsBox .moreInfo .list .picBox{
+	margin-left:5px;
+	border-radius:50%;
+	overflow:hidden;
+}
+.solitaireHome-goodsBox .moreInfo .rightNum{
+	position:absolute;
+	right:10px;
+	top:50%;
+	margin-top:-15px;
+	color:#232323;
+	line-height:25px;
+	font-size:16px;
+}
+.solitaireHome-goodsBox .progressBox{
+	position:relative;
+	margin:0 15px;
+	background:#eee;
+	border-radius:20px;
+	height:10px;
+}
+.solitaireHome-goodsBox .progressBox .progressSpan{
+	position:absolute;
+	left:0;
+	background:#FF0E00;
+	border-radius:20px;
+	top:0;
+	height:100%;
+}
+.solitaireHome-goodsBox .endInfo{
+	padding:15px 15px 10px 15px;
+}
+.solitaireHome-goodsBox .endInfo .left{
+	float:left;
+	font-size: 12px;
+	color: #050505;
+}
+.solitaireHome-goodsBox .endInfo .left .price{
+	color:#FF2A06;
+	font-size:18px;
+}
+.solitaireHome-goodsBox .endInfo .right{
+	float:right;
+	display:block;
+	width:140px;
+	padding:3px 0;
+	background: #E10004;
+	border-radius:24px;
+	font-size:12px;
+	color:#fff;
+	letter-spacing: 1px;
+	text-align:center;
+}
+.solitaireHome-goodsBox .endInfo .numList{
+	display: inline-block;
+	background: #fff;
+	border-radius: 2px;
+	text-align: center;
+	font-size: 12px;
+	color: #FF2A06;
+	width: 18px;
+	padding-left:1px;
+	height: 16px;
+	vertical-align: middle;
+	margin: 0 2px;
+	line-height: 16px;
+}
+
+/*nav*/
+.xzui-tabbar:before{
+  border-top: 0px none;
+}
+.xzui-tabbar_item.index{
+    background-image: url(/static/images/nav-index.png);
+}
+.xzui-bar_item_on.index,
+.xzui-tabbar_item.index:hover{
+    background-image: url(/static/images/nav-indexActive.png);
+}
+.xzui-tabbar_item.activity{
+    background-image: url(/static/images/nav-activity.png);
+}
+.xzui-bar_item_on.activity,
+.xzui-tabbar_item.activity:hover{
+    background-image: url(/static/images/nav-activityActive.png);
+}
+.xzui-tabbar_item.store{
+    background-image: url(/static/images/nav-store.png);
+}
+.xzui-bar_item_on.store,
+.xzui-tabbar_item.store:hover{
+    background-image: url(/static/images/nav-storeActive.png);
+}
+.xzui-tabbar_item.group{
+    background-image: url(/static/images/nav-group.png);
+}
+.xzui-bar_item_on.group,
+.xzui-tabbar_item.group:hover{
+    background-image: url(/static/images/nav-groupActive.png);
+}
+.xzui-tabbar_item.message{
+    background-image: url(/static/images/nav-message.png);
+}
+.xzui-bar_item_on.message,
+.xzui-tabbar_item.message:hover{
+    background-image: url(/static/images/nav-messageActive.png);
+}
+.xzui-tabbar_item.goods{
+    background-image: url(/static/images/nav-goods.png);
+}
+.xzui-bar_item_on.goods,
+.xzui-tabbar_item.goods:hover{
+    background-image: url(/static/images/nav-goodsActive.png);
+}
+.xzui-tabbar_item.my{
+    background-image: url(/static/images/nav-my.png);
+}
+.xzui-bar_item_on.my,
+.xzui-tabbar_item.my:hover{
+    background-image: url(/static/images/nav-myActive.png);
+}

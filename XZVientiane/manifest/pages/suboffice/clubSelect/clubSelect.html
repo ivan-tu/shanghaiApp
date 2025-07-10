@@ -1,0 +1,27 @@
+<div class="app-wrapper">
+    <div class="app-main pb20">
+    	<search-bar label="搜索名称" placeholder="搜索名称" keyword="{{form.keyword}}" bindinput="changeKeyword" bindclose="closeKeyword"></search-bar>
+        <div class="form-title clearfix">
+        	<p class="fl" style="line-height:35px;">共 {{count}} 条</p>
+            <span class="fr yellowBtn" bindtap="submit" style="padding:5px 24px;font-size:14px;">确定</span>
+        </div>
+        <view class="ptb20 tac c999" wx:if="{{!form.keyword}}">请输入搜索关键词</view>
+        <div class="clubSelect_box" wx:elif="{{data&&data.length}}">
+            <div class="clubSelect_list" wx:for="{{data}}">
+            	<div class="clearfix" data-index="{{index}}" bindtap="selectThis">
+                    <span class="xzui-checkbox-new {{(item.active==1?' active':'')}}"></span>
+                    <div class="picBox hasLoading"><image src="{{item.pic}}" mode="widthFix" class="w100 h100" /></div>
+                    <div class="textBox">
+                        <p class="p14 c333 textOver">{{item.name}}</p>
+                        <p class="p12 c666 mt5 textOver">{{item.slogan}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <view class="loadingBox mlr14" hidden="{{!showLoading}}">
+            <div class="xzicon-loading"></div>
+            <div class="xzui-loadmore__tips">正在加载</div>
+        </view>
+        <view class="noData mlr14" hidden="{{!showNoData}}">暂无数据</view>
+    </div>
+</div>

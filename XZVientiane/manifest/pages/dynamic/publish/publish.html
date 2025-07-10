@@ -1,0 +1,91 @@
+<div class="app-wrapper">
+	<div class="app-main positionBottom">
+    	<div class="markWraper"></div>
+        <view class="loadingBox mlr14" wx:if="{{ajaxLoading}}">
+            <div class="xzicon-loading"></div>
+        </view>
+		<div class="dynamicPublish_main" wx:elif="{{dynamicPublishWX==1}}">
+			<div class="form-list" style="padding:30px 15px;">
+            	<div class="form-list-item"><textarea style="color:#333;height:240px;" class="textarea" placeholder="快来说点什么吧" bindinput="model" data-model="form.content" value="{{form.content}}" maxlength="-1"></textarea></div>
+            </div>
+            <div class="plr15">
+            	<!--图片-->
+                <div class="dynamicPublish_picBox clearfix" wx:if="{{files&&files.length}}">
+                	<div class="goodsAddPic-container goodsAddPic-container-picture">
+                    	<div class="goodsAddPic-list clearfix">
+                        	<div class="goodsAddPic-item goodsAddPic-item-row5" wx:for="{{files}}">
+                            	<div class="goodsAddPic-bar" style="height:{{imageWidth}}px;" bindtap="showMenu" data-index="{{index}}">
+                                	<image src="{{item.src}}" mode="widthFix" />
+                                    <view class="xzui-uploader_progress" hidden="{{item.hidePercent}}">
+                                    	<span class="xzui-uploader_progressText">{{(item.percent||0)}}%</span>
+                                    </view>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+  				</div>
+                <!--视频-->
+                <div class="bgfff mt10" wx:if="{{videoData&&videoData.uploadStatus}}">
+                   <div class="xzui-uploader user-upload" wx:if="{{!videoData.file}}">
+                    	<div class="xzui-uploader__one">
+                        	<div class="xzui-uploader__files">
+                            	<div class="xzui-uploader__file xzui-uploader__one" style="width: 100%;height:auto;min-height:100px;">
+                                	<div class="xzui-uploader_progress">
+                                    	<span class="xzui-uploader_progressText">上传中...  已上传{{videoData.percent}}%</span>
+                                    </div>
+                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="xzui-uploader user-upload" wx:elif="{{videoData.error}}">
+                    	<div class="xzui-uploader__one">
+                        	<div class="xzui-uploader__files">
+                            	<div class="xzui-uploader__file xzui-uploader__one" style="width: 100%;height:auto;min-height:100px;">
+                                	<div class="xzui-uploader_progress">
+                                    	<span class="xzui-uploader_progressText">视频转码中...，请稍后</span>
+                                    </div>
+                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="xzui-uploader user-upload" wx:elif="{{videoData.file}}" bindtap="menuVideo">
+                    	<div class="xzui-uploader__one">
+                        	<div class="xzui-uploader__files">
+                            	<div class="xzui-uploader__file xzui-uploader__one" style="width: 100%;height:auto;min-height:100px;">
+                                	<image id="videoPic" mode="widthFix" src="{{videoData.poster}}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt10">
+                    <navigator url="javascript:;" bindtap="uploadPics" class="dynamicPublish_uploadBtn">
+                    	<div><image class="pic" src="https://statics.tuiya.cc/17327802577687847.png" mode="widthFix" /></div>
+                        <p class="dynamicPublish_uploadText">相册</p>
+                    </navigator>
+                    <navigator url="javascript:;" bindtap="uploadVideo" class="dynamicPublish_uploadBtn ml15">
+                    	<div><image class="pic" src="https://statics.tuiya.cc/17327802611862102.png" mode="widthFix" /></div>
+                        <p><span class="dynamicPublish_uploadText">视频</span></p>
+                    </navigator>
+                </div>
+                <div class="mt20" wx:if="{{clubList&&clubList.length}}">
+                	<p class="c666 p14">同步到俱乐部</p>
+                    <div class="mt10">
+                    	<div class="publish_clubList" wx:for="{{clubList}}" data-index="{{index}}" bindtap="selectThis"><span class="xzui-checkbox-new {{(item.active==1?' active':'')}}"></span><span class="xzui-checkboxTitle-new">{{item.name}}</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="xzui-btn-app positionBottom dynamicPublish_btnBox">
+                <button type="button" bindtap="submit" class="xzui-btn xzui-btn_b primary" size="large">
+                	<span class="displayIB vMid ml5">发布</span>
+                </button>
+            </div>
+		</div>
+        <div wx:else>
+        	<p class="tac p16" style="margin-top:60px;">非常抱歉，您暂时无权访问</p>
+            <div class="xzui-btn-app publish_footBtn">
+                <button type="button" bindtap="reback" class="xzui-btn xzui-btn_b primary" size="large">返回</button>
+            </div>
+        </div>
+	</div>
+</div>

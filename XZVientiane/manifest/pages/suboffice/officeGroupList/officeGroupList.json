@@ -1,0 +1,6 @@
+{
+	"usingComponents":{
+		"search-bar": "/components/common/search-bar/search-bar"
+	},
+    "navigationBarTitleText": "俱乐部列表"
+}

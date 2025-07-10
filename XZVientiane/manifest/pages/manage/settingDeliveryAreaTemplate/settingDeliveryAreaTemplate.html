@@ -1,0 +1,22 @@
+<div class="app-wrapper">
+    <div wx:if="{{isUserLogin}}" class="app-main mb20">
+        <div wx:if="{{myAuthority&&(myAuthority.setting||myAuthority.goods)}}">
+        	<div class="bgfff" wx:if="{{data&&data.length}}">
+                <div wx:for="{{data}}" bindtap="selectThis" data-id="{{item.id}}" data-name="{{item.name}}" class="form-list displayB">
+                    <div wx:if="{{options.select==1}}" class="form-list-item c666 textOver"><span class="xzui-radio-new {{(options.id==item.id?' active':'')}}"></span><span class="xzui-radioTitle-new">{{item.name}}</span></div>
+                    <div wx:else class="form-list-item rightIcon c666 textOver">{{item.name}}</div>                        
+                </div>
+            </div>
+            <div class="app-loadmore" wx:else>
+                <div class="xzui-loadmore xzui-loadmore_line">
+                    <div class="xzui-loadmore__tips xzui-loadmore__tips_in-line">未添加模板</div>
+                </div>
+            </div>
+            <div class="xzui-btn-app">
+              <button type="button" bindtap="submit" class="xzui-btn xzui-btn_b primary" size="large">添加模板</button>
+           </div>
+        </div>
+        <div class="tac pd20 p14 c888 bgfff" wx:else>暂无权限</div>               
+    </div>
+    <nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

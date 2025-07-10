@@ -1,0 +1,7 @@
+{
+	"usingComponents": {
+		"videoPlay":"/components/common/videoPlay/videoPlay"
+   },
+  "navigationBarTitleText": "更多动态"
+}
+

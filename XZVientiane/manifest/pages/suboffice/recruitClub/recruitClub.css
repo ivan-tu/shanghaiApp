@@ -1,0 +1,15 @@
+.recruitClub-box{
+	padding:0 15px;
+}
+.recruitClub-box .recruitClub-list +.recruitClub-list{
+	margin-top:15px;
+}
+.recruitClub-list .picBox{
+	width:90px;
+	height:90px;
+	overflow:hidden;
+	float:left;
+}
+.recruitClub-list .textBox{
+	margin-left:100px;
+}

@@ -1,0 +1,36 @@
+<div class="app-wrapper">
+    <div wx:if="{{isUserLogin}}" class="app-main mb10">
+        <div class="user-setting" wx:if="{{myAuthority&&myAuthority.setting}}">
+            <div class="xzui-cells xzui-cells_after-title">
+                <navigator url="../settingInfo/settingInfo" class="xzui-cell xzui-cell_access">
+                    <div class="xzui-cell__bd">基本信息</div>
+                    <div class="xzui-cell__ft xzui-cell__ft_in-access"><i class="xzicon-right xzui-cell__ft_arrow"></i>
+                    </div>
+                </navigator>
+                <navigator url="../settingPage/settingPage" class="xzui-cell xzui-cell_access">
+                    <div class="xzui-cell__bd">配置首页</div>
+                    <div class="xzui-cell__ft xzui-cell__ft_in-access"><i class="xzicon-right xzui-cell__ft_arrow"></i>
+                    </div>
+                </navigator>
+                <navigator url="../settingAddress/settingAddress" class="xzui-cell xzui-cell_access">
+                    <div class="xzui-cell__bd">退货地址</div>
+                    <div class="xzui-cell__ft xzui-cell__ft_in-access"><i class="xzicon-right xzui-cell__ft_arrow"></i>
+                    </div>
+                </navigator>
+                <navigator url="../settingDeliveryAreaTemplate/settingDeliveryAreaTemplate"
+                    class="xzui-cell xzui-cell_access">
+                    <div class="xzui-cell__bd">可配送区域</div>
+                    <div class="xzui-cell__ft xzui-cell__ft_in-access"><i class="xzicon-right xzui-cell__ft_arrow"></i>
+                    </div>
+                </navigator>
+                <navigator url="../settingFreightTemplate/settingFreightTemplate" class="xzui-cell xzui-cell_access">
+                    <div class="xzui-cell__bd">运费模板</div>
+                    <div class="xzui-cell__ft xzui-cell__ft_in-access"><i class="xzicon-right xzui-cell__ft_arrow"></i>
+                    </div>
+                </navigator>
+            </div>
+        </div>
+        <div class="tac pd20 p14 c888 bgfff" wx:else>暂无权限</div>
+    </div>
+    <nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

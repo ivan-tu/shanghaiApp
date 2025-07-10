@@ -1,0 +1,80 @@
+<div class="app-wrapper">
+    <div wx:if="{{isUserLogin}}" class="app-main mb20 positionBottom">
+        <div wx:if="{{myAuthority&&myAuthority.setting}}">
+            <div class="xzui-cells">
+            	<div class="xzui-cell">
+                    <div class="xzui-cell__hd">
+                        <label class="xzui-label">LOGO<span class="cRed">*</span></label>
+                    </div>
+                    <div class="xzui-cell__bd">
+                        <upload value="{{form.logo}}" class="user-upload" width="65" height="65" bindchange="uploadSuccess" id="uploadPic"></upload>
+                    </div>
+                    <div class="xzui-cell__ft">
+                        <i class="xzicon-right xzui-cell__ft_arrow"></i>
+                    </div>
+                </div>
+                <!--
+                <div class="xzui-cell">
+                    <div class="xzui-cell__hd">
+                        <label class="xzui-label">封面图<span class="cRed">*</span></label>
+                        <p class="p12 c666">推荐：620*504</p>
+                    </div>
+                    <div class="xzui-cell__bd">
+                        <upload value="{{form.cover}}" class="user-upload" width="65" height="65" bindchange="uploadSuccessCover" id="uploadCover"></upload>
+                    </div>
+                    <div class="xzui-cell__ft">
+                        <i class="xzicon-right xzui-cell__ft_arrow"></i>
+                    </div>
+                </div>-->
+                <div class="xzui-cell xzui-cell_access">
+                    <div class="xzui-cell__hd">
+                        <label class="xzui-label">店铺名称<span class="cRed">*</span></label>
+                    </div>
+                    <div class="xzui-cell__bd">
+                        <input class="xzui-input" placeholder="填写店铺名称" value="{{form.name}}" bindinput="model" data-model="form.name" class="textInput p16 c666"  />
+                    </div>
+                </div> 
+                <div class="xzui-cell xzui-cell_access">
+                    <div class="xzui-cell__hd">
+                        <label class="xzui-label">店铺简介</label>
+                    </div>
+                    <div class="xzui-cell__bd">
+                        <textarea  placeholder="填写店铺简介" value="{{form.content}}" bindinput="model" data-model="form.content" class="xzui-textarea" rows="3"></textarea>
+                    </div>
+                </div> 
+                <div class="xzui-cell xzui-cell_access">
+                    <div class="xzui-cell__hd">
+                        <label class="xzui-label">客服电话</label>
+                    </div>
+                    <div class="xzui-cell__bd">
+                        <input class="xzui-input" placeholder="填写客服电话号码" value="{{form.customertel}}" bindinput="model" data-model="form.customertel" class="textInput p16 c666"  />
+                    </div>
+                </div>
+                <div class="xzui-cell xzui-cell_access">
+                    <div class="xzui-cell__hd">
+                        <label class="xzui-label">客服微信</label>
+                    </div>
+                    <div class="xzui-cell__bd">
+                        <input class="xzui-input" placeholder="填写客服微信号" value="{{form.customerwx}}" bindinput="model" data-model="form.customerwx" class="textInput p16 c666"  />
+                    </div>
+                </div>
+                <div class="xzui-cell">
+                    <div class="xzui-cell__hd">
+                        <label class="xzui-label">客服微信</label>
+                    </div>
+                    <div class="xzui-cell__bd">
+                        <upload value="{{form.customerQrcode}}" class="user-upload" width="65" height="65" bindchange="uploadCliwxpic" id="uploadCliwxpic"></upload>
+                    </div>
+                    <div class="xzui-cell__ft">
+                        <i class="xzicon-right xzui-cell__ft_arrow"></i>
+                    </div>
+                </div>                          
+            </div>
+            <div class="xzui-btn-app positionBottom">
+              <button type="button" bindtap="submit" class="xzui-btn xzui-btn_b primary" size="large">保存</button>
+           </div>
+        </div>
+        <div class="tac pd20 p14 c888 bgfff" wx:else>暂无权限</div>           
+    </div>
+    <nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

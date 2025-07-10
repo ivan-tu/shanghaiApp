@@ -1,0 +1,57 @@
+<div class="app-wrapper">
+	<div wx:if="{{isUserLogin}}" class="app-main">
+    	<view class="loadingBox mlr14" wx:if="{{ajaxLoading}}">
+            <div class="xzicon-loading"></div>
+        </view>
+        <div class="bgfff" wx:else>
+        	<p class="form-title" wx:if="{{activityDetail.collectTips}}">{{activityDetail.collectTips}}</p>
+        	<div class="submitInfo-list" wx:for="{{data}}">
+                <div class="listBox" wx:if="{{item.value&&item.type=='radio'}}">
+                	<div class="form-list">
+                        <div class="form-list-item title c333 p14 long {{(item.value==2?' must':'')}}">{{item.title}}</div>
+                        <div class="form-list-item">
+                            <div class="displayIB radioList" wx:for="{{item.data}}" wx:for-item="g" wx:for-index="l" data-value="{{g.name}}" data-index="{{index}}" bindtap="selectThis"><span class="xzui-radio-new small {{(item.formData==g.name?' active':'')}}"></span><span class="xzui-radioTitle-new small">{{g.name}}</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="listBox" wx:elif="{{item.value&&item.type=='cardpic'}}">
+                	<div class="form-list">
+                        <div class="form-list-item title c333 p14 long {{(item.value==2?' must':'')}}">身份证正面</div>
+                        <div class="form-list-item">
+                             <upload value="{{form.pic}}" class="user-upload" width="65" height="65" bindchange="uploadIdCard_a" id="uploadIdCard_a">
+                            </upload>
+                        </div>
+                    </div>
+                    <div class="form-list">
+                        <div class="form-list-item title c333 p14 long {{(item.value==2?' must':'')}}">身份证反面</div>
+                        <div class="form-list-item">
+                             <upload value="{{form.pic}}" class="user-upload" width="65" height="65" bindchange="uploadIdCard_b" id="uploadIdCard_b">
+                            </upload>
+                        </div>
+                    </div>
+                </div>
+                <div class="listBox" wx:elif="{{item.value&&item.type=='pic'}}">
+                	<div class="form-list">
+                        <div class="form-list-item title c333 p14 long {{(item.value==2?' must':'')}}">{{item.title}}</div>
+                        <div class="form-list-item">
+                             <upload value="{{item.formData}}" class="user-upload" width="65" height="65" bindchange="uploadPic" id="uploadPic_{{index}}" index="{{index}}">
+                            </upload>
+                        </div>
+                    </div>
+                </div>
+                <div class="listBox" wx:elif="{{item.value}}">
+                	<div class="form-list">
+                        <div class="form-list-item title c333 p14 long {{(item.value==2?' must':'')}}">{{item.title}}</div>
+                        <div class="form-list-item">
+                            <input class="textInput" placeholder="请输入" type="{{item.type}}" data-index="{{index}}" bindinput="changeInput" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="xzui-btn-app" wx:if="{{!ajaxLoading}}">
+            <button type="button" bindtap="submit" class="xzui-btn xzui-btn_b primary yellow" size="large">提交</button>
+        </div>
+	</div>
+	<nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

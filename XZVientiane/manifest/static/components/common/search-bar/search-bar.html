@@ -1,0 +1,39 @@
+<div class="xzui-search xzui-mobilesearch {{(open||keyword?'open-search':'')}}">
+    <form action="javascript:;" bindsubmit="search">
+        <label class="xzui-search_label xzui-mobilesearch_label" bindtap="openSearch">
+            <div class="xzui-mobilesearch_inputbox">
+                <input class="xzui-input xzui-mobilesearch_input" placeholder="{{keyword||label}}" type="search" value="{{keyword}}" bindconfirm="search" bindinput="getKeyword" />
+                <div class="xzui-mobilesearch_clear {{(keyword&&open?'show':'')}}" bindtap="emptyKeyword"><i class="xzicon-closecircle"></i></div>
+            </div>
+            <!--<div class="xzui-mobilesearch_placeholder">
+                <span class="xzui-mobilesearch_pt"><i class="xzicon-search1 xzui-mobilesearch_pi"></i>{{keyword||label}}</span>
+            </div>-->
+        </label>
+        <div class="xzui-mobilesearch_cancel">
+            <button class="skin" type="button" catchtap="closeSearch">取消</button>
+        </div>
+    </form>
+    <div class="xzui-mobilesearch_sub {{(open?'show':'')}}" wx:if="{{list}}">
+        <div wx:if="{{loading}}">
+            <div class="xzui-loadmore">
+                <div class="xzicon-loading"></div>
+                <div class="xzui-loadmore__tips">正在加载</div>
+            </div>
+        </div>
+        <ul class="xzui-mobilesearch_sub_list" wx:elif="{{keyword&&vague}}">
+            <li class="xzui-mobilesearch_sub_item" wx:for="{{vagueList}}" bindtap="selectKeyword" data-value="{{item}}">{{item}}</li>
+            <div class="xzui-loadmore xzui-loadmore_line" wx:if="{{!vagueList.length}}">
+                <div class="xzui-loadmore__tips xzui-loadmore__tips_in-line">暂无数据</div>
+            </div>
+        </ul>
+        <div wx:else="">
+            <div class="xzui-mobilesearch_sub_title">{{title}}</div>
+            <ul class="xzui-mobilesearch_sub_list">
+                <li class="xzui-mobilesearch_sub_item" wx:for="{{sublist}}" bindtap="selectKeyword" data-value="{{item}}">{{item}}</li>
+                <div class="xzui-loadmore xzui-loadmore_line" wx:if="{{!sublist.length}}">
+                    <div class="xzui-loadmore__tips xzui-loadmore__tips_in-line">暂无关键词</div>
+                </div>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,47 @@
+.xzui-tabbar_item.home{
+    background-image: url(../images/index_home_new.png);
+}
+.xzui-bar_item_on.home,
+.xzui-tabbar_item.home:hover{
+    background-image: url(../images/index_homeActive_new.png);
+}
+
+.xzui-tabbar_item.message{
+    background-image: url(../images/index_message.png);
+}
+.xzui-bar_item_on.message,
+.xzui-tabbar_item.message:hover{
+    background-image: url(../images/index_messageActive.png);
+}
+.xzui-tabbar_item.me{
+    background-image: url(../images/index_me_new.png);
+}
+.xzui-bar_item_on.me,
+.xzui-tabbar_item.me:hover{
+    background-image: url(../images/index_meActive_new.png);
+}
+
+.xzui-tabbar_item.visitor{
+    background-image: url(../images/index_visitor.png);
+}
+.xzui-bar_item_on.visitor,
+.xzui-tabbar_item.visitor:hover{
+    background-image: url(../images/index_visitorActive.png);
+}
+.xzui-tabbar_item.explore{
+    background-image: url(../images/index_explore_new.png);
+}
+.xzui-bar_item_on.explore,
+.xzui-tabbar_item.explore:hover{
+    background-image: url(../images/index_exploreActive_new.png);
+}
+.xzui-tabbar_item.friend{
+    background-image: url(../images/index_friend_new.png);
+}
+.xzui-bar_item_on.friend,
+.xzui-tabbar_item.friend:hover{
+    background-image: url(../images/index_friendActive_new.png);
+}
+
+
+

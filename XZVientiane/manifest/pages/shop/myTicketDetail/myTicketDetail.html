@@ -1,0 +1,52 @@
+<div class="app-wrapper">
+    <div class="app-main" wx:if="{{isUserLogin}}">
+        <div class="bgfff pd20 tac">
+            <p class="c333 p18">{{data.ticketname}}</p>
+            <view wx:if="{{data.status==1}}">
+            	<p class="cRed p14">有效期至：{{data.expiretime}}</p>
+                <div class="" wx:if="{{data.ticketsType==2}}">
+                	<div class="getGoods_address" wx:if="{{data.ispick==1}}">
+                        <div class="clearfix title">
+                            <div class="fl p14 c000">确认收货地址</div>
+                            <div class="fr p14 c666" bindtap="selectAddress">修改收货地址 ></div>
+                        </div>
+                        <div class="detail" wx:if="{{address.name}}">
+                            <div>姓名：{{address.name}}</div>
+                            <div>手机号：{{address.mobile}}</div>
+                            <div>地址：{{address.area[0]}}{{address.area[1]}}{{address.area[2]}}{{address.address}}</div>
+                        </div>
+                         <div class="detail" wx:else>
+                            <div>姓名：</div>
+                            <div>手机号：</div>
+                            <div>地址：</div>
+                        </div>
+                        <span class="submitBtn" bindtap="submitPick">确认提货</span>
+                    </div>
+                    <p class="c666 pt20 p16" wx:else>可提货日期：{{data.pickBeginDate}}至{{data.pickEndDate}}</p>
+     			</div>
+                <div wx:else>
+                    <div class="picBox hasLoading" style="margin:20px auto;width:180px;height:180px;">
+                        <image src="{{data.codeUrl}}" mode="widthFix" style="width:180px;height:180px;" />
+                    </div>
+                    <p class="c666">出示二维码给管理员扫码核销</p>
+                </div>
+            </view>
+            <view wx:elif="{{data.status==2}}">
+            	<p class="cRed p14">使用时间：{{data.hxtime}}</p>
+            	<div class="tac c999 p20" style="height:60px;line-height:60px">已使用</div>
+            </view>
+            <view wx:elif="{{data.status==3}}">
+            	<p class="cRed p14">过期时间：{{data.expiretime}}</p>
+            	<div class="tac c999 p20" style="height:60px;line-height:60px">已过期</div>
+            </view>
+            <view wx:elif="{{data.status==0||data.status==4}}">
+            	<div class="tac c999 p20" style="height:60px;line-height:60px">已退款</div>
+            </view>
+        </div>
+        <div class="bgfff mt10 pd15">
+        	<p class="c999 p12">使用规则</p>
+            <div class="mt10 p14 c666"><pre style="font-family:inherit;">{{data.content}}</pre></div>
+        </div>
+    </div>
+    <nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

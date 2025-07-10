@@ -1,0 +1,19 @@
+<div class="app-wrapper">
+	<div class="app-main">
+		<div class="user-address">
+			<div class="user-address-list" wx:if="{{data&&data.length}}">
+				<div class="user-address-item" wx:for="{{data}}">
+					<div bindtap="selectThis" data-index="{{index}}"
+						class="user-address-main {{(select?'':'setBottomLine')}} {{(select==item._id?'active':'')}}">
+						<p class="user-address-title">{{item.name}} {{item.mobile}}</p>
+						<p class="user-address-phone">{{item.detail}}</p>
+					</div>
+				</div>
+			</div>
+			<view class="noData mlr14" wx:else>暂无数据</view>
+			<div class="xzui-btn-app">
+				<button class="xzui-btn primary xzui-btn_b user-address-add" bindtap="toAdd">添加收货地址</button>
+			</div>
+		</div>
+	</div>
+</div>

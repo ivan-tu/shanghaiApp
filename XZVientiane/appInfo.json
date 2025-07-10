@@ -1,0 +1,46 @@
+{        "nav" : {
+    "tabBgcolor" : "#FFFFFF",
+    "bottomNav" : "1",
+    "scrollHide" : 0,
+    "activeNavBgcolor" : "#FFFFFF",
+    "textColor" : "#666666",
+    "activeTextColor" : "#333333",
+    "items" : [
+        {
+            "active" : "1",
+            "icon" : "icon_home",
+            "name" : "在局",
+            "activeIcon" : "icon_homeSelect",
+            "url" : "https://hi3.tuiya.cc/p/home/index/index",
+            "isCheck":"1"
+        },
+        {
+            "active" : "0",
+            "icon" : "icon_xiaoxi",
+            "name" : "俱乐部",
+            "activeIcon" : "icon_xiaoxiSelect",
+            "url" : "https://hi3.tuiya.cc/p/suboffice/index/index",
+            "isCheck":"0"
+        },
+        {
+            "active" : "0",
+            "icon" : "icon_userCenter",
+            "name" : "我的",
+            "activeIcon" : "icon_userCenterSelect",
+            "url" : "https://hi3.tuiya.cc/p/user/my/my",
+            "isCheck":"0"
+        }
+    ]
+},
+"qiniu" : "https://statics.tuiya.cc/",
+"name" : "在局",
+"adLink" : "",
+"leftSideBarUrl" : "",
+"customDomain" : "hi3.tuiya.cc",
+"statusBar" : {
+    "status" : "1",
+    "textColor" : "black",
+    "backgroundColor" : "#FFFFFF"
+},
+"leftSideBarWidth" : "75"
+}

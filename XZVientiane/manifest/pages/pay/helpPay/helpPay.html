@@ -1,0 +1,66 @@
+<div class="app-wrapper">
+    <div class="app-main">
+    	<view class="markWraper"></view>
+        <view class="helpPay_loading loadingBox tac" wx:if="{{showLoading}}">
+            <div class="xzicon-loading"></div>
+        </view>
+        <view class="p16 tac c888 pd20" wx:elif="{{showNoData}}">订单出现异常</view>
+        <view wx:else>
+            <div class="helpPay-header clearfix">
+                <div class="picBox"><image src="{{data.userinfo.headpic}}" mode="widthFix" class="round" /></div>
+                <div class="textBox">
+                    <p class="cfff p14 textOver">{{data.userinfo.username}}</p>
+                    <p class="cfff p12" wx:if="{{data.paystatus==1}}">“请帮我代付这个订单，感谢您”</p>
+                    <p class="cfff p12" wx:elif="{{data.paystatus==2}}">“已有人帮我付款，谢谢”</p>
+                    <p class="cfff p12" wx:elif="{{data.paystatus==3}}">“该订单已取消，谢谢”</p>
+                </div>
+            </div>
+            <!--待付款-->
+            <div class="helpPay-main tac mt15" wx:if="{{data.paystatus==1}}">
+                <p class="c000 p16">代付金额</p>
+                <p class="price"><span class="p16">¥</span>{{data.ordertotal}}</p>
+                <p class="c666 p14">到期时间：{{data.endtimeText}}</p>
+                <div class="mt10" wx:if="{{data.ismy==1}}">
+                    <form wx:if="{{client=='wx'}}" action="javascript:;" bindsubmit="toShare" report-submit='true'>
+                        <button type="button" class="helpPay-submitBtn" form-type="submit">发送给微信好友</button>
+                    </form>
+                    <button wx:else type="button" class="helpPay-submitBtn" bindtap="toShare">发送给微信好友</button>
+                </div>
+                <div class="mt10" wx:else>
+                	<button type="button" class="helpPay-submitBtn" bindtap="toPay">帮他付款</button>
+                </div>
+            </div>
+            <!--已付款-->
+            <div class="helpPay-main tac mt15" wx:elif="{{data.paystatus==2}}">
+                <p class="c000 p16">订单已支付</p>
+                <p class="c888 p12">如若发生退款，则原路退还</p>
+                <div class="pt10 tac"><image style="width:90px;height:90px;" src="https://static.gedian.shop/16395392984826724.png" mode="widthFix" /></div>
+            </div>
+            <!--已取消-->
+            <div class="helpPay-main tac mt15" wx:elif="{{data.paystatus==3}}">
+                <p class="c000 p16">订单已取消</p>
+                <p class="c888 p12">如若发生退款，则原路退还</p>
+                <div class="pt10 tac"><image style="width:90px;height:90px;" src="https://static.gedian.shop/16395397521414268.png" mode="widthFix" /></div>
+            </div>
+            <div class="helpPay-goodsInfo hasBorder top mt15 pt10">
+                <p class="c000 p16 plr15">代付订单信息</p>
+                <div class="goodsBox clearfix plr15 mt10" wx:if="{{data.goodsInfo}}">
+                	<div class="goodsList clearfix" wx:for="{{data.goodsInfo}}">
+                        <div class="picBox">
+                            <image src="{{item.pic}}" mode="widthFix" class="round" />
+                        </div>
+                        <div class="textBox">
+                            <p class="c000 p14">{{item.name}}</p>
+                            <p class="cRed p14">¥{{item.price}}<span class="c888 displayIB ml5">x{{item.quantity}}</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="hasBorder top plr15 mt15 pt10">
+                    <p class="c000 p16">代付说明</p>
+                    <div class="c000 p12 mt10">1.当代付订单退款成功后，实付金额将原路退还代付人。</div>
+                </div>
+            </div>
+        </view>
+    </div>
+    <newShare id="newShareCon"></newShare>
+</div>

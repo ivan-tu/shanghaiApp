@@ -1,0 +1,47 @@
+<div class="app-wrapper">
+	<div class="app-main">
+    	<view class="markWraper"></view>
+        <div class="activityTicketReceive_head" wx:if="{{data.sendstatus==0}}">
+        	<div class="picBox hasLoading"><image src="{{data.masterData.headpic}}" mode="widthFix" /></div>
+            <div class="mt10">
+                <p class="userName">您的好友 {{data.masterData.username}} 送你一张门票</p>
+                <p class="mt5 p16" wx:if="{{data.price}}">{{data.ticketinfo.name}}：价值{{data.price}}元</p>
+                <p class="mt5 p16" wx:else>{{data.ticketinfo.name}}</p>
+            </div>
+            <div class="activityTicketReceive_footBtn tac">
+                <div class="activityTicketReceive_getBtn" bindtap="receiveThis" wx:if="{{isUserLogin}}">立即领取</div>
+                <div class="activityTicketReceive_getBtn" bindtap="toLogin" wx:else>登录领取</div>
+            </div>
+        </div>
+        <div class="activityTicketReceive_head" wx:else>
+        	<div class="tac iconBox cGreen"><i class="xzicon-checkcircle"></i></div>
+            <div class="mt10">
+            	<p class="userName" wx:if="{{data.ismy==1}}">您已成功领取门票</p>
+                <p class="userName" wx:elif="{{data.receivename}}">门票已被{{data.receivename}}领取</p>
+                <p class="userName" wx:else>门票已被其他人领取</p>
+            </div>
+        </div>
+        <div class="hasBorder top left pd15">
+            <p class="c333 p18">{{data.activity.name}}</p>
+            <p class="c666 p14">时间：{{data.activity.activityTime}}</p>
+            <div class="ticketReceive-mapBox" wx:if="{{data.activity.realAddress}}">
+            	<p class="c666 p14">地址：{{data.activity.realAddress}}</p>
+                <button wx:if="{{client=='wx'}}" type="button" class="mapBtn" bindtap="openLocation"
+                    data-address="{{data.activity.realAddress}}" >
+                    <p style="color:#6996FF"><i class="xzicon-map"></i></p>
+                    <p class="p12" style="color:#6996FF">导航</p>
+                </button>
+                <navigator wx:else url="https://m.amap.com/search/mapview/keywords={{data.activity.realAddress}}" target="_blank" class="mapBtn"><p style="color:#6996FF"><i class="xzicon-map"></i></p>
+                    <p class="p12" style="color:#6996FF">导航</p>
+                </navigator>
+            </div>
+            <div class="mt5" wx:if="{{contentData&&contentData.length}}">
+                <editor-content content="{{contentData}}"></editor-content>
+            </div>
+            <div class="c333 mt5" wx:else>
+                <pre>{{data.activity.content}}</pre>
+            </div>
+        </div>
+	</div>
+    <newShare id="newShareCon"></newShare>
+</div>

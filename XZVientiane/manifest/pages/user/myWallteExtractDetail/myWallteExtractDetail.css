@@ -1,0 +1,37 @@
+.user-withdrawDetail-top{
+	background-color: #fff;
+	padding:26px 20px 24px;
+	text-align: center;
+}
+.user-withdrawDetail-pic{
+	width: 84px;
+	margin:0 auto;
+}
+.user-withdrawDetail-title{
+	font-size: 18px;
+	color: #F84438;
+	font-weight: 500;
+	margin-top: 20px;
+}
+.user-withdrawDetail-desc{
+	color: #999;
+	font-weight: 300;
+	margin-top: 8px;
+}
+.user-withdrawDetail-info{
+	margin-top: 20px;
+}
+.user-withdrawDetail-info .title{
+	padding:0 15px;
+	color: #b2b2b2;
+	font-weight: 300;
+	font-size: 14px;
+}
+.user-withdrawDetail-info .content{
+	background-color: #fff;
+	padding:20px 15px;
+	margin-top: 8px;
+}
+.user-withdrawDetail-info .link{
+	color: #F84438;
+}

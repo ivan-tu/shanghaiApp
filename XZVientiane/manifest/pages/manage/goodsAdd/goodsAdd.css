@@ -1,0 +1,17 @@
+.goodsAddPic-item.goodsAddPic-item-row5{
+	width:20%;
+	float:left;
+}
+.goodsAddPic-container.goodsAddPic-container-picture{
+	margin:-10px 0 0 -5px;
+}
+.goodsAddPic-container-picture .goodsAddPic-bar{
+    margin: 10px 0 0 5px;
+	position:relative;
+}
+.goodsAddPic-item .xzui-uploader__input-box{
+	margin:0;
+}
+.addGoodsPicker .picker-region:after{
+	display:none;
+}

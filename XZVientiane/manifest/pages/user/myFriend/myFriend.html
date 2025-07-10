@@ -1,0 +1,61 @@
+<div class="app-wrapper">
+    <div class="app-main">
+    	<div class="markWraper"></div>
+    	<div class="">
+            <div class="searchCategory-box clearfix">
+                <div class="searchCategory">
+                    <div class="listBox">
+                        <span class="list {{(getType=='my'?' active':'')}}" data-type="my" bindtap="screenType">我的好友</span>
+                        <span class="list {{(getType=='apply'?' active':'')}}" data-type="apply" bindtap="screenType">好友申请</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <search-bar label="搜索名称" placeholder="搜索名称" keyword="{{form.keyword}}" bindchange="changeKeyword" bindclose="closeKeyword"></search-bar>
+    	<div class="bgfff myFriend-box" wx:if="{{data&&data.length}}">
+            <div class="myFriend-list clearfix" wx:for="{{data}}" data-index="{{index}}" data-uid="{{getType=='apply'?item.userid:item.frienduid}}" bindtap="toDetail">
+                <div class="picBox hasLoading"><image wx:if="{{getType=='apply'}}" src="{{item.myheadpic}}" mode="widthFix" class="round" /><image wx:elif="{{getType=='my'}}" src="{{item.friendheadpic}}" mode="widthFix" class="round" /></div>
+                <div class="textBox">
+                	<p class="c131 p14 textOver" wx:if="{{getType=='apply'}}">{{item.myname}}</p>
+                    <p class="c131 p14 textOver" wx:elif="{{getType=='my'}}">{{item.friendname}}</p>
+                    <div class="p12 c666">{{item.createAt}}</div>
+                </div>
+            </div>
+        </div>
+        <view class="loadingBox mlr15" hidden="{{!showLoading}}">
+			<div class="xzicon-loading"></div>
+			<div class="xzui-loadmore__tips">正在加载</div>
+		</view>
+		<view class="noData mlr15" hidden="{{!showNoData}}">暂无数据</view>
+        <!--转让弹框-->
+        <div class="publicScroll_dialog {{(sendForm.show?' show':'')}}">
+            <view class="publicScroll_body" style="height:240px;">
+                <div class="publicScroll_head clearfix tac bgfff">
+                    <span class="p16" style="color:#3B3B3B;">赠送友币</span>
+                    <span class="fr p16" bindtap="toHideDialog"><i class="xzicon-close"></i></span>
+                </div>
+                <div class="publicScroll_main">
+                    <view class="bgfff">
+                        <div class="form-list">
+                            <div class="form-list-item title long">赠送数量</div>
+                            <div class="form-list-item">
+                                <input placeholder="请输入" bindinput="model" data-model="sendForm.total" value="{{sendForm.total}}" class="textInput" type="number" />
+                            </div>
+                             <div class="form-list-item tar title large p12 c888">我的友币：{{sendForm.wallte}}</div>
+                        </div>
+                        <div class="form-list">
+                            <div class="form-list-item title long">短信验证</div>
+                            <div class="form-list-item">
+                                <input placeholder="请输入" bindinput="model" data-model="sendForm.vcode" value="{{sendForm.vcode}}" class="textInput" type="tel" />
+                            </div>
+                            <div class="form-list-item tar title large"><span class="getCodeBtn" bindtap="getCode">{{sendForm.getCodeText}}</span></div>
+                        </div>
+                    </view>
+                </div>
+                <view class="publicScroll_footBtn">
+                    <button class="submitBtn" type="button" bindtap="toConfirmDialog">确定</button>
+                </view>
+            </view>
+        </div>
+    </div>
+</div>

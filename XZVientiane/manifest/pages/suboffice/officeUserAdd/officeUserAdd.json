@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+	"picker": "/components/web/picker/picker",
+	"nologin": "/components/common/nologin/nologin"
+  },
+  "enablePullDownRefresh": false,
+  "navigationBarTitleText": "添加会员"
+}

@@ -1,0 +1,79 @@
+.guoyao-goodsDetail-header{
+	background:#fff;
+	margin:-40px 10px 0 10px;
+	border-radius:4px;
+	position:relative;
+	z-index:2;
+}
+.c03{
+	/*color:#D81E06;*/
+	color:#000000;
+}
+.guoyao-goodsDetail-content{
+	background:#fff;
+	min-height:320px;
+}
+.guoyao-goodsDetail-price {
+	line-height: 30px;
+}
+.guoyao-goodsDetail-discount {
+	font-size: 12px;
+	display: inline-block;
+	padding: 1px 5px;
+	background:#F5CD40;
+	border-radius: 3px;
+	margin-left: 10px;
+	line-height:23px;
+	color:#000;
+	vertical-align:middle;
+}
+
+.goodsDetail-footBtn{
+	background:transparent !important;
+	padding:0 !important;
+}
+.goodsDetail-homeBtn{
+	background:#fff;
+	color:#000;
+	line-height:52px;
+	height:58px;
+	width:90px;
+	max-width:90px;
+	padding:0;
+	margin:0;
+}
+.goodsDetail-shareBtn{
+	background:#fff;
+	color:#000;
+	line-height:52px;
+	height:58px;
+	width:90px;
+	max-width:90px;
+	padding:0;
+	margin:0;
+}
+.goodsDetail-shareBtn:hover,
+.goodsDetail-shareBtn:active{
+	color:#000 !important;
+}
+.goodsDetail-footBtn .iconText{
+	font-size:16px;
+	display:inline-block;
+	vertical-align:middle;
+	margin-left:4px;
+}
+.guoyao-goodsDetail-icon{
+	font-size:23px;
+	vertical-align:middle;
+	display: inline-block;
+}
+.guoyao-goodsDetail-buyTicketBtn{
+	background: #000000;
+	color: #fff;
+	line-height: 58px;
+	font-size: 16px;
+}
+.guoyao-goodsDetail-buyTicketBtn.gray{
+	background: #ccc;
+	color: #fff;
+}

@@ -1,0 +1,26 @@
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '15.0'
+inhibit_all_warnings!
+target :XZVientiane do
+pod 'Masonry'
+pod 'MJRefresh'
+pod 'JSONModel'
+pod 'WebViewJavascriptBridge'
+pod 'AFNetworking'
+pod 'Qiniu'
+pod 'GTMBase64'
+pod 'SAMKeychain'
+pod 'SDWebImage', '~> 5.0.6'
+# 友盟SDK套件
+pod 'UMCCommon'
+pod 'UMShare'
+pod 'UMPush'
+pod 'AlipaySDK-iOS'
+# 微信SDK套件
+pod 'WechatOpenSDK-XCFramework'      # 微信官方SDK
+# 高德SDK套件配置 - 强制使用标准版本（更稳定）
+pod 'AMap3DMap'
+pod 'AMapFoundation' # 基础SDK（强制标准版本）
+pod 'AMapSearch'         # 搜索功能SDK（强制标准版本）
+pod 'AMapLocation'      # 定位功能SDK（强制标准版本）
+end

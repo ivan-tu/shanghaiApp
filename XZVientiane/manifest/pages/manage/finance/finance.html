@@ -1,0 +1,40 @@
+<div class="app-wrapper">
+	<div wx:if="{{isUserLogin}}" class="app-main">
+        <div class="pt10 pb10 bgfff">
+            <div class="displayFlex tac">
+                <div class="list">
+                    <p class="p18 cRed bold">{{data.todayincome}}</p>
+                    <p class="p12 c888">今日收入</p>
+                </div>
+                <div class="list">
+                    <p class="p18 cRed  bold">{{data.allincome}}</p>
+                    <p class="p12 c888">总收入</p>
+                </div>
+                <div class="list">
+                    <p class="p18 cRed  bold">{{data.freeze}}</p>
+                    <p class="p12 c888">待解冻</p>
+                </div>
+            </div>
+        </div>
+        <div class="mt10 bgfff">
+            <navigator url="../../manage/financeCashinList/financeCashinList" class="form-list displayB">
+                <div class="form-list-item rightIcon">
+                    <span class="vMid displayIB c333 p16">收入记录</span>
+                </div>
+            </navigator>
+            <navigator url="../../finance/withdrawList/withdrawList?type=shop&shopid={{manageShopId}}" class="form-list displayB">
+                <div class="form-list-item rightIcon">
+                    <span class="vMid displayIB c333 p16">提现记录</span>
+                </div>
+            </navigator>
+        </div>
+        <div class="mt10 bgfff">
+            <navigator url="../../finance/withdraw/withdraw?type=shop&shopid={{manageShopId}}" class="form-list displayB">
+                <div class="form-list-item rightIcon">
+                    <span class="vMid displayIB c333 p16">去提现</span>
+                </div>
+            </navigator>
+        </div>
+	</div>
+  <nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

@@ -1,0 +1,51 @@
+<div class="app-wrapper">
+	<div wx:if="{{isUserLogin}}" class="app-main">
+    	<view class="loadingBox mlr14" wx:if="{{ajaxLoading}}">
+            <div class="xzicon-loading"></div>
+        </view>
+    	<div wx:elif="{{dynamicPublishWX}}">
+            <div class="bgfff club_form">
+                <div class="form-list">
+                    <div class="form-list-item title c333 p14">封面</div>
+                    <div class="form-list-item">
+                        <upload value="{{form.pic}}" class="user-upload" width="65" height="65" bindchange="uploadPic" id="uploadPic">
+                        </upload>
+                    </div>
+                </div>
+                <div class="form-list">
+                    <div class="form-list-item title c333 p14">名称</div>
+                    <div class="form-list-item"><input class="textInput" placeholder="请输入名称" bindinput="model" type="text" data-model="form.name" value="{{form.name}}" /></div>
+                </div>
+                <div class="form-list">
+                    <div class="form-list-item title c333 p14">地区</div>
+                    <div class="form-list-item">
+                        <picker mode="region" class="picker-region" custom-item="" bindchange="bindAreaChange" value="{{form.area}}"
+                            id="pickerArea">
+                            <view class="picker c333" wx:if="{{form.area.length}}">{{form.area[0]}}-{{form.area[1]}}-{{form.area[2]}}</view>
+                            <view class="picker c999" wx:else>选择地区</view>
+                        </picker>
+                    </div>
+                </div>
+                <div class="form-list">
+                    <div class="form-list-item title c333 p14">宣传语</div>
+                    <div class="form-list-item"><input class="textInput" placeholder="请输入宣传语" bindinput="model" type="text" data-model="form.slogan" value="{{form.slogan}}" /></div>
+                </div>
+                <div class="form-list">
+                    <div class="form-list-item title c333 p14">简介</div>
+                    <div class="form-list-item"><textarea maxlength="-1" class="textarea" placeholder="请输入简介" bindinput="model"
+                            data-model="form.summary" value="{{form.summary}}"></textarea></div>
+                </div>
+            </div>
+            <div class="xzui-btn-app">
+                <button type="button" bindtap="submit" class="xzui-btn xzui-btn_b primary yellow" size="large">提交</button>
+            </div>
+        </div>
+        <div wx:else>
+        	<p class="tac p16" style="margin-top:60px;">非常抱歉，您暂时无权访问</p>
+            <div class="xzui-btn-app publish_footBtn">
+                <button type="button" bindtap="reback" class="xzui-btn xzui-btn_b primary" size="large">返回</button>
+            </div>
+        </div>
+	</div>
+	<nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

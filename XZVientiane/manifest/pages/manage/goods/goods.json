@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+	  "picker": "/components/web/picker/picker",
+	  "search-bar": "/components/common/search-bar/search-bar",
+	  "nologin": "/components/common/nologin/nologin"
+   },
+  "navigationBarTitleText": "商品管理"
+}

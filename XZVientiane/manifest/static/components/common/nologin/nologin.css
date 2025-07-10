@@ -1,0 +1,54 @@
+/*未登录*/
+.tuige-noAuth {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    text-align: center;
+    padding-top: 10%;
+}
+.tuige-noAuth_img {
+    margin:30px auto 0;
+    width:197px;
+    height:200px;
+}
+.tuige-noAuth_title {
+    color: #000;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 30px;
+    margin-top: 50px;
+}
+.tuige-noAuth_tips {
+    color: #333;
+    margin-top: 10px;
+}
+.tuige-noAuth_btn{
+	margin:20px 48px 0 48px;
+}
+.tuige-noAuth_btn .xzui-btn{
+	border-radius: 22px;
+	line-height: 44px;
+	color: #fff;
+	font-size: 18px;
+	font-weight: 500;
+}
+.tuige-noAuth_btn .xzui-btn.xzui-btn_b.primary{
+	color: #000;
+    font-weight: 500;
+    background-color: #FEE10B;
+    display: block;
+	margin:0;
+}
+.tuige-noAuth_btn .xzui-btn.xzui-btn_b.primary:hover{
+	background-color: #FEE10B;
+	color:#000;
+}
+.mt20{
+	margin-top:20px;
+}
+.c888{
+	color:#888;
+}

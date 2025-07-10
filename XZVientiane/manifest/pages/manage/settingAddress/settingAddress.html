@@ -1,0 +1,62 @@
+<div class="app-wrapper">
+    <div wx:if="{{isUserLogin}}" class="app-main mb20 positionBottom">
+        <div wx:if="{{myAuthority&&myAuthority.setting}}">
+        	<div>
+            <div class="xzui-cells">
+                <div class="xzui-cell xzui-cell_access">
+                    <div class="xzui-cell__hd">
+                        <label class="xzui-label">收货人</label>
+                    </div>
+                    <div class="xzui-cell__bd">
+                        <input class="xzui-input" placeholder="填写收货人姓名" value="{{form.name}}" bindinput="model" data-model="form.name" class="textInput p16 c666"  />
+                    </div>
+                </div> 
+                <div class="xzui-cell xzui-cell_access">
+                    <div class="xzui-cell__hd">
+                        <label class="xzui-label">电话号码</label>
+                    </div>
+                    <div class="xzui-cell__bd">
+                        <input class="xzui-input" placeholder="填写收货人联系电话" value="{{form.mobile}}" bindinput="model" data-model="form.mobile" class="textInput p16 c666"  />
+                    </div>
+                </div>
+                <div class="xzui-cell xzui-area-cell">
+                    <div class="xzui-cell__hd">
+                        <label class="xzui-label">所在地区</label>
+                    </div>
+                    <div class="xzui-cell__bd">
+                        <picker mode="region" class="picker-region" custom-item="" bindchange="bindRegionChange" value="{{area}}" id="areaPicker">
+                            <view class="picker" wx:if="{{area.length}}">{{area[0]}}-{{area[1]}}-{{area[2]}}</view>
+                            <view class="picker c999" wx:else>选择地区</view>
+                        </picker>
+                    </div>
+                </div>
+                <div class="xzui-cell xzui-cell_access">
+                    <div class="xzui-cell__hd">
+                        <label class="xzui-label">详细地址</label>
+                    </div>
+                    <div class="xzui-cell__bd">
+                        <input class="xzui-input" placeholder="详细地址不需要地区名" value="{{form.address}}" bindinput="model" data-model="form.address" class="textInput p16 c666"  />
+                    </div>
+                </div>
+                <div class="xzui-cell xzui-cell_access">
+                    <div class="xzui-cell__hd">
+                        <label class="xzui-label">备注</label>
+                    </div>
+                    <div class="xzui-cell__bd">
+                        <textarea  placeholder="填写备注说明" value="{{form.content}}" bindinput="model" data-model="form.content" class="xzui-textarea" rows="3"></textarea>
+                    </div>
+                </div>                               
+            </div>
+            
+           </div>
+            <div class="xzui-btn-app positionBottom">
+              <button type="button" bindtap="submit" class="xzui-btn xzui-btn_b primary" size="large">提交</button>
+           </div>
+        </div>
+        <div class="tac pd20 p14 c888 bgfff" wx:else>
+        暂无权限
+        </div>
+                      
+    </div>
+    <nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

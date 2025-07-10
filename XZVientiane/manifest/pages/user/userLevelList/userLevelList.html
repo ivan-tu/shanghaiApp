@@ -1,0 +1,23 @@
+<div class="app-wrapper">
+    <div class="app-main" wx:if="{{isUserLogin}}">
+        <div class="userLevel-head clearfix">
+        	<div class="picBox hasLoading"><image src="{{data.headpic}}" class="round" mode="widthFix" /></div>
+            <div class="textBox">
+            	<p class="username">{{data.username}}</p>
+                <p class=""><span class="displayIB vMid c666">积分：{{data.credit}}</span><span class="levelName" wx:if="{{data.levelName&&data.levelName.name}}">{{data.levelName.name}}</span></p>
+            </div>
+        </div>
+        <p class="form-title">等级列表</p>
+        <div class="userLevel-table">
+        	<div class="thList">
+            	<span class="tdList c666">等级</span>
+                <span class="tdList c666">积分</span>
+            </div>
+            <div class="thList" wx:for="{{levelList}}">
+            	<span class="tdList">{{item.name}}</span>
+                <span class="tdList">{{item.credit}}</span>
+            </div>
+        </div>
+    </div>
+    <nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

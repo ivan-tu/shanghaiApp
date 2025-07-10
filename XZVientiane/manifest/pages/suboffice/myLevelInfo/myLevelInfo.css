@@ -1,0 +1,84 @@
+.upGrade-title{
+	font-size:21px;
+	color:#222;
+	text-align:center;
+}
+.upGrade-goodsInfo .picBox{
+	float:left;
+	width:80px;
+	height:80px;
+	overflow:hidden;
+}
+.upGrade-goodsInfo .textBox{
+	margin-left:90px;
+}
+.upGrade-footBtn{
+	position:fixed;
+	bottom:0;
+	background:#fff;
+	left:0;
+	right:0;
+	z-index:2;
+	padding:10px 10px 15px 10px;
+	box-shadow:0px 0px 1px 0 #eee;
+}
+.upGrade-footBtn .buyBtn{
+	background:#D2161F;
+	position:absolute;
+	right:10px;
+	top:50%;
+	margin-top:-22.5px;
+	color:#fff;
+	width:120px;
+	height:40px;
+	line-height:40px;
+	font-size:16px;
+	text-align:center;
+	border-radius:6px;
+}
+.upGrade-ruleBox .upGrade-ruleList{
+	position:relative;
+	padding:5px 30px 5px 30px;
+}
+.upGrade-ruleBox .upGrade-ruleList .xzicon-checkcircle{
+	position:absolute;
+	color:#339933;
+	font-size:20px;
+	left:0;
+	top:0;
+}
+.upGrade-ruleBox .upGrade-ruleList .xzicon-minuscircle{
+	position:absolute;
+	color:#ccc;
+	font-size:20px;
+	left:0;
+	top:0;
+}
+.upGrade-ruleBox .upGrade-ruleList .rightNum{
+	position:absolute;
+	right:0;
+	top:5px;
+	line-height:25px;
+}
+.xzui-btn.primary.gray{
+	background:#ccc !important;
+}
+.xzui-btn.primary.gray:hover{
+	background:#ccc !important;
+}
+
+
+.upGrade-goodsBox .upGrade-goodsList{
+	padding:0 15px;
+}
+.upGrade-goodsBox .upGrade-goodsList +.upGrade-goodsList{
+	margin-top:15px;
+}
+
+.myLevelInfo-signOut{
+	color:#666;
+	font-size:12px;
+	text-decoration:underline;
+	display:inline-block;
+	margin-left:10px;
+}

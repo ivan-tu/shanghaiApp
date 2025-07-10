@@ -1,0 +1,46 @@
+.client_myWallte_header{
+	padding:30px 15px 10px 15px;
+	text-align:center;
+}
+.client_myWallte_header .money{
+	font-size:30px;
+	font-weight:600;
+}
+.client_myWallte_header .title{
+	font-size:16px;
+	line-height:20px;
+}
+.tuige-myAchievement-item{
+	padding:12px 0;
+	position:relative;
+	overflow:hidden;
+}
+.tuige-myAchievement-money{
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 46px;
+}
+.tuige-myAchievement-item + .tuige-myAchievement-item:after{
+	content: '';
+	background: #f1f1f1;
+	position: absolute;
+	left: -50%;
+	right: -50%;
+	-webkit-transform: scale(0.5);
+	transform: scale(0.5);
+	height: 1px;
+	width: 200%;
+	top:0;
+}
+.client_myIncome_timeBtn{
+	background: #FFE300;
+	border-radius: 4px;
+	display: inline-block;
+	font-size: 12px;
+	color: #000;
+	padding: 3px 4px;
+	min-width: 50px;
+	text-align: center;
+	font-family: initial;
+	cursor:pointer;
+}

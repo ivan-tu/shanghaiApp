@@ -1,0 +1,75 @@
+<div class="app-wrapper">
+    <div wx:if="{{isUserLogin}}" class="app-main positionBottom">
+    	<div class="markWraper"></div>
+    	<div class="loadingBox mlr15" wx:if="{{showLoading}}">
+			<div class="xzicon-loading"></div>
+		</div>
+        <div wx:else>
+            <div class="ptb15">
+                <div class="searchCategory-box clearfix bgfff">
+                    <div class="searchCategory">
+                        <div class="listBox">
+                            <span wx:for="{{levelList}}" class="list {{(form.levelid==item._id?' active':'')}}"  data-id="{{item._id}}" data-index="{{index}}" bindtap="changeLevel">{{item.name}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="upGradeList-levelInfo pd15">
+                	<p class="p16 mb10">会员介绍</p>
+                    <div wx:if="{{levelInfo.content}}"><image class="w100" src="{{levelInfo.content}}" mode="widthFix" /></div>
+                </div>
+            </div>
+            <div class="xz-bottomBox-fixed setTopLine" wx:if="{{canBuy}}">
+                <div class="clearfix">
+                    <div class="xz-bottomBox-fixedTotal p16">
+                        <span class="ml5">合计：</span><span class="cRed p18" wx:if="{{totalPrice}}">¥{{totalPrice}}</span><span class="cRed p18" wx:else>免费</span>
+                    </div>
+                    <button class="xz-bottomBox-fixedSave" bindtap="toCheckParent">立即加入</button>
+                </div>
+            </div>
+        </div>
+        <!--确认推荐人弹框-->
+        <div class="publicScroll_dialog checkParentDialog {{(checkParentDialog.show?' show':'')}}">
+            <div class="publicScroll_body" style="height:{{checkParentDialog.height}}px;">
+                <div class="publicScroll_head clearfix tac bgfff">
+                    <span class="p16">确认推荐人</span>
+                    <span class="fr p16" bindtap="toHideCheckDialog"><i class="xzicon-close"></i></span>
+                </div>
+                <div class="publicScroll_main">
+                    <view class="bgfff">
+                        <div class="form-list">
+                            <div class="form-list-item title">推荐人</div>
+                            <div class="form-list-item" wx:if="{{checkParentDialog.edit==1}}">
+                            	<input placeholder="请输入账号" class="textInput" bindinput="model" value="{{checkParentDialog.account}}" data-model="checkParentDialog.account" type="tel" />
+                            </div>
+                            <div class="form-list-item " wx:elif="{{checkParentDialog.parentData&&checkParentDialog.parentData._id}}">
+                                <div class="userInfoBox clearfix">
+                                    <div class="picBox"><image src="{{checkParentDialog.parentData.headpic}}" class="w100 h100" mode="widthFix" /></div>
+                                    <div class="textBox">
+                                        <p>{{checkParentDialog.parentData.account}}</p>
+                                        <p class="p12 c666 textOver">{{checkParentDialog.parentData.username}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-list-item c999" wx:else>暂无推荐人</div>
+                            <div class="form-list-item title long tar">
+                            	<span class="redBtn" wx:if="{{checkParentDialog.edit==1}}" bindtap="checkAccount">确认推荐人</span>
+                                <span class="redBtn" wx:else bindtap="toEditParent">修改推荐人</span>
+                            </div>
+                        </div>
+                    </view>
+                </div>
+                <view class="publicScroll_footBtn">
+                	<div class="displayFlex">
+                    	<div class="list">
+                        	<button class="cancelBtn" type="button" bindtap="toCancelCheckDialog">没有推荐人</button>
+                        </div>
+                        <div class="list ml10">
+                        	<button class="submitBtn" type="button" bindtap="toConfirmCheckDialog">确定</button>
+                        </div>
+                    </div>
+                </view>
+            </div>
+        </div>
+    </div>
+    <nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

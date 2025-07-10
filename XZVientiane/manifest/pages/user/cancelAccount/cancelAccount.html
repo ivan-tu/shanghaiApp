@@ -1,0 +1,23 @@
+<div class="app-wrapper">
+	<div wx:if="{{isUserLogin}}" class="app-main">
+    	<div class="bgfff">
+            <div class="form-list">
+                <div class="form-list-item title long"><span style="color: #f90022;">*</span>联系方式</div>
+                <div class="form-list-item">
+                    <input class="xzui-input" placeholder="填写账号" value="{{form.account}}" bindinput="model"
+                            data-model="form.account" class="textInput c666 p14" type="text" />
+                </div>
+            </div>
+            <div class="form-list">
+                <div class="form-list-item title long"><span style="color: #f90022;">*</span>注销说明</div>
+                <div class="form-list-item">
+                    <textarea style="height: 100px;" class="xzui-textarea c666 p14" placeholder="请输入注销说明" bindinput="model" data-model="form.content" value="{{form.content}}"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="xzui-btn-app">
+            <button type="button" bindtap="cancel" class="xzui-btn xzui-btn_b primary small" size="large">提交</button>
+        </div>
+	</div>
+	<nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+	"nologin": "/components/common/nologin/nologin"
+  },
+  "enablePullDownRefresh": false,
+  "navigationBarTitleText": "隐私设置"
+}

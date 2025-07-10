@@ -1,0 +1,47 @@
+<div class="app-wrapper">
+    <div wx:if="{{isUserLogin}}" class="app-main">
+        <div class="">
+            <div class="form-list bgfff"  wx:for="{{data}}" bindtap="toDetail" data-id="{{item.id}}">
+            	<div class="form-list-item c666">
+                	<p>状态</p>
+                    <p>时间</p>
+                    <p>提现金额</p>
+                    <p>税费</p>
+                    <p>手续费</p>
+                    <p>实际到账</p>
+                    <p wx:if="{{item.status==2}}">拒绝理由</p>
+                </div>
+                <div class="form-list-item tar c666">
+                	<p>
+                    	<span wx:if="{{item.status==0}}">待审核</span>
+                        <span class="cGreen" wx:elif="{{item.status==1}}">已通过</span>
+                        <span class="cRed"  wx:elif="{{item.status==2}}">{{item.rfcontent=='用户撤回'?'同意撤回':'已拒绝'}}</span>
+                    </p>
+                    <p>{{item.addtime}}</p>
+                    <p>{{item.total}}</p>
+                    <p>{{item.poundage}}</p>
+                    <p>{{item.handlingfee}}</p>
+                    <p>¥{{item.actualmoney}}</p>
+                    <p wx:if="{{item.status==2}}">{{item.rfcontent}}</p>
+                </div>
+            </div>
+            <div class="app-loadmore" wx:if="{{!data.length&&showLoading}}">
+                <div class="xzui-loadmore xzui-loadmore_line">
+                    <div class="xzui-loadmore__tips xzui-loadmore__tips_in-line">还没有提现记录哦</div>
+                </div>
+            </div>
+            <div class="app-loadmore" wx:elif="{{settings.noMore&&showLoading}}">
+                <div class="xzui-loadmore xzui-loadmore xzui-loadmore_line">
+                    <div class="xzui-loadmore__tips xzui-loadmore__tips_in-line">我是有底线的</div>
+                </div>
+            </div>
+            <view class="app-loadmore" hidden="{{showLoading}}">
+                <div class="xzui-loadmore">
+                    <div class="xzicon-loading"></div>
+                    <div class="xzui-loadmore__tips">正在加载</div>
+                </div>
+            </view>
+        </div>
+    </div>
+    <nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

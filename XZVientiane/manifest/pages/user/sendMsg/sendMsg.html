@@ -1,0 +1,13 @@
+<div class="app-wrapper">
+    <div class="app-main" wx:if="{{isUserLogin}}">
+    	<div class="form-list bgfff">
+             <div class="form-list-item">
+                <textarea class="xzui-textarea" placeholder="请输入内容" bindinput="model" style="height:180px;" value="{{form.content}}" data-model="form.content"></textarea>
+            </div>
+        </div>
+        <div class="xzui-btn-app">
+            <button type="button" bindtap="submit" class="xzui-btn xzui-btn_b primary" size="large">提交</button>
+        </div>
+    </div>
+    <nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

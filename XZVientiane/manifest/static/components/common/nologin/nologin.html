@@ -1,0 +1,11 @@
+<div class="tuige-noAuth">
+  <p class="tuige-noAuth_title">需要登录后才能访问</p>
+  <div class="tuige-noAuth_btn">
+      <button type="button" bindtap="toLogin" class="xzui-btn xzui-btn_b primary" size="large">去登录</button>
+  </div>
+  <div wx:if="{{showPhoneLogin}}" class="mt20">
+  <navigator url="../../user/login/login?type=phone" class="c888">
+  	  手机号登录
+  </navigator>
+  </div>
+</div>

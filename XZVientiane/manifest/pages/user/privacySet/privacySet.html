@@ -1,0 +1,17 @@
+<div class="app-wrapper">
+    <div class="app-main pb20">
+    	<div class="bgfff">
+            <div class="form-list">
+                <div class="form-list-item">不公开加入的俱乐部</div>
+                <div class="form-list-item title tar long"><span class="xzui-switch-new {{(form.hideclubs==1?' active':'')}}" data-type="hideclubs" bindtap="switchThis"></span></div>
+            </div>
+            <div class="form-list">
+                <div class="form-list-item">不公开参加的活动</div>
+                <div class="form-list-item title tar long"><span class="xzui-switch-new {{(form.hideactivity==1?' active':'')}}" data-type="hideactivity" bindtap="switchThis"></span></div>
+            </div>
+        </div>
+        <div class="xzui-btn-app">
+            <button type="button" bindtap="submit" class="xzui-btn xzui-btn_b primary" size="large">提交</button>
+        </div>
+    </div>
+</div>

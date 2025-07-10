@@ -1,0 +1,53 @@
+<div class="app-wrapper">
+    <div wx:if="{{isUserLogin}}" class="app-main">
+    	<div class="searchCategory-box clearfix bgfff">
+            <div class="searchCategory">
+                <div class="listBox">
+                    <span class="list {{(options.type=='my'&&options.status==''?' active':'')}}" bindtap="screenStatus" data-status="">全部</span>
+                    <span class="list {{(options.type=='my'&&options.status==1?' active':'')}}" bindtap="screenStatus" data-status="1">可使用</span>
+                    <span class="list {{(options.type=='my'&&options.status==2?' active':'')}}" bindtap="screenStatus" data-status="2">已使用</span>
+                    <span class="list {{(options.type=='my'&&options.status==3?' active':'')}}" bindtap="screenStatus" data-status="3">已过期</span>
+                    <!--<span class="list {{(options.type=='send'?' active':'')}}" bindtap="screenStatus" data-status="send">已转赠</span>-->
+                </div>
+            </div>
+        </div>
+        <div class="form-title">共 {{count}} 张票券</div>
+        <div class="myTicket-box">
+        	<div class="myTicket-listBox pd15 bgfff" wx:for="{{data}}">
+            	<div class="clearfix pb10 hasBorder bottom">
+                	<div class="fl orderList_storeInfo" bindtap="toStoreIndex" data-shopid="{{item.shopdata.shortid}}">
+                    	<div class="picBox"><image src="{{item.shopdata.logo}}" mode="widthFix" class="round" style="vertical-align: bottom;"/></div>
+                        <div class="textBox p12 c333">{{item.shopdata.name}} <i class="xzicon-right"></i></div>
+                    </div>
+                </div>
+                <view class="myTicket-list mt10 clearfix">
+                    <div class="picBox hasLoading" bindtap="toUse" data-id="{{item.id}}"><image src="{{item.pic}}" mode="widthFix" /></div>
+                    <div class="textBox {{(options.orderid?' hasBtn':'')}}" bindtap="toUse" data-id="{{item.id}}">
+                        <p class="textOver c333 p14">{{item.ticketname}}</p>
+                        <p class="cRed p12 mt5" wx:if="{{item.status==1}}">过期时间：{{item.expiretime}}</p>
+                        <p class="c999 p12 mt5" wx:elif="{{item.status==2}}">已使用</p>
+                        <p class="c999 p12 mt5" wx:elif="{{item.status==3}}">已过期</p>
+                        <p class="c999 p12 mt5" wx:elif="{{item.status==4}}">已退款</p>
+                        <p class="c666 p12 mt5" wx:if="{{item.ismy==1&&item.userinfo}}">赠送人：{{item.userinfo.username}}</p>
+                        <p class="c666 p12 mt5" wx:if="{{item.ismy==0&&item.userinfo}}">领取人：{{item.userinfo.username}}</p>
+                    </div>
+                    <div class="codeBtn" wx:if="{{item.ticketsType==1&&options.orderid}}">
+                    	<image src="{{item.codeUrl}}" mode="widthFix" style="width:80px;height:80px;" />
+                    </div>
+                    <div class="btnBox" wx:if="{{options.type!='send'}}">
+                    	<!--<button type="button" class="sendBtn" data-index="{{index}}" bindtap="toShareThis" wx:if="{{item.status==1&&!item.issend}}">赠送好友</button>-->
+                        <button type="button" class="changeBtn" wx:if="{{item.status==1}}" data-id="{{item.id}}" data-goodsid="{{item.shortid}}" bindtap="toUse">立即使用</button>
+                        <button type="button" class="changeBtn" wx:else  data-id="{{item.id}}" data-goodsid="{{item.shortid}}" bindtap="toBuy">再次购买</button>
+                    </div>
+                </view>
+            </div>
+        </div>
+        <view class="loadingBox mlr14" hidden="{{!showLoading}}">
+            <div class="xzicon-loading"></div>
+            <div class="xzui-loadmore__tips">正在加载</div>
+        </view>
+        <view class="noData mlr14" hidden="{{!showNoData}}"><image class="noData_pic" src="{{staticPath}}images/noData.png" mode="widthFix" /></view>
+    </div>
+    <nologin bindloginsuccess="onShow" wx:else></nologin>
+    <newShare id="newShareCon"></newShare>
+</div>

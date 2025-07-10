@@ -1,0 +1,106 @@
+.signupList-list{
+	box-shadow: 0 0 2px 1px #eee;
+	background: #fff;
+	padding: 10px;
+	border-radius: 4px;
+	position:relative;
+}
+.signupList-list .spanStatus{
+	position:absolute;
+	right:5px;
+	top:5px;
+	z-index:2;
+	font-size:12px;
+}
+.signupList-box .listBox{
+	position:relative;
+}
+.signupList-box .listBox .xzui-checkbox-new{
+	position:absolute;
+	z-index:2;
+	left:5px;
+	top:25px;
+}
+.signupList-box .listBox.active{
+	padding-left:40px;
+}
+.signupList-box .listBox + .listBox{
+	margin-top:15px;
+}
+.signupList-list .cancelBtn{
+	background:#F5F5F5;
+	color:#666;
+	position:absolute;
+	right:10px;
+	bottom:10px;
+	font-size:12px;
+	line-height:24px;
+	height:24px;
+	padding:0 5px;
+	border-radius:4px;
+}
+.signupList-list  .priceInfo{
+	color:#666;
+	position:absolute;
+	right:10px;
+	top:30px;
+	font-size:12px;
+}
+.signupList-list .headBox{
+	position:relative;
+	padding-right:35px;
+}
+.signupList-list .headBox .picBox{
+	width:50px;
+	height:50px;
+	float:left;
+	border-radius:50%;
+	overflow:hidden;
+}
+.signupList-list .headBox .textBox{
+	margin-left:60px;
+}
+.signupList-list .headBox .codePic{
+	width:23px;
+	position:absolute;
+	right:0px;
+	top:0px;
+}
+.signupList-list .headBox .delPic{
+	width:20px;
+}
+.signupList-list .identityBox .identityList{
+	position:relative;
+	padding-left:20px;
+	padding-right:15px;
+}
+.signupList-list .identityBox .identityList:before{
+	content:'';
+	display:inline-block;
+	width:8px;
+	height:8px;
+	border-radius:50%;
+	border:1px solid #888;
+	position:absolute;
+	left:5px;
+	top:7px;
+}
+.signupList-list .identityBox .identityList.red{
+	color:#F90022;
+}
+.signupList-list .identityBox .identityList.red:before{
+	content:'';
+	border:1px solid #F90022;
+}
+.signupList-list .identityBox .identityList +.identityList{
+	margin-top:5px;
+}
+
+.signupList-infoList .picContainer .title{
+	width:100px;
+	float:left;
+}
+.signupList-infoList .picContainer .picBox{
+	width:160px;
+	margin-left:110px;
+}

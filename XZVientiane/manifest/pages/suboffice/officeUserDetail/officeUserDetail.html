@@ -1,0 +1,54 @@
+<div class="app-wrapper">
+    <div class="app-main">
+        <div class="loadingBox mlr15" wx:if="{{ajaxLoading}}">
+			<div class="xzicon-loading"></div>
+		</div>
+        <div wx:else>
+        	<div class="officeUserDetail-header clearfix bgfff" bindtap="toUserDetail">
+            	<div class="picBox"><image class="w100 h100 round" src="{{data.headpic}}" mode="widthFix" /></div>
+                <div class="textBox">
+                	<p>{{data.username}}<span wx:if="{{data.levelname}}" class="spanList">{{data.levelname}}</span></p>
+                    <p class="p12">{{data.account}}</p>
+                    <p class="p12">加入时间:{{data.createAt}} 到期时间:{{data.expiretime||'-'}}</p>
+                    <p class="p12">{{data.summary}}</p>
+                </div>
+                <i class="xzicon-right"></i>
+            </div>
+            <div class="displayFlex tac bgfff mt5 ptb10">
+            	<div class="list">
+                	<p>{{data.activity}}</p>
+                    <p>参加活动</p>
+                </div>
+                <div class="list">
+                	<p>{{data.total}}</p>
+                    <p>推广收入</p>
+                </div>
+                <div class="list">
+                	<p>{{data.childnum}}</p>
+                    <p>推荐会员</p>
+                </div>
+            </div>
+            <div class="bgfff mt5">
+                <div class="form-list">
+                    <div class="form-list-item title long">邀请人</div>
+                    <div class="form-list-item tar rightIcon" bindtap="changeParent" data-type="parent">{{data.parentUsername}}</div>
+                </div>
+                <div class="form-list">
+                    <div class="form-list-item title long">团队长</div>
+                    <div class="form-list-item tar rightIcon" bindtap="changeParent" data-type="commander">{{data.commanderUsername}}</div>
+                </div>
+                <div class="form-list">
+                    <div class="form-list-item title long">合伙人</div>
+                    <div class="form-list-item tar rightIcon" bindtap="changeParent" data-type="partner">{{data.partnerUsername}}</div>
+                </div>
+            </div>
+            <div class="officeUserDetail-footBtn">
+            	<span class="btnList" bindtap="changeLevel">修改会员级别</span>
+                <span class="btnList" bindtap="changeExpireTime">修改有效期</span>
+                <span class="btnList" bindtap="changeBeizhu">修改备注</span>
+                <span class="btnList" bindtap="cancelLevel">移除会员</span>
+            </div>
+        </div>
+    </div>
+    <newShare id="newShareCon"></newShare>
+</div>

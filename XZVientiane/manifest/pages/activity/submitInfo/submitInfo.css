@@ -1,0 +1,16 @@
+.submitInfo-list +.submitInfo-list .listBox{
+	border-top:1px solid #F9F9F9;
+}
+.radioList +.radioList{
+	margin-left:6px;
+}
+.form-list-item.must{
+	position:relative;
+}
+.form-list-item.must:before{
+	content:'*';
+	position:absolute;
+	color:#EF5A5A;
+	left:-7px;
+	top:1px;
+}

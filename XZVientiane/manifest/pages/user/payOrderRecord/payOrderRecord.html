@@ -1,0 +1,22 @@
+<div class="app-wrapper">
+    <div class="app-main">
+    	<p class="form-title">共 {{count}} 条记录</p>
+    	<div class="payOrderRecord_box" wx:if="{{data&&data.length}}">
+        	<navigator url="../../store/detail/detail?id={{item.shopInfo._id}}" class="payOrderRecord_List" wx:for="{{data}}">
+            	<div class="header clearfix">
+            		<div class="picBox hasLoading"><image class="w100 h100 pic" src="{{item.shopInfo.pic}}" mode="widthFix" /></div>
+                    <p class="shopName"><span class="text">{{item.shopInfo.name}}</span> <i class="xzicon-right"></i></p>
+                    <span class="detailBtn">{{item.createAt}}</span>
+                </div>
+                <div class="container">
+                	<p class="c666">买单：{{item.payTotal}}</p>
+                </div>
+    		</navigator>
+        </div>
+        <view class="loadingBox mlr15" hidden="{{!showLoading}}">
+			<div class="xzicon-loading"></div>
+			<div class="xzui-loadmore__tips">正在加载</div>
+		</view>
+		<view class="noData mlr15" hidden="{{!showNoData}}">暂无数据</view>
+    </div>
+</div>

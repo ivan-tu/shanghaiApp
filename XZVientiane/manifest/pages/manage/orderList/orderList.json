@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "search-bar": "/components/common/search-bar/search-bar",
+	"picker": "/components/web/picker/picker",
+    "nologin": "/components/common/nologin/nologin"
+  },
+  "navigationBarTitleText": "订单列表"
+}

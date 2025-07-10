@@ -1,0 +1,73 @@
+<div class="app-wrapper">
+    <div wx:if="{{isUserLogin}}" class="app-main {{(hasBtn?' positionBottom':' mb20')}}">
+    	<div class="bgfff">
+            <div class="form-list">
+                <div class="form-list-item c333 p16">订单状态：<span class="cRed">{{data.statusName}}</span></div>
+            </div>
+            <div wx:if="{{data.address_name}}" class="hasBorder top left orderDetail-addressBar">
+                <image class="addressIcon" src="{{staticPath}}iconPic/addressIcon.png" mode="widthFix" />
+                <p>姓名：{{data.address_name}}</p>
+                <p>电话：{{data.address_mobile}}</p>
+                <p>地址：{{data.address_address}}</p>
+            </div>
+        </div>
+        <div class="bgfff mt10">
+            <div class="shop-orderDetail-goodsList  hasBorder bottom left">
+            	<div>
+                    <div class="displayB clearfix positionR plr14 pt15 pb15">
+                        <div class="goodsPic hasLoading"><image class="pic" src="{{data.goodsinfo.pic}}"  mode="widthFix" /></div>
+                        <div class="goodsSet tar">
+                            <div class="c333 p14">¥{{data.goodsinfo.total}}</div>
+                        </div>
+                        <div class="goodsText">
+                            <div class="c333 p14 textOver">{{data.goodsinfo.name}}</div>
+                            <div class="c333 p12 textLine mt5">x{{data.quantity}}</div>
+                        </div>     
+                    </div>
+            	</div>
+            </div>
+            <div class="form-list">
+                <div class="form-list-item c666 p16">实付款</div>
+                <div class="form-list-item cRed p16 tar">¥{{data.totalPrice}}</div>
+            </div>
+        </div>
+        <div class="bgfff mt10 ptb10">
+        	<div class="orderDetail-title">订单信息</div>
+            <div class="mt10 c888 p12 plr15">
+            	<p>订单编号：{{data.ordernum}}</p>
+                <p wx:if="{{data.paytypeName}}" class="mt5">支付方式：{{data.paytypeName}}</p>
+                <p class="mt5">下单时间：{{data.createAt}}</p>
+                <p wx:if="{{data.paytime}}" class="mt5">支付时间：{{data.paytime}}</p>
+                <p wx:if="{{data.deliverytime}}" class="mt5">发货时间：{{data.deliverytime}}</p>
+                <p wx:if="{{data.confirmtime}}" class="mt5">确认时间：{{data.confirmtime}}</p>
+                <p wx:if="{{data.refundText}}" class="mt5">退款拒绝：{{data.refundText}}</p>
+            </div>
+        </div>
+        <view class="xzui-btn-app positionBottom orderDetail-footBtn" wx:if="{{data.status==1}}">
+        	<div class="displayFlex">
+                <div class="list">
+                    <button type="button" class="xzui-btn xzui-btn_b gray" size="large" bindtap="delOrder">取消订单</button>
+                </div>
+                <div class="list">
+                    <button type="button" class="xzui-btn xzui-btn_b primary" size="large" bindtap="payOrder">立即付款</button>
+                </div>
+            </div>
+        </view>
+        <!--
+        <view class="xzui-btn-app positionBottom orderDetail-footBtn" wx:elif="{{data.status==2&&data.applyRefund==0}}">
+        	<div class="displayFlex">
+                <div class="list">
+                    <button type="button" class="xzui-btn xzui-btn_b gray" size="large" bindtap="cancelOrder">申请退款</button>
+                </div>
+            </div>
+        </view>-->
+        <view class="xzui-btn-app positionBottom orderDetail-footBtn" wx:elif="{{data.status==3}}">
+        	<div class="displayFlex">
+                <div class="list">
+                    <button type="button" class="xzui-btn xzui-btn_b primary" size="large" bindtap="reveiveOrder">确认收货</button>
+                </div>
+            </div>
+        </view>
+    </div>
+    <nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

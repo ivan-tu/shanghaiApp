@@ -1,0 +1,46 @@
+<div class="app-wrapper">
+	<div class="app-main pb20" wx:if="{{isUserLogin}}">
+        <view class="loadingBox mlr14" wx:if="{{showLoading}}">
+            <div class="xzicon-loading"></div>
+        </view>
+        <div wx:else class="myIdentity_wraper">
+        	<div class="myIdentity_list" wx:for="{{data}}">
+            	<p class="title c333">{{item.name}}合伙人</p>
+                <p class="mt10 c888">介绍</p>
+                <div class="contentBox" style="white-space:pre-wrap;">{{item.content}}</div>
+                <div class="mt10 clearfix">
+                    <p class="price fl">¥{{item.price}}/三年</p>
+                    <span class="submitBtn fr" bindtap="toSupply" data-index="{{index}}">立即开通</span>
+                </div>
+            </div>
+        </div>
+        <div class="publicScroll_dialog addDialog {{(addDialog.show?' show':'')}}">
+            <div class="publicScroll_body" style="height:{{addDialog.height}}px;">
+                <div class="publicScroll_main">
+                	<div class="clearfix plr15">
+                        <div class="fl">
+                        	<p>选择您的专属号码</p>
+                       	</div>
+                    </div>
+                    <div class="contentBox">
+                        <div class="pb10">
+                            <div class="selectNumBox clearfix">
+                            	<div class="listBox" wx:for="{{addDialog.numberList}}">
+                                	<span class="list {{(addDialog.number===item?' active':'')}}" bindtap="selectNum" data-num="{{item}}">{{item}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <view class="publicScroll_footBtn">
+                	<div class="displayFlex">
+                    	<div class="list"><button class="cancelBtn" type="button" bindtap="toHideAddDialog">取消</button></div>
+                        <div class="list ml10"><button class="submitBtn" type="button" bindtap="toConfirmAddDialog">确定</button></div>
+                    </div>
+                </view>
+            </div>
+        </div>
+	</div>
+    <nologin bindloginsuccess="onShow" wx:else></nologin>
+    <newShare id="newShareCon"></newShare>
+</div>

@@ -1,0 +1,7 @@
+{
+  "usingComponents":{
+	  "upload": "/components/common/upload/upload",
+	  "newShare": "/components/common/newShare/newShare"
+  },
+  "navigationBarTitleText":"活动"
+}

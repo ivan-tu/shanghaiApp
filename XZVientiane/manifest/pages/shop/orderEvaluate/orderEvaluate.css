@@ -1,0 +1,47 @@
+.shop-orderDetail-goodsList .goodsPic{
+	overflow:hidden;
+	width:80px;
+	height:80px;
+	float:left;
+	position:relative;
+}
+.shop-orderDetail-goodsList .goodsText{
+	margin-left:88px;
+	margin-right:90px;
+}
+.shop-orderDetail-goodsList .goodsSet{
+	float:right;
+	width:90px;
+}
+.shop-orderDetail-goodsList:last-child:after{
+	content:'';
+	display:none;
+}
+.xzui-btn_b.gray{
+	color: #999;
+	font-weight: 500;
+	background-color: #f5f5f5;
+	display: block;
+	margin: 0;
+}
+.xzui-btn_b.red{
+	color: #fff;
+	font-weight: 500;
+	background-color:rgba(248,68,56,0.6);
+	display: block;
+	margin: 0;
+}
+
+.order_starList .xzicon-staro{
+	font-size:16px;
+	color:#999;
+}
+.order_starList .xzicon-star2{
+	font-size:16px;
+	color:#D2161F;
+}
+.order_starTips{
+	font-size:14px;
+	color:#666;
+	margin-left:5px;
+}

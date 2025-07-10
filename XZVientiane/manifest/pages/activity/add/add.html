@@ -1,0 +1,422 @@
+<div class="app-wrapper">
+	<div wx:if="{{isUserLogin}}" class="app-main pb20">
+		<div class="bgfff activity_form">
+			<div class="form-list">
+				<div class="form-list-item title c333 p14 long">活动名称</div>
+				<div class="form-list-item"><input placeholder="请输入活动名称" value="{{form.name}}" bindinput="model"
+						data-model="form.name" class="textInput c666" type="text" /></div>
+			</div>
+            <div class="form-list">
+				<div class="form-list-item title c333 p14 long">活动类型</div>
+				<div class="form-list-item">
+					<picker range="{{activityCategory}}" class="picker-region" bindchange="bindCagegoryChange" value="{{cagegoryIndex}}" range-key="name" 
+						id="pickerCategory">
+						<view class="picker c666" wx:if="{{form.category}}">{{form.category}}</view>
+						<view class="picker c999" wx:else>请选择</view>
+					</picker>
+				</div>
+			</div>
+            <div class="form-list">
+				<div class="form-list-item title c333 p14 long">活动系列</div>
+				<div class="form-list-item rightIcon" bindtap="selectType">
+                	<p wx:if="{{form.typeid}}">{{form.typename}}</p>
+                    <p wx:else class="c999">请选择</p>
+                </div>
+                <div class="form-list-item title tar" wx:if="{{form.typeid}}"><span class="clearBtn" bindtap="deleteType">清除</span></div>
+			</div>
+			<div class="form-list">
+				<div class="form-list-item title c333 p14 long">开始日期</div>
+				<div class="form-list-item">
+					<picker mode="date" class="picker-region" bindchange="bindBeginDate" value="{{bDate}}"
+						id="pickerBeginDate">
+						<view class="picker c666" wx:if="{{form.bDate}}">{{form.bDate}}</view>
+						<view class="picker c999" wx:else>选择开始日期</view>
+					</picker>
+				</div>
+			</div>
+			<div class="form-list">
+				<div class="form-list-item title c333 p14 long">开始时间</div>
+				<div class="form-list-item">
+					<picker mode="time" class="picker-region" bindchange="bindBeginTime" value="{{form.bTime}}"
+						id="pickerBeginTime">
+						<view class="picker c666" wx:if="{{form.bTime}}">{{form.bTime}}</view>
+						<view class="picker c999" wx:else>选择开始时间</view>
+					</picker>
+				</div>
+			</div>
+			<div class="form-list">
+				<div class="form-list-item title c333 p14 long">结束日期</div>
+				<div class="form-list-item">
+					<picker mode="date" class="picker-region" bindchange="bindEndDate" value="{{eDate}}" id="pickerEndDate">
+						<view class="picker c666" wx:if="{{form.eDate}}">{{form.eDate}}</view>
+						<view class="picker c999" wx:else>选择结束日期</view>
+					</picker>
+				</div>
+			</div>
+			<div class="form-list">
+				<div class="form-list-item title c333 p14 long">结束时间</div>
+				<div class="form-list-item">
+					<picker mode="time" class="picker-region" bindchange="bindEndTime" value="{{form.eTime}}"
+						id="pickerEndTime">
+						<view class="picker c666" wx:if="{{form.eTime}}">{{form.eTime}}</view>
+						<view class="picker c999" wx:else>选择结束时间</view>
+					</picker>
+				</div>
+			</div>
+            <!--
+            <div class="form-list">
+				<div class="form-list-item title c333 p14 long">报名截止日期</div>
+				<div class="form-list-item">
+					<picker mode="date" class="picker-region" bindchange="bindEndSDate" value="{{sDate}}" id="pickerEndSDate">
+						<view class="picker c666" wx:if="{{form.sDate}}">{{form.sDate}}</view>
+						<view class="picker c999" wx:else>选择截止日期</view>
+					</picker>
+				</div>
+			</div>
+			<div class="form-list">
+				<div class="form-list-item title c333 p14 long">报名截止时间</div>
+				<div class="form-list-item">
+					<picker mode="time" class="picker-region" bindchange="bindEndSTime" value="{{form.sTime}}"
+						id="pickerEndSTime">
+						<view class="picker c666" wx:if="{{form.sTime}}">{{form.sTime}}</view>
+						<view class="picker c999" wx:else>选择截止时间</view>
+					</picker>
+				</div>
+			</div>-->
+			<div class="form-list">
+				<div class="form-list-item title c333 p14 long">所在地区</div>
+				<div class="form-list-item">
+					<picker mode="region" class="picker-region" custom-item="" bindchange="bindAreaChange" value="{{form.area}}"
+						id="pickerArea">
+						<view class="picker c666" wx:if="{{form.area.length}}">{{form.area[0]}}-{{form.area[1]}}-{{form.area[2]}}</view>
+						<view class="picker c999" wx:else>选择活动举办地区</view>
+					</picker>
+				</div>
+			</div>
+			<div class="form-list">
+				<div class="form-list-item title c333 p14 long">详细地址</div>
+				<div class="form-list-item"><input placeholder="请输入详细地址" value="{{form.address}}" bindinput="model"
+						data-model="form.address" class="textInput c666" type="text" /></div>
+			</div>
+			<div class="form-list">
+				<div class="form-list-item title c333 p14 long">场所名称</div>
+				<div class="form-list-item"><input placeholder="请输入场所名称" value="{{form.addressName}}" bindinput="model"
+						data-model="form.addressName" class="textInput c666" type="text" /></div>
+			</div>
+			<div class="form-list">
+				<div class="form-list-item title c333 p14 long">活动详情</div>
+				<div class="form-list-item rightIcon c666" bindtap="setContent"><span wx:if="{{form.content}}">编辑详情</span><span
+						wx:else>添加详情</span></div>
+			</div>
+			<div class="form-list">
+				<div class="form-list-item title c333 p14 long">活动简介</div>
+				<div class="form-list-item"><textarea maxlength="-1" class="textarea" placeholder="请输入活动简介" bindinput="model"
+						data-model="form.describe" value="{{form.describe}}"></textarea></div>
+			</div>
+			<div class="form-list">
+                <div class="form-list-item title c333 p14 large" style="height:65px;margin-top:7px">
+					<div class="mt10">活动封面</div>
+					<div class="c666 p12">建议长宽750px*600px</div>
+				</div>
+				<div class="form-list-item">
+					<upload value="{{form.pic}}" class="user-upload" width="65" height="65" bindchange="uploadPic" id="uploadPic">
+					</upload>
+				</div>
+			</div>
+            <!--
+            <div class="form-list">
+				<div class="form-list-item title c333 p14 long" style="line-height:65px;">活动图片</div>
+				<div class="form-list-item">
+					<div class="album-container album-container-picture">
+						<div class="album-list clearfix">
+							<div class="album-item album-item-row3" wx:for="{{files}}">
+								<div class="album-bar" style="height:{{imageWidth}}px;">
+									<image src="{{item.src}}" style="width:100%;height:100%;" mode="widthFix" bindtap="viewImage"
+										data-index="{{index}}" />
+									<view class="xzui-uploader_progress" hidden="{{item.hidePercent}}">
+										<span class="xzui-uploader_progressText">{{(item.percent||0)}}%</span>
+									</view>
+									<button type="button" class="album-del album-del-picture" bindtap="showMenu" data-id="{{item.id}}"
+										data-index="{{index}}"><i class="xzicon-nav"></i></button>
+								</div>
+							</div>
+							<div class="album-item album-item-row3">
+								<div class="album-bar" style="height:{{imageWidth}}px;">
+									<view class="xzui-uploader__input-box" style="height:{{imageWidth}}px;width:{{imageWidth}}px;"
+										catchtap="uploadPics">
+									</view>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>-->
+            <!--
+			<div class="form-list">
+				<div class="form-list-item title c333 p14 large" style="height:65px;margin-top:7px">
+                	<div class="mt10">H5分享缩略图</div>
+                    <div class="c666 p12">建议长宽480px*480px</div>
+                </div>
+				<div class="form-list-item">
+					<upload value="{{form.h5sharepic}}" class="user-upload" width="65" height="65" bindchange="uploadH5sharepic"
+						id="uploadH5sharepic">
+					</upload>
+				</div>
+			</div>
+			<div class="form-list">
+				<div class="form-list-item title c333 p12 large" style="height:65px;margin-top:7px">
+                	<div class="mt10">小程序分享缩略图</div>
+                    <div class="c666 p12">建议长宽480px*360px</div>
+                </div>
+				<div class="form-list-item">
+					<upload value="{{form.miniwxsharepic}}" class="user-upload" width="88" height="66"
+						bindchange="uploadMiniwxsharepic" id="uploadMiniwxsharepic">
+					</upload>
+				</div>
+			</div>-->
+            <div class="form-list">
+				<div class="form-list-item title c333 p14 long">客服手机号</div>
+				<div class="form-list-item">
+					<input placeholder="不填为发布人手机号" value="{{form.customerTel}}" bindinput="model" data-model="form.customerTel"
+						class="textInput c666" type="tel" />
+				</div>
+			</div>
+			<div class="form-list">
+				<div class="form-list-item title c333 p14 long">总参与人数</div>
+				<div class="form-list-item">
+					<input placeholder="请输入参与总人数" value="{{form.limitnum}}" bindinput="model" data-model="form.limitnum"
+						class="textInput c666" type="number" />
+				</div>
+			</div>
+			<div class="form-list">
+				<div class="form-list-item c333 p14 title large">显示报名人数</div>
+				<div class="form-list-item tar">
+					<span catchtap="switchThis" data-type="showusernum"
+						class="xzui-switch-new yellow {{(form.showusernum==1?' active':'')}}"></span>
+				</div>
+			</div>
+            <div class="form-list">
+				<div class="form-list-item c333 p14 title large">是否可以取消</div>
+				<div class="form-list-item tar">
+					<div class="displayIB" data-type="selfcancel" bindtap="selectThis" data-value="0"><span class="xzui-radio-new small {{(form.selfcancel==0?' active':'')}}"></span><span class="xzui-radioTitle-new">可以</span></div>
+                    <div class="displayIB ml5" data-type="selfcancel" bindtap="selectThis" data-value="1"><span class="xzui-radio-new small {{(form.selfcancel==1?' active':'')}}"></span><span class="xzui-radioTitle-new">不可以</span></div>
+				</div>
+			</div>
+            <div class="form-list">
+				<div class="form-list-item c333 p14 title large">报名范围</div>
+				<div class="form-list-item tar">
+					<div class="displayIB" data-type="publicity" bindtap="selectThis" data-value="1"><span class="xzui-radio-new small {{(form.publicity==1?' active':'')}}"></span><span class="xzui-radioTitle-new">所有人</span></div>
+                    <div class="displayIB ml5" data-type="publicity" bindtap="selectThis" data-value="2"><span class="xzui-radio-new small {{(form.publicity==2?' active':'')}}"></span><span class="xzui-radioTitle-new">本俱乐部</span></div>
+				</div>
+			</div>
+            <div class="form-list" wx:if="{{form.publicity==2}}">
+				<div class="form-list-item c333 p14 title large">允许报名会员</div>
+				<div class="form-list-item tar">
+					<div class="pb5" wx:for="{{clubLevelList}}" bindtap="selectLevel" data-index="{{index}}"><span class="xzui-checkbox-new small {{(item.active==1?' active':'')}}"></span><span class="xzui-radioTitle-new">{{item.name}}</span></div>
+				</div>
+			</div>
+            <div class="form-list">
+				<div class="form-list-item c333 p14 title large">
+                	<p>私密活动</p>
+                    <p class="p12 c666">开启后只能分享可见</p>
+                </div>
+				<div class="form-list-item tar">
+					<span catchtap="switchThis" data-type="showstatus"
+						class="xzui-switch-new yellow {{(form.showstatus===0?' active':'')}}"></span>
+				</div>
+			</div>
+            <!--
+            <div class="form-list" wx:if="{{form.publicity==2}}">
+				<div class="form-list-item c333 p14 title large">选择俱乐部</div>
+				<div class="form-list-item tar">
+					<div class="pb5" wx:for="{{clubList}}" bindtap="selectClub" data-index="{{index}}"><span class="xzui-checkbox-new small {{(item.active==1?' active':'')}}"></span><span class="xzui-radioTitle-new">{{item.name}}</span></div>
+				</div>
+			</div>
+            <div class="form-list">
+				<div class="form-list-item title c333 p14 long">报名人员</div>
+				<div class="form-list-item">
+					<picker range="{{levelList}}" class="picker-region" bindchange="bindLevelChange" value="{{form.levelset}}"
+						id="pickerLevel">
+						<view class="picker c666" wx:if="{{levelList[form.levelset]}}">{{levelList[form.levelset]}}</view>
+						<view class="picker c999" wx:else>请选择</view>
+					</picker>
+				</div>
+			</div>-->
+		</div>
+        <div class="bgfff mt10">
+        	<div class="form-list">
+				<div class="form-list-item title c333 p14 large">开启收礼</div>
+				<div class="form-list-item tar">
+					<span catchtap="switchThis" data-type="acceptGift"
+						class="xzui-switch-new yellow {{(form.acceptGift==1?' active':'')}}"></span>
+				</div>
+			</div>
+        	<div class="form-list">
+				<div class="form-list-item title c333 p14 large">开启收费</div>
+				<div class="form-list-item tar">
+					<span catchtap="switchThis" data-type="isfree"
+						class="xzui-switch-new yellow {{(form.isfree==2?' active':'')}}"></span>
+				</div>
+			</div>
+            <div class="form-list" wx:if="{{form.isfree==2}}">
+				<div class="form-list-item c333 p14">
+                	<p>允许钻石支付</p>
+                    <p class="p12 c666" wx:if="{{diamondTips}}">{{diamondTips}}</p>
+                </div>
+				<div class="form-list-item tar title long">
+					<span catchtap="switchThis" data-type="diamondpay"
+						class="xzui-switch-new yellow {{(form.diamondpay==1?' active':'')}}"></span>
+				</div>
+			</div>
+            <div class="form-list" wx:if="{{form.isfree==2}}">
+				<div class="form-list-item title c333 p14 large">签到后退款</div>
+				<div class="form-list-item tar">
+					<span catchtap="switchThis" data-type="signRefund"
+						class="xzui-switch-new yellow {{(form.signRefund==1?' active':'')}}"></span>
+				</div>
+			</div>
+            <!--
+            <div class="form-list" wx:if="{{form.isfree==2}}">
+				<div class="form-list-item title c333 p14 large">默认价</div>
+				<div class="form-list-item">
+					<input placeholder="请输入价格" value="{{form.price}}" bindinput="model" data-model="form.price"
+						class="textInput c666" type="digit" />
+				</div>
+                <div class="form-list-item tar title short c999">元</div>
+			</div>-->
+        </div>
+        <div wx:if="{{form.isfree==2&&form.tickets&&form.tickets.length}}">
+			<div class="bgfff mt10" wx:for="{{form.tickets}}">
+				<div class="form-list">
+					<div class="form-list-item title c333 p14">票名</div>
+					<div class="form-list-item"><input bindchange="changeTicketInput" data-type="name" data-index="{{index}}" placeholder="请输入"
+							value="{{item.name}}" type="text" class="textInput" /></div>
+				</div>
+				<div class="form-list">
+					<div class="form-list-item title c333 p14">描述</div>
+					<div class="form-list-item"><input bindchange="changeTicketInput" data-type="content" data-index="{{index}}" placeholder="请输入"
+							value="{{item.content}}" type="text" class="textInput" /></div>
+				</div>
+				<div class="form-list">
+					<div class="form-list-item title c333 p14">票价</div>
+					<div class="form-list-item title c333 p12 long">
+						<p wx:for="{{item.priceList}}" wx:for-index="l" wx:for-item="g">{{l}}：</p>
+					</div>
+					<div class="form-list-item">
+						<div wx:for="{{item.priceList}}" wx:for-index="l" wx:for-item="g"><input bindchange="changeTicketPrice"
+								data-index="{{index}}" data-type="{{l}}" placeholder="请输入" value="{{g}}" type="digit"
+								class="textInput" /></div>
+					</div>
+				</div>
+                <div class="form-list">
+					<div class="form-list-item title c333 p14">总数</div>
+					<div class="form-list-item"><input bindchange="changeTicketInput" data-type="quantity" data-index="{{index}}" placeholder="请输入"
+							value="{{item.quantity}}" type="number" class="textInput" /></div>
+                    <div class="form-list-item title short tar c999">张</div>
+				</div>
+                <div class="form-list">
+					<div class="form-list-item title c333 p14">升级会员</div>
+					<div class="form-list-item">
+                    	<picker range="{{clubLevelList}}" class="picker-region" bindchange="bindLevelChange" range-key="name" id="pickerLevel_{{index}}" index="{{index}}" data-index="{{index}}">
+                            <view class="picker c666" wx:if="{{item.upgradeToLevelname}}">{{item.upgradeToLevelname}}</view>
+                            <view class="picker c999" wx:else>请选择</view>
+                        </picker>
+                    </div>
+                    <div class="form-list-item title tar c888 short" bindtap="delThisLevel" data-index="{{index}}" wx:if="{{item.upgradeToLevelname}}">删除</div>
+				</div>
+                <div class="form-list" wx:if="{{item.upgradeToLevelname}}">
+					<div class="form-list-item title c333 p14">会员天数</div>
+					<div class="form-list-item">
+                    	<input bindchange="changeTicketInput" data-type="upgradeToLevelday" data-index="{{index}}" placeholder="请输入"
+							value="{{item.upgradeToLevelday}}" type="number" class="textInput" />
+                    </div>
+                    <div class="form-list-item title short tar c999">天</div>
+				</div>
+				<div class="form-list">
+					<div class="form-list-item tac cRed" bindtap="delTicket" data-index="{{index}}">删除票种</div>
+				</div>
+			</div>
+		</div>
+		<view wx:if="{{form.isfree==2}}" class="xzui-cells xzui-cells_form mt10">
+			<div class="xzui-cell xzui-cell_addlist ml15">
+				<div class="xzui-cell__bd">
+					<div class="xzui-addlist">
+						<div class="xzui-addlist_addbox">
+							<button class="xzui-addlist_add" bindtap="addTicketList">
+								<i class="xzicon-pluscircle xzui-addlist_addicon"></i>
+								<div class="xzui-addlist_addtitle">添加票种</div>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</view>
+        <div class="bgfff mt10">
+        	<div class="form-list">
+				<div class="form-list-item title c333 p14 long">收集资料</div>
+				<div class="form-list-item tar">
+					<span catchtap="switchThis" data-type="iscollect"
+						class="xzui-switch-new {{(form.iscollect==1?' active':'')}}"></span>
+				</div>
+			</div>
+            <div class="form-list" wx:if="{{form.iscollect==1}}">
+				<div class="form-list-item title c333 p14 long">提示语</div>
+				<div class="form-list-item tar">
+					<input placeholder="请输入提示语" value="{{form.collectTips}}" bindinput="model" data-model="form.collectTips"
+						class="textInput p16 c666" type="text" />
+				</div>
+			</div>
+            <div class="form-list" wx:if="{{form.iscollect==1}}" wx:for="{{form.collectList}}">
+				<div class="form-list-item title c333 p14 long">{{item.title}}</div>
+				<div class="form-list-item tar">
+					<div class="displayIB" data-type="{{item.id}}" data-value="0" bindtap="changeCollect"><span class="xzui-radio-new small {{(item.value==0?' active':'')}}"></span><span class="xzui-radioTitle-new small">关闭</span></div>
+                    <div class="displayIB ml5" data-type="{{item.id}}" data-value="1" bindtap="changeCollect"><span class="xzui-radio-new small {{(item.value==1?' active':'')}}"></span><span class="xzui-radioTitle-new small">选填</span></div>
+                    <div class="displayIB ml5" data-type="{{item.id}}" data-value="2" bindtap="changeCollect"><span class="xzui-radio-new small {{(item.value==2?' active':'')}}"></span><span class="xzui-radioTitle-new small">必填</span></div>
+				</div>
+			</div>
+        </div>
+        <div class="bgfff mt10">
+        	<div class="form-list">
+				<div class="form-list-item title c333 p14 large">联合举办</div>
+				<div class="form-list-item tar">
+					<span catchtap="switchThis" data-type="joinclubStatus"
+						class="xzui-switch-new yellow {{(form.joinclubStatus==1?' active':'')}}"></span>
+				</div>
+			</div>
+            <div class="form-list" wx:if="{{form.joinclubStatus==1}}">
+				<div class="form-list-item title c333 p14 long">联办分润</div>
+				<div class="form-list-item">
+					<input placeholder="请输入联办分润" value="{{form.joinratio}}" bindinput="model" data-model="form.joinratio"
+						class="textInput c666" type="digit" />
+				</div>
+                <div class="form-list-item title c999 short tar">%</div>
+			</div>
+            <div class="form-list" wx:if="{{form.joinclubStatus==1}}">
+				<div class="form-list-item title c333 p14 large">联办俱乐部</div>
+				<div class="form-list-item" style="max-width:240px;width:240px;">
+                	<div class="joinclub-list" wx:for="{{joinclubList}}">
+                    	<p class="clubName textOver">{{item.name}}</p>
+                        <span class="delBtn" data-index="{{index}}" bindtap="delThisClub">删除</span>
+        			</div>
+                    <div class="joinclub-addBtn" bindtap="toSelectClub">
+                    	<i class="xzicon-pluscircle" style="color: #52c41a;"></i><span class="displayIB ml5">添加俱乐部</span>
+                    </div>
+                </div>
+			</div>
+        </div>
+        <p class="form-title">用户报名后加入群聊</p>
+        <div class="bgfff">
+        	<div class="form-list">
+				<div class="form-list-item title c333 p14 large" style="line-height:65px;">群二维码</div>
+				<div class="form-list-item">
+					<upload value="{{form.grouppic}}" class="user-upload" width="65" height="65" bindchange="uploadCode"
+						id="uploadCode"></upload>
+				</div>
+			</div>
+        </div>
+		<div class="xzui-btn-app">
+			<button type="button" bindtap="submit" class="xzui-btn xzui-btn_b primary yellow" size="large">提交</button>
+		</div>
+	</div>
+	<nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

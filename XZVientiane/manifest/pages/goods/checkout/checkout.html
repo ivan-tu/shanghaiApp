@@ -1,0 +1,80 @@
+<div class="app-wrapper">
+	<div wx:if="{{isUserLogin}}" class="app-main positionBottom">
+		<div class="mb10" wx:if="{{data.name}}">
+            <!--地址信息-->
+            <div class="bgfff pd15">
+                <div class="shop-checkout-address" bindtap="selectAddress" wx:if="{{address}}">
+                    <div class="shop-checkout-address-left c999">
+                        <i class="xzicon-map"></i>
+                    </div>
+                    <div class="shop-checkout-address-middle">
+                        <div>{{address.name}} {{address.mobile}}</div>
+                        <div class="p12 c999">{{address.detail}}</div>
+                    </div>
+                    <div class="shop-checkout-address-right c999">
+                        <i class="xzicon-right xzui-cell__ft_arrow"></i>
+                    </div>
+                </div>
+                <div class="tac cRed" bindtap="addAddress" wx:else>
+                    <i class="xzicon-pluscircleo"></i> 添加收货地址
+                </div>
+            </div>
+    		<!--商品信息-->
+            <div class="xzui-cells" style="margin-top:10px;">
+                <!--商品规格-->
+                <div class="xzui-panel__bd">
+                    <div class="xzui-media-box xzui-media-box_appmsg">
+                        <div class="xzui-media-box__hd xzui-media-box__hd_in-appmsg hasLoading" style="width:70px;height:70px;">
+                            <image src="{{data.pic}}"  mode="widthFix" />
+                        </div>
+                        <div class="xzui-media-box__bd xzui-media-box__bd_in-appmsg">
+                            <div class="xzui-media-box__title p16">{{data.name}}</div>
+                            <div class="xzui-media-box__desc">
+                                <div class="cRed p12 mt5">¥<span class="p14">{{data.price}}</span>
+                                	<div class="fr">
+                                    	<span class="xzicon-minussquare cRed p18" bindtap="minusCount"></span><span class="p14 tac" style="display:inline-block;width:40px;"><input class="xzui-input tac" pattern="[0-9]*" type="number" value="{{form.quantity}}" bindchange="inputCount"   style="margin-top:-2px;" /></span><span class="xzicon-plussquare cRed  p18" bindtap="addCount"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          <!--底部按钮-->
+          <div class="xz-bottomBox-fixed setTopLine">
+            <div class="clearfix">
+                <div class="xz-bottomBox-fixedTotal">实付款：<span class="c000 p18">¥{{totalPrice}}</span></div>
+                <form wx:if="{{client=='wx'}}" action="javascript:;" bindsubmit="submit" report-submit='true'>
+                  <button class="xz-bottomBox-fixedSave needsclick" form-type="submit">去支付</button>
+                </form>
+                <button wx:else class="xz-bottomBox-fixedSave needsclick" bindtap="submit">去支付</button>
+            </div>
+        </div>  
+    </div>
+    <div wx:elif="{{!showLoading}}" class="checkout_div">
+      <div class="tac pd15 p14 c999 bgfff" wx:if="{{!orderInfo._id}}">
+          <div class="shop-noData-icon tac"><i class="xzicon-shoppingcart"></i></div>
+          <p class="c666 tac">还没有要结算的商品</p>
+          <div bindtap="backIndex" class="shop-noData-linkBtn">去首页看看</div>
+      </div>
+      <div class="tac pd15 p14 c999 bgfff" wx:elif="{{orderInfo._id}}" style="padding-bottom:30px;">
+      	  <div class="tac pd20"><image style="width:60px;" src="https://statics.tuiya.cc/16996014595647778.png" mode="widthFix" /></div>
+          <p class="c666 tac p20" wx:if="{{orderInfo.status==5}}">订单已取消</p>
+          <p class="c666 tac p20" wx:elif="{{orderInfo.status>1}}">订单支付成功</p>
+          <p class="c666 tac p20" wx:else>订单还未付款</p>
+          <p class="c999 tac p12">订单号：{{orderInfo.ordernum}}</p>
+          <div class="displayFlex mt30">
+          	<div class="list"><span class="checkout_listBtn green" bindtap="backIndex">回首页</span></div>
+            <div class="list ml10"><navigator url="../../goods/orderDetail/orderDetail?id={{orderInfo._id}}" class="checkout_listBtn orange">查看订单</navigator></div>
+            <div class="list ml10" wx:if="{{orderInfo.status<=1}}"><span class="checkout_listBtn" bindtap="payOrder">立即付款</span></div>
+          </div>
+      </div>
+    </div> 
+    <view class="loadingBox mlr14" wx:if="{{showLoading}}">
+        <div class="xzicon-loading"></div>
+        <div class="xzui-loadmore__tips">正在加载</div>
+    </view>       
+  </div>
+  <nologin bindloginsuccess="onShow" wx:else></nologin>
+  <newShare id="newShareCon"></newShare>
+</div>

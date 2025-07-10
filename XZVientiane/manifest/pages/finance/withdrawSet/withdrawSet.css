@@ -1,0 +1,119 @@
+.form-list-item.title.biglong {
+    max-width: 110px;
+}
+.xzui-radio-new.small{
+	width:18px;
+	height:18px;
+	line-height:17px;
+}
+.xzui-radioTitle-new.small{
+    font-size: 12px;
+}
+.contractBtn{
+	display:block;
+	margin-top:10px;
+	padding:0 15px;
+	color:#f90022;
+	text-align:right;
+}
+.contractBtn:hover{
+	color:#f90022;
+}
+.withdrawSet_dialog{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,0.5);
+	opacity: 0;
+	visibility: hidden;
+	z-index: 999;
+	-webkit-transition: opacity .2s, visibility .2s;
+	-moz-transition: opacity .2s, visibility .2s;
+	-ms-transition: opacity .2s, visibility .2s;
+	-o-transition: opacity .2s, visibility .2s;
+	transition: opacity .2s, visibility .2s
+}
+
+.withdrawSet_dialog.show {
+	opacity: 1;
+	visibility: visible
+}
+.withdrawSet_dialog.show .withdrawSet_dialog_body{
+	top: 50%;
+	margin-top:-20px;
+}
+.withdrawSet_dialog_body{
+	text-align:center;
+	padding:20px 0;
+	background-color: #E8E8EA;
+	position: absolute;
+	left:50%;
+	margin-left:-100px;
+	width:200px;
+	border-radius:4px;
+	top: -100%;
+	-webkit-transition: bottom .4s;
+	-moz-transition: bottom .4s;
+	-ms-transition: bottom .4s;
+	-o-transition: bottom .4s;
+	transition: bottom .4s
+}
+.withdrawSet_dialog.show .withdrawSet_dialog_main{
+	top:20px;
+	bottom:80px;
+}
+.withdrawSet_dialog_main{
+	background-color: #fff;
+	border-radius:4px 4px 0 0;
+	position: absolute;
+	left:20px;
+	right:20px;
+	bottom: -100%;
+	-webkit-transition: bottom .4s;
+	-moz-transition: bottom .4s;
+	-ms-transition: bottom .4s;
+	-o-transition: bottom .4s;
+	transition: bottom .4s;
+	overflow-y:auto;
+	-webkit-overflow-scrolling:touch;
+}
+.withdrawSet_dialog_foot{
+	background:#fff;
+	position: absolute;
+	bottom:20px;
+	left:20px;
+	right:20px;
+	height:60px;
+	border-radius:0 0 4px 4px;
+	border-top:1px dashed #eee;
+}
+.withdrawSet_dialog_foot .cRedBtn{
+	text-align:center;
+	background: #f90022;
+	color:#fff;
+	border-radius:20px;
+	height:40px;
+	line-height:40px;
+}
+.authenInfo_statusDiv .picBox{
+	width:260px;
+	margin:50px auto;
+}
+
+.withdrawSet_footBtn .xzui-btn{
+	max-width:180px;
+	margin:auto;
+	background:#DABB53 !important;
+	padding:0;
+	border-radius:6px;
+}
+
+.financeWithdraw_agreeMent{
+	padding:0 15px;
+	margin-top:10px;
+}
+.financeWithdraw_agreeMent .xzui-radioTitle-new{
+	color:#131313;
+}

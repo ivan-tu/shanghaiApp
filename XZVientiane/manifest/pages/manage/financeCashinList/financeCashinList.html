@@ -1,0 +1,49 @@
+<div class="app-wrapper">
+    <div wx:if="{{isUserLogin}}" class="app-main pb20">
+        <div class="searchCategory-box clearfix bgfff">
+            <div class="searchCategory">
+                <div class="listBox">
+                    <span wx:for="{{timeScreen}}" class="list {{((form.timestap==item.value&&!showDate)?' active':'')}}" bindtap="screen" data-value="{{item.value}}" data-type="timestap">{{item.name}}</span>
+                    <span class="list {{(showDate?' active':'')}}" bindtap="screenTime">指定日期</span>
+                </div>
+            </div>
+        </div>
+        <div class="form-list hasBorder top bgfff" style="padding:5px 10px;line-height:20px;" wx:if="{{showDate}}">
+            <div class="form-list-item tac">
+                <picker mode="date" bindchange="bindStartTime" value="{{begindate}}">
+                    <view class="picker" wx:if="{{form.begindate}}">{{form.begindate}}</view>
+                    <div class="picker c666" wx:else>请选择</div>
+                </picker>
+            </div>
+            <div class="form-list-item tac">
+                <picker mode="date" bindchange="bindEndTime" value="{{enddate}}">
+                    <view class="picker" wx:if="{{form.enddate}}">{{form.enddate}}</view>
+                    <div class="picker c666" wx:else>请选择</div>
+                </picker>
+            </div>
+            <div class="form-list-item title  tar"><button class="redBtn" bindtap="confirmTime">确定</button></div>
+        </div>
+        <div class="form-title clearfix">
+        	<p class="fl">共{{count}}条，合计{{total}}元</p>
+            <!--<navigator url="{{exportURL}}" class="redBtn fr" wx:if="{{form.status=='1'&&client=='web'}}" target="_blank">导出</navigator>-->
+        </div>
+        <div class="bgfff mb10" wx:for="{{data}}" data-index="{{index}}">
+            <div class="form-list" data-id="{{item.id}}">
+                <div class="form-list-item" style="width:80%;">
+                    <p class="p14 c333 textOver" >{{item.title}}</p>
+                    <p class="p12 c333">{{item.addtime}}</p>
+                </div>
+                <div class="form-list-item tar" style="width:20%;">
+                    <p class="p16" style="margin-top:20%;">{{item.total}}</p>
+                </div>
+            </div>
+        </div>
+        <view class="loadingBox mlr14" hidden="{{showLoading}}">
+            <div class="xzicon-loading"></div>
+            <div class="xzui-loadmore__tips">正在加载</div>
+        </view>
+        <view class="noData mlr14" wx:if="{{!data.length&&showLoading}}">暂无记录</view>
+        <view class="noData mlr14" wx:elif="{{settings.noMore&&showLoading}}">我是有底线的</view>
+    </div>
+    <nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

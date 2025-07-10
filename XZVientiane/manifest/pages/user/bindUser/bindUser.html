@@ -1,0 +1,27 @@
+<div class="app-wrapper bgColor_l">
+    <div wx:if="{{isUserLogin}}" class="app-main">
+        <div>
+            <div class="user-userMenu">
+                <div class="xzui-cells xzui-cells_after-title">
+                    <navigator url="../bindAccount/bindAccount" class="xzui-cell xzui-cell_access">
+                        <div class="xzui-cell__hd"><i class="xzicon-phone xzui-cell__icon"></i></div>
+                        <div class="xzui-cell__bd">绑定手机</div>
+                        <div class="xzui-cell__ft xzui-cell__ft_in-access">
+                            <span class="xzui-cell__ft_text" wx:if="{{data.phone}}">{{data.phone}}</span>
+                            <i class="xzicon-right xzui-cell__ft_arrow"></i>
+                        </div>
+                    </navigator>
+                    <div class="xzui-cell xzui-cell_access" bindtap="bindWeixin">
+                        <div class="xzui-cell__hd"><i class="xzicon-wechat xzui-cell__icon"></i></div>
+                        <div class="xzui-cell__bd">绑定微信</div>
+                        <div class="xzui-cell__ft xzui-cell__ft_in-access">
+                            <span class="xzui-cell__ft_text" wx:if="{{data.weixin}}">{{data.weixin}}</span>
+                            <i class="xzicon-right xzui-cell__ft_arrow"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+     <noLogin bindloginsuccess="onShow" wx:else></noLogin>
+</div>

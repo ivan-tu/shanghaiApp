@@ -1,0 +1,59 @@
+.mt2{
+	margin-top:2px;
+}
+.punchRecord_box .storeList{
+	padding:10px 15px;
+	display:block;
+}
+.punchRecord_box .storeList + .storeList{
+	border-top:1px solid #eee;
+}
+.punchRecord_box .storeList .picBox{
+	float:left;
+	width:100px;
+	height:100px;
+	border-radius:4px;
+	overflow:hidden;
+}
+.punchRecord_box .storeList .picBox .pic{
+	border-radius:4px;
+}
+.punchRecord_box .storeList .textBox{
+	margin-left:110px;
+}
+.punchRecord_box .storeList .title{
+	font-size:16px;
+	color:#131313;
+}
+.punchRecord_box .storeList .address{
+	font-size:12px;
+	color:#666;
+}
+.punchRecord_box .storeList .userInfo .userPic{
+	width:20px;
+	height:20px;
+	border-radius:50%;
+}
+.punchRecord_box .storeList .userInfo .userName{
+	display:inline-block;
+	margin-left:5px;
+	font-size:12px;
+	color:#313131;
+}
+.punchRecord_box .storeList .textBox .price{
+	color:#D9001B;
+	font-size:14px;
+}
+.punchRecord_box .storeList .signInfo{
+	font-size:12px;
+	color:#666;
+}
+.punchRecord_box .storeList .signInfo .signBtn{
+	background:#fff;
+	border-radius:4px;
+	border:1px solid #ddd;
+	padding:2px 6px;
+	font-size:12px;
+	color:#333;
+	margin-left:5px;
+}

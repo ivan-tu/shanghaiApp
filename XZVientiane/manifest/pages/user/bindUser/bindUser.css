@@ -1,0 +1,25 @@
+.user-set-btnBox{
+	padding:24px 14px 0 14px;
+}
+.user-userMenu .xzui-cell__hd{
+	min-width:auto;
+	margin-right:10px;
+}
+.user-userMenu .xzui-cell__icon{
+	font-size:16px;
+}
+.user-userMenu .jdIcon-user{
+	color: #F19D32;
+}
+.user-userMenu .jdIcon-withdraw{
+	color: #2C93C8;
+}
+.user-userMenu .xzicon-phone{
+	color: #2C93C8;
+}
+.user-userMenu .xzicon-wechat{
+	color: #08BB08;
+}
+.user-userMenu .xzui-cell__bd{
+  min-width:100px;
+}

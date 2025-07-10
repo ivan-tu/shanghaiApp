@@ -1,0 +1,35 @@
+<div class="app-wrapper">
+	<div class="app-main" wx:if="{{isUserLogin}}">
+        <view class="loadingBox mlr14" wx:if="{{showLoading}}">
+            <div class="xzicon-loading"></div>
+        </view>
+        <div wx:elif="{{data.iscitypartner==1}}" class="mt15">
+        	<div class="markWraper"></div>
+            <div class="myPartner-userInfo">
+            	<p class="tac p18">{{data.partnercity}}合伙人</p>
+                <p class="tac p16 mt10">NO.{{data.partnernum}}</p>
+                <p class="tac p14 c666">有效期至：{{data.partnerexpire}}</p>
+            </div>
+            <div class="myPartner-numberInfo">
+                <div class="displayFlex tac">
+                    <navigator url="../../finance/incomeReocrd/incomeReocrd?fromre=601" class="list">
+                        <p class="p18 cFc bold">{{data.total}}</p>
+                        <p class="p12 c888 mt5">收入</p>
+                    </navigator>
+                    <navigator url="../../user/myInvite/myInvite?gettype=partner" class="list">
+                        <p class="p18 cFc bold">{{data.teamuser}}</p>
+                        <p class="p12 c888 mt5">团队</p>
+                    </navigator>
+                </div>
+            </div>
+            <div class="mt20 tac"><navigator url="../../home/articleDetail/articleDetail?customId=hhrqy" class="myPartner-quanyi">查看权益</navigator></div>
+            <div class="myPartner-submitBtn" bindtap="toShare">邀请合伙人</div>
+		</div>
+        <div wx:else class="myPartner-noData">
+        	<p class="title">您还不是合伙人</p>
+            <div class="myPartner-submitBtn" bindtap="toPartner">申请成为合伙人</div>
+        </div>
+	</div>
+    <nologin bindloginsuccess="onShow" wx:else></nologin>
+    <newShare id="newShareCon"></newShare>
+</div>

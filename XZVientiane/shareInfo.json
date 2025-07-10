@@ -1,0 +1,56 @@
+{
+    "data": {
+        "wxpayApp": {
+            "KEY": "mbgyR2e825L2r4RDWHsXaoDnvTlNzPIg",
+            "APPSECRET": "119f7f0a816a29b812cd47b2d9d2281d",
+            "MCHID": "1502146081",
+            "APPID": "wx71ed098c91349cdc"
+        },
+        "wxAppScret": "119f7f0a816a29b812cd47b2d9d2281d",
+        "wxAppId": "wx71ed098c91349cdc",
+        "isShare": 1,
+        "isSocial": 1,
+        "pushMsgSecret": "",
+        "wbAppId": "2960264426",
+        "wbAppScret": "78a8bfc08cd6435981e60e52c66dfe0a",
+        "fbAppScret": "",
+        "fbUrl": "",
+        "isTtSocial": 0,
+        "qqUrl": "www.hnwc.com",
+        "isQqShare": 1,
+        "qqAppId": "1106431358",
+        "ttUrl": "",
+        "alipay": {
+            "account_name": "",
+            "seller_id": "",
+            "seller_email": "",
+            "partner": "",
+            "alipayPublicKey": "",
+            "key": "",
+            "rsaPrivateKey": ""
+        },
+        "unionpay": {
+            "CERT_PATH": "",
+            "CERT_PWD": "",
+            "CODE": ""
+        },
+        "isWbShare": 1,
+        "gdArea": "",
+        "pushAppKey": "5db314c23fc195be40000ac6",
+        "pushAppSecret": "deu4oni7intctmmp78u0degj92hcupao",
+        "isWxSocial": 1,
+        "isTtShare": 0,
+        "wbUrl": "http://sns.whalecloud.com/sina2/callback",
+        "ttAppId": "",
+        "qqAppScret": "ffCm7BmDsMstVWYG",
+        "isFbShare": 0,
+        "isFbSocial": 0,
+        "ttAppScret": "",
+        "wxUrl": "www.hnwc.com",
+        "isQqSocial": 0,
+        "fbAppId": "",
+        "isWxShare": 1,
+        "isPush": 1,
+        "isWbSocial": 1
+    }
+}

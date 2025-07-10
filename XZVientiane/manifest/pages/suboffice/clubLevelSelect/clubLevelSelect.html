@@ -1,0 +1,13 @@
+<div class="app-wrapper">
+    <div class="app-main pb20">
+        <div wx:if="{{data&&data.length}}" class="bgfff">
+            <div class="form-list" wx:for="{{data}}" data-index="{{index}}" bindtap="selectThis">
+            	<div class="form-list-item rightIcon">{{item.name}}</div>
+            </div>
+        </div>
+        <div class="loadingBox mlr15" wx:if="{{ajaxLoading}}">
+			<div class="xzicon-loading"></div>
+		</div>
+        <div class="noData mlr15" wx:if="{{ajaxNoData}}">暂无等级</div>
+    </div>
+</div>

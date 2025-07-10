@@ -1,0 +1,52 @@
+<div class="app-wrapper">
+    <div class="app-main">
+        <div class="fenqiPayInfo-box" wx:if="{{data&&data.length}}">
+        	<div class="fenqiPayInfo-list" wx:for="{{data}}">
+        		<p class="fenqiPayInfo-title">购买{{item.name}}待付款<span wx:if="{{item.num&&item.stagestype=='stages'}}">第{{item.num}}期</span></p>
+                <p class="fenqiPayInfo-priceBox">¥<span class="price">{{item.price}}</span></p>
+                <p class="fenqiPayInfo-tips">请在<span class="cRed">{{item.expiretime}}</span>前付款，付款后到账<span wx:if="{{item.diamond>0}}">{{item.diamond}}钻石</span><span wx:if="{{item.whitegift>0}}">{{item.whitegift}}个白钻礼包</span>，逾期未付款则取消<span wx:if="{{item.type=='white'}}">达人</span><span wx:elif="{{item.type=='red'}}">代理</span><span wx:elif="{{item.type=='gold'}}">合伙人</span>资格，收回赠送的分红股。</p>
+                <div class="fenqiPayInfo-btnBox">
+                	<span class="submitBtn large bgRed" wx:if="{{item.stagestype=='deposit'&&item.status==1}}" data-index="{{index}}" bindtap="toChange">改为分期</span>
+                	<span class="submitBtn large" wx:if="{{item.waitPay>0}}">请先支付第{{item.waitPay}}期</span>
+                	<span class="submitBtn" wx:elif="{{item.status==1}}" bindtap="toPay" data-index="{{index}}">立即支付</span>
+                    <span class="submitBtn disable" wx:elif="{{item.status==2}}">已支付</span>
+                    <span class="submitBtn disable" wx:elif="{{item.status==3}}">已经逾期</span>
+   				</div>
+            </div>
+        </div>
+        <view class="loadingBox mlr14" hidden="{{!showLoading}}">
+            <div class="xzicon-loading"></div>
+            <div class="xzui-loadmore__tips">正在加载</div>
+        </view>
+        <view class="noData mlr14" hidden="{{!showNoData}}">暂无数据</view>
+    </div>
+    <!--定金改分期弹框-->
+    <div class="publicScroll_dialog changeDialog {{(changeDialog.show?' show':'')}}">
+            <div class="publicScroll_body" style="height:{{changeDialog.height}}px;">
+                <div class="publicScroll_head clearfix tac bgfff">
+                    <span class="p16">选择分期</span>
+                    <span class="fr p16" bindtap="toHideDialog"><i class="xzicon-close"></i></span>
+                </div>
+                <div class="publicScroll_main bgfff">
+                    <div class="changeDialog-box">
+                        <div class="changeDialog-list" data-num="{{item.num}}" bindtap="screenStages" wx:for="{{changeDialog.fenqiList}}">
+                            <span class="xzui-radio-new {{(changeDialog.stagesnum==item.num?' active':'')}}"></span>
+                            <p class="title">分{{item.num}}期付（送{{item.zjbcoin}}股，少{{item.zjbcoinPercent}}%）</p>
+                            <p class="tips">先付{{item.firstPrice}}元，余款分{{item.num-1}}次付，每个月付{{item.otherPrice}}元</p>
+                            <p class="cRed" wx:if="{{item.needPay}}">需补差价：{{item.needPay}}元</p>
+                        </div>     
+                    </div>
+                </div>
+                <div class="publicScroll_footBtn">
+                	<div class="displayFlex">
+                    	<div class="list">
+                        	<button class="cancelBtn" type="button" bindtap="toHideDialog">取消</button>
+                        </div>
+                        <div class="list ml10">
+                        	<button class="submitBtn" type="button" bindtap="toConfirmDialog">确定</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div> 

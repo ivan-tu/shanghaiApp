@@ -1,0 +1,7 @@
+{
+	"usingComponents":{
+		"search-bar": "/components/common/search-bar/search-bar",
+		"videoPlay":"/components/common/videoPlay/videoPlay"
+	},
+    "navigationBarTitleText": "俱乐部"
+}

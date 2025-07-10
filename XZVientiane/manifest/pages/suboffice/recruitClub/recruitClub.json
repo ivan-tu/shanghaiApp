@@ -1,0 +1,6 @@
+{
+	"usingComponents":{
+		"newShare": "/components/common/newShare/newShare"
+	},
+    "navigationBarTitleText": "招募俱乐部"
+}

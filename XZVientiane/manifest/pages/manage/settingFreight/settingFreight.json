@@ -1,0 +1,8 @@
+{
+    "usingComponents":
+    {
+		"nologin": "/components/common/nologin/nologin"
+    },
+    "enablePullDownRefresh": false,
+    "navigationBarTitleText": "设置配送模板"
+}

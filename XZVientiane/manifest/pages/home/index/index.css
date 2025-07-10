@@ -1,0 +1,643 @@
+/*banner*/
+.home-index-banner{
+	overflow:hidden;
+	border-radius:8px;
+	margin:0px 15px 10px 15px;
+}
+.home-index-banner .pagination{
+    position: absolute;
+    bottom: 0 !important;
+    z-index: 2;
+    text-align: center;
+}
+.home-index-banner .pagination .swiper-pagination-bullet{
+	opacity: 0.3;
+	background:transparent;
+	border: 1px solid #FFFFFF;
+	box-shadow: 0 0 2px 1px rgba(0,0,0,0.3);
+}
+.home-index-banner .pagination .swiper-pagination-bullet-active{
+	opacity: 0.9;
+	background: #fff;
+	border:0 none;
+}
+
+.home-searchCategory{
+	padding-right:100px;
+	position:relative;
+}
+.home-searchCategory .addBtn{
+	position:absolute;
+	z-index:2;
+	right:15px;
+	top:50%;
+	margin-top:-15px;
+	background:#FEE10B;
+	color:#000;
+	padding:0 10px;
+	height:30px;
+	line-height:30px;
+	font-size:14px;
+	border-radius:4px;
+}
+.mt2{
+	margin-top:2px;
+}
+.searchCategory-secretary.hasMore{
+	padding-right:50px;
+	position:relative;
+}
+.searchCategory-secretary .moreBtn{
+	position:absolute;
+	right:14px;
+	top:0px;
+	font-size:14px;
+	color:#666;
+}
+.homeIndex-searchCategory{
+	line-height:28px !important;
+}
+.homeIndex-searchCategory .searchCategory .spanList{
+	background:#ECECEC;
+	color:#888;
+	border-radius:20px;
+	padding:0 16px;
+	display:inline-block;
+}
+.homeIndex-searchCategory .searchCategory .list:after{
+	content:'';
+	display:none;
+}
+.homeIndex-searchCategory .searchCategory .spanList.active{
+	background:#FEE10B;
+	color:#111;
+}
+.homeIndex-searchCategory .searchCategory .list + .list {
+	padding-left: 14px;
+}
+/*头部homeIndex-header*/
+.homeIndex-header{
+	padding:15px;
+}
+.homeIndex-header .picBox{
+	width:55px;
+	height:55px;
+	border-radius:50%;
+	overflow:hidden;
+	float:left;
+}
+.homeIndex-header .textBox{
+	margin-left:165px;
+}
+.homeIndex-header .searchBtn{
+	padding:4px 10px;
+	border-radius:30px;
+	text-align:center;
+	color:#888;
+	font-size:12px;
+	background:#fafafa;
+}
+.homeIndex-header .userName{
+	display: inline-block;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width:110px;
+	font-size:16px;
+	color:#000;
+	font-weight:600;
+	vertical-align:middle;
+}
+.homeIndex-header .spanLevel{
+	background:#FEE10B;
+	padding:1px 6px;
+	border-radius:4px;
+	color:#000;
+	display:inline-block;
+	margin-left:5px;
+	font-size:10px;
+	vertical-align:middle;
+}
+.homeIndex-header .rechargeBox .rechargeList{
+	display:inline-block;
+}
+.homeIndex-header .rechargeBox .rechargeList +.rechargeList{
+	margin-left:5px;
+}
+.homeIndex-header .rechargeBox .iconPic{
+	width:20px;
+}
+.homeIndex-header .rechargeBox .number{
+	display:inline-block;
+	height:18px;
+	text-align:center;
+	line-height:18px;
+	color:#000;
+	font-size:12px;
+	margin:0 5px;
+}
+.homeIndex-header .rechargeBox .addBtn{
+	display: inline-block;
+	width: 18px;
+	height: 18px;
+	text-align: center;
+	line-height: 16px;
+	color: #000;
+	border-radius: 2px;
+	font-size: 15px;
+	font-weight:bold;
+	background:#fafafa;
+}
+.homeIndex-header .loginBtn{
+	background: #FEE10B;
+	padding: 2px 8px;
+	border-radius: 4px;
+	color: #000;
+	display: inline-block;
+	font-size: 12px;
+}
+.homeIndex-menu{
+	padding:10px 15px 15px 15px;
+	text-align:center;
+}
+.homeIndex-menu .list +.list{
+	margin-left:10px;
+}
+.homeIndex-menu .iconBox{
+	width:40px;
+	margin:auto;
+}
+.homeIndex-menu .text{
+	font-size:16px;
+	color:#000;
+	margin-top:3px;
+}
+.homeIndex-menu .title{
+	font-size:12px;
+	color:#333;
+}
+.collectTip{
+	background: #000;
+	position: fixed;
+	top: 12px;
+	right: 15px;
+	color: #fff;
+	font-size: 12px;
+	padding: 3px 15px;
+	border-radius: 23px;
+	z-index:10;
+}
+.collectTip:after{
+	content: "\e607";
+	font-family: 'xzicon';
+	color: #000;
+	position: absolute;
+	right: 52px;
+	top: -12px;
+	font-size: 16px;
+}
+.collectTip i{
+	margin-left:5px;
+}
+.homeIndex-header2 .areaBox{
+	float:left;
+}
+.homeIndex-header2 .picker-region:after{
+	content:'';
+    display:none;
+}
+/*homeIndex-listBox*/
+.homeIndex-listBox{
+	margin-left:-10px;
+}
+.homeIndex-listBox .listBox{
+	float:left;
+	width:50%;
+}
+.homeIndex-listBox .listBox.item3{
+	float:left;
+	width:33.3333333%;
+}
+.homeIndex-listBox .listBox .list{
+	margin:10px 0 0 10px;
+	display:block;
+}
+.homeIndex-listBox .textBox{
+	padding:5px;
+}
+.homeIndex-listBox .picBox{
+	border-radius:2px;
+	overflow:hidden;
+}
+.homeIndex-listBox .w100{
+	border-radius:2px;
+}
+.homeIndex-listBox .textBox .username{
+	display: inline-block;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width:120px;
+}
+/*homeIndex-activityBox*/
+.homeIndex-activityBox .listBox{
+	/*box-shadow:0 0 2px 1px #eee;
+	padding:10px;
+	border-radius:15px;*/
+}
+.homeIndex-activityBox .listBox +.listBox{
+	margin-top:15px;
+}
+.homeIndex-activityBox .masterBox .spanList{
+	display:inline-block;
+	margin-left:3px;
+	vertical-align:middle;
+}
+.homeIndex-activityBox .infoBox .spanStatus{
+	display:inline-block;
+	margin-right:5px;
+	vertical-align:middle;
+	background:#70B603;
+	color:#fff;
+	font-size:12px;
+	padding:1px 5px;
+}
+.homeIndex-activityBox .infoBox .spanStatus.disable{
+	background:#F7F7F7;
+	color:#999;
+}
+.homeIndex-activityBox .bannerPicBox{
+	border-radius:14px;
+	overflow:hidden;
+	position:relative;
+}
+.homeIndex-activityBox .gradient-overlay{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	/* 创建一个从顶部到底部的半透明渐变 */
+	background: linear-gradient(to bottom, rgba(0, 0, 0, 0),rgba(0, 0, 0, 0),rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.6));
+	z-index:2;
+}
+.homeIndex-activityBox .bannerPicBox .describe{
+	position:absolute;
+	color:#fff;
+	left:15px;
+	right:15px;
+	bottom:72px;
+	font-size:14px;
+	z-index:3;
+	/* 设置为弹性伸缩盒子模型 */
+	display: -webkit-box;
+	/* 子元素垂直排列 */
+	-webkit-box-orient: vertical;
+	/* 限制文本显示两行 */
+	-webkit-line-clamp: 2;
+	/* 隐藏超出部分 */
+	overflow: hidden;
+	/* 超出部分用省略号表示 */
+	text-overflow: ellipsis;
+}
+.homeIndex-activityBox .bannerPicBox .joinBox{
+	position:absolute;
+	padding:10px 15px;
+	background:rgba(0,0,0,0.4);
+	left:0px;
+	right:0px;
+	bottom:0px;
+	z-index:3;
+}
+.homeIndex-activityBox .bannerPicBox .masterPic{
+	float:left;
+	width:45px;
+	height:45px;
+	border-radius:4px;
+}
+.homeIndex-activityBox .bannerPicBox .masterText{
+	margin-left:55px;
+}
+.homeIndex-activityBox .picsBox{
+	margin-left:-5px;
+}
+.homeIndex-activityBox .picsBox .picsList{
+	float:left;
+	width:33.33333333333%;
+}
+.homeIndex-activityBox .picsBox .picsList_box{
+	margin:5px 0 0 5px;
+}
+.homeIndex-activityBox .joinBox{
+	position:relative;
+}
+.homeIndex-activityBox .joinBox .joinBtn{
+	position:absolute;
+	right:0px;
+	top:50%;
+	margin-top:-16px;
+	background:rgba(236, 211, 49, 1);
+	color:#fff;
+	height:32px;
+	line-height:32px;
+	padding:0 20px;
+	border-radius:20px;
+	display:inline-block;
+	z-index:2;
+}
+.homeIndex-activityBox .joinBox .joinBtn.disable{
+	background:#F7F7F7;
+	color:#999;
+}
+.homeIndex-activityBox .joinBox .userBox{
+	width:180px;
+	display:inline-block;
+}
+.homeIndex-activityBox .joinBox .userBox .list{
+	float:left;
+	width:14%;
+}
+.homeIndex-activityBox .joinBox .userBox .list + .list{
+	margin-left:-12px;
+}
+.homeIndex-activityBox .joinBox .userBox .list .picBox{
+	border-radius:50%;
+	border:1px solid #fff;
+	width:20px;
+	height:20px;
+	overflow:hidden;
+}
+.homeIndex-activityBox .joinBox .userNum{
+	font-size:12px;
+	color:#fff;
+	display:inline-block;
+	vertical-align:top;
+	line-height:20px;
+	margin-left:5px;
+}
+
+/*挖币弹框*/
+.ingotDialog .publicScroll_body{
+	background:#FEE10B;
+}
+.ingotDialog .publicScroll_main{
+	top:35px;
+	bottom:15px;
+}
+.ingotDialog .publicScroll_body{
+	margin-bottom:-150px;
+}
+.ingotDialog.show .publicScroll_body{
+	bottom: 50%;
+}
+.ingotDialog .contentTips{
+	color: #000;
+	padding: 15px 15px 0 15px;
+	font-size: 16px;
+	line-height: 28px;
+}
+.ingotDialog .contentTitle{
+	font-size:28px;
+	text-align:center;
+	font-weight:600;
+}
+.ingotDialog .contentPrice{
+	font-size:36px;
+	text-align:center;
+	font-weight:600;
+}
+.ingotDialog .closeBtn{
+	position:absolute;
+	right:15px;
+	top:5px;
+	font-size:24px;
+}
+/*公众号弹框*/
+.showWxDialog .publicScroll_body{
+	background:#fff;
+	left:40px;
+	right:40px;
+}
+.showWxDialog .publicScroll_main{
+	top:20px;
+	bottom:10px;
+}
+.showWxDialog .publicScroll_body{
+	margin-bottom:-180px;
+}
+.showWxDialog.show .publicScroll_body{
+	bottom: 50%;
+}
+.showWxDialog .picBox{
+	width:260px;
+	height:260px;
+	margin:auto;
+}
+.showWxDialog .toSubmitBtn{
+	color:#0385D8;
+	text-align:center;
+	padding:5px 0;
+	font-size:16px;
+}
+/*个人资料弹框*/
+.showEditInfoDialog .publicScroll_body{
+	left:0;
+	right:0;
+	background:#fff;
+	border-radius:10px 10px 0 0;
+}
+.showEditInfoDialog .publicScroll_main{
+	top:15px;
+	bottom:0px;
+}
+.showEditInfoDialog.show .publicScroll_body{
+	bottom:0;
+}
+.showEditInfoDialog .headPicBox{
+	width:60px;
+	height:60px;
+	margin:10px auto;
+	position:relative;
+}
+.showEditInfoDialog .picBox{
+	width:60px;
+	height:60px;
+	border-radius:50%;
+	overflow:hidden;
+	margin:auto;
+}
+.showEditInfoDialog .headPicBox .cameraIcon{
+	display: inline-block;
+	background: #339933;
+	position: absolute;
+	right: 0px;
+	bottom: 0px;
+	z-index: 2;
+	border-radius: 50%;
+	border: 1px solid #fff;
+	width: 18px;
+	height: 18px;
+	text-align: center;
+	line-height: 13px;
+	color: #fff;
+}
+.showEditInfoDialog .headPicBox .cameraIcon i{
+	font-size:10px;
+}
+.showEditInfoDialog .wxUploadBtn{
+	margin:0;
+	padding:0;
+	display:block;
+	background: #bbb;
+	border-radius:50%;
+	width:60px;
+	height:60px;
+	overflow:hidden;
+}
+.showEditInfoDialog .xzui-uploader__file{
+	margin:0;
+	background: #bbb;
+}
+.showEditInfoDialog .xzui-uploader{
+	display: inline-block;
+	vertical-align: middle;
+}
+.showEditInfoDialog .user-upload{
+    display: inline-block;
+    vertical-align: middle;
+}
+.showEditInfoDialog .inputBox{
+	height:35px;
+	border-radius:20px;
+	background:#F4F4F4;
+}
+.showEditInfoDialog .inputBox{
+	border:1px solid #eee;
+	border-radius:20px;
+	margin:15px 35px;
+	padding:0 10px;
+	background:#f9f9f9;
+}
+.showEditInfoDialog .textInput{
+	border:0 none;
+	height:35px;
+	color:#000;
+	vertical-align:top;
+	font-family:inherit;
+	font-size:14px;
+	background:transparent;
+	outline:none;
+	text-align:center;
+	width:100%;
+}
+.showEditInfoDialog input::-moz-placeholder{
+	color: #999;
+	opacity:1;
+}
+.showEditInfoDialog input:-ms-input-placeholder{
+	color: #999;
+	opacity:1;
+}
+.showEditInfoDialog input::-webkit-input-placeholder{
+	color: #999;
+	opacity:1;
+}
+.showEditInfoDialog  .toSubmitBtn{
+	background:#FEE10B;
+	border-radius:20px;
+	margin:15px 35px;
+	color:#000;
+	height:35px;
+	text-align:center;
+	line-height:35px;
+}
+/*公众号小弹框*/
+.showWxGZHDialog{
+	position: fixed;
+	width:260px;
+	margin-left:-130px;
+	left:50%;
+	bottom:-100px;
+	background:rgb(250,234,205);
+	z-index: 999;
+	transition:all 0.3s;
+	color:#111;
+	padding:10px 15px;
+	border-radius:8px;
+	text-align:center;
+}
+.showWxGZHDialog .textBox{
+	font-size:16px;
+}
+.showWxGZHDialog .closeBtn{
+	display:inline-block;
+	padding:4px 12px;
+	border:1px solid #ddd;
+	background:#F9F9F9;
+	border-radius:20px;
+	color:#888;
+}
+.showWxGZHDialog .focusBtn{
+	display:inline-block;
+	padding:4px 12px;
+	background:rgb(30,183,83);
+	border-radius:20px;
+	color:#fff;
+	margin-left:10px;
+}
+.showWxGZHDialog.show{
+	bottom:100px;
+}
+/*nav*/
+.xzui-tabbar:before{
+  border-top: 0px none;
+}
+.xzui-tabbar_item.index{
+    background-image: url(/static/images/nav-index.png);
+}
+.xzui-bar_item_on.index,
+.xzui-tabbar_item.index:hover{
+    background-image: url(/static/images/nav-indexActive.png);
+}
+.xzui-tabbar_item.activity{
+    background-image: url(/static/images/nav-activity.png);
+}
+.xzui-bar_item_on.activity,
+.xzui-tabbar_item.activity:hover{
+    background-image: url(/static/images/nav-activityActive.png);
+}
+.xzui-tabbar_item.store{
+    background-image: url(/static/images/nav-store.png);
+}
+.xzui-bar_item_on.store,
+.xzui-tabbar_item.store:hover{
+    background-image: url(/static/images/nav-storeActive.png);
+}
+.xzui-tabbar_item.group{
+    background-image: url(/static/images/nav-group.png);
+}
+.xzui-bar_item_on.group,
+.xzui-tabbar_item.group:hover{
+    background-image: url(/static/images/nav-groupActive.png);
+}
+.xzui-tabbar_item.message{
+    background-image: url(/static/images/nav-message.png);
+}
+.xzui-bar_item_on.message,
+.xzui-tabbar_item.message:hover{
+    background-image: url(/static/images/nav-messageActive.png);
+}
+.xzui-tabbar_item.goods{
+    background-image: url(/static/images/nav-goods.png);
+}
+.xzui-bar_item_on.goods,
+.xzui-tabbar_item.goods:hover{
+    background-image: url(/static/images/nav-goodsActive.png);
+}
+.xzui-tabbar_item.my{
+    background-image: url(/static/images/nav-my.png);
+}
+.xzui-bar_item_on.my,
+.xzui-tabbar_item.my:hover{
+    background-image: url(/static/images/nav-myActive.png);
+}

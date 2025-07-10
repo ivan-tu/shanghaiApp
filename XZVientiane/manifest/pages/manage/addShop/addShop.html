@@ -1,0 +1,24 @@
+<div class="app-wrapper">
+	<div wx:if="{{isUserLogin}}" class="app-main">
+    	<p class="form-title">填写店铺资料</p>
+        <div class="bgfff">
+            <div class="form-list">
+                <div class="form-list-item c666 title">店名</div>
+                <div class="form-list-item c666"><input type="text" placeholder="请输入店铺名称" bindinput="model" data-model="form.name" value="{{form.name}}" class="textInput" /></div>
+            </div>
+            <div class="form-list">
+                <div class="form-list-item c666 title">地区</div>
+                <div class="form-list-item c666">
+                    <picker mode="region" class="picker-region" custom-item="" bindchange="bindAreaChange" value="{{form.area}}" id="pickerArea">
+                        <view class="picker c666" wx:if="{{form.area.length}}">{{form.area[0]}}-{{form.area[1]}}-{{form.area[2]}}</view>
+                        <view class="picker c999" wx:else>店铺所在地区</view>
+                    </picker>
+                </div>
+            </div>
+        </div>
+        <div class="xzui-btn-app">
+            <button class="xzui-btn primary xzui-btn_b user-address-add" bindtap="toAdd">提交</button>
+        </div>
+    </div>
+    <nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

@@ -1,0 +1,23 @@
+<div class="app-wrapper">
+	<div class="app-main pb20">
+    	<div class="bgfff ptb5" wx:if="{{categoryList&&categoryList.length}}">
+            <div class="searchCategory-box clearfix">
+                <div class="searchCategory">
+                    <div class="listBox">
+                        <span wx:for="{{categoryList}}" class="list {{(form.category==item.name?' active':'')}}" data-type="category" data-value="{{item.name}}" bindtap="screen">{{item.name}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <view class="loadingBox mlr14" wx:if="{{showLoading}}">
+            <div class="xzicon-loading"></div>
+        </view>
+        <view class="noData mlr14" wx:elif="{{showNoData}}">暂无数据</view>
+        <div class="mt10 bgfff" wx:else>
+            <div class="form-list" wx:for="{{data}}">
+                <navigator url="../../user/courseDetail/courseDetail?id={{item._id}}" class="form-list-item rightIcon">{{item.title}}</navigator>
+            </div>
+        </div>
+	</div>
+    <newShare id="newShareCon"></newShare>
+</div>

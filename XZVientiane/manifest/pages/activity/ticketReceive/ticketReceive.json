@@ -1,0 +1,8 @@
+{
+  "usingComponents":
+  {
+	  "editor-content": "/components/common/editor-content/editor-content",
+	  "newShare": "/components/common/newShare/newShare"
+  },
+  "navigationBarTitleText": "领取门票"
+}

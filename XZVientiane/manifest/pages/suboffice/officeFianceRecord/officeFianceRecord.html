@@ -1,0 +1,50 @@
+<div class="app-wrapper">
+    <div wx:if="{{isUserLogin}}" class="app-main">
+    	<div class="ptb5 bgfff">
+            <div class="searchCategory-box searchCategory-box-tuige clearfix">
+                <div class="searchCategory">
+                    <div class="listBox">
+                        <span class="list {{(form.timestap==''&&!showDate?' active':'')}}" data-type="" bindtap="screenType">全部</span>
+                        <span class="list {{(form.timestap=='today'?' active':'')}}" data-type="today" bindtap="screenType">今日</span>
+                        <span class="list {{(form.timestap=='yesterday'?' active':'')}}" data-type="yesterday" bindtap="screenType">昨日</span>
+                        <span class="list {{(form.timestap=='week'?' active':'')}}" data-type="week" bindtap="screenType">本周</span>
+                        <span class="list {{(form.timestap=='prevweek'?' active':'')}}" data-type="prevweek" bindtap="screenType">上周</span>
+                        <span class="list {{(form.timestap==''&&showDate?' active':'')}}" data-type="showDate" bindtap="screenType">指定日期</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div wx:if="{{showDate}}" class="form-list hasBorder top bgfff">
+            <div class="form-list-item">
+                <picker class="picker-region" mode="date" bindchange="bindStartTime" value="{{begindate}}">
+                    <view class="picker" wx:if="{{form.begindate}}">{{form.begindate}}</view>
+                    <div class="picker c999" wx:else>开始日期</div>
+                </picker>
+            </div>
+            <div class="form-list-item title short tac">至</div>
+            <div class="form-list-item">
+                <picker class="picker-region" mode="date" bindchange="bindEndTime" value="{{enddate}}">
+                    <view class="picker" wx:if="{{form.enddate}}">{{form.enddate}}</view>
+                    <div class="picker c999" wx:else>结束日期</div>
+                </picker>
+            </div>
+            <div class="form-list-item title tar"><span class="client_myIncome_timeBtn" bindtap="confirmTime">确定</span></div>
+        </div>
+        <p class="form-title">共 {{count}} 条记录，共 ¥{{total}}</p>
+        <div class="bgfff">
+            <div class="form-list" wx:for="{{data}}">
+                <div class="form-list-item">
+                	<p class="p14 c333">{{item.title}}</p>
+                    <p class="p12 c888">{{item.addtime}}</p>
+                </div>
+                <div class="form-list-item title large tar p16">¥{{item.total}}</div>
+            </div>
+        </div>
+        <view class="loadingBox mlr14" hidden="{{!showLoading}}">
+            <div class="xzicon-loading"></div>
+            <div class="xzui-loadmore__tips">正在加载</div>
+        </view>
+        <view class="noData mlr14" hidden="{{!showNoData}}">暂无记录</view>
+    </div>
+    <nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

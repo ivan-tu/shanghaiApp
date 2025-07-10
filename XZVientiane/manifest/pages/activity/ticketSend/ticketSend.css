@@ -1,0 +1,95 @@
+.activitySendTicket_userBox{
+	position:relative;
+	padding:10px 15px 10px 15px;
+}
+.activitySendTicket_userBox .picBox{
+	width:50px;
+	height:50px;
+	float:left;
+	border-radius:50%;
+	overflow:hidden;
+}
+.activitySendTicket_userBox .textBox{
+	margin-left:60px;
+	color:#303030;
+	line-height:50px;
+}
+.activityTicket_box{
+	padding:5px 15px 20px 15px;
+}
+.activityTicket_list{
+	border-radius: 8px;
+	border: 1px solid #737373;
+	padding:10px;
+	color:#737373;
+	margin-top:10px;
+}
+.activityTicket_list.active{
+	border:1px solid #E53737;
+}
+.activityTicket_list.active .name{
+	color:#222;
+}
+.activityTicket_list.active .price{
+	color:#E53737;
+}
+.ticketSend_recordBtn{
+	color:#EF4F4D;
+}
+.ticketSend_recordBtn:hover{
+	color:#EF4F4D;
+}
+.searchCategory-box.positionR .yellowBtn{
+	position: absolute;
+	right: 10px;
+	top: 6px;
+	padding: 0 6px;
+	height: 30px;
+	line-height: 30px;
+}
+.xzui-btn.xzui-btn_b.gray{
+	background:#DDD !important;
+}
+.xzui-btn.xzui-btn_b.gray:hover{
+	background:#DDD !important;
+}
+/*数量控制quantityControl*/
+.quantityControl .minusControl{
+	display:inline-block;
+	width: 32px;
+	height: 30px;
+	border: 1px solid #C4D5ED;
+	text-align:center;
+	line-height:29px;
+	font-size:18px;
+	color:#A9B9D1;
+	vertical-align:middle;
+}
+.quantityControl .addControl{
+	display:inline-block;
+	width: 32px;
+	height: 30px;
+	border: 1px solid #C4D5ED;
+	text-align:center;
+	line-height:29px;
+	font-size:18px;
+	color:#A9B9D1;
+	vertical-align:middle;
+}
+.quantityControl .inputControl{
+	display:inline-block;
+	width: 36px;
+	height: 30px;
+	border: 1px solid #C4D5ED;
+	text-align:center;
+	margin:0 5px;
+	vertical-align:middle;
+}
+.quantityControl .inputControl .xzui-input{
+	height:100%;
+	vertical-align:top;
+	text-align:center;
+	width:100%;
+	padding:0;
+	margin:0;
+}

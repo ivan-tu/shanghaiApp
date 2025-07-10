@@ -1,0 +1,8 @@
+{
+    "usingComponents":
+    {
+        "picker": "/components/web/picker/picker"
+    },
+    "enablePullDownRefresh": false,
+    "navigationBarTitleText": "添加收货地址"
+}

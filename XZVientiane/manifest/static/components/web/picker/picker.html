@@ -1,0 +1,32 @@
+<div class="picker-region">
+<div class="smooth-picker-wrapper {{pickerShow}}" catchtap="togglePicker">
+<div class="smooth-picker-container" catchtap="noop">
+<div class="smooth-picker-headbar clearfix">
+<button type="button" class="smooth-picker-cancel black_l fl" catchtap="cancel">取消</button>
+<button type="button" class="smooth-picker-confirm skin fr" catchtap="confirm">确定</button>
+</div>
+  <div class="smooth-picker flex-box">
+      <!-- smooth-group-layer -->
+      <div ref="smoothGroup" xz-for="(group, gIndex) in data" :key="gIndex" class="smooth-group" :class="getGroupClass(gIndex)">
+        <div class="smooth-list">
+          <div xz-if="group.divider" class="smooth-item divider" :class="getItemClass(gIndex, iIndex, true)">{{ group.text }}</div>
+  
+          <div xz-else xz-for="(item, iIndex) in group.list" :key="iIndex"
+            class="smooth-item" :class="getItemClass(gIndex, iIndex)" :style="getItemStyle(gIndex, iIndex)">
+            {{ item.value || item }}
+          </div>
+        </div>
+      </div>
+  
+      <div ref="smoothHandleLayer" class="smooth-handle-layer flex-box direction-column">
+        <div data-type="top" class="smooth-top flex-1"></div>
+        <div data-type="middle" class="smooth-middle"></div>
+        <div data-type="bottom" class="smooth-bottom flex-1"></div>
+      </div>
+  </div>
+</div>
+</div>
+<div catchtap="togglePicker">
+<slot></slot>
+</div>
+</div>

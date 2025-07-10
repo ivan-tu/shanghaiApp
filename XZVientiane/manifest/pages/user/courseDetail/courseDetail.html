@@ -1,0 +1,27 @@
+<div class="app-wrapper">
+	<div class="app-main">
+    	<view class="videoDetailLoading" wx:if="{{showLoading}}"><div class="xzicon-loading"></div></view>
+        <div class="pb10" wx:else>
+        	<div class="markWraper"></div>
+            <div class="videoDetail_container" wx:if="{{data.video&&data.video.file}}">
+                <div class="videoDetail_video" wx:if="{{client=='wx'}}">
+                    <image wx:if="{{videoStatus==0}}" bindload="videoPicLoad" class="videoPic" style="width:100%;" id="videoPic" src="{{data.video.pic}}" mode="widthFix" catchtap="toPlay" />
+                    <div class="playCover" wx:if="{{videoStatus==0}}"></div>
+                    <image catchtap="toPlay" wx:if="{{videoStatus==0}}" class="playBtn" src="https://statics.wukongbaishi.com/17057585327121151.png" mode="widthFix" />
+                    <video wx:if="{{videoStatus==1}}" id="video" src="{{data.video.file}}" poster="{{data.video.pic}}" style="width:100%;" enable-play-gesture="{{true}}" play-btn-position="center" autoplay controls></video>
+                </div>
+                <div class="videoDetail_video" wx:else>
+                    <image wx:if="{{videoStatus==0}}" bindload="videoPicLoad" class="videoPic" style="width:100%;" id="videoPic" src="{{data.video.pic}}" mode="widthFix" catchtap="toPlay" />
+                    <div class="playCover" wx:if="{{videoStatus==0}}"></div>
+                    <image catchtap="toPlay" wx:if="{{videoStatus==0}}" class="playBtn" src="https://statics.wukongbaishi.com/17057585327121151.png" mode="widthFix" />
+                    <video wx:if="{{videoStatus==1}}" id="video" x5-playsinline="" playsinline="true" webkit-playsinline="true" x-webkit-airplay="true" x5-video-player-type="h5" x5-video-player-fullscreen="" x5-video-orientation="portraint" src="{{data.video.file}}" id="videoMain" poster="{{data.pic}}" style="width:100%;" controls="controls" controlslist="nodownload" autoplay></video>
+                </div>
+            </div>
+            <p class="videoDetail-title mt15">{{data.title}}</p>
+            <div wx:if="{{data.content}}" class="videoDetail-content">
+                <div class="articleContent"><rich-text nodes="{{data.content}}"></rich-text></div>
+            </div>
+        </div>
+        <newShare id="newShareCon"></newShare>
+    </div>
+</div>

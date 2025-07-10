@@ -1,0 +1,49 @@
+.officeUserList-list{
+	padding:10px 15px;
+	position:relative;
+}
+.officeUserList-list + .officeUserList-list{
+	border-top:1px solid #F9F9F9;
+}
+.officeUserList-list .picBox{
+	float:left;
+	border-radius:50%;
+	overflow:hidden;
+	width:40px;
+	height:40px;
+}
+.officeUserList-list .textBox{
+	margin-left:50px;
+}
+.officeUserList-list .spanList{
+	background:#FEE10B;
+	color:#333;
+	margin-left:5px;
+}
+.officeUserList-list .spanGrade{
+	font-size:10px;
+	height: 20px;
+	line-height: 20px;
+	padding:0 4px;
+	margin-left:3px;
+}
+.officeUserList-list .spanStatus{
+	position:absolute;
+	z-index:2;
+	font-size:14px;
+	font-weight:600;
+	right:10px;
+	top:10px;
+}
+.officeUserList-list .giftList{
+	display:inline-block;
+	width:25px;
+	text-align:center;
+}
+.officeUserList-list .giftList .giftPic{
+	width:25px;
+	margin:auto;
+}
+.cDAB{
+	color:#DABB53;
+}

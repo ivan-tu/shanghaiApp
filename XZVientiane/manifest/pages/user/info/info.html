@@ -1,0 +1,78 @@
+<div class="app-wrapper">
+    <div class="app-main pb20">
+    	<div class="markWraper"></div>
+        <div class="userDetailEdit-header">
+            <div class="picBox hasLoading" wx:if="{{client=='wx'}}">
+            	<button class="wxUploadBtn" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
+                	<image class="round" src="{{avatarUrl}}" style="width:100%;height:100%;" mode="widthFix" />
+                </button> 
+            </div>
+            <div class="picBox hasLoading" wx:else><upload value="{{form.headpic}}" class="user-upload" width="90" height="90" bindchange="uploadSuccess" id="uploadPic"></upload></div>
+        </div>
+        <!--
+        <div style="padding:0 30px;" wx:if="{{showSex}}">
+            <p class="bold c131 p18">请选择性别</p>
+            <p class="p12 c888">注册成功后性别不可以修改</p>
+            <div class="userInfo_sexList displayFlex ptb15">
+                <span class="list {{(form.sex==1?' yellow':'')}}" data-sex="1" bindtap="selectSex">我是男生</span>
+                <span class="list ml15  {{(form.sex==2?' red':'')}}" data-sex="2" bindtap="selectSex">我是女生</span>
+            </div>
+        </div>-->
+        <div class="plr15 userInfo_editForm">
+            <div class="form-list">
+                <div class="form-list-item title c131">昵称</div>
+                <div class="form-list-item">
+                	<input type="nickname" 	class="textInput" bindinput="model" data-model="form.username" value="{{form.username}}" placeholder="请输入昵称" />
+                </div>
+            </div>
+            <div class="form-list">
+                <div class="form-list-item title c131">性别</div>
+                <div class="form-list-item">
+                    <picker range="{{sexList}}" class="picker-region" custom-item="" bindchange="bindSexChange" value="{{sexIndex}}" id="pickerSex">
+                        <view class="picker c131" wx:if="{{form.sex}}">{{form.sex==2?'女':'男'}}</view>
+                        <view class="picker c999" wx:else>请选择</view>
+                    </picker>
+                </div>
+            </div>
+            <div class="form-list">
+                <div class="form-list-item title c131">生日</div>
+                <div class="form-list-item">
+                    <picker mode="date" class="picker-region" bindchange="bindDateChange" value="{{birthday}}" id="pickerArea">
+                        <view class="picker c131" wx:if="{{form.birthday}}">{{form.birthday}}</view>
+                        <view class="picker c999" wx:else>请选择</view>
+                    </picker>
+                </div>
+            </div>
+            <div class="form-list">
+                <div class="form-list-item title c131">城市</div>
+                <div class="form-list-item">
+                    <picker mode="region" class="picker-region" custom-item="" bindchange="bindRegionChange" value="{{form.area}}" id="pickerArea">
+                        <view class="picker c131" wx:if="{{form.area.length}}">{{form.area[0]}}-{{form.area[1]}}-{{form.area[2]}}</view>
+                        <view class="picker c999" wx:else>请选择</view>
+                    </picker>
+                </div>
+            </div>
+            <div class="form-list" wx:if="{{editUserInfoWX==1}}">
+                <div class="form-list-item title c131">职业</div>
+                <div class="form-list-item">
+                    <input type="text" class="textInput" bindinput="model" data-model="form.identity" value="{{form.identity}}" placeholder="请输入身份" />
+                </div>
+            </div>
+             <div class="form-list">
+                <div class="form-list-item title c131">微信</div>
+                <div class="form-list-item">
+                    <upload value="{{form.wxCodePic}}" class="user-upload" width="90" height="90" bindchange="uploadCodePic" id="uploadCodePic"></upload>
+                </div>
+            </div>
+            <p class="mt5 p14 plr15 c131" wx:if="{{editUserInfoWX==1}}">个人说明</p>
+            <div class="form-list" wx:if="{{editUserInfoWX==1}}">
+                <div class="form-list-item textareaBox">
+                    <textarea maxlength="-1" class="textarea" cursor-spacing="140" bindinput="model" data-model="form.desctext" value="{{form.desctext}}" placeholder="简单介绍一下自己"></textarea>
+                </div>
+            </div>
+            <div class="xzui-btn-app userInfo_footBtn">
+                <button type="button" bindtap="submit" class="xzui-btn xzui-btn_b" size="large">提交</button>
+            </div>
+        </div>
+    </div>
+</div>

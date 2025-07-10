@@ -1,0 +1,793 @@
+.activityDetail_topPic{
+	display:block;
+}
+.activityDetail_title{
+	margin:-20px 15px 0 15px;
+	padding:14px 10px;
+	box-shadow: 0px 1px 4px 0px rgba(225, 225, 225, 0.5);
+	border-radius: 4px;
+	font-size:18px;
+	color:#1E1E1E;
+	line-height:25px;
+	position:relative;
+	z-index:2;
+}
+.activityDetail_red{
+	color:#E53737;
+}
+.activityDetail_blue{
+	color:#1577FE;
+}
+.activityDetail_price{
+	font-size:20px;
+	font-weight:600;
+}
+.activityDetail_oldPrice{
+	font-size:14px;
+	color:#999;
+	text-decoration:line-through;
+	display:inline-block;
+	margin-left:10px;
+	line-height:36px;
+}
+.activityDetail_text{
+	font-size:14px;
+	color:#1E1E1E;
+	font-weight:600;
+}
+.activityDetail_tips{
+	font-size:12px;
+	color:#858585;
+}
+.activityDetail_codeImage {
+	width:140px;
+}
+.activityDetail_border{
+	border-top:10px solid #F8F8F7;
+}
+.activityDetail_footBorder{
+	border-bottom:10px solid #F8F8F7;
+}
+.activityDetail_footBorder +.activityDetail_border{
+	border-top:0 none;
+}
+.activityDetail_joinUser{
+	position:relative;
+}
+.activityDetail_joinUser .title{
+	font-size:12px;
+	color:#1E1E1E;
+	font-weight:600;
+}
+.activityDetail_joinUser .userBox{
+	display:inline-block;
+	width:240px;
+}
+.activityDetail_joinUser .userBox .list{
+	float:left;
+	width:16.666666%;
+}
+.activityDetail_joinUser .userBox .list + .list{
+	margin-left:-12px;
+}
+.activityDetail_joinUser .userBox .list .picBox{
+	border-radius:50%;
+	border:2px solid #fff;
+	width:32px;
+	height:32px;
+	overflow:hidden;
+}
+.activityDetail_joinUser .userNum{
+	font-size:26px;
+	color:#FF8F3F;
+	font-weight:600;
+	display:inline-block;
+	vertical-align:top;
+	line-height:30px;
+}
+.activityDetail_container{
+	padding-bottom:80px;
+}
+/*activityDetail_footBtn*/
+.activityDetail_footBtn{
+	position:fixed;
+	z-index:10;
+	left:0;
+	right:0;
+	bottom:0;
+	padding:16px 10px;
+	background:#fff;
+	box-shadow: 0px -2px 5px 0px rgba(200, 200, 200, 0.5);
+	min-height:60px;
+}
+.activityDetail_footBtn .shareBtn{
+	background: #FF9933;
+	color:#fff;
+	position:absolute;
+	left:10px;
+	top:50%;
+	margin-top:-22px;
+	text-align:center;
+	width:100px;
+	height:44px;
+	line-height:44px;
+	border-radius:22px;
+}
+.activityDetail_footBtn .shareBtn i{
+	font-size:13px;
+}
+.activityDetail_footBtn .shareBtn .text{
+	font-size:13px;
+	display:inline-block;
+	margin-left:3px;
+}
+.activityDetail_footBtn .btnBox{
+	margin-left:135px;
+}
+.activityDetail_moreBtn{
+	width:130px;
+	position:absolute;
+	left:10px;
+	top:50%;
+	margin-top:-22px;
+	text-align:center;
+}
+.activityDetail_moreBtn .moreBtn-icon{
+	font-size: 18px;
+	color: #888;
+	line-height: 20px;
+}
+.activityDetail_footBtn .btnBox .list + .list{
+	margin-left:5px;
+}
+.activityDetail_footBtn .btn{
+	display:block;
+	border-radius: 22px;
+	height:44px;
+	line-height:44px;
+	margin:0;
+	padding:0;
+	width:100%;
+	font-size:12px;
+}
+.activityDetail_footBtn .detail_redBtn{
+	background: #E53737;
+	color:#fff;
+}
+.activityDetail_footBtn .detail_redBtn:hover{
+	background: #E53737;
+	color:#fff;
+}
+.activityDetail_footBtn .detail_blueBtn{
+	background: #1577FE;
+	color:#fff;
+}
+.activityDetail_footBtn .detail_blueBtn:hover{
+	background: #1577FE;
+	color:#fff;
+}
+.activityDetail_footBtn .detail_grayBtn{
+	background: #ddd;
+	color:#fff;
+}
+.activityDetail_footBtn .detail_grayBtn:hover{
+	background: #ddd;
+	color:#fff;
+}
+.activityDetail_footBtn .detail_yellowBtn{
+	background: #FF9933;
+	color:#fff;
+}
+.activityDetail_footBtn .detail_yellowBtn:hover{
+	background: #FF9933;
+	color:#fff;
+}
+.activityDetail_footBtn .detail_greenBtn{
+	background: #7BBD28;
+	color:#fff;
+}
+.activityDetail_footBtn .detail_greenBtn:hover{
+	background: #7BBD28;
+	color:#fff;
+}
+.selectPeopleBox {
+	margin: -5px 0 0 -5px;
+	padding-bottom: 20px;
+}
+
+.selectPeopleList {
+	float: left;
+	width: 25%;
+}
+
+.selectPeopleList .list {
+	margin: 5px 0 0 5px;
+	background: #fff;
+	border: 1px solid #eee;
+	border-radius: 4px;
+	height: 35px;
+	line-height: 35px;
+	text-align: center;
+}
+
+.selectPeopleList .list.active {
+	background: #F84438;
+	color: #fff;
+	border: 1px solid #F84438;
+}
+.xzui-btn.gray{
+	background:#eee !important;
+	color:#999 !important;
+}
+.xzui-btn.gray:hover{
+	background:#eee !important;
+	color:#999 !important;
+}
+/*表单弹框*/
+.signUp_dialog{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,0.5);
+	opacity: 0;
+	visibility: hidden;
+	z-index: 999;
+	-webkit-transition: opacity .2s, visibility .2s;
+	-moz-transition: opacity .2s, visibility .2s;
+	-ms-transition: opacity .2s, visibility .2s;
+	-o-transition: opacity .2s, visibility .2s;
+	transition: opacity .2s, visibility .2s
+}
+.signUp_dialog.show {
+	opacity: 1;
+	visibility: visible
+}
+.signUp_dialog.show .signUp_body{
+	bottom: 0
+}
+.signUp_body{
+	background-color: #fff;
+	border-radius:18px 18px 0 0;
+	width: 100%;
+	position: absolute;
+	left: 0;
+	bottom: -100%;
+
+
+	-webkit-transition: bottom .4s;
+	-moz-transition: bottom .4s;
+	-ms-transition: bottom .4s;
+	-o-transition: bottom .4s;
+	transition: bottom .4s;
+}
+.signUp_body .submitBtn{
+	background: #E10004;
+	border-radius: 24px;
+	display:block;
+	color:#fff;
+	height:48px;
+	line-height:48px;
+	text-align:center;
+	font-size:18px;
+	width:100%;
+	margin:0;
+	padding:0;
+}
+.signUp_body .submitBtn:hover{
+	background: #E10004;
+	color:#fff;
+}
+.activityDetail_master .masterPic{
+	width:25px;
+	height:25px;
+	border-radius:50%;
+	overflow:hidden;
+}
+.activityDetail_master .masterName{
+	font-size:12px;
+	color:#336699;
+	display:inline-block;
+	vertical-align:middle;
+	margin-left:2px;
+}
+.activityMyCode_box .codeText{
+	font-size:12px;
+	color:#727272;
+}
+.activityMyCode_box .codeImage{
+	width:150px;
+	height:150px;
+	margin:10px auto;
+}
+
+/*邀请弹框*/
+.inviteDialog .publicScroll_body{
+	background:#fff;
+	left:40px;
+	right:40px;
+}
+.inviteDialog .publicScroll_main{
+	top:20px;
+	bottom:10px;
+}
+.inviteDialog .publicScroll_body{
+	margin-bottom:-90px;
+}
+.inviteDialog.show .publicScroll_body{
+	bottom: 50%;
+}
+.inviteDialog .toSubmitBtn{
+	display:block;
+	color:#000;
+	text-align:center;
+	height:42px;
+	line-height:42px;
+	border-radius:4px;
+	font-size:16px;
+	background-color: #FEE10B;
+	width:180px;
+	margin:20px auto 0 auto;
+	padding:0;
+}
+/*个人资料弹框*/
+.showEditInfoDialog .publicScroll_body{
+	left:0;
+	right:0;
+	background:#fff;
+	border-radius:10px 10px 0 0;
+}
+.showEditInfoDialog .publicScroll_main{
+	top:15px;
+	bottom:0px;
+}
+.showEditInfoDialog.show .publicScroll_body{
+	bottom:0;
+}
+.showEditInfoDialog .headPicBox{
+	width:60px;
+	height:60px;
+	margin:10px auto;
+	position:relative;
+}
+.showEditInfoDialog .picBox{
+	width:60px;
+	height:60px;
+	border-radius:50%;
+	overflow:hidden;
+	margin:auto;
+}
+.showEditInfoDialog .headPicBox .cameraIcon{
+	display: inline-block;
+	background: #339933;
+	position: absolute;
+	right: 0px;
+	bottom: 0px;
+	z-index: 2;
+	border-radius: 50%;
+	border: 1px solid #fff;
+	width: 18px;
+	height: 18px;
+	text-align: center;
+	line-height: 13px;
+	color: #fff;
+}
+.showEditInfoDialog .headPicBox .cameraIcon i{
+	font-size:10px;
+}
+.showEditInfoDialog .wxUploadBtn{
+	margin:0;
+	padding:0;
+	display:block;
+	background: #bbb;
+	border-radius:50%;
+	width:60px;
+	height:60px;
+	overflow:hidden;
+}
+.showEditInfoDialog .xzui-uploader__file{
+	margin:0;
+	background: #bbb;
+}
+.showEditInfoDialog .xzui-uploader{
+	display: inline-block;
+	vertical-align: middle;
+}
+.showEditInfoDialog .user-upload{
+    display: inline-block;
+    vertical-align: middle;
+}
+.showEditInfoDialog .inputBox{
+	height:35px;
+	border-radius:20px;
+	background:#F4F4F4;
+}
+.showEditInfoDialog .inputBox{
+	border:1px solid #eee;
+	border-radius:20px;
+	margin:15px 35px;
+	padding:0 10px;
+	background:#f9f9f9;
+}
+.showEditInfoDialog .textInput{
+	border:0 none;
+	height:35px;
+	color:#000;
+	vertical-align:top;
+	font-family:inherit;
+	font-size:14px;
+	background:transparent;
+	outline:none;
+	text-align:center;
+	width:100%;
+}
+.showEditInfoDialog input::-moz-placeholder{
+	color: #999;
+	opacity:1;
+}
+.showEditInfoDialog input:-ms-input-placeholder{
+	color: #999;
+	opacity:1;
+}
+.showEditInfoDialog input::-webkit-input-placeholder{
+	color: #999;
+	opacity:1;
+}
+.showEditInfoDialog  .toSubmitBtn{
+	background:#FEE10B;
+	border-radius:20px;
+	margin:15px 35px;
+	color:#000;
+	height:35px;
+	text-align:center;
+	line-height:35px;
+}
+
+.activityDetail_publishBtn{
+	height:30px;
+	line-height:30px;
+	padding:0 6px;
+}
+/*动态*/
+.activityDetail_dynamicList{
+	padding-top:15px;
+}
+.activityDetail_dynamicList + .activityDetail_dynamicList{
+	margin-top:15px;
+	border-top:1px solid #F9F9F9;
+}
+.activityDetail_dynamicList .content{
+	color:#131313;
+	line-height:18px;
+	font-size:14px;
+}
+.activityDetail_dynamicList .addtime{
+	color:#131313;
+	font-size:12px;
+	margin-top:5px;
+}
+.activityDetail_dynamicList .picContainer{
+	margin-left:-5px;
+}
+.activityDetail_dynamicList .picContainer .picBox{
+	float:left;
+	display:block;
+	width:33.333333%;
+}
+.activityDetail_dynamicList .picContainer.row1 .picBox{
+	width:100%;
+}
+.activityDetail_dynamicList .picContainer.row2 .picBox{
+	width:50%;
+}
+.activityDetail_dynamicList .picContainer .picBox .picList{
+	margin:5px 0 0 5px;
+	position:relative;
+}
+.activityDetail_dynamicList .picContainer .videoPlay_image{
+	width: 30px;
+	height: 30px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -15px;
+	margin-left: -15px;
+}
+.activityDetail_dynamicList .userPicBox{
+	width:35px;
+	height:35px;
+	border-radius:50%;
+	overflow:hidden;
+	float:left;
+}
+.activityDetail_dynamicList .contentBox{
+	margin-left:45px;
+}
+.activityDetail_dynamicList .userName{
+	color:#336699;
+	font-size:14px;
+}
+.activityDetail_dynamicList .levelName{
+	font-size:10px;
+	background:#FF9900;
+	color:#fff;
+	border-radius:10px;
+	display:inline-block;
+	margin-left:5px;
+	vertical-align:middle;
+	padding:0 5px;
+}
+.activityDetail_dynamicList .content{
+	margin-top:10px;
+	font-size:12px;
+	line-height:22px;
+}
+.dynamicListBtn +.dynamicListBtn{
+	margin-left:10px;
+}
+.activityDetail_dynamicList .starsBox{
+	margin:10px 0;
+	font-size:0;
+}
+.activityDetail_dynamicList .starsBox .iconPic{
+	width:16px;
+}
+.activityDetail_dynamicList .starsBox .iconTitle{
+	font-size:10px;
+	margin-right:2px;
+	vertical-align:middle;
+	color:#FF6666;
+	padding:1px 4px;
+}
+.activityDetail_dynamicList .starsBox .iconStars{
+	width:12px;
+	vertical-align:middle;
+	display:inline-block;
+}
+.activityDetail_dynamicList .starsBox .iconStars + .iconStars{
+	margin-left:1px;
+}
+.activityDetail_dynamicList .starsBox .activityName{
+	font-size:12px;
+	color:#555;
+	display:inline-block;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width:130px;
+	vertical-align:middle;
+	margin-left:10px;
+}
+
+
+
+
+.activityDetail_menuBox{
+	padding:10px 15px 0 15px;
+	border-bottom:2px solid #F8F8F7;
+}
+.activityDetail_menuBox .listBtn{
+	display:inline-block;
+	font-size:16px;
+	color:#666;
+	position:relative;
+}
+.activityDetail_menuBox .listBtn +.listBtn{
+	margin-left:20px;
+}
+.activityDetail_menuBox .listBtn.active{
+	color:#111;
+	font-size:18px;
+	font-weight:600;
+}
+.activityDetail_divTitle{
+	position:relative;
+	color:#333;
+}
+.activityDetail_divTitle:after{
+	content:'';
+	width:3px;
+	background:#FBE900;
+	position:absolute;
+	top:2px;
+	bottom:2px;
+	left:-7px;
+}
+.activityDetail_zuanshi{
+	width:20px;
+	line-height:36px;
+	margin-left:5px;
+}
+.tagsBox{
+	margin:0px 0 0 -5px;
+}
+.tagsBox .tagsList{
+	display:inline-block;
+	background:#FF9900;
+	color:#fff;
+	font-size:11px;
+	border-radius:10px;
+	padding:1px 6px;
+	margin:5px 0 0 5px;
+}
+
+/*礼物相关*/
+.businessCard_sendGiftBtn .xzui-btn{
+	margin:auto;
+	color:#fff !important;
+	background:#DABB53 !important;
+	padding:0;
+	border-radius:30px;
+}
+.businessCard_sendGiftBtn .sendPic{
+	width:24px;
+}
+.publicScroll_giftBox{
+	margin:-10px 0 0 -10px;
+}
+.publicScroll_giftBox .publicScroll_giftList{
+	float:left;
+	width:25%;
+}
+.publicScroll_giftBox .publicScroll_giftList .list{
+	margin:10px 0 0 10px;
+	text-align:center;
+	height:90px;
+	position:relative;
+}
+.publicScroll_giftBox .publicScroll_giftList .list .topContainer{
+	padding:5px 0;
+}
+.publicScroll_giftBox .publicScroll_giftList .list.active .topContainer{
+	background:#FFFDEE;
+}
+.publicScroll_giftList .picBox{
+	margin:auto;
+}
+.publicScroll_giftList .picBox .pic{
+	width:100%;
+	height:100%;
+}
+.publicScroll_giftList .nameBox{
+	font-size:14px;
+	color:#000;
+	font-weight:600;
+}
+.publicScroll_giftList .priceBox .priceIcon{
+	width:12px;
+	height:11px;
+}
+.publicScroll_giftList .priceBox .priceText{
+	font-size:12px;
+	color:#000;
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 2px;
+}
+.publicScroll_giftList .quantityBox{
+	font-size:0px;
+	margin-top:5px;
+}
+.publicScroll_giftList .quantityBox .reduceBtn{
+	background:rgba(198,218,229,0.6);
+	color:#000;
+	font-size:12px;
+	border-radius:30px 0px 0px 30px;
+	display:inline-block;
+	width:23px;
+	height:20px;
+	text-align:center;
+	line-height:20px;
+	vertical-align:middle;
+}
+.publicScroll_giftList .quantityBox .numBtn{
+	background:rgba(198,218,229,0.6);
+	color:#000;
+	font-size:12px;
+	display:inline-block;
+	margin:0 2px;
+	width:20px;
+	height:20px;
+	text-align:center;
+	line-height:20px;
+	vertical-align:middle;
+}
+.publicScroll_giftList .quantityBox .addBtn{
+	background:rgba(198,218,229,0.6);
+	color:#000;
+	font-size:12px;
+	border-radius:0px 30px 30px 0px;
+	display:inline-block;
+	width:23px;
+	height:20px;
+	text-align:center;
+	line-height:20px;
+	vertical-align:middle;
+}
+.publicScroll_giftFoot{
+	position:relative;
+	height:45px;
+}
+.publicScroll_giftFoot .priceBox{
+	line-height:36px;
+}
+.publicScroll_giftFoot .priceBox .priceIcon{
+	width:20px;
+	height:19px;
+}
+.publicScroll_giftFoot .priceBox .priceText{
+	display:inline-block;
+	vertical-align:middle;
+	margin-left:5px;
+	color:#000;
+	font-size:16px;
+}
+.publicScroll_giftFoot .toSubmitBtn{
+	background:#FEE10B;
+	color:#000;
+	font-size:16px;
+	width:120px;
+	height:36px;
+	line-height:36px;
+	text-align:center;
+	display:inline-block;
+	border-radius:20px;
+	position:absolute;
+	right:0px;
+	top:50%;
+	margin-top:-18px;
+}
+
+.activityDetail_dynamicList .giftBox{
+	margin-top:10px;
+}
+.activityDetail_dynamicList .giftPicBox{
+	width:40px;
+	float:left;
+}
+.activityDetail_dynamicList .giftNum{
+	margin-left:43px;
+	font-size:14px;
+	line-height:48px;
+	color:#666;
+}
+.activity-submitInfoBtn{
+	padding:4px 15px;
+	font-size:16px;
+}
+.activityDetail_clubBox{
+	padding:10px 15px;
+}
+.activityDetail_clubBox .title{
+	font-size: 12px;
+	color: #1E1E1E;
+	font-weight: 600;
+}
+.activityDetail_clubBox .activityDetail_clubList{
+	margin-top:5px;
+	display:block;
+	position:relative;
+}
+.activityDetail_clubBox .activityDetail_clubList:after{
+	content: "\e61f";
+	font-family: 'xzicon';
+	position: absolute;
+	right: 0px;
+	top: 50%;
+	margin-top: -11px;
+	font-size: 12px;
+	color: #A4A4A4;
+}
+.activityDetail_clubBox .activityDetail_clubList .picBox{
+	width:35px;
+	height:35px;
+	float:left;
+}
+.activityDetail_clubBox .activityDetail_clubList .textBox{
+	margin-left:45px;
+	line-height:35px;
+}
+.activityDetail_addressItem{
+	max-width:310px;
+}

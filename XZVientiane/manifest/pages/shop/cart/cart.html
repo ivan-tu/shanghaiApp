@@ -1,0 +1,80 @@
+<div class="app-wrapper">
+	<div wx:if="{{isUserLogin}}" class="app-main pb20">
+		<div class="mb10" wx:if="{{data.data.length}}">
+			<!--商品信息-->
+			<div class="xzui-cells">
+				<!--商品规格-->
+				<div class="xzui-panel xzui-panel_access">
+					<div class="xzui-panel__bd">
+						<checkbox-group>
+                        <div class="shop-cart-listBox" wx:for="{{data.data}}" wx:for-item="b" wx:for-index="a">
+                        	<div class="shop-cart-storeInfo clearfix" data-shortid="{{b.shopdata.shortid}}" bindtap="toStorIndex">
+                            	<div class="picBox"><image class="w100 h100 round4" src="{{b.shopdata.logo}}" mode="widthFix"/></div>
+                                <div class="textBox">{{b.shopdata.name}}</div>
+                            </div>
+                            <div class="xzui-media-box xzui-media-box_appmsg" wx:for="{{b.data}}" wx:for-item="item" wx:for-index="index">
+                                <div class="xzui-media-box__hd xzui-media-box__hd_in-appmsg" style="width:25px;height:70px;">
+                                    <span class="xzui-checkbox-new {{(item.checked?' active':'')}}" data-index="{{index}}" data-parent="{{a}}" bindtap="selectItem"></span>
+                                </div>
+                                <div class="xzui-media-box__hd xzui-media-box__hd_in-appmsg" bindtap="toPage" data-page="../../shop/goodsDetail/goodsDetail?id={{item.goodshortid}}" style="width:70px;height:70px;">
+                                    <image src="{{item.pic}}" mode="widthFix"/>
+                                </div>
+                                <div class="xzui-media-box__bd xzui-media-box__bd_in-appmsg" wx:if="{{item.canBuy&&item.hasstock}}">
+                                    <i class="xzicon-delete fr c888" data-index="{{index}}" data-parent="{{a}}" bindtap="del" style="position:absolute;right:15px;"></i>
+                                    <div class="xzui-media-box__title p14" bindtap="toPage" data-page="../../shop/goodsDetail/goodsDetail?id={{item.goodshortid}}" style="margin-right:15px;">{{item.goodsname}}
+                                    </div>
+                                    <div class="xzui-media-box__desc">
+                                        <div class="c999 p12">{{item.format}}{{refundStatus==2?(' | '+(item.refundType==1?'7天可退款':'不可退款')):''}}
+                                        </div>
+                                        <div class="cRed p12 mt5 clearfix">
+                                            <div class="fl">
+                                                ¥<span class="p14">{{item.price}}</span>
+                                            </div>
+                                            <div class="fr">
+                                                <span class="xzicon-minussquare cRed p18" data-index="{{index}}" data-parent="{{a}}" catchtap="minusCount"></span><span class="p14 tac" style="display:inline-block;width:40px;"><input class="xzui-input tac" pattern="[0-9]*" type="number" value="{{item.quantity}}" bindinput="inputCount" data-index="{{index}}" data-parent="{{a}}" style="margin-top:-2px;"/></span><span class="xzicon-plussquare cRed p18" data-index="{{index}}" data-parent="{{a}}" catchtap="addCount"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="xzui-media-box__bd xzui-media-box__bd_in-appmsg" wx:else>
+                                	<i class="xzicon-delete fr c888" data-index="{{index}}" data-parent="{{a}}" bindtap="del" style="position:absolute;right:15px;"></i>
+                                	<p class="c999 p12">{{item.tips}}</p>
+                                </div>
+                            </div>
+                        </div>
+						</checkbox-group>
+					</div>
+				</div>
+			</div>
+			<!--底部按钮-->
+			<div class="xz-bottomBox-fixed setTopLine client_cart_bottom {{(client)}}">
+				<div class="clearfix">
+					<div class="xz-bottomBox-fixedTotal p12">
+						<checkbox-group bindchange="selectAll">
+						<label class="checkbox">
+						<checkbox class="checkbox-input checkbox-cells_input" name="checkbox" checked="{{selectedAll}}" disabled="{{refundStatus==2}}"></checkbox>
+						<span class="checkbox-title checkbox-cells_title ">全选</span>
+						</label>
+						<span class="ml5">合计：</span><span class="cRed p14">¥{{data.realTotalPrice}}</span>
+						</checkbox-group>
+					</div>
+					<button class="xz-bottomBox-fixedSave" bindtap="submit">去结算</button>
+				</div>
+			</div>
+		</div>
+		<view  wx:elif="{{!showLoading}}">
+     		<div class="bgfff pd20 tac">
+                <div class="shop-noData-icon tac"><i class="xzicon-shoppingcart"></i></div>
+                <p class="c666 tac">购物车还什么都没有～</p>
+                <div bindtap="backIndex" class="shop-noData-linkBtn">去首页看看</div>
+            </div>
+		</view>
+		<view class="loadingBox mlr14" hidden="{{!showLoading}}">
+            <div class="xzicon-loading"></div>
+            <div class="xzui-loadmore__tips">
+                正在加载
+            </div>
+		</view>
+	</div>
+	<nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

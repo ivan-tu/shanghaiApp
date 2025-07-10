@@ -1,0 +1,45 @@
+//
+//  PrefixHeader.pch
+//  XZVientiane
+//
+//  Created by 崔逢举 on 2017/12/11.
+//  Copyright © 2017年 崔逢举. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+#ifdef __OBJC__
+#import "XZFunctionDefine.h"       //宏定义方法
+#import "CLUserDefaultDefine.h"
+#import "ClientJsonRequestManager.h"
+#import "XZBaseHead.h"
+#import "SystemDefine.h"
+#import "UIColor+addition.h"
+#import "NSArray+safe.h"
+#import "NSMutableArray+safe.h"
+#import "UIWebView+addition.h"
+#import "UIBarButtonItem+DCBarButtonItem.h"
+#import "PublicSettingModel.h"
+#import <UIKit/UIKit.h>
+#import "UIImage+tool.h"
+#import "NSString+addition.h"
+#endif
+
+#define iOS11Later @available(iOS 11.0, *)
+#define ScreenWidth [UIScreen mainScreen].bounds.size.width
+#define NoReachable [AFNetworkReachabilityManager manager].networkReachabilityStatus == AFNetworkReachabilityStatusNotReachable
+#define Wifi [AFNetworkReachabilityManager manager].networkReachabilityStatus == AFNetworkReachabilityStatusReachableViaWiFi
+#define KNavSettingPath [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"NavSetting.plist"]
+#define AlivcScreenWidth  [UIScreen mainScreen].bounds.size.width
+#define AlivcScreenHeight  [UIScreen mainScreen].bounds.size.height
+#define AlivcSizeWidth(W) (W*(AlivcScreenWidth)/320)
+#define AlivcSizeHeight(H) (H*(AlivcScreenHeight)/568)
+
+#define IPHONEX (AlivcScreenWidth == 375.f && AlivcScreenHeight == 812.f)
+
+#define AlivcRGB(R,G,B)  [UIColor colorWithRed:(R * 1.0) / 255.0 green:(G * 1.0) / 255.0 blue:(B * 1.0) / 255.0 alpha:1.0]
+#define AlivcRGBA(R,G,B,A)  [UIColor colorWithRed:(R * 1.0) / 255.0 green:(G * 1.0) / 255.0 blue:(B * 1.0) / 255.0 alpha:A]
+
+#define KCURRENTCITYINFODEFAULTS [NSUserDefaults standardUserDefaults]
+
+#endif /* PrefixHeader_pch */

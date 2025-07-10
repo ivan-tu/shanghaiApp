@@ -1,0 +1,67 @@
+/* CSS Document */
+
+.items .items-title,
+.items_title {
+  color: #888;
+  padding: 6px 15px;
+  text-align: left;
+  background: #f5f5f5;
+}
+
+.items .items-cantent {
+  padding-left: 15px;
+  background-color: #fff;
+}
+
+.items .items-cantent .items-li {
+  line-height: 60px;
+  position: relative;
+}
+
+.items .items-cantent .items-li+.items-li:before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 1px;
+  background-color: #f5f5f5;
+  content: '';
+}
+
+.items .items-cantent .items-li .img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin: 10px 0;
+  float: left;
+}
+
+.items .items-cantent .items-li .name {
+  padding: 0 15px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-align: left;
+}
+
+.mailList-userList_option {
+  height: calc(100vh - 96px);
+  position: fixed;
+  right: 0;
+  top: 44px;
+  width: 24px;
+  text-align: center;
+  line-height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mailList-userList_option p {
+  width: 24px;
+}
+
+.userLisr-index {
+  display: block;
+  color: #111;
+}

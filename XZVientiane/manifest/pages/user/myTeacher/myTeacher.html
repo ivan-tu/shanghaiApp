@@ -1,0 +1,43 @@
+<div class="app-wrapper">
+	<div wx:if="{{isUserLogin}}" class="app-main">
+    	<div class="bgfff displayFlex tac">
+        	<div class="list ptb15">
+            	<p class="p18">12</p>
+            	<p class="p14 c666">我服务的人</p>
+            </div>
+            <div class="list ptb15">
+            	<p class="p18">900</p>
+            	<p class="p14 c666">讲解奖励</p>
+            </div>
+        </div>
+        <div class="searchCategory-box clearfix mt15">
+            <div class="searchCategory">
+                <div class="listBox">
+                    <span class="list {{(getType=='1'?' active':'')}}" data-value="1" bindtap="screen">讲解奖励</span>
+                    <span class="list {{(getType=='2'?' active':'')}}" data-value="2" bindtap="screen">服务人员</span>
+                </div>
+            </div>
+        </div>
+        <div class="pb15">
+            <div class="bgfff plr15">
+                <div class="public-myAchievement-item">
+                    <div class="clearfix">
+                        <div class="fl" style="max-width:70%;">
+                            <p class="c333 p14 textOver">今日服务XXX</p>
+                            <p class="c666 p12">2025-05-10</p>
+                        </div>
+                        <div class="fr tar">
+                            <p class="public-myAchievement-money cRed" style="line-height:24px;">+999</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <view class="loadingBox mlr14" hidden="{{!showLoading}}">
+                <div class="xzicon-loading"></div>
+                <div class="xzui-loadmore__tips">正在加载</div>
+            </view>
+            <view class="noData mlr14" hidden="{{!showNoData}}">暂无记录</view>
+        </div>
+    </div>
+    <nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

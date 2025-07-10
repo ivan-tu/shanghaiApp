@@ -1,0 +1,41 @@
+.myInvite-list{
+	padding:15px;
+	position:relative;
+}
+.myInvite-list + .myInvite-list{
+	border-top:1px solid #F9F9F9;
+}
+.myInvite-list .picBox{
+	float:left;
+	border-radius:50%;
+	overflow:hidden;
+	width:40px;
+	height:40px;
+}
+.myInvite-list .textBox{
+	margin-left:50px;
+}
+.myInvite-list .textBox .levelSpan{
+	margin-left:5px;
+	display:inline-block;
+	background:#FEE10B;
+	color:#111;
+	font-size:12px;
+	border-radius:4px;
+	padding:0 3px;
+}
+.myInvite-list .getWxCodeBtn{
+	position:absolute;
+	right:15px;
+	top:14px;
+	text-align:center;
+}
+.myInvite-list .getWxCodeBtn .codePic{
+	width:30px;
+	margin:auto;
+}
+.myInvite-list .getWxCodeBtn .codeTips{
+	font-size:12px;
+	color:#888;
+	margin-top:3px;
+}

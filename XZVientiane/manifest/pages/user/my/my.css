@@ -1,0 +1,269 @@
+.userMy-header{
+	padding:15px;
+	position:relative;
+}
+.userMy-header .picBox{
+	width:80px;
+	height:80px;
+	overflow:hidden;
+	border-radius:50%;
+	float:left;
+	background:#fff;
+}
+.userMy-header .textBox{
+	margin-left:90px;
+	padding-right:40px;
+	position:relative;
+}
+.userMy-header .textBox .username{
+	font-size:20px;
+}
+.userMy-header .textBox .levelName{
+	font-size:12px;
+	background:#FF9900;
+	color:#fff;
+	border-radius:10px;
+	display:inline-block;
+	vertical-align:middle;
+	padding:0 5px;
+}
+.userMy-header .codeBox{
+	position: absolute;
+	z-index: 2;
+	right: 20px;
+	top: 50%;
+	margin-top: -15px;
+	width: 40px;
+	text-align:center;
+}
+.userMy-header .codeBox .pic{
+	width:28px;
+}
+.userMy-header .copyIcon{
+	width:19px;
+	margin-left:5px;
+}
+.userMy-header .spanStatusList .spanStatus{
+	display:inline-block;
+	padding:0 8px;
+	height: 22px;
+	line-height:22px;
+	background: #3A5CD3;
+	border-radius: 4px;
+	font-size:12px;
+	color:#fff;
+}
+.userMy-header .spanStatusList .spanStatus +.spanStatus{
+	margin-left:3px;
+}
+.userMy-header .spanStatusList .spanStatus.yellow{
+	background: #DABB53;
+}
+.userMy-header .spanStatusList .spanStatus.red{
+	background:#EC6672;
+}
+.userMy-header .spanStatusList .spanStatus.color_w{
+	background:rgba(212,215,225);
+	color:rgba(255,255,255);
+}
+.userMy-header .spanStatusList .spanStatus.color_b{
+	background:rgba(24,24,24);
+	color:rgba(218,187,83);
+	border:1px solid rgba(218,187,83);
+}
+.userMy-header .spanStatusList .spanStatus.color_g{
+	background:rgba(236,205,100);
+	color:rgba(255,255,255);
+}
+.userMy-menuList .form-list + .form-list:not(.noBorder)::before{
+	content: '';
+	background: #F9F9F9;
+	position: absolute;
+	left: -50%;
+	top: 0;
+	right: -50%;
+	-webkit-transform: scale(0.5);
+	transform: scale(0.5);
+	height: 1px;
+	width: 200%;
+	margin-left: 15px;
+}
+.userMy-socialBtn .recordBtn{
+	background: #000;
+	color:#fff;
+	padding:8px 12px;
+	border-radius:6px;
+}
+.userMy-socialBtn .friendBtn{
+	background: #DABB53;
+	color:#fff;
+	padding:8px 12px;
+	border-radius:6px;
+}
+.userMy-socialBtn .iconPic{
+	width:24px;
+}
+
+
+.userFinanceRegister_inputBox{
+	border-bottom:1px solid #666;
+	padding:0px 5px 5px 5px;
+	text-align:center;
+}
+.userFinanceRegister_inputBox .textInput{
+	border:0 none;
+	height:24px;
+	color:#131313;
+	vertical-align:top;
+	font-family:inherit;
+	outline:none;
+	font-size:18px;
+	text-align:center;
+}
+.userFinanceRegister_inputBox input::-moz-placeholder{
+	color: #999;
+	opacity:1;
+}
+.userFinanceRegister_inputBox input:-ms-input-placeholder{
+	color: #999;
+	opacity:1;
+}
+.userFinanceRegister_inputBox input::-webkit-input-placeholder{
+	color: #999;
+	opacity:1;
+}
+
+.userMy-upGradeBtn{
+	background:rgba(0,0,0,1);
+	color:#fff;
+	height:42px;
+	line-height:42px;
+	margin:25px 15px 0 15px;
+	border-radius:4px;
+	position:relative;
+	padding:0 10px;
+}
+.userMy-upGradeBtn:after{
+	content: "\e61f";
+	font-family: 'xzicon';
+	position: absolute;
+	right: 10px;
+	top: 50%;
+	margin-top: -11px;
+	font-size: 12px;
+	line-height:22px;
+	color: #fff;
+}
+/*userMy-menu*/
+.userMy-menu2{
+	margin-left:-10px;
+}
+.userMy-menu2 .menuList{
+	display:block;
+	float:left;
+	width:25%;
+}
+.userMy-menu2 .menuList .listBox{
+	display:block;
+	margin:20px 0 0 10px;
+	text-align:center;
+	position:relative;
+}
+.userMy-menu2 .menuList .listBox .iconPic{
+	height:22px;
+}
+.userMy-menu2 .menuList .listBox .iconText{
+	margin-top:3px;
+	color:#333;
+	font-size:14px;
+	display:block;
+}
+.userMy-menu2 .menuList .listBox .redRoundNum{
+	background: #D9001B;
+	color: #fff;
+	border-radius: 50%;
+	display: inline-block;
+	width: 17px;
+	height: 17px;
+	font-size: 12px;
+	line-height: 17px;
+	text-align: center;
+	position: absolute;
+	top: -2px;
+	right: 21px;
+}
+.userMy-expertBtn .list{
+	background:#FEE10B;
+	height:45px;
+	line-height:45px;
+	color:#333;
+	border-radius:6px;
+	text-align:center;
+	font-size:16px;
+}
+.userMy-payTips{
+	background:#dd0000;
+	padding:10px 15px;
+	text-align:center;
+	font-size:15px;
+	color:#fff;
+	border-radius:4px;
+	margin:10px 15px 0 15px;
+	display:block;
+}
+.userMy-payTips:active{
+	color:#fff;
+}
+/*nav*/
+.xzui-tabbar:before{
+  border-top: 0px none;
+}
+.xzui-tabbar_item.index{
+    background-image: url(/static/images/nav-index.png);
+}
+.xzui-bar_item_on.index,
+.xzui-tabbar_item.index:hover{
+    background-image: url(/static/images/nav-indexActive.png);
+}
+.xzui-tabbar_item.activity{
+    background-image: url(/static/images/nav-activity.png);
+}
+.xzui-bar_item_on.activity,
+.xzui-tabbar_item.activity:hover{
+    background-image: url(/static/images/nav-activityActive.png);
+}
+.xzui-tabbar_item.store{
+    background-image: url(/static/images/nav-store.png);
+}
+.xzui-bar_item_on.store,
+.xzui-tabbar_item.store:hover{
+    background-image: url(/static/images/nav-storeActive.png);
+}
+.xzui-tabbar_item.group{
+    background-image: url(/static/images/nav-group.png);
+}
+.xzui-bar_item_on.group,
+.xzui-tabbar_item.group:hover{
+    background-image: url(/static/images/nav-groupActive.png);
+}
+.xzui-tabbar_item.message{
+    background-image: url(/static/images/nav-message.png);
+}
+.xzui-bar_item_on.message,
+.xzui-tabbar_item.message:hover{
+    background-image: url(/static/images/nav-messageActive.png);
+}
+.xzui-tabbar_item.goods{
+    background-image: url(/static/images/nav-goods.png);
+}
+.xzui-bar_item_on.goods,
+.xzui-tabbar_item.goods:hover{
+    background-image: url(/static/images/nav-goodsActive.png);
+}
+.xzui-tabbar_item.my{
+    background-image: url(/static/images/nav-my.png);
+}
+.xzui-bar_item_on.my,
+.xzui-tabbar_item.my:hover{
+    background-image: url(/static/images/nav-myActive.png);
+}

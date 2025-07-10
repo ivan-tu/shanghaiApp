@@ -1,0 +1,78 @@
+.shop-orderDetail-goodsList .goodsPic{
+	overflow:hidden;
+	width:80px;
+	height:80px;
+	float:left;
+	position:relative;
+}
+.shop-orderDetail-goodsList .goodsText{
+	margin-left:88px;
+	margin-right:90px;
+}
+.shop-orderDetail-goodsList .goodsSet{
+	float:right;
+	width:90px;
+}
+.shop-orderDetail-goodsList:last-child:after{
+	content:'';
+	display:none;
+}
+.xzui-btn_b.gray{
+	color: #999 !important;
+	font-weight: 500;
+	background-color: #f5f5f5 !important;
+	display: block;
+	margin: 0;
+}
+.xzui-btn_b.red{
+	color: #fff;
+	font-weight: 500;
+	background-color:rgba(248,68,56,0.6);
+	display: block;
+	margin: 0;
+}
+.xzui-btn-app .displayFlex .list + .list{
+	margin-left:10px;
+}
+/*选择商品退款相关*/
+.shop-orderDetail-goodsList .edit{
+	padding-left:45px;
+}
+.shop-orderDetail-goodsList .xzui-radio-new{
+	position:absolute;
+	left:10px;
+	top:50%;
+	margin-top:-10px;
+}
+.shop-orderDetail-goodsList .xzui-radio-new.disabled{
+	background:#eee;
+}
+/*评价相关*/
+.order_starList .xzicon-staro {
+	font-size: 16px;
+	color: #999;
+}
+
+.order_starList .xzicon-star2 {
+	font-size: 16px;
+	color: #D2161F;
+}
+.order_starTips {
+	font-size: 14px;
+	color: #666;
+	margin-left: 5px;
+}
+.evaluate_picBox {
+	margin: -5px 0 0 -5px;
+}
+.evaluate_picBox .evaluate_picList {
+	width: 33.333333%;
+	float: left;
+}
+.evaluate_picList .list {
+	margin: 5px 0 0 5px;
+}
+.evaluate_list+.evaluate_list {
+	margin-top: 10px;
+}
+

@@ -1,0 +1,50 @@
+<div class="app-wrapper">
+    <div wx:if="{{isUserLogin}}" class="app-main" style="position:absolute;width:100%;height:100%;background:rgb(239,239,239);max-width:480px;overflow:hidden;">
+    	<!--聊天记录-->
+        <view>
+            <scroll-view scroll-y="true" scroll-with-animation="true" scroll-anchoring="true" class="chat-messageRecord {{(showFace?' hasFace':'')}}" id="messageBox">
+                <view class="chat-messageRecordBox" id="messageContent" catchtap="clickMessageContent">
+                    <view class="loadingBox" hidden="{{!showLoading}}">
+                        <div class="xzicon-loading"></div>
+                    </view>
+                    <view wx:for="{{messageList}}" class="chat-message-list clearfix {{(item.flow=='out'?' my':'')}}">
+                    	<div class="chat-message-time" wx:if="{{timeList[index]}}">{{timeList[index]}}</div>
+                        <div class="headPic"><image class="pic" src="{{item.flow=='out'?userInfo.headpic:customerInfo.headpic}}" mode="widthFix" /></div>
+                        <div class="content">
+                            <p class="userName textOver">{{item.flow=='out'?userInfo.username:customerInfo.username}}</p>
+                            <!--文字消息-->
+                            <div class="chat-message-content" wx:if="{{item.type=='TIMTextElem'}}" style="max-width:{{messageContentWidth}}px;">
+                                <div class="text">
+                                	<div class="textContent" wx:for="{{item.content}}" wx:for-item="g">
+                                    	<image class="faceImg" wx:if="{{g.name=='img'}}" src="{{g.src}}" mode="widthFix" />
+                                        <span wx:else>{{g.text}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--图片消息-->
+                            <div class="chat-message-content" wx:elif="{{item.type=='TIMImageElem'}}" style="max-width:{{messageContentWidth}}px;"><image bindtap="viewImage" data-src="{{item.content.imageUrl}}" class="pic" src="{{item.content.imageUrl}}" mode="widthFix" style="width:{{item.width}}px;" /></div>
+                        </div>
+         			</view>
+                </view>
+            </scroll-view>
+        </view>
+        <!--聊天输入-->
+        <view class="chat-messageControl" id="chat-messageControl">
+        	<div class="inputMain">
+                <div class="inputBox"><form action="javascript:;" bindsubmit="submitMessage"><input type="text" class="inputText" placeholder="" bindinput="model" value="{{imForm.content}}" data-model="imForm.content" confirm-type="send" bindconfirm="submitMessage" id="contentInput" /></form><span class="inputBox-submitBtn" wx:if="{{imForm.content}}" bindtap="submitMessage">发送</span></div>
+                <button class="expressionBtn" bindtap="toHideFace" wx:if="{{showFace}}"><image src="{{assetsPath}}chatImg/expression.png" mode="widthFix" /></button>
+                <button class="expressionBtn" bindtap="toShowFace" wx:else><image src="{{assetsPath}}chatImg/expression.png" mode="widthFix" /></button>
+            </div>
+            <div class="moreFace {{(showFace?' show':'')}} {{(showFaceS?' showS':'')}}">
+                <div class="moreFace-content">
+                	<div class="list clearfix"><image src="{{faceUrl}}{{item}}" class="faceImage" wx:for="{{faceArray}}" bindtap="sendFace" data-name="{{index}}" mode="widthFix" /></div>
+                </div>
+                <div class="tar" style="padding:5px 10px;">
+                	<button class="moreFace-deleteBtn {{(imForm.content?' active':'')}}" bindtap="deleteFace"><i class="xzicon-arrowleft"></i></button>
+                	<button class="moreFace-sendBtn {{(imForm.content?' active':'')}}" bindtap="submitMessage">发送</button>
+                </div>
+            </div>
+        </view>
+    </div>
+    <nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

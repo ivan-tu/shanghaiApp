@@ -1,0 +1,60 @@
+.userUpGrade-list{
+	box-shadow: 0 3px 2px 0px rgba(000,000,000,0.1);
+	border-radius:8px;
+	padding:12px 100px 12px 15px;
+	position:relative;
+	margin-top:15px;
+}
+.userUpGrade-list .controlBox{
+	position:absolute;
+	right:10px;
+	bottom:10px;
+	width:100px;
+	text-align:right;
+}
+.userUpGrade-list .upBtn{
+	display:inline-block;
+	padding:5px 10px;
+	border-radius:20px;
+	background:#fff;
+	color:#000;
+	font-size:14px;
+	margin-top:10px;
+}
+.userUpGrade-list .price{
+	font-size:18px;
+	color:#131313;
+	margin-top:2px;
+	font-weight:bold;
+}
+.userUpGrade-list .title{
+	font-size:18px;
+	color:#131313;
+}
+.userUpGrade-list .tipsInfo{
+	color:#222;
+}
+.userUpGrade-list.color_1{
+	background: rgb(212, 215, 225);
+}
+.userUpGrade-list.color_2{
+	background: rgba(236,205,100);
+}
+.userUpGrade-list.color_3{
+	/*background:rgba(250,250,245);*/
+}
+.userUpGrade-list.color_3{
+	background:rgba(24,24,24);
+}
+.userUpGrade-list.color_3 .title{
+	color:rgba(218,187,83);
+}
+.userUpGrade-list.color_3 .tipsInfo{
+	color:rgba(218,187,83);
+}
+.userUpGrade-list.color_3 .price{
+	color:rgba(218,187,83);
+}
+.userUpGrade-list.color_red{
+	background: #EC6672;
+}

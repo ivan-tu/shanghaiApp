@@ -1,0 +1,322 @@
+<div class="app-wrapper">
+	<div class="app-main positionBottom" style="padding-bottom:62px;">
+		<view class="markWraper"></view>
+		<div wx:if="{{data.name}}" class="positionR">
+			<view class="shop-goodsDetail-banner hasLoading" wx:if="{{data.pics&&data.pics.length}}"
+				style="height:{{imgHeight}}px;">
+				<view class="shop-goodsDetail-bannerBox">
+					<swiper autoplay="true" indicator-dots="true" indicator-color="rgba(255,255,255,0.3)"
+						indicator-active-color="rgba(255,255,255,0.8)" circular="true" style="height:{{imgHeight}}px;"
+						wx:if="{{client=='wx'}}">
+						<block wx:for="{{data.pics}}">
+							<swiper-item>
+								<image src="{{item}}" class="slide-image" mode="widthFix" style="width:100%" />
+							</swiper-item>
+						</block>
+					</swiper>
+					<div class="swiper-container" id="swiperBanner" wx:else>
+						<div class="swiper-wrapper">
+							<div class="swiper-slide" wx:for="{{data.pics}}">
+								<image src="{{item}}" class="slide-image" style="width:100%" mode="widthFix" />
+							</div>
+						</div>
+						<div class="pagination"></div>
+					</div>
+				</view>
+			</view>
+			<view wx:else class="hasLoading" style="height:{{imgHeight}}px;" bindtap="viewThisImage" data-pic="{{data.pic}}">
+				<image src="{{data.pic}}" mode="widthFix" style="width:100%" />
+			</view>
+			<div class="p16 bold plr15 pt15" data-content="{{data.name}}" bindtap="copyThis">{{data.name}}</div>
+			<div class="plr15 mt5 clearfix shop-goodsDetail-price">
+				<div class="fl">
+					<span class="p14 cRed">¥</span>
+					<span class="p24 cRed bold">{{data.sku[selectedIndex].realPrice}}</span>
+				</div>
+			</div>
+			<div class="hasBorder top mlr15 mt10 pt10 c999 p12">
+				<div class="goodsDetail_tagBox">
+					<!--退款方式-->
+					<span class="list"><i class="xzicon-checkcircleo"></i> {{data.refundType==1?'7天可退款':'不可退款'}}</span>
+					<!--是否限购-->
+					<span class="list" wx:if="{{data.limitCount}}"><i class="xzicon-checkcircleo"></i>
+						每人限购{{data.limitCount}}件</span>
+					<!--配送模板-->
+					<span class="list" wx:if="{{data.deliveryName}}"><i class="xzicon-checkcircleo"></i>
+						{{data.deliveryName}}</span>
+					<!--运费模板-->
+					<span class="list" wx:if="{{data.freightName}}"><i class="xzicon-checkcircleo"></i>
+						{{data.freightName}}</span>
+				</div>
+			</div>
+			<!--规格选项-->
+			<div class="heightTopBorder plr15 pt10 top mt10" wx:if="{{data.sku.length>1}}" bindtap="selectSku">
+				<div class="xzui-cells_after-title">
+					<view class="xzui-cell xzui-cell_access pd0">
+						<div class="xzui-cell__bd textOver">
+							已选：{{data.sku[selectedIndex].name}}
+						</div>
+						<div class="xzui-cell__ft">
+							<span>可选({{data.sku.length}})</span>
+							<i class="xzicon-right xzui-cell__ft_arrow"></i>
+						</div>
+					</view>
+				</div>
+			</div>
+            <!--店铺信息-->
+            <div class="xzui-media-box_appmsg mt10 heightTopBorder  plr15 pt10" bindtap="gotoShopIndex">
+				<div class="xzui-media-box__hd xzui-media-box__hd_in-appmsg hasLoading round4" style="width:60px;height:60px;">
+					<image class="page-info-logo round4" src="{{shopInfo.logo}}" data-pic="{{shopInfo.logo}}"
+						catchtap="viewThisImage" mode="widthFix" />
+				</div>
+				<div class="xzui-media-box__bd xzui-media-box__bd_in-appmsg">
+					<div class="xzui-media-box__title">{{shopInfo.name}}</div>
+					<div class="xzui-media-box__desc">
+						<pre>{{shopInfo.content}}</pre>
+					</div>
+				</div>
+			</div>
+			<!--票券类商品的票券信息-->
+			<div class="heightTopBorder pd15 top mt10" wx:if="{{data.goodsCategoryType==2&&data.sku.length}}">
+				<div class="p16 bold">包含票券（{{data.ticketCounts}}张），购买后{{data.sku[0].days}}天内有效</div>
+				<div class="shop-goodsDetail-ticket" wx:for="{{data.sku}}" data-index="{{index}}" bindtap="showContent">
+					<div class="p16">{{item.name}}</div>
+					<div class="cRed">x{{item.count}}</div>
+					<div>
+						<pre class="shop-goodsDetail-ticket-content">{{item.content}}</pre>
+					</div>
+				</div>
+			</div>
+			<!--商品详情-->
+			<div class="heightTopBorder mt10 pd15" wx:if="{{contentData&&contentData.length}}">
+				<editor-content content="{{contentData}}" id="editorcontent"></editor-content>
+			</div>
+			<!--举报投诉
+			<div class="tac ptb10 c666" bindtap="toShowReport" style="background:#f4f4f4;">举报投诉</div>-->
+			<!--举报弹框-->
+			<div class="goods-detail-report" wx:if="{{showReport}}">
+				<div class="reportDialog {{(showReport_m?' show':'')}}">
+					<div class="reportDialog-head clearfix">
+						<p class="title fl">投诉</p>
+						<button class="reportDialog-close fr" bindtap="closeReport"><i class="xzicon-close"></i></button>
+					</div>
+					<div class="reportDialog-main">
+						<p class="reportDialog-tips">联系方式</p>
+						<div class="reportDialog-list">
+							<div class="form-list">
+								<input type="text" value="{{reportForm.mobile}}" bindinput="model" data-model="reportForm.mobile"
+									class="textInput" placeholder="请输入联系方式" />
+							</div>
+						</div>
+					</div>
+					<div class="reportDialog-main">
+						<p class="reportDialog-tips">请选择投诉类型</p>
+						<div class="reportDialog-list">
+							<div class="form-list" wx:for="{{reportList}}" bindtap="selectReport" data-index="{{index}}">
+								<span class="xzui-radio-new {{(reportForm.index==index?' active':'')}}"></span>
+								<span class="xzui-radioTitle-new">{{item.title}}</span>
+							</div>
+							<div class="form-list" wx:if="{{reportForm.index==reportList.length-1}}">
+								<input type="text" value="{{reportForm.content}}" bindinput="model" data-model="reportForm.content"
+									class="textInput" placeholder="请输入投诉内容" />
+							</div>
+						</div>
+					</div>
+					<div class="reportDialog-foot">
+						<div class="reportDialog-btnBox xzui-flex">
+							<div class="xzui-flex_item bgfff">
+								<button bindtap="closeReport" class="xzui-btn cancel">取消</button>
+							</div>
+							<div class="xzui-flex_item bgfff">
+								<button bindtap="submitReport" class="xzui-btn confirm">确定投诉</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--商品评价-->
+			<div class="heightTopBorder mt10 pd15" wx:if="{{evaluateData&&evaluateData.length}}">
+				<div class="c999 pb10">商品评价</div>
+				<div class="evaluate_list hasBorder top pt10" wx:for="{{evaluateData}}">
+					<div class="evaluate_userInfo clearfix">
+						<div class="picBox">
+							<image class="round" src="{{item.headpic}}" mode="widthFix" />
+						</div>
+						<p class="rightBox c999 p14">{{item.addtime}}</p>
+						<div class="textBox c666 p14">{{item.username}}</div>
+					</div>
+					<div class="mt10">
+						<span class="order_starList"><i class="{{(item.stars>=1?'xzicon-star2':'xzicon-staro')}}"></i></span>
+						<span class="order_starList"><i class="{{(item.stars>=2?'xzicon-star2':'xzicon-staro')}}"></i></span>
+						<span class="order_starList"><i class="{{(item.stars>=3?'xzicon-star2':'xzicon-staro')}}"></i></span>
+						<span class="order_starList"><i class="{{(item.stars>=4?'xzicon-star2':'xzicon-staro')}}"></i></span>
+						<span class="order_starList"><i class="{{(item.stars>=5?'xzicon-star2':'xzicon-staro')}}"></i></span>
+						<span class="order_starTips" wx:if="{{item.stars==1}}">非常差</span>
+						<span class="order_starTips" wx:if="{{item.stars==2}}">很差</span>
+						<span class="order_starTips" wx:if="{{item.stars==3}}">一般</span>
+						<span class="order_starTips" wx:if="{{item.stars==4}}">满意</span>
+						<span class="order_starTips" wx:if="{{item.stars==5}}">超赞</span>
+					</div>
+					<div class="mt10 c666 p14">
+						<pre>{{item.content}}</pre>
+					</div>
+					<div class="mt10" wx:if="{{item.pics&&item.pics.length}}">
+						<div class="evaluate_picBox clearfix">
+							<div class="evaluate_picList" wx:for="{{item.pics}}" wx:for-index="l" wx:for-item="g">
+								<div class="list" bindtap="viewImage" data-index="{{l}}" data-parent="{{index}}">
+									<image src="{{g.file}}" mode="widthFix" />
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="mt10 hasBorder top pt5 c666" wx:if="{{item.replaycontent}}">商家回复：{{item.replaycontent}}</div>
+				</div>
+				<view class="pd15 tac" hidden="{{!showEvaMore}}"><button class="goodsDetail_moreBtn" type="button"
+						bindtap="loadMoreEva">查看更多</button></view>
+				<view class="loadingBox mlr14" hidden="{{!showEvaLoading}}">
+					<div class="xzicon-loading"></div>
+					<div class="xzui-loadmore__tips">正在加载</div>
+				</view>
+			</div>
+			<!--底部菜单-->
+			<div class="xzui-btn-app positionBottom max480 hasBorder top" style="padding:10px 10px 15px 10px;height:62px;">
+				<div class="clearfix">
+					<div class="shop-goodsDetail-iconBtn displayFlex p10 c999">
+						<!--<div class="list" bindtap="backIndex">
+							<p class="shop-goodsDetail-icon"><i class="xzicon-home"></i></p>
+							<p>首页</p>
+						</div>-->
+                        <div class="list" bindtap="toShare">
+							<p class="shop-goodsDetail-icon"><i class="xzicon-sharealt"></i></p>
+							<p>分享</p>
+						</div>
+						<div class="list" wx:if="{{shopInfo.customertel}}">
+							<div wx:if="{{client=='wx'}}" bindtap="callTel" data-tel="{{shopInfo.customertel}}">
+								<p class="shop-goodsDetail-icon c999">
+									<i class="xzicon-customerservice"></i>
+								</p>
+								<p class="c999">客服</p>
+							</div>
+							<navigator url="tel:{{shopInfo.customertel}}" wx:else>
+								<p class="shop-goodsDetail-icon c999">
+									<i class="xzicon-customerservice"></i>
+								</p>
+								<p class="c999">客服</p>
+							</navigator>
+						</div>
+						<div class="list" style="position:relative;" bindtap="toCartPage">
+							<p class="shop-goodsDetail-icon">
+								<i class="xzicon-shoppingcart">
+								</i>
+							</p>
+							<p>购物车</p>
+							<view class="shop-goodsDetail-cartCount" hidden="{{!cartCount}}">{{cartCount}}</view>
+						</div>
+					</div>
+					<div class="shop-goodsDetail-buyBtn" wx:if="{{data.canbuyCount===0}}">
+						<div class="shop-goodsDetail-disabledCarBtn textOver">已购买，限购{{data.limitCount}}件</div>
+					</div>
+					<div class="shop-goodsDetail-buyBtn" wx:elif="{{!data.stocks}}">
+						<div class="shop-goodsDetail-disabledCarBtn textOver">已售罄</div>
+					</div>
+					<div class="shop-goodsDetail-buyBtn" wx:elif="{{!data.status}}">
+						<div class="shop-goodsDetail-disabledCarBtn textOver">已下架</div>
+					</div>
+					<div class="shop-goodsDetail-buyBtn" wx:elif="{{data.stocks&&data.status}}">
+                    	<!--票券-->
+                        <div wx:if="{{data.goodsCategoryType==2}}">
+                        	<div class="shop-goodsDetail-buyTicketBtn" bindtap="toBuy">
+								<span wx:if="{{data.sku[selectedIndex].realPrice}}">立即购买</span>
+								<span wx:else>免费领取</span>
+							</div>
+                        </div>
+                        <!--实物-->
+                        <div wx:else>
+                        	<div class="shop-goodsDetail-addBuyBtn" bindtap="buy">
+								<span wx:if="{{data.sku[selectedIndex].realPrice}}">立即购买</span>
+								<span wx:else>免费领取</span>
+							</div>
+							<div class="shop-goodsDetail-addCarBtn" bindtap="addCart">加入购物车</div>
+                        </div>
+					</div>
+				</div>
+			</div>
+			<!--弹出选项-->
+			<view hidden="{{!showDialog}}" style="z-index:8;" class="xzui-mask {{(showDialog_animate?' show':'')}}"
+				bindtap="closeSelect"></view>
+			<view hidden="{{!showDialog}}" class="shop-goodsDetail-selectBox {{(showDialog_animate?' show':'')}}"
+				wx:if="{{data.sku.length}}">
+
+				<div class="pd15 xzui-media-box xzui-media-box_appmsg">
+					<div class="xzui-media-box__hd xzui-media-box__hd_in-appmsg hasLoading" style="width:80px;height:80px;"
+						bindtap="viewThisImage" data-pic="{{data.sku[selectedIndex].pic}}">
+						<image src="{{data.sku[selectedIndex].pic}}" mode="widthFix" />
+					</div>
+					<div class="xzui-media-box__bd xzui-media-box__bd_in-appmsg">
+						<div class="xzui-media-box__title cRed">
+                        	<span>¥{{data.sku[selectedIndex].price}}</span>
+    					</div>
+						<div class="xzui-media-box__desc">
+							<div class="p12 textOver">已选：{{data.sku[selectedIndex].name}}</div>
+							<div class="c999 p12 mt10">
+								<span class="xzicon-minussquare cRed p18" bindtap="minusCount"></span><span class="p14 tac"
+									style="display:inline-block;width:40px;"><input class="xzui-input tac" pattern="[0-9]*" type="number"
+										value="{{selectedCount}}" bindinput="inputCount" style="margin-top:-2px;" /></span><span
+									class="xzicon-plussquare cRed  p18" bindtap="addCount"></span><span
+									class="ml10">库存:{{data.sku[selectedIndex].stock}}</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="mlr15">选择规格</div>
+				<div class="shop-goodsDetail-selectBox-box clearfix">
+					<div wx:for="{{data.sku}}"
+						class="shop-goodsDetail-selectBox-btn {{(index==selectedIndex?'active':'')}} {{(!item.stock?'disabled':'')}}"
+						data-stock="{{item.stock}}" data-index="{{index}}" bindtap="onSelected">{{item.name}}</div>
+				</div>
+				<div class="displayFlex pd10 shop-goodsDetail-selectBox-bottom hasBorder top">
+					<view class="list pd5" wx:if="{{selectType!='buy'&&!data.selfbuyprice}}">
+						<button type="button" class="xzui-btn xzui-btn_b primary"
+							bindtap="addToCart">{{!selectType?'加入购物车':'确定'}}</button>
+					</view>
+					<view class="list pd5" wx:if="{{selectType!='cart'}}">
+						<button type="button" class="xzui-btn xzui-btn_b primary"
+							bindtap="toBuy">{{!selectType?(data.sku[selectedIndex].price?'立即购买':'免费领取'):'确定'}}</button>
+					</view>
+				</div>
+				<div class="shop-goodsDetail-selectBox-close" bindtap="closeSelect"><span
+						class="xzicon-closecircle c999"></span></div>
+			</view>
+		</div>
+		<div wx:elif="{{!showLoading}}" class="tac noGoodsBox">
+			<p class="p16 c666">商品不存在或已下架</p>
+			<div class="mt10"><button class="redBtn" bindtap="backIndex">去首页看看</button></div>
+		</div>
+		<view class="loadingBox mlr14" hidden="{{!showLoading}}">
+			<div class="xzicon-loading"></div>
+			<div class="xzui-loadmore__tips">正在加载</div>
+		</view>
+		<newShare id="newShareCon"></newShare>
+        <!--选择店铺弹框-->
+        <div class="selectStore_dialog {{(showSelectShopDialog?' show':'')}}">
+            <view class="selectStore_body">
+                <div class="form-title clearfix">
+                    <p class="fl">选择店铺</p>
+                </div>
+                <div class="selectStore_box" style="max-height:{{maxHeight}}px;">
+                    <div class="form-list" wx:for="{{myShopList}}">
+                        <div class="form-list-item" data-index="{{index}}" bindtap="selectThisShop"><span class="xzui-radio-new {{(selectShopData.id==item._id?' active':'')}}"></span><span class="xzui-radioTitle-new">{{item.name}}</span></div>
+                    </div>
+                </div>
+                <view class="displayFlex">
+                    <view class="list">
+                        <button class="selectStore_btn" type="button" bindtap="cancelSlectShopDialog">取消</button>
+                    </view>
+                    <view class="list" style="border-left:1px solid rgba(0,0,0,0.1);">
+                        <button class="selectStore_btn" type="button" bindtap="confirmSlectShopDialog">确定</button>
+                    </view>
+                </view>
+            </view>
+        </div>
+	</div>
+</div>

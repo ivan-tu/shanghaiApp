@@ -1,0 +1,38 @@
+.member_priceList{
+	margin:8px 0 0 -10px;
+}
+.member_priceList .box{
+	width:33.3333333%;
+	float:left;
+}
+.member_priceList .list{
+	margin:10px 0 0 10px;
+	border:1px solid #eee;
+	border-radius:4px;
+	padding:15px;
+	text-align:center;
+	background: #fff;
+	transition:all 0.2s;
+}
+.member_priceList .list.active{
+	background: #FBE900;
+	border: 1px solid #FBD100;
+}
+.member_official_box{
+	float:left;
+	width:130px;
+	height:130px;
+}
+.member_official_btn{
+	margin-left:155px;
+}
+.member_official_btnList{
+	padding:5px 0;
+	height:60px;
+}
+.member_official .lineText{
+	line-height:18px;
+}
+.xzui-btn.round20{
+	border-radius:20px;
+}

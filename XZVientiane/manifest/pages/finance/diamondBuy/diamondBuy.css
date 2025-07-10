@@ -1,0 +1,18 @@
+.xz-bottomBox-fixedSave.disable{
+	background:#ECECEC;
+	color:#888;
+}
+.xz-bottomBox-fixedTotal .oldPrice{
+	text-decoration:line-through;
+	font-size:13px;
+	display:inline-block;
+	margin-left:3px;
+}
+.finance-agreeMent{
+	position:fixed;
+	bottom:80px;
+	left:0;
+	right:0;
+	text-align:center;
+	color:#888;
+}

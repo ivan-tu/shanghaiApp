@@ -1,0 +1,38 @@
+.mt2{
+	margin-top:2px;
+}
+.officeChange_box .officeChange_list{
+	padding:10px 15px;
+	display:block;
+}
+.officeChange_box .officeChange_list + .officeChange_list{
+	border-top:1px solid #eee;
+}
+.officeChange_box .officeChange_list .picBox{
+	float:left;
+	width:100px;
+	height:100px;
+	border-radius:4px;
+	overflow:hidden;
+}
+.officeChange_box .officeChange_list .picBox .pic{
+	border-radius:4px;
+}
+.officeChange_box .officeChange_list .textBox{
+	margin-left:110px;
+}
+.officeChange_box .officeChange_list .title{
+	font-size:16px;
+	color:#131313;
+}
+.officeChange_box .officeChange_list .userInfo .userPic{
+	width:20px;
+	height:20px;
+	border-radius:50%;
+}
+.officeChange_box .officeChange_list .userInfo .userName{
+	display:inline-block;
+	margin-left:5px;
+	font-size:12px;
+	color:#313131;
+}

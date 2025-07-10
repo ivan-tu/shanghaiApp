@@ -1,0 +1,19 @@
+{
+	"usingComponents": {
+		"nologin": "/components/common/nologin/nologin",
+		"newShare": "/components/common/newShare/newShare"
+    },
+	"navigationBarTitleText": "店铺管理",
+	"leftItem":{
+		"icon":"https://static.gedian.shop/16420425604601501.png",
+		"name":"",
+		"textColor":"",
+	  	"bgColor":""
+	},
+	"rightItem":{
+		"icon":"https://static.gedian.shop/16414564890037525.png",
+		"name":"",
+		"textColor":"",
+	  	"bgColor":""
+	}
+}

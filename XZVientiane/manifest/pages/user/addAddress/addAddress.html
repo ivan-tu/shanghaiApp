@@ -1,0 +1,51 @@
+<div class="app-wrapper">
+    <div class="app-main">
+        <div class="user-addAddress">
+        	<div class="form-list bgfff">
+            	<div class="form-list-item">
+                	<textarea style="resize: none;height:60px;" placeholder="复制粘贴完整地址，可自动识别如：张三，188******，北京市xx区xx街道" class="textarea" bindinput="model" value="{{addressDetail}}" data-model="addressDetail"></textarea>
+            	</div>
+                <div class="form-list-item title tar pt10"><span class="redBtn green" bindtap="toGetRealAddress">自动识别</span></div>
+            </div>
+            <div class="xzui-cells">
+                <div class="xzui-cell">
+                    <div class="xzui-cell__hd">
+                        <label class="xzui-label">联系人</label>
+                    </div>
+                    <div class="xzui-cell__bd">
+                        <input placeholder="请输入收货人姓名" class="xzui-input" bindinput="model" value="{{form.name}}" data-model="form.name" type="text" />
+                    </div>
+                </div>
+                <div class="xzui-cell">
+                    <div class="xzui-cell__hd">
+                        <label class="xzui-label">手机号</label>
+                    </div>
+                    <div class="xzui-cell__bd">
+                        <input placeholder="请输入收货人手机号" class="xzui-input" bindinput="model" value="{{form.mobile}}" data-model="form.mobile" type="tel" />
+                    </div>
+                </div>
+                <div class="xzui-cell xzui-area-cell">
+                    <div class="xzui-cell__hd">
+                        <label class="xzui-label">地区</label>
+                    </div>
+                    <div class="xzui-cell__bd">
+                        <picker mode="region" custom-item="" bindchange="bindRegionChange" value="{{region}}" id="pickerArea">
+                            <view class="picker" wx:if="{{region.length}}">{{region[0]}}，{{region[1]}}，{{region[2]}}</view>
+                            <div class="picker picker-no" wx:else>请选择</div>
+                        </picker>
+                    </div>
+                </div>
+                <div class="xzui-cell">
+                    <div class="xzui-cell__hd">
+                        <label class="xzui-label">详细地址</label>
+                    </div>
+                    <div class="xzui-cell__bd">
+                        <input placeholder="请输入详细地址" class="xzui-input" bindinput="model" value="{{form.address}}" data-model="form.address" type="text" />
+                    </div>
+                </div>
+            </div>
+            <div class="user-addAddress-save"><button bindtap="submit" class="btn">保存地址</button></div>
+            <div class="tac pd10 bgfff hasBorder top cBlue" bindtap="selectWX" wx:if="{{isWX}}">选择微信地址</div>
+        </div>
+    </div>
+</div>

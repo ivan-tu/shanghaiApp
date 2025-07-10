@@ -1,0 +1,49 @@
+<div class="app-wrapper">
+    <div class="app-main pb20">
+    	<div class="searchCategory-box clearfix searchCategory-secretary bgfff {{(options.ismanager==1?' hasBorder bottom':'')}} " wx:if="{{typeList&&typeList.length}}">
+            <div class="searchCategory">
+                <div class="listBox">
+                    <span class="list {{(form.typeid==''?' active':'')}}" data-type="typeid" data-value="" bindtap="screen">全部</span>
+                    <span wx:for="{{typeList}}" class="list {{(form.typeid==item.id?' active':'')}}" data-type="typeid" data-value="{{item.id}}" bindtap="screen">{{item.name}}</span>
+                </div>
+            </div>
+        </div>
+    	<div class="searchCategory-box clearfix searchCategory-secretary bgfff" wx:if="{{options.ismanager==1}}">
+            <div class="searchCategory">
+                <div class="listBox">
+                    <span class="list {{(form.isshow=='1'?' active':'')}}" data-type="isshow" data-value="1" bindtap="screen">已上架</span>
+                    <span class="list {{(form.isshow=='0'?' active':'')}}" data-type="isshow" data-value="0" bindtap="screen">已下架</span>
+                </div>
+            </div>
+        </div>
+    	<p class="form-title">共 {{count}} 个</p>
+        <div class="activityBox bgfff" wx:if="{{data&&data.length}}">
+        	<div class="activityList"  wx:for="{{data}}">
+                <div bindtap="toDetail" data-index="{{index}}" class="clearfix">
+                    <div class="picBox hasLoading"><image class="w100 h100 pic" src="{{item.pic}}" mode="widthFix" /></div>
+                    <div class="textBox">
+                        <p class="title">{{item.name}}</p>
+                        <p class="address mt2">{{item.begintime}}开始 | {{item.areaText}}</p>
+                        <div class="userInfo mt2"><image src="{{item.masterpic}}" class="userPic" mode="widthFix" /><span class="userName">{{item.mastername}}组织</span></div>
+                        <div class="clearfix mt2">
+                            <p class="fl signInfo">限{{item.limitnum}}人，<span class="signBtn" wx:if="{{item.friendnum}}">{{item.friendnum}}好友已报名</span><span class="signBtn" wx:else>{{item.joinnum}}人已报名</span></p>
+                            <p class="fr price" wx:if="{{item.isfree==2&&item.price}}">{{item.price}}<span class="p12" wx:if="{{item.paytype=='wallte'}}"> 币</span><span class="p12" wx:elif="{{item.paytype=='cash'}}"> 元</span><span class="p12" wx:elif="{{item.paytype=='diamond'}}"> 钻</span></p>
+                            <p class="fr price" wx:else>免费</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="tar mt10" wx:if="{{options.from=='manage'||options.ismanager==1}}">
+                	<span wx:if="{{item.isshow==0}}" class="yellowBtn activityList_btnList" data-id="{{item._id}}" bindtap="upThis">上架活动</span>
+                    <span wx:if="{{item.isshow==1}}" class="grayBtn activityList_btnList" data-id="{{item._id}}" bindtap="downThis">下架活动</span>
+                    <span wx:if="{{item.isshow==0}}" class="grayBtn activityList_btnList" data-id="{{item._id}}" bindtap="delThis">删除活动</span>
+                	<span class="yellowBtn activityList_btnList" data-id="{{item._id}}" bindtap="copyThis">复制活动</span>
+                </div>
+            </div>
+        </div>
+        <view class="loadingBox mlr15" hidden="{{!showLoading}}">
+			<div class="xzicon-loading"></div>
+			<div class="xzui-loadmore__tips">正在加载</div>
+		</view>
+		<view class="noData mlr15" hidden="{{!showNoData}}">暂无数据</view>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+.weixinCodeBox{
+	width:160px;
+	height:160px;
+	margin:auto;
+}
+.redBtn.large{
+	height:40px;
+   line-height:36px;
+	width:100px;
+	font-size:14px;
+}
+.addShop_title .icon_yes{
+	font-size:24px;
+	line-height:26px;
+	vertical-align:bottom;
+	color:rgb(24,219,173);	
+}
+.addShop_title .icon_no{
+	font-size:24px;
+	line-height:26px;
+	vertical-align:bottom;
+	color:#D2161F;
+}
+.addShop_title .title{
+	display:inline-block;
+	color:#666;
+	font-size:16px;
+	margin-left:10px;
+	vertical-align:top;
+}
+.xzui-btn-app .addShop_btn{
+    width: auto;
+    border-radius: 4px;
+    margin: 0 auto !important;
+	padding:0 15px;
+	font-size:14px;
+	line-height:40px;
+}

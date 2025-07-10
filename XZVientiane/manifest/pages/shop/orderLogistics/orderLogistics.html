@@ -1,0 +1,21 @@
+<div class="app-wrapper">
+    <div class="app-main mb20">
+    	<view class="bgfff pd15" wx:if="{{orderData.number}}">
+        	<p>快递单号：{{orderData.number}}</p>
+            <p>快递公司：{{orderData.typename}}</p>
+        </view>
+    	<view class="bgfff pd15 mt10" wx:if="{{data&&data.length}}">
+        	<view class="shop_logistics_tree">
+            	<div wx:for="{{data}}" class="list">
+                	<p class="text">{{item.status}}</p>
+                    <time>{{item.time}}</time>
+                </div>
+            </view>
+        </view>
+    	<view class="loadingBox mlr14" hidden="{{!showLoading}}">
+            <div class="xzicon-loading"></div>
+            <div class="xzui-loadmore__tips">正在加载</div>
+        </view>
+        <view class="noData mlr14" hidden="{{!showNoData}}">未获取到物流信息</view>
+    </div>
+</div>

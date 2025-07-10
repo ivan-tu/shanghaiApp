@@ -1,0 +1,42 @@
+<div class="app-wrapper">
+    <div wx:if="{{isUserLogin}}" class="app-main">
+    	<div class="ptb5 bgfff">
+            <div class="searchCategory-box searchCategory-box-tuige clearfix">
+                <div class="searchCategory">
+                    <div class="listBox">
+                        <span class="list {{(form.timestap==''?' active':'')}}" data-type="" bindtap="screenType">全部</span>
+                        <span class="list {{(form.timestap=='today'?' active':'')}}" data-type="today" bindtap="screenType">今日</span>
+                        <span class="list {{(form.timestap=='yesterday'?' active':'')}}" data-type="yesterday" bindtap="screenType">昨日</span>
+                        <span class="list {{(form.timestap=='week'?' active':'')}}" data-type="week" bindtap="screenType">本周</span>
+                        <span class="list {{(form.timestap=='prevweek'?' active':'')}}" data-type="prevweek" bindtap="screenType">上周</span>
+                        <span class="list {{(form.timestap=='month'?' active':'')}}" data-type="month" bindtap="screenType">本月</span>
+                        <span class="list {{(form.timestap=='prevmonth'?' active':'')}}" data-type="prevmonth" bindtap="screenType">上月</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p class="form-title">共 {{count}} 条记录，共 ¥{{total}}</p>
+        <div class="bgfff pb15 plr15" wx:if="{{!showNoData}}">
+            <div class="recruitClubFinance-list" wx:for="{{data}}">
+            	<div class="listBox">
+                	<div class="clearfix">
+                        <p class="fl p14">{{index}}</p>
+                        <p class="fr p14">¥{{item.total}}</p>
+                    </div>
+                    <div class="mt10" wx:if="{{item.list&&item.list.length}}">
+                        <div class="child-list clearfix" wx:for="{{item.list}}" wx:for-item="g">
+                            <p class="fl p12">{{g.clubName}}</p>
+                            <p class="fr p12">¥{{g.total}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <view class="loadingBox mlr14" hidden="{{!showLoading}}">
+            <div class="xzicon-loading"></div>
+            <div class="xzui-loadmore__tips">正在加载</div>
+        </view>
+        <view class="noData mlr14" hidden="{{!showNoData}}">暂无记录</view>
+    </div>
+    <nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

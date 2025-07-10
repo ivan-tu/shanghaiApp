@@ -1,0 +1,252 @@
+<div class="app-wrapper">
+	<div class="app-main positionBottom" wx:if="{{isUserLogin}}">
+        <view class="loadingBox mlr14" wx:if="{{ajaxLoading}}">
+            <div class="xzicon-loading"></div>
+        </view>
+        <div wx:elif="{{data.ispartner==1||data.isexpert==1||data.isagent==1}}" class="mt15">
+        	<div class="markWraper"></div>
+            <div class="myExpertInfo-userInfo">
+            	<p class="tac p18" wx:if="{{data.ispartner==1}}">在局合伙人</p>
+                <p class="tac p18" wx:elif="{{data.isagent==1}}">在局代理</p>
+                <p class="tac p18" wx:elif="{{data.isexpert==1}}">在局达人</p>
+            </div>
+            <div class="plr15 clearfix">
+            	<div class="displayFlex tac">
+                	<navigator url="../../user/myWallte/myWallte" class="list">
+                    	<p class="p18">{{data.userBeans||0}}</p>
+                        <p class="p12">分红股</p>
+                    </navigator>
+                    <navigator url="../../finance/statistics/statistics?type=user" class="list">
+                    	<p class="p18">{{data.total||0}}</p>
+                        <p class="p12">奖励</p>
+                    </navigator>
+                    <navigator url="../../user/myWallte/myWallte" class="list">
+                    	<p class="p18">{{data.contribution||0}}</p>
+                        <p class="p12">贡献值</p>
+                    </navigator>
+                    <navigator url="../../finance/fenhongRecord/fenhongRecord" class="list">
+                    	<p class="p18">{{data.todayFenhong||0}}</p>
+                        <p class="p12">今日分红</p>
+                    </navigator>
+                </div>
+            </div>
+            <div class="myExpertInfo-titleDiv">
+                <p class="form-title">我邀请的人<span class="p12">(共{{count}}人)</span></p>
+                <div class="myExpertInfo-userBox" bindtap="toMyInvite">
+                	<div class="userBox">
+                        <div class="userList clearfix">
+                            <div class="list" wx:for="{{userList}}">
+                                <div class="picBox hasLoading">
+                                    <image class="round" src="{{item.headpic}}" mode="widthFix" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="rightNum">查看全部 <i class="xzicon-right"></i></span>
+                </div>
+                <p class="form-title" wx:if="{{data.parentInfo&&data.parentInfo.username}}">我的邀请人</p>
+                <div class="myExpertInfo-infoItem clearfix" wx:if="{{data.parentInfo&&data.parentInfo.username}}">
+                	<div class="picBox hasLoading"><image src="{{data.parentInfo.headpic}}" mode="widthFix" class="round w100 h100" /></div>
+                    <div class="textBox">
+                    	<p class="p14 c333">{{data.parentInfo.username}}/{{data.parentInfo.account}}</p>
+                        <div class="clearfix picContent">
+                        	<p class="fl c888">微信：</p>
+                            <div class="wxCodePic" wx:if="{{data.parentInfo.wxCodePic}}" bindtap="viewThisImage" data-pic="{{data.parentInfo.wxCodePic}}"><image src="{{data.parentInfo.wxCodePic}}" mode="widthFix" class="w100" /></div>
+                            <div class="wxCodePic c999" wx:else>未上传</div>
+                        </div>
+                    </div>
+                </div>
+                <p class="form-title" wx:if="{{customerWxPic}}">在局客服</p>
+                <div class="myExpertInfo-infoItem clearfix" wx:if="{{customerWxPic}}">
+                	<div class="picBox hasLoading"><image src="{{customerHeadPic}}" mode="widthFix" class="round w100 h100" /></div>
+                    <div class="textBox">
+                    	<p class="p14 c333">{{customerWxName}}</p>
+                        <div class="clearfix picContent" >
+                        	<p class="fl c888">微信：</p>
+                            <div class="wxCodePic" bindtap="viewThisImage" data-pic="{{customerWxPic}}"><image src="{{customerWxPic}}" mode="widthFix" class="w100" /></div>
+                        </div>
+                    </div>
+                </div>
+                <p class="form-title" wx:if="{{data.serverInfo&&data.serverInfo.username}}">我的服务商</p>
+                <div class="myExpertInfo-infoItem clearfix" wx:if="{{data.serverInfo&&data.serverInfo.username}}">
+                	<div class="picBox hasLoading"><image src="{{data.serverInfo.headpic}}" mode="widthFix" class="round w100 h100" /></div>
+                    <div class="textBox">
+                    	<p class="p14 c333">{{data.serverInfo.username}}/{{data.serverInfo.account}}</p>
+                        <div class="clearfix picContent">
+                        	<p class="fl c888">微信：</p>
+                            <div class="wxCodePic" wx:if="{{data.serverInfo.wxCodePic}}" bindtap="viewThisImage" data-pic="{{data.serverInfo.wxCodePic}}"><image src="{{data.serverInfo.wxCodePic}}" mode="widthFix" class="w100" /></div>
+                            <div class="wxCodePic c999" wx:else>未上传</div>
+                        </div>
+                    </div>
+                </div>
+                <p class="form-title" wx:if="{{data.operCenterInfo&&data.operCenterInfo.username}}">我的运营商</p>
+                <div class="myExpertInfo-infoItem clearfix" wx:if="{{data.operCenterInfo&&data.operCenterInfo.username}}">
+                	<div class="picBox hasLoading"><image src="{{data.operCenterInfo.headpic}}" mode="widthFix" class="round w100 h100" /></div>
+                    <div class="textBox">
+                    	<p class="p14 c333">{{data.operCenterInfo.username}}/{{data.operCenterInfo.account}}</p>
+                        <div class="clearfix picContent" >
+                        	<p class="fl c888">微信：</p>
+                            <div class="wxCodePic" wx:if="{{data.operCenterInfo.wxCodePic}}" bindtap="viewThisImage" data-pic="{{data.operCenterInfo.wxCodePic}}"><image src="{{data.operCenterInfo.wxCodePic}}" mode="widthFix" class="w100" /></div>
+                            <div class="wxCodePic c999" wx:else>未上传</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--
+            <div class="searchCategory-box clearfix mt15 positionR">
+                <div class="searchCategory">
+                    <div class="listBox">
+                        <span class="list {{(form.gettype=='expert'?' active':'')}}" data-type="gettype" data-value="expert" bindtap="screen">我的邀请</span>
+                        <span wx:if="{{data.ispartner==1}}" class="list {{(form.gettype=='partner'?' active':'')}}" data-type="gettype" data-value="partner" bindtap="screen">我的团队</span>
+                        <span wx:elif="{{data.isagent==1}}" class="list {{(form.gettype=='agent'?' active':'')}}" data-type="gettype" data-value="agent" bindtap="screen">我的团队</span>
+                    </div>
+                </div>
+                <span class="searchCategory-more" bindtap="showTips">奖励政策</span>
+            </div>
+            <p class="c666 plr15">共 {{count}} 个</p>
+            <div class="plr15" wx:if="{{userList&&userList.length}}">
+                <div class="mt5 myExpertInfo-userBox">
+                	<div class="userList" wx:for="{{userList}}">
+                    	<div class="listBox clearfix" data-userid="{{item._id}}" bindtap="toUserDetail">
+                        	<div class="picBox hasLoading"><image src="{{item.headpic}}" mode="widthFix" /></div>
+                            <div class="textBox">
+                            	<p class="c333 p14">{{item.username}}<span wx:if="{{item.ispartner==1}}">[合伙人]</span><span wx:elif="{{item.isagent==1}}">[代理]</span><span wx:elif="{{item.isexpert==1}}">[达人]</span></p>
+                                <p class="c666 p12">{{item.createAt}}加入</p>
+                            </div>
+                        </div>
+          			</div>
+    			</div>
+            </div>
+            <view class="loadingBox mlr14" hidden="{{!showLoading}}">
+                <div class="xzicon-loading"></div>
+                <div class="xzui-loadmore__tips">正在加载</div>
+            </view>
+            <view class="noData mlr14" hidden="{{!showNoData}}">暂无数据</view>-->
+            
+            <div class="xzui-btn-app positionBottom">
+                <div class="displayFlex">
+                    <div class="list">
+                        <button type="button" bindtap="toShare" class="xzui-btn xzui-btn_b primary" size="large">邀请达人</button>
+                    </div>
+                    <div class="list ml10" wx:if="{{!data.ispartner}}">
+                        <button type="button" bindtap="toUpDate" class="xzui-btn xzui-btn_b primary" size="large">购买礼包升级</button>
+                    </div>
+                </div>
+            </div>
+		</div>
+        <div wx:else class="myExpertInfo-noData">
+        	<div class="myExpertInfo-menu">
+            	<div class="displayFlex">
+                	<div class="list {{(showType=='daren'?' active':'')}}" data-type="daren" bindtap="changeType">成为达人</div>
+                    <div class="list ml10 {{(showType=='agent'?' active':'')}}" data-type="agent" bindtap="changeType">成为代理</div>
+                    <div class="list ml10  {{(showType=='partner'?' active':'')}}" data-type="partner" bindtap="changeType">成为合伙人</div>
+                </div>
+			</div>
+        	<div class="mt10" wx:if="{{showType=='partner'}}"><rich-text nodes="{{partnerContent}}" class="richText"></rich-text></div>
+            <div class="mt10" wx:elif="{{showType=='agent'}}"><rich-text nodes="{{agentContent}}" class="richText"></rich-text></div>
+            <div class="mt10" wx:else><rich-text nodes="{{darenContent}}" class="richText"></rich-text></div>
+            <div class="finance-agreeMent"><span bindtap="changeAgreeMent" class="xzui-checkbox-new small {{(agreeMent?' active':'')}}"></span><navigator url="../../home/articleDetail/articleDetail?customId=rechargeRule" target="_blank" class="displayIB vMid ml5">已阅读并同意《充值协议》</navigator></div>
+            <div class="xz-bottomBox-fixed setTopLine">
+                <div class="clearfix">
+                    <div class="xz-bottomBox-fixedTotal"><span class="cRed p18" wx:if="{{showType=='partner'}}">¥{{settingData.price}}</span><span class="cRed p18" wx:elif="{{showType=='agent'}}">¥{{settingData.agentPrice}}</span><span class="cRed p18" wx:else>¥{{settingData.darenPrice}}</span></div>
+                    <button wx:if="{{showToBuy}}" class="xz-bottomBox-fixedSave ml5" bindtap="toBuyDiamond">立即购买</button>
+                    <button wx:if="{{showToBuy}}" class="xz-bottomBox-fixedSave" bindtap="toChange" style="background:#FFFDDD;">使用兑换码</button>
+                    
+                    <span wx:if="{{!showToBuy}}" class="fr displayIB" style="color:#999;line-height:38px;padding:0 10px;">暂不支持购买，可关注公众号</span>
+                </div>
+            </div>
+        </div>
+        <!--兑换弹框-->
+        <div class="publicScroll_dialog changeForm_dialog  {{(changeForm.show?' show':'')}}">
+            <view class="publicScroll_body" style="height:{{changeForm.height}}px;">
+                <div class="publicScroll_head clearfix tac bgfff">
+                    <span class="p16">使用兑换码</span>
+                    <span class="fr p16" bindtap="toHideDialog"><i class="xzicon-close"></i></span>
+                </div>
+                <div class="publicScroll_main bgfff">
+                    <view class="bgfff">
+                        <div class="form-list">
+                            <div class="form-list-item title long">兑换码</div>
+                            <div class="form-list-item">
+                                <input placeholder="请输入" bindinput="model" data-model="changeForm.changecode" value="{{changeForm.changecode}}" class="textInput" type="tel" />
+                            </div>
+                            <div class="form-list-item title tar long"><span class="yellowBtn" bindtap="checkCode">确认兑换码</span></div>
+                        </div>
+                        <div class="form-list" wx:if="{{changeForm.data}}">
+                            <div class="form-list-item p12">
+                            	<p>礼包名称：{{changeForm.data.name}}<span wx:if="{{changeForm.data.status==1}}" class="cRed displayIB ml5">已兑换</span><span wx:else class="cGreen displayIB ml5">可兑换</span></p>
+                                <p style="white-space:pre-wrap;">{{changeForm.data.confirmTips}}</p>
+                            </div>
+                        </div>
+                        <div class="form-list" wx:else>
+                            <div class="form-list-item p12 c999 tac ptb20">暂无礼包数据</div>
+                        </div>
+                    </view>
+                </div>
+                <view class="publicScroll_footBtn">
+                    <button class="submitBtn" type="button" bindtap="toConfirmDialog">确定</button>
+                </view>
+            </view>
+        </div>
+        <!--奖励政策弹框-->
+        <div class="publicScroll_dialog contentTips_dialog  {{(contentTipsForm.show?' show':'')}}">
+        	<view class="publicScroll_body" style="height:{{contentTipsForm.height}}px;">
+                <div class="publicScroll_head clearfix tac bgfff">
+                    <span class="p16">奖励政策</span>
+                    <span class="fr p16" bindtap="toHideTipsDialog"><i class="xzicon-close"></i></span>
+                </div>
+                <div class="publicScroll_main bgfff">
+                    <view class="pd15">
+                    	<p style="white-space:pre-wrap;">{{contentTipsForm.content}}</p>
+                    </view>
+                </div>
+            </view>
+        </div>
+        <!--确认推荐人弹框-->
+        <div class="publicScroll_dialog checkParentDialog {{(checkParentDialog.show?' show':'')}}">
+            <div class="publicScroll_body" style="height:{{checkParentDialog.height}}px;">
+                <div class="publicScroll_head clearfix tac bgfff">
+                    <span class="p16">确认推荐人</span>
+                    <span class="fr p16" bindtap="toHideCheckDialog"><i class="xzicon-close"></i></span>
+                </div>
+                <div class="publicScroll_main">
+                    <view class="bgfff">
+                        <div class="form-list">
+                            <div class="form-list-item title">推荐人</div>
+                            <div class="form-list-item">
+                            	<input placeholder="请输入账号" class="textInput" bindinput="model" value="{{checkParentDialog.account}}" data-model="checkParentDialog.account" type="tel" />
+                            </div>
+                            <div class="form-list-item title long tar">
+                            	<span class="redBtn" bindtap="checkAccount">确认推荐人</span>
+                            </div>
+                        </div>
+                        <div class="form-list">
+                            <div class="form-list-item" wx:if="{{checkParentDialog.parentData&&checkParentDialog.parentData._id}}">
+                                <div class="userInfoBox clearfix">
+                                    <div class="picBox"><image src="{{checkParentDialog.parentData.headpic}}" class="w100 h100" mode="widthFix" /></div>
+                                    <div class="textBox">
+                                        <p>{{checkParentDialog.parentData.account}}</p>
+                                        <p class="p12 c666 textOver">{{checkParentDialog.parentData.username}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-list-item c999 tac" wx:else>请先确认推荐人</div>
+                        </div>
+                    </view>
+                </div>
+                <div class="publicScroll_footBtn">
+                	<div class="displayFlex">
+                    	<div class="list">
+                        	<button class="cancelBtn" type="button" bindtap="toHideCheckDialog">取消</button>
+                        </div>
+                        <div class="list ml10">
+                        	<button class="submitBtn" type="button" bindtap="toConfirmCheckDialog">确定</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+    <nologin bindloginsuccess="onShow" wx:else></nologin>
+    <newShare id="newShareCon"></newShare>
+</div>

@@ -1,0 +1,41 @@
+.shop_logistics_tree{
+	position: relative
+}
+.shop_logistics_tree:before {
+	position: absolute;
+	top: 5px;
+	bottom: 0;
+	left: 10px;
+	width: 2px;
+	background: #eee;
+	content: ''
+}
+.shop_logistics_tree .list{
+	position: relative;
+	display: block;
+	padding-left: 30px
+}
+.shop_logistics_tree .list:before {
+	position: absolute;
+	top: 2px;
+	left: 10px;
+	display: inline-block;
+	margin-left: -3px;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: #ddd;
+	content: ''
+}
+.shop_logistics_tree .list:first-child:before {
+	margin-left: -5px;
+	width: 12px;
+	height: 12px;
+	background: #d00
+}
+.shop_logistics_tree .list + .list{
+	margin-top: 30px
+}
+.shop_logistics_tree .list .text{
+	margin: 0
+}

@@ -1,0 +1,70 @@
+.fenhongRank-head{
+	padding:10px 60px 10px 70px;
+	position:relative;
+}
+.fenhongRank-head .indexNum{
+	position:absolute;
+	left:10px;
+	top:50%;
+	line-height:30px;
+	margin-top:-15px;
+}
+.fenhongRank-head .totalNum{
+	position:absolute;
+	right:10px;
+	top:50%;
+	line-height:40px;
+	margin-top:-20px;
+}
+.fenhongRank-list{
+	padding:15px 60px 15px 50px;
+	position:relative;
+}
+.fenhongRank-list + .fenhongRank-list{
+	border-top:1px solid #F9F9F9;
+}
+.fenhongRank-list .picBox{
+	float:left;
+	border-radius:50%;
+	overflow:hidden;
+	width:40px;
+	height:40px;
+}
+.fenhongRank-list .textBox{
+	margin-left:50px;
+	line-height:40px;
+}
+.fenhongRank-list .indexNum{
+	position:absolute;
+	left:10px;
+	top:50%;
+	display:inline-block;
+	width:30px;
+	height:30px;
+	line-height:30px;
+	margin-top:-15px;
+	text-align:center;
+	background:rgba(229,229,229,0.8);
+	color:#666;
+	border-radius:50%;
+	overflow:hidden;
+}
+.fenhongRank-list .totalNum{
+	position:absolute;
+	right:10px;
+	top:50%;
+	line-height:40px;
+	margin-top:-20px;
+}
+.fenhongRank-list .indexNum.index_0{
+	background:#DAA520;
+	color:#fff;
+}
+.fenhongRank-list .indexNum.index_1{
+	background:#C0C0C0;
+	color:#fff;
+}
+.fenhongRank-list .indexNum.index_2{
+	background:#B87333;
+	color:#F0E68C;
+}

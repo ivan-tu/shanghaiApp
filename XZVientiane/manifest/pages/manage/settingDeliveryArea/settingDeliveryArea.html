@@ -1,0 +1,27 @@
+<div class="app-wrapper">
+    <div wx:if="{{isUserLogin}}" class="app-main mb20 positionBottom">
+        <div wx:if="{{myAuthority&&myAuthority.setting}}">
+        	<div class="bgfff">
+            	<div class="form-list">
+                    <div class="form-list-item title long">模板名称</div>
+                    <div class="form-list-item tar"><input type="text" placeholder="请输入模板名称" class="textInput" bindinput="model" data-model="form.name" value="{{form.name}}" /></div>                           
+                </div>
+            </div>
+            <p class="form-title">可配送区域</p>
+        	<div class="bgfff">
+                <div class="form-list" wx:for="{{data}}">
+                    <div class="form-list-item">{{item.area}}</div>
+                    <div class="form-list-item tar"><span catchtap="selectThis" data-index="{{index}}" class="xzui-switch-new {{(item.active==1?' active':'')}}"></span></div>                           
+                </div>
+            </div>
+            <div class="xzui-btn-app positionBottom">
+            	<div class="displayFlex">
+                	<div class="list" wx:if="{{form.id}}"><button type="button" bindtap="delThis" class="xzui-btn xzui-btn_b primary grayBtn" size="large">删除</button></div>
+                    <div class="list {{(form.id?' ml10':'')}}"><button type="button" bindtap="submit" class="xzui-btn xzui-btn_b primary" size="large">提交</button></div>
+                </div>
+           </div>
+        </div>
+        <div class="tac pd20 p14 c888 bgfff" wx:else>暂无权限</div>               
+    </div>
+    <nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

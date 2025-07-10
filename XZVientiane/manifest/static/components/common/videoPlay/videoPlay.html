@@ -1,0 +1,11 @@
+<div class="public_videoPlayModal {{(open?' show':'')}}">
+	<div wx:if="{{isLoaded}}">
+        <div class="modal_head">
+            <p class="modal_title textOver tac" wx:if="{{title}}">{{title}}</p>
+            <span class="modal_closeBtn" bindtap="closeVideo"><i class="xzicon-close"></i></span>
+        </div>
+        <div class="modal_body tac {{(videoShow? 'show':'')}}" style="{{styleCss}}">
+            <video src="{{src}}" x5-video-player-fullscreen="true" x5-playsinline="true" type="video/mp4" playsinline="true" webkit-playsinline="true" poster="{{poster}}" autoplay style="width:{{videoWidth}};height:{{videoHeight}};"  controls id="videoPlay_video"></video>
+        </div>
+    </div>
+</div>

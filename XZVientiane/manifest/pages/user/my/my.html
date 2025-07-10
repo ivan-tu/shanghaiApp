@@ -1,0 +1,208 @@
+<div class="app-wrapper  {{(client=='web'?' hasPageFrame':' pb20')}}">
+	<div class="markWraper"></div>
+    <div wx:if="{{isUserLogin}}" class="app-main">
+    	<div class="userMy-header clearfix">
+        	<div class="picBox hasLoading" bindtap="toPage" data-page="../../user/businessCard/businessCard?id={{data._id}}"><image src="{{data.headpic}}" class="round" mode="widthFix" /></div>
+            <div class="textBox">
+            	<p class="username c131 mt5" bindtap="toPage" data-page="../../user/businessCard/businessCard?id={{data._id}}">{{data.username}}</p>
+                <div class="mt10 c666"><span class="levelName" wx:if="{{data.levelName&&data.levelName.name}}" bindtap="toLevelList">{{data.levelName.name}}</span><span class="vMid displayIB ml5" bindtap="copyThis" data-content="{{data.invitationNum}}">在局号：{{data.invitationNum}}</span></div>
+            </div>
+            <div class="codeBox" bindtap="getSharePic">
+                <image class="pic" src="{{assetsPath}}images/userInfo-myCode.png" mode="widthFix" />
+            </div>
+            <view class="myShare_code_wrapper tac p14" hidden="{{!showSharePic}}"
+                style="width:{{picWidth}}px;margin-left:{{((picWidth+40)/2*-1)}}px;">
+                <view hidden="{{loadOk}}" class="mt20 pd20">图片生成中，请稍后...</view>
+                <view hidden="{{!loadOk}}">
+                    <image src="{{loadPicUrl}}" bindload="loadSuccess" mode="widthFix"
+                        style="width:100%;padding-bottom:10px;" wx:if="{{client=='web'}}" />
+                    <image src="{{loadPicUrl}}" bindload="loadSuccess" mode="widthFix"
+                        style="width:100%;padding-bottom:10px;" bindtap="saveImage" wx:else />
+                    <div wx:if="{{client=='web'}}">长按图片保存到相册</div>
+                    <button type="button" class="xzui-btn primary" style="margin-right:0;" bindtap="saveImage"
+                        wx:else>点击保存图片</button>
+                </view>
+                <div bindtap="closeSharePic" class="share_close_button">关闭</div>
+            </view>
+        </div>
+        <div class="plr15 mt5">
+            <div class="displayFlex tac">
+            	<navigator url="../../finance/recharge/recharge" class="list">
+                    <p class="bold c13 p18">{{data.diamond}}</p>
+                    <p class="cfff p12" style="color:#818181;">钻石余额</p>
+                </navigator>
+                <!--
+                <navigator url="../../finance/moneyRecord/moneyRecord" class="list">
+                    <p class="bold c13 p18">{{data.wallte}}</p>
+                    <p class="cfff p12" style="color:#818181;">友币余额</p>
+                </navigator>
+                <navigator url="../../finance/incomeReocrd/incomeReocrd?type=user&timestap=today" class="list">
+                    <p class="bold c13 p18">{{data.todayTotal}}</p>
+                    <p class="cfff p12" style="color:#818181;">今日收入</p>
+                </navigator>-->
+                <navigator url="../../finance/statistics/statistics?type=user" class="list">
+                    <p class="bold c13 p18">{{data.total}}</p>
+                    <p class="cfff p12" style="color:#818181;">总收入</p>
+                </navigator>
+                <navigator url="../../finance/statistics/statistics?type=user" class="list">
+                    <p class="bold c13 p18">{{data.balance}}</p>
+                    <p class="cfff p12" style="color:#818181;">可提现</p>
+                </navigator>
+            </div>
+		</div>
+        <!--
+        <div class="plr15 mt15">
+        	<navigator url="../../user/myExpertInfo/myExpertInfo" class="displayB">
+        		<image style="border-radius:6px;" src="https://statics.tuiya.cc/17361619617026378.jpg" mode="widthFix" />
+            </navigator>
+        </div>-->
+        <div class="plr15 mt15 userMy-expertBtn">
+        	<div class="displayFlex">
+            	<navigator url="../../user/myExpertInfo/myExpertInfo" class="displayB list">在局达人</navigator>
+                <div class="list ml10" bindtap="toShareExperInfo">邀请达人</div>
+            </div>
+        </div>
+        <navigator url="../../pay/fenqiPayInfo/fenqiPayInfo" class="userMy-payTips" wx:if="{{data.waitPayOrder>0}}"><p>您有{{data.waitPayOrder}}笔待付款项，立即查看 <i class="xzicon-right"></i></p></navigator>
+        <div class="ptb10 plr15">
+            <div class="userMy-menu2 clearfix">
+                <div class="menuList">
+                	<navigator url="../../user/messageCategory/messageCategory" class="listBox">
+                    	<image class="iconPic" src="{{assetsPath}}images/userMenu-message.png" mode="heightFix" />
+                    	<span class="iconText">消息</span>
+                        <span class="redRoundNum" wx:if="{{data.message>0}}">{{data.message}}</span>
+                    </navigator>
+                </div>
+            	<div class="menuList">
+                	<navigator url="../../user/myFriend/myFriend" class="listBox">
+                    	<image class="iconPic" src="{{assetsPath}}images/userMenu-team.png" mode="heightFix" />
+                    	<span class="iconText">好友</span>
+                        <span class="redRoundNum" wx:if="{{data.firend>0}}">{{data.firend}}</span>
+                    </navigator>
+                </div>
+                <!--
+                <div class="menuList">
+                	<navigator url="../../user/myGiftList/myGiftList" class="listBox">
+                    	<image class="iconPic" src="{{assetsPath}}images/userMenu-gift.png" mode="heightFix" />
+                    	<span class="iconText">礼物</span>
+                    </navigator>
+                </div>-->
+                <div class="menuList">
+                	<navigator url="../../user/myInvite/myInvite" class="listBox">
+                    	<image class="iconPic" src="{{assetsPath}}images/userMenu-myInvite.png" mode="heightFix" />
+                    	<span class="iconText">邀请的人</span>
+                    </navigator>
+                </div>
+                <div class="menuList">
+                	<navigator url="../../shop/orderList/orderList" class="listBox">
+                    	<image class="iconPic" src="{{assetsPath}}images/userMenu-order.png" mode="heightFix" />
+                    	<span class="iconText">我的订单</span>
+                    </navigator>
+                </div>
+                <!--
+                <div class="menuList">
+                	<navigator url="../../user/payOrderRecord/payOrderRecord" class="listBox">
+                    	<image class="iconPic" src="{{assetsPath}}images/userMenu-payOrder.png" mode="heightFix" />
+                    	<span class="iconText">我的买单</span>
+                    </navigator>
+                </div>-->
+                <!--
+                <div class="menuList">
+                	<navigator url="../../user/punchRecord/punchRecord" class="listBox">
+                    	<image class="iconPic" src="{{assetsPath}}images/userMenu-punchRecord.png" mode="heightFix" />
+                    	<span class="iconText">我的打卡</span>
+                    </navigator>
+                </div>-->
+                <!--
+                <div class="menuList">
+                	<navigator url="../../store/applyStore/applyStore" class="listBox">
+                    	<image class="iconPic" src="{{assetsPath}}images/userMenu-store.png" mode="heightFix" />
+                    	<span class="iconText">店铺入驻</span>
+                    </navigator>
+                </div>-->
+                <!--
+                <div class="menuList">
+                	<navigator url="../../user/myPartner/myPartner" class="listBox">
+                    	<image class="iconPic" src="{{assetsPath}}images/userMenu-partner.png" mode="heightFix" />
+                    	<span class="iconText">合伙人</span>
+                    </navigator>
+                </div>
+                <div class="menuList" wx:if="{{data.ispartner==1}}">
+                	<navigator url="../../suboffice/recruitClub/recruitClub" class="listBox">
+                    	<image class="iconPic" src="{{assetsPath}}images/userMenu-zhaomu.png" mode="heightFix" />
+                    	<span class="iconText">招募俱乐部</span>
+                    </navigator>
+                </div>-->
+                <div class="menuList">
+                	<navigator url="../../home/articleDetail/articleDetail?customId=aboutUs" class="listBox">
+                    	<image class="iconPic" src="{{assetsPath}}images/userMenu-aboutUs.png" mode="heightFix" />
+                    	<span class="iconText">关于在局</span>
+                    </navigator>
+                </div>
+                <div class="menuList">
+                	<navigator url="../../user/courseList/courseList" class="listBox">
+                    	<image class="iconPic" src="{{assetsPath}}images/userMenu-course.png" mode="heightFix" />
+                    	<span class="iconText">教程</span>
+                    </navigator>
+                </div>
+                <div class="menuList">
+                	<navigator url="../../user/setting/setting" class="listBox">
+                    	<image class="iconPic" src="{{assetsPath}}images/userMenu-set.png" mode="heightFix" />
+                    	<span class="iconText">设置</span>
+                    </navigator>
+                </div>
+                <!--
+                <div class="menuList">
+                	<navigator url="../../user/myTeacher/myTeacher" class="listBox">
+                    	<image class="iconPic" src="{{assetsPath}}images/userMenu-teacher.png" mode="heightFix" />
+                    	<span class="iconText">我是讲师</span>
+                    </navigator>
+                </div>-->
+                <div class="menuList">
+                	<navigator url="../../user/myServer/myServer" class="listBox">
+                    	<image class="iconPic" src="{{assetsPath}}images/userMenu-server.png" mode="heightFix" />
+                    	<span class="iconText">服务商</span>
+                    </navigator>
+                </div>
+                <div class="menuList" wx:if="{{data.operCenter==1}}">
+                	<navigator url="../../user/operCenter/operCenter" class="listBox">
+                    	<image class="iconPic" src="{{assetsPath}}images/userMenu-center.png" mode="heightFix" />
+                    	<span class="iconText">运营中心</span>
+                    </navigator>
+   				</div>
+                <div class="menuList" wx:if="{{data.gedianCredit}}">
+                	<navigator url="../../user/gedianCredit/gedianCredit" class="listBox">
+                    	<image class="iconPic" src="{{assetsPath}}images/userMenu-jifen.png" mode="heightFix" />
+                    	<span class="iconText">各店积分</span>
+                    </navigator>
+                </div>
+                <div class="menuList" wx:if="{{client=='wx'}}">
+                	<button open-type="contact" class="listBox">
+                    	<image class="iconPic" src="{{assetsPath}}images/userInfo-service.png" mode="heightFix" />
+                    	<span class="iconText">联系客服</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nologin bindloginsuccess="onShow" wx:else></nologin>
+    <newShare id="newShareCon"></newShare>
+</div>
+<div class="xzui-tabbar app-nav max480" wx:if="{{client=='web'}}">
+	<navigator url="../../home/index/index" class="xzui-tabbar_item index">
+        <span class="xzui-tabbar_label">在局</span>
+    </navigator>
+    <!--
+    <navigator url="../../store/index/index" class="xzui-tabbar_item store">
+        <span class="xzui-tabbar_label">在店</span>
+    </navigator>-->
+    <navigator url="../../suboffice/index/index" class="xzui-tabbar_item group">
+        <span class="xzui-tabbar_label">俱乐部</span>
+    </navigator>
+    <!--
+    <navigator url="../../goods/index/index" class="xzui-tabbar_item goods">
+        <span class="xzui-tabbar_label">商城</span>
+    </navigator>-->
+    <navigator url="../../user/my/my" class="xzui-tabbar_item my xzui-bar_item_on">
+        <span class="xzui-tabbar_label">我的</span>
+    </navigator>
+</div>

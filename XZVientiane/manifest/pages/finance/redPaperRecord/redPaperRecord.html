@@ -1,0 +1,25 @@
+<div class="app-wrapper">
+    <div wx:if="{{isUserLogin}}" class="app-main">
+        <p class="form-title">共 {{count}} 条记录，共 <span wx:if="{{options.type!='userBeans'}}">¥</span>{{total}} </p>
+        <div class="pb15">
+            <div class="bgfff plr15" wx:if="{{data&&data.length}}">
+                <div class="tuige-myAchievement-item" wx:for="{{data}}">
+                    <div class="clearfix">
+                        <div class="fl" style="max-width:70%;">
+                            <p class="c333 p14 textOver">{{item.title}}</p>
+                        </div>
+                        <div class="fr tar">
+                            <p class="tuige-myAchievement-money" style="line-height:24px;"><span wx:if="{{options.type!='userBeans'}}">¥</span>{{item.total}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <view class="loadingBox mlr14" hidden="{{!showLoading}}">
+                <div class="xzicon-loading"></div>
+                <div class="xzui-loadmore__tips">正在加载</div>
+            </view>
+            <view class="noData mlr14" hidden="{{!showNoData}}">暂无记录</view>
+        </div>
+    </div>
+    <nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

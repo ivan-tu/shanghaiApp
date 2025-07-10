@@ -1,0 +1,42 @@
+<view class="editor-content">
+   <view class="editor-content-list" wx:for="{{content}}" wx:for-key="l" wx:for-item="g" data-link="{{g.link}}" bindtap="toLink">
+      <view class="editor-content-text"  wx:if="{{g.type=='text'}}">
+         <rich-text class="editor-content-text publicTextarea"  nodes="{{g.content}}"></rich-text>
+      </view>
+      <view class="editor-content-image" wx:elif="{{g.type=='image'}}">
+         <image src="{{g.file}}" mode="widthFix" data-index="{{index}}" wx:if="{{g.link}}" />
+         <image src="{{g.file}}" mode="widthFix" bindtap="viewImage" wx:else data-index="{{index}}" />
+      </view>
+      <view class="editor-content-video" wx:elif="{{g.type=='video'}}">
+         <video src="{{g.file}}"  poster="{{g.poster}}" style="width:{{videoWidth}}px;" controls controlslist="nodownload"></video>
+      </view>
+      <view wx:elif="{{g.type=='audio'}}" class="editorContent-audio">
+          <view class="editorContent-audio-main">
+              <view class="editorContent-audio-progress"><span style="left:{{g.progress}}%" class="editorContent-audio-progressSpeed"></span></view>
+              <view class="clearfix mt5">
+                  <span class="fl c666 p12">{{g.now}}</span>
+                  <span class="fr c666 p12">{{g.time}}</span>
+              </view>
+          </view>
+          <view class="editorContent-audio-playBtn" data-index="{{index}}" bindtap="toPlayAudio">
+              <view class="editorContent-audio-playVoice"><view class="editorContent-audio-playVoice-play  {{(g.active==1?' active':'')}}"></view></view>
+          </view>
+      </view>
+      <view wx:elif="{{g.type=='ad'}}" class="editorContent-ad">
+      	  <!--微信小程序广告-->
+          <view wx:if="{{g.content.fromme=='tencent'}}" class="editorContent-adList"><ad unit-id="{{g.content.content}}" data-index="{{index}}" binderror="adError"></ad></view>
+          <!--百度广告-->
+          <view wx:elif="{{g.content.fromme=='baidu'}}" class="editorContent-adList"></view>
+          <!--平台广告-->
+          <view wx:elif="{{g.content.fromme=='system'}}" class="editorContent-adList">
+              <view class="editor-content-video" wx:if="{{g.content.video&&g.content.video.src}}">
+                 <video src="{{g.content.video.src}}"  poster="{{g.content.video.poster}}" style="width:{{videoWidth}}px;" controls controlslist="nodownload"></video>
+              </view>
+              <view class="editor-content-image" wx:elif="{{g.content.pics}}">
+                 <image class="pic" src="{{g.content.pics}}" mode="widthFix" data-appid="{{g.content.content}}" data-link="{{g.content.link}}" data-wxlink="{{g.content.wxlink}}" catchtap="toAdLink" />
+              </view>
+              <p class="editor-content-adTips">广告</p>
+          </view>
+      </view>
+   </view>
+</view>

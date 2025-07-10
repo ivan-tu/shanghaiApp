@@ -1,0 +1,229 @@
+<div class="app-wrapper">
+	<div wx:if="{{isUserLogin}}" class="app-main">
+		<view class="orderList-searchBox">
+			<div class="orderList-searchType" bindtap="screenSearchType">
+				<span class="typeName textOver" wx:if="{{form.searchtype=='addressmobile'}}">收货人手机号</span>
+				<span class="typeName textOver" wx:elif="{{form.searchtype=='addressname'}}">收货人姓名</span>
+				<span class="typeName textOver" wx:elif="{{form.searchtype=='usermobile'}}">付款人手机号</span>
+                <span class="typeName textOver" wx:elif="{{form.searchtype=='goodsname'}}">商品名称</span>
+				<span class="typeName textOver" wx:else>订单号</span>
+			</div>
+			<search-bar label="请输入搜索关键词" placeholder="请输入搜索关键词" keyword="{{form.keyword}}" bindchange="changeKeyword"
+				bindclose="closeKeyword"></search-bar>
+		</view>
+		<div class="searchCategory-box clearfix bgfff">
+			<div class="searchCategory">
+				<div class="listBox">
+					<span class="list {{(form.status==''?' active':'')}}" bindtap="screenStatus" data-status="">全部</span>
+					<span class="list {{(form.status==1?' active':'')}}" bindtap="screenStatus" data-status="1">待付款</span>
+					<span class="list {{(form.status==2?' active':'')}}" bindtap="screenStatus" data-status="2">待发货</span>
+					<span class="list {{(form.status==3?' active':'')}}" bindtap="screenStatus" data-status="3">待收货</span>
+					<span class="list {{(form.status==4?' active':'')}}" bindtap="screenStatus" data-status="4">已完成</span>
+					<span class="list {{(form.status==5?' active':'')}}" bindtap="screenStatus" data-status="5">已退款</span>
+					<span class="list {{(form.status==6?' active':'')}}" bindtap="screenStatus" data-status="6">已过售后期</span>
+				</div>
+			</div>
+		</div>
+		<div class="searchCategory-box clearfix bgfff hasBorder top">
+			<div class="searchCategory">
+				<div class="listBox">
+					<span wx:for="{{timeScreen}}" class="list {{((form.filterType==item.value&&!showDate)?' active':'')}}"
+						bindtap="screen" data-value="{{item.value}}" data-type="filterType">{{item.name}}</span>
+					<span class="list {{(showDate?' active':'')}}" bindtap="screenTime">指定日期</span>
+				</div>
+			</div>
+		</div>
+		<div class="form-list hasBorder top bgfff" style="padding:5px 10px;line-height:20px;" wx:if="{{showDate}}">
+			<div class="form-list-item tac">
+				<picker mode="date" bindchange="bindStartTime" value="{{startTime}}">
+					<view class="picker" wx:if="{{form.startTime}}">{{form.startTime}}</view>
+					<div class="picker c666" wx:else>请选择</div>
+				</picker>
+			</div>
+			<div class="form-list-item tac">
+				<picker mode="date" bindchange="bindEndTime" value="{{endTime}}">
+					<view class="picker" wx:if="{{form.endTime}}">{{form.endTime}}</view>
+					<div class="picker c666" wx:else>请选择</div>
+				</picker>
+			</div>
+			<div class="form-list-item title  tar"><button class="redBtn" bindtap="confirmTime">确定</button></div>
+		</div>
+		<div class="form-title clearfix">
+			<div class="fl">共{{count}}个订单</div>
+		</div>
+		<div class="manage_orderList_main" wx:if="{{data.length}}">
+			<div class="xzui-cells" wx:for="{{data}}">
+				<div class="clearfix pr15 ml15 ptb10 hasBorder bottom">
+					<div class="fl">
+						<image style="width:30px;height:30px;" class="round" src="{{item.headpic}}" mode="widthFix" />
+						<span class="c666 p12 displayIB ml5 vMid orderList_userName">{{item.username}}</span>
+					</div>
+					<p class="fr p12" style="line-height:30px;"><span
+							class="c666 p12 displayIB mr10">{{item.addtime}}</span>{{item.statusName}}<span
+							wx:if="{{item.afterstatusName}}">-{{item.afterstatusName}}</span></p>
+				</div>
+				<div class="xzui-panel__bd">
+					<view wx:if="{{item.goodslist.length>1}}" class="manage_orderList_list {{(checkAll?' active':'')}}"
+						bindtap="clickThis" data-id="{{item.id}}" data-index="{{index}}">
+						<view class="xzui-media-box xzui-media-box_appmsg orderListGoods">
+							<div class="picBox" style="height:{{(checkAll?smallPicWidth:picWidth)}}px;overflow:hidden;">
+								<div class="picList"
+									style="width:{{(checkAll?smallPicWidth:picWidth)}}px;height:{{(checkAll?smallPicWidth:picWidth)}}px;"
+									wx:for="{{item.goodslist}}" wx:for-item="g">
+									<div class="list hasLoading">
+										<image src="{{g.pic}}" />
+									</div>
+								</div>
+							</div>
+							<p class="quantityText">共{{item.goodslist.length}}件</p>
+						</view>
+						<span class="xzui-checkbox-new manage_orderList_checkbox {{(item.checked?' active':'')}}"></span>
+					</view>
+					<view wx:else bindtap="clickThis" class="manage_orderList_list {{(checkAll?' active':'')}}"
+						data-id="{{item.id}}" data-index="{{index}}">
+						<view class="xzui-media-box xzui-media-box_appmsg" wx:for="{{item.goodslist}}" wx:for-item="g">
+							<div class="xzui-media-box__hd xzui-media-box__hd_in-appmsg hasLoading" style="width:80px;height:80px;">
+								<image src="{{g.pic}}" mode="widthFix" />
+							</div>
+							<div class="xzui-media-box__bd xzui-media-box__bd_in-appmsg">
+								<div class="xzui-media-box__title clearfix">
+									<div class="fl textOver" style="width: 180px;">{{g.goodsname}}</div>
+								</div>
+								<div class="xzui-media-box__desc">
+									<div class="c999 p12">{{g.format}}</div>
+									<div class="cRed p12 mt5">
+										¥<span class="p14">{{g.price}}<span class="c999 fr">x{{g.quantity}}</span></span>
+									</div>
+								</div>
+							</div>
+						</view>
+						<span class="xzui-checkbox-new manage_orderList_checkbox {{(item.checked?' active':'')}}"></span>
+					</view>
+				</div>
+				<div class="clearfix pr15 ml15 ptb10 hasBorder top">
+					<p class="fl c666 p14" style="line-height:30px;">实收：<span class="cRed">¥</span><span class="p16 cRed">
+							{{item.totalPrice}}</span></p>
+
+					<!--<div class="fr" wx:if="{{item.status==1}}">
+						<button type="button" class="orderList_btn b1" bindtap="toShowEdit" data-id="{{item.id}}">修改金额</button>
+					</div>-->
+					<div class="fr" wx:if="{{item.afterstatus==1}}">
+						<button type="button" class="orderList_btn b1" bindtap="noAfter" data-id="{{item.id}}"
+							data-index="{{index}}">拒绝退款</button>
+						<button type="button" class="orderList_btn b2" bindtap="toAfter" data-id="{{item.id}}"
+							data-index="{{index}}">同意退款</button>
+					</div>
+					<div class="fr" wx:elif="{{item.afterstatus==2}}">
+						<button type="button" class="orderList_btn b2" bindtap="toRefund" data-id="{{item.id}}"
+							data-index="{{index}}">立即退款</button>
+					</div>
+					<div class="fr" wx:elif="{{item.status==2}}">
+						<button type="button" class="orderList_btn b2" wx:if="{{item.deliveryType!=2&&item.address}}" bindtap="toShowDeilvery"
+							data-index="{{index}}" data-id="{{item.id}}">立即发货</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<view class="loadingBox mlr14" hidden="{{!showLoading}}">
+			<div class="xzicon-loading"></div>
+			<div class="xzui-loadmore__tips">正在加载</div>
+		</view>
+		<view class="noData mlr14" hidden="{{!showNoData}}">暂无数据</view>
+        <!--
+        <view class="xzui-btn-app positionBottom" wx:if="{{!checkAll}}">
+        	<div class="displayFlex">
+                <div class="list">
+                    <button type="button" class="xzui-btn xzui-btn_b primary orderLargeBtn" size="large"
+                        bindtap="exportAll">导出全部</button>
+                </div>
+                <div class="list ml10">
+                    <button type="button" class="xzui-btn xzui-btn_b primary orderLargeBtn" size="large"
+                        bindtap="toCheckAll">批量导出</button>
+                </div>
+                <div class="list">
+                    <button type="button" class="xzui-btn xzui-btn_b primary orderLargeBtn" size="large"
+                        bindtap="toDeliveryOrder">批量发货</button>
+                </div>
+            </div>
+		</view>
+		<view class="xzui-btn-app positionBottom" wx:if="{{checkAll}}">
+        	<div class="displayFex">
+                <div class="list">
+                    <button type="button" class="xzui-btn xzui-btn_b gray" size="large" bindtap="toCancelAll">取消</button>
+                </div>
+                <div class="list ml10">
+                    <button type="button" class="xzui-btn xzui-btn_b primary" size="large" bindtap="exportThis">导出</button>
+                </div>
+            </div>
+		</view>-->
+		<!--修改金额弹框-->
+		<view class="" hidden="{{!showEdit}}">
+			<div style="z-index:20;" class="xzui-mask show" bindtap="toHideEdit"></div>
+			<div class="xzui-modal show" style="z-index:21;">
+				<div class="xzui-modal_body" style="padding:15px 14px;">
+					<div class="xzui-modal_main">
+						<div class="form-list tal">
+							<div class="form-list-item title c666" style="line-height:26px;">类型</div>
+							<div class="form-list-item">
+								<div class="displayIB" bindtap="editType" data-type="add">
+									<span class="xzui-radio-new {{(editForm.type=='add'?' active':'')}}"></span>
+									<span class="xzui-radioTitle-new">增加</span>
+								</div>
+								<div class="displayIB ml10" bindtap="editType" data-type="low">
+									<span class="xzui-radio-new {{(editForm.type=='low'?' active':'')}}"></span>
+									<span class="xzui-radioTitle-new">减少</span>
+								</div>
+							</div>
+						</div>
+						<div class="form-list tal" style="margin-top:1px;">
+							<div class="form-list-item title c666" style="line-height:32px;">金额</div>
+							<div class="form-list-item">
+								<input type="number" value="{{editForm.total}}" bindinput="model" data-model="editForm.total"
+									placeholder="请输入修改金额" class="textInput" style="border:1px solid #ddd;padding:0 10px;height:32px;" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="xzui-modal_foot">
+					<div class="xzui-modal_btnBox">
+						<button class="xzui-btn confirm xzui-modal_btn" type="primary" bindtap="toHideEdit">取消</button>
+						<button class="xzui-btn confirm xzui-modal_btn" type="primary" bindtap="toConfirmEdit">确定</button>
+					</div>
+				</div>
+			</div>
+		</view>
+		<!--发货弹框-->
+		<view class="" hidden="{{!showDeilvery}}">
+			<div style="z-index:20;" class="xzui-mask show" bindtap="toHideDeilvery"></div>
+			<div class="xzui-modal show" style="z-index:21;">
+				<div class="xzui-modal_body" style="padding:15px 14px;">
+					<div class="xzui-modal_main">
+						<div class="form-list tal" style="margin-top:1px;">
+							<div class="form-list-item title c666" style="line-height:32px;">物流单号</div>
+							<div class="form-list-item">
+								<input type="text" value="{{deilveryForm.deliverynum}}" bindinput="model"
+									data-model="deilveryForm.deliverynum" placeholder="输入物流单号，没有可为空" class="textInput"
+									style="border:1px solid #ddd;padding:0 10px;height:32px;" />
+							</div>
+						</div>
+                        <div class="form-list tal">
+                            <div class="form-list-item title c666" style="line-height:32px;">物流名称</div>
+                            <div class="form-list-item">
+                                <input type="text" value="{{deilveryForm.deliveryname}}" bindinput="model"
+                                    data-model="deilveryForm.deliveryname" placeholder="输入物流名称" class="textInput"
+                                    style="border:1px solid #ddd;padding:0 10px;height:32px;" />
+                            </div>
+                        </div>
+					</div>
+				</div>
+				<div class="xzui-modal_foot">
+					<div class="xzui-modal_btnBox">
+						<button class="xzui-btn confirm xzui-modal_btn" type="primary" bindtap="toHideDeilvery">取消</button>
+						<button class="xzui-btn confirm xzui-modal_btn" type="primary" bindtap="toConfirmDeilvery">确定</button>
+					</div>
+				</div>
+			</div>
+		</view>
+	</div>
+	<nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

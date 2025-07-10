@@ -1,0 +1,81 @@
+.userDetailEdit-header{
+	padding:15px;
+	position:relative;
+}
+.userDetailEdit-header .picBox{
+	width:90px;
+	height:90px;
+	border-radius:50%;
+	overflow:hidden;
+	margin:auto;
+}
+.userDetailEdit-header .wxUploadBtn{
+	margin:0;
+	padding:0;
+	display:block;
+	background: #bbb;
+	border-radius:50%;
+	width:90px;
+	height:90px;
+	overflow:hidden;
+}
+.userDetailEdit-header .xzui-uploader__file{
+	margin:0;
+	background: #bbb;
+}
+.client_userInfo_uploadBox .xzui-uploader{
+	display: inline-block;
+	vertical-align: middle;
+}
+.client_userInfo_uploadBox .user-upload{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.userInfo_sexList .list{
+	background:#eee;
+	border-radius:10px;
+	height:45px;
+	line-height:45px;
+	font-size:16px;
+	color:#131313;
+	text-align:center;
+}
+.userInfo_sexList .list.blue{
+	background:#3A5CD3;
+	color:#fff;
+}
+.userInfo_sexList .list.red{
+	background:#EC6672;
+	color:#fff;
+}
+.userInfo_sexList .list.yellow{
+	background:#DABB53;
+	color:#fff;
+}
+.userInfo_editForm .textInput,
+.userInfo_editForm .textarea{
+	background:transparent !important;
+}
+.userInfo_editForm .textareaBox{
+	background:#eee;
+	border-radius:6px;
+	padding:10px;
+}
+.userInfo_editForm_hasTips{
+	position:relative;
+	padding-bottom:16px;
+}
+.userInfo_editForm_hasTips .tips{
+	position:absolute;
+	right:0;
+	bottom:0;
+}
+.userInfo_footBtn .xzui-btn{
+	max-width:180px;
+	margin:auto;
+	color:#000 !important;
+	background:#FEE10B !important;
+	padding:0;
+	border-radius:6px;
+}

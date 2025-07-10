@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+	  "picker": "/components/web/picker/picker",
+		"nologin": "/components/common/nologin/nologin",
+		"newShare": "/components/common/newShare/newShare"
+   },
+  "navigationBarTitleText": "确认订单"
+}

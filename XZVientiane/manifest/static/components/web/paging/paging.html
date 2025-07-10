@@ -1,0 +1,20 @@
+<div>
+  <div class="xzui-paging" wx:if="{{count}}">
+      <span class="xzui-paging_total">第{{page}}/{{total}}页</span>
+      <span class="xzui-paging_setPage">
+      每页
+          <picker class="xzui-picker xzui-paging_select" bindchange="updateSize" value="{{sizeIndex}}" range="{{sizes}}">
+           <div class="picker xzui-paging_picker"><span class="picker-select">{{sizes[sizeIndex]}}</span></div>
+          </picker>
+          条
+      </span>
+      <span class="disable xzui-paging_btn {{(page==1?'disabled':'')}}" bindtap="first"><i class="xzicon-verticleright"></i></span>
+      <span class="disable xzui-paging_btn {{(page==1?'disabled':'')}}" bindtap="prev"><i class="xzicon-left"></i></span>
+      <div class="xzui-paging_numbox">
+          <span class="xzui-paging_num {{(item==page?'active':'')}}" data-num="{{item}}" wx:for="{{pages}}" wx:key="page" bindtap='tap'>{{item}}</span>
+      </div>
+      <span class="xzui-paging_btn {{(page==total?'disabled':'')}}" bindtap='next'><i class="xzicon-right"></i></span>
+      <span class="xzui-paging_btn {{(page==total?'disabled':'')}}" bindtap='last'><i class="xzicon-verticleleft"></i></span>
+      <span class="xzui-paging_goto">跳至<input class="xzui-input xzui-paging_input" type="number" bindinput='jump' value="{{jumpPage}}" />页</span>
+  </div>
+</div>

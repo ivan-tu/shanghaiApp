@@ -1,0 +1,15 @@
+<div class="xzui-search">
+    <form bindsubmit="search">
+        <div class="xzui-search_label">
+            <div class="xzui-search_prefix" wx:if="{{type}}">
+                <select class="xzui-search_select" bindchange="model" data-model="searchType">
+                    <option wx:for="{{searchSelect}}" value="{{index}}">{{item}}</option>
+                </select>
+            </div>
+            <input class="xzui-input xzui-search_input" placeholder="{{(placeholder=='type'?searchSelect[searchType]+'搜索':placeholder)}}" type="search" value="{{keyword}}" bindinput="getKeyword">
+            <div class="xzui-search_suffix">
+                <span class="xzui-search_close {{(keyword?'show':'')}}" bindtap="emptyKeyword"><i class="xzicon-closecircle"></i></span>
+                <button class="xzui-search_btn" type="submit">搜索</button>
+            </div>
+        </div>
+    </form>

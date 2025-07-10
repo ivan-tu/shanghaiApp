@@ -1,0 +1,29 @@
+<div class="app-wrapper">
+    <div wx:if="{{isUserLogin}}" class="app-main">
+        <div class="xzui-cells xzui-cells_after-title">
+            <navigator url="../../user/info/info" class="xzui-cell xzui-cell_access">
+                <div class="xzui-cell__bd">个人资料</div>
+                <div class="xzui-cell__ft xzui-cell__ft_in-access"><i class="xzicon-right xzui-cell__ft_arrow"></i></div>
+            </navigator>
+            <navigator url="../../user/address/address" class="xzui-cell xzui-cell_access">
+                <div class="xzui-cell__bd">收货地址</div>
+                <div class="xzui-cell__ft xzui-cell__ft_in-access"><i class="xzicon-right xzui-cell__ft_arrow"></i></div>
+            </navigator>
+            <navigator url="../../user/privacySet/privacySet" class="xzui-cell xzui-cell_access">
+                <div class="xzui-cell__bd">隐私设置</div>
+                <div class="xzui-cell__ft xzui-cell__ft_in-access"><i class="xzicon-right xzui-cell__ft_arrow"></i></div>
+            </navigator>
+            <navigator url="../../user/bindUser/bindUser" class="xzui-cell xzui-cell_access">
+                <div class="xzui-cell__bd">绑定账号</div>
+                <div class="xzui-cell__ft xzui-cell__ft_in-access"><i class="xzicon-right xzui-cell__ft_arrow"></i></div>
+            </navigator>
+            <navigator wx:if="{{client=='app'}}" url="../../user/cancelAccount/cancelAccount" class="xzui-cell xzui-cell_access">
+                <div class="xzui-cell__bd">注销账号申请</div>
+                <div class="xzui-cell__ft xzui-cell__ft_in-access"><i class="xzicon-right xzui-cell__ft_arrow"></i>
+                </div>
+            </navigator>
+        </div>
+        <button class="user-set-out setBottomLine setTopLine bgColor" type="button" bindtap="signOut">退出登录</button>
+    </div>
+    <noLogin bindloginsuccess="onShow" wx:else></noLogin>
+</div>

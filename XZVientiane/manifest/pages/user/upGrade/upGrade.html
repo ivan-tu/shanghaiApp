@@ -1,0 +1,39 @@
+<div class="app-wrapper">
+    <div class="app-main" wx:if="{{isUserLogin}}">
+    	<div class="markWraper"></div>
+        <div class="pd15">
+        	<div wx:if="{{data.userData.level>0}}">
+            	<p class="p18 bold">我的级别：{{data.userData.memberName}}</p>
+            	<p>会员到期：{{data.userData.memberExpireTime||'-'}}</p>
+            </div>
+            <div wx:else>
+            	<p class="p18 bold">加入{{subofficeName}}会员</p>
+                <p class="c888">升级会员后可以组局和加入俱乐部，钻石可用于购买礼物赠送好友，友币可用于参加官方活动。</p>
+            </div>
+            <div class="userUpGrade-box">
+            	<div class="userUpGrade-list color_{{item.level}}" wx:for="{{data.setup}}" data-level="{{item.level}}" bindtap="toBuy">
+                    <div class="infoBox">
+                    	<p class="title bold">{{item.name}}会员</p>
+                        <p class="mt10 tipsInfo">{{item.tips}}</p>
+                        <p class="price">{{item.price}}元/{{item.year}}年</p>
+                    </div>
+                    <div class="controlBox">
+                        <span class="upBtn">成为会员</span>
+                    </div>
+                </div>
+                <!--
+                <div class="userUpGrade-list color_red" bindtap="toAuthenInfo">
+                    <div class="infoBox">
+                    	<p class="title bold">颜值会员</p>
+                        <p class="mt10 tipsInfo">送5000友币，消费和邀请送1倍友币</p>
+                        <p class="price">颜值60分以上</p>
+                    </div>
+                    <div class="controlBox">
+                        <span class="upBtn">成为会员</span>
+                    </div>
+                </div>-->
+            </div>
+        </div>
+    </div>
+    <nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

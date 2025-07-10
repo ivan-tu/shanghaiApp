@@ -1,0 +1,10 @@
+{
+    "usingComponents":
+    {
+        "picker": "/components/web/picker/picker",
+		"nologin": "/components/common/nologin/nologin",
+        "upload": "/components/common/upload/upload"
+    },
+    "enablePullDownRefresh": false,
+    "navigationBarTitleText": "认证"
+}

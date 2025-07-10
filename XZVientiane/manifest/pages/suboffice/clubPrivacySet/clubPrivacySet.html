@@ -1,0 +1,38 @@
+<div class="app-wrapper">
+	<div wx:if="{{isUserLogin}}" class="app-main">
+        <div class="bgfff club_form">
+            <div class="form-list">
+                <div class="form-list-item c333 p14">成员不对外开放</div>
+                <div class="form-list-item tar title large">
+                    <span catchtap="switchThis" data-type="showUser"
+                        class="xzui-switch-new yellow {{(form.showUser==1?' active':'')}}"></span>
+                </div>
+            </div>
+            <div class="form-list">
+                <div class="form-list-item c333 p14">活动不对外开放</div>
+                <div class="form-list-item tar title large">
+                    <span catchtap="switchThis" data-type="showActivity"
+                        class="xzui-switch-new yellow {{(form.showActivity==1?' active':'')}}"></span>
+                </div>
+            </div>
+            <div class="form-list">
+                <div class="form-list-item c333 p14">动态不对外开放</div>
+                <div class="form-list-item tar title large">
+                    <span catchtap="switchThis" data-type="showDynamic"
+                        class="xzui-switch-new yellow {{(form.showDynamic==1?' active':'')}}"></span>
+                </div>
+            </div>
+            <div class="form-list">
+                <div class="form-list-item c333 p14">不被推荐和搜索</div>
+                <div class="form-list-item tar title large">
+                    <span catchtap="switchThis" data-type="showSearch"
+                        class="xzui-switch-new yellow {{(form.showSearch==1?' active':'')}}"></span>
+                </div>
+            </div>
+        </div>
+        <div class="xzui-btn-app">
+            <button type="button" bindtap="submit" class="xzui-btn xzui-btn_b primary yellow" size="large">提交</button>
+        </div>
+	</div>
+	<nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

@@ -1,0 +1,33 @@
+<div class="app-wrapper">
+	<div wx:if="{{isUserLogin}}" class="app-main positionBottom">
+        <div class="bgfff">
+            <div class="form-list">
+                <div class="form-list-item title c333 p14 long">海报封面</div>
+                <div class="form-list-item">
+                    <div><upload value="{{form.pic}}" class="user-upload" width="200" height="200" bindchange="uploadPic" id="uploadPic">
+                    </upload>
+                    </div>
+                    <p class="mt10 c888 p12">推荐尺寸：800*1200</p>
+                </div>
+            </div>
+        </div>
+        <div class="xzui-btn-app positionBottom">
+            <button type="button" bindtap="getSharePic" class="xzui-btn xzui-btn_b primary yellow" size="large">生成海报</button>
+        </div>
+        <view class="myShare_code_wrapper tac p14" hidden="{{!showSharePic}}"
+            style="width:{{picWidth}}px;margin-left:{{((picWidth+40)/2*-1)}}px;">
+            <view hidden="{{loadOk}}" class="mt20 pd20">图片生成中，请稍后...</view>
+            <view hidden="{{!loadOk}}">
+                <image src="{{loadPicUrl}}" bindload="loadSuccess" mode="widthFix"
+                    style="width:100%;padding-bottom:10px;" wx:if="{{client=='web'}}" />
+                <image src="{{loadPicUrl}}" bindload="loadSuccess" mode="widthFix"
+                    style="width:100%;padding-bottom:10px;" bindtap="saveImage" wx:else />
+                <div wx:if="{{client=='web'}}">长按图片保存到相册</div>
+                <button type="button" class="xzui-btn primary" style="margin-right:0;" bindtap="saveImage"
+                    wx:else>点击保存图片</button>
+            </view>
+            <div bindtap="closeSharePic" class="share_close_button">关闭</div>
+        </view>
+	</div>
+	<nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

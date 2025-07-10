@@ -1,0 +1,269 @@
+<div class="app-wrapper">
+    <div wx:if="{{isUserLogin}}" class="app-main {{(hasBtn?' positionBottom':' mb20')}}">
+    	<div class="bgfff">
+            <div class="form-list">
+                <div class="form-list-item c333 p16">{{data.statusName}}<span wx:if="{{data.afterstatusName}}">-{{data.afterstatusName}}</span></div>
+            </div>
+        </div>
+        <div wx:if="{{data.deliveryType==2&&data.deliveryAddress}}">
+            <div class="form-title">自提地址</div>
+            <div class="form-list bgfff" wx:if="{{data.deliveryAddress&&data.deliveryAddress.name}}">
+                <div class="form-list-item c666 title">联系人：</div>
+                <div class="form-list-item c666">{{data.deliveryAddress.name}}</div>
+            </div>
+            <div class="form-list bgfff" wx:if="{{data.deliveryAddress&&data.deliveryAddress.mobile}}">
+                <div class="form-list-item c666 title">电话：</div>
+                <div class="form-list-item c666">{{data.deliveryAddress.mobile}}</div>
+                <div class="form-list-item c666 title tar">
+                	<button type="button" class="redBtn pd0" bindtap="callTel" data-tel="{{data.deliveryAddress.mobile}}" wx:if="{{client=='wx'}}">拨打</button>
+                    <navigator url="tel:{{data.deliveryAddress.mobile}}" class="redBtn pd0" wx:else>拨打</navigator>
+                </div>
+            </div>
+            <div class="form-list bgfff">
+                <div class="form-list-item c666 title">地址：</div>
+                <div class="form-list-item c666">{{data.deliveryAddress.allAddress}}</div>
+                <div class="form-list-item c666 title tar">
+                	<button type="button" class="redBtn pd0" bindtap="openLocation" data-address="{{data.deliveryAddress.allAddress}}" wx:if="{{client=='wx'}}">导航</button>
+                    <navigator url="https://m.amap.com/search/mapview/keywords={{data.deliveryAddress.allAddress}}" target="_blank" class="redBtn pd0" wx:else>导航</navigator>
+                </div>
+            </div>
+            <div class="form-list bgfff" wx:if="{{data.status==2}}">
+            	<div class="form-list-item c666 title">提货码：</div>
+                <div class="form-list-item">
+                	<div><image data-src="{{hexiaoUrl}}" bindtap="viewImage" style="width:150px;height:150px;" src="{{hexiaoUrl}}" mode="widthFix" /></div>
+                    <p class="c666 mt5" wx:if="{{data.status==2}}">到提货点出示提货码提货</p>
+                </div>
+                <div class="form-list-item c666 title tar">
+                	<button type="button" bindtap="saveThis" class="redBtn pd0">保存</button>
+                </div>
+            </div>
+        </div>
+        <div wx:if="{{(!data.deliveryType||data.deliveryType!=2)&&data.address_name}}">
+            <div class="form-title">收货信息</div>
+            <div class="form-list bgfff">
+                <div class="form-list-item c666">
+                    <div>姓名：{{data.address_name}}</div>
+                    <div>电话：{{data.address_mobile}}</div>
+                    <div>地址：{{data.address_address}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="form-title clearfix">
+            <div class="fl">商品信息</div>
+            <div class="fr" wx:if="{{data.goodslist&&data.goodslist.length&&data.goodslist[0].goodsCategoryType==2}}"><button type="button" class="redBtn" bindtap="toViewTickets">全部票券</button></div>
+        </div>
+        <div class="bgfff">
+            <div class="shop-orderDetail-goodsList  hasBorder bottom left" wx:for="{{data.goodslist}}">
+            	<navigator url="../../shop/goodsDetail/goodsDetail?id={{item.goodshortid}}" target="_blank">
+                    <div class="displayB clearfix positionR plr14 pt15 pb15">
+                        <div class="goodsPic hasLoading"><image class="pic" src="{{item.pic}}"  mode="widthFix" /></div>
+                        <div class="goodsSet tar">
+                            <div class="cRed p16">¥{{item.total}}</div>
+                            <div class="c666 p14 mt30">x{{item.quantity}}</div>
+                        </div>
+                        <div class="goodsText">
+                            <div class="c333 p16 textOver">{{item.goodsname}}</div>
+                            <div class="c666 p12 textLine mt15">{{item.format}}</div>
+                            <div class="c666 p12 textLine">¥{{item.price}}</div>
+                        </div>     
+                    </div>
+            	</navigator>
+                <div class="clearfix plr15 pb15" wx:if="{{item.deliverynum}}">
+                    <p class="fl p12 c666" style="line-height:25px;">物流单号：{{item.deliverynum}}</p>
+                    <button type="button" class="fr redBtn" data-deliverynum="{{item.deliverynum}}" bindtap="viewLogistics">查看物流</button>
+                </div>
+            </div>
+        </div>
+        <div class="form-title" wx:if="{{data.status>2&&data.deliverynum}}">物流信息</div>
+        <div class="bgfff"  wx:if="{{data.status>2&&data.deliverynum}}">
+            <div class="form-list">
+                <div class="form-list-item c666 p14" style="line-height:30px;">{{data.deliveryname||'快递单号'}}：<span bindtap="copyThis" data-content="{{data.deliverynum}}">{{data.deliverynum}}</span></div>
+                <div class="form-list-item p14 tar title long"><button class="redBtn" type="button" bindtap="viewLogistics">查看物流</button></div>
+            </div>
+        </div>
+        <div class="form-title" wx:if="{{data.returninfo&&data.returninfo.addtime}}">退款信息</div>
+        <div class="bgfff" wx:if="{{data.returninfo&&data.returninfo.addtime}}">
+            <div class="form-list">
+                <div class="form-list-item c666 p14 title">退款原因</div>
+                <div class="form-list-item tar c666 p14">{{data.returninfo.content}}</div>
+            </div>
+            <div class="form-list" wx:if="{{data.returninfo.pics&&data.returninfo.pics.length}}">
+                <div class="form-list-item c666 p14 title">退款凭证</div>
+                <div class="form-list-item tar p14">
+                	<div class="picList" wx:for="{{data.returninfo.pics}}" bindtap="viewReturnImage" data-index="{{index}}" data-key="{{item.key}}">
+                    	<image class="pic" src="{{item.file}}" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-list">
+                <div class="form-list-item c666 p14 title">申请时间</div>
+                <div class="form-list-item tar c666 p14">{{data.returninfo.addtime}}</div>
+            </div>
+        </div>
+        <div class="form-title">订单金额</div>
+        <div class="bgfff">
+            <div class="form-list">
+                <div class="form-list-item c666 p14">商品金额</div>
+                <div class="form-list-item c666 p14 tar">¥{{data.goodsTotalPrice}}</div>
+            </div>   
+            <div class="form-list">
+                <div class="form-list-item c666 p14">运费</div>
+                <div class="form-list-item c666 p14 tar">¥{{data.freightTotal}}</div>
+            </div>
+            <div class="form-list" wx:if="{{data.revisionTotal}}">
+                <div class="form-list-item c666 p14">调整金额</div>
+                <div class="form-list-item c666 p14 tar">¥{{data.revisionTotal}}</div>
+			</div>
+            <div class="form-list" wx:if="{{data.discountTotalprice}}">
+            	<div class="form-list-item c666 p14">优惠金额</div>
+                <div class="form-list-item c666 p14 tar">¥{{data.discountTotalprice}}</div>
+            </div>
+            <div class="form-list">
+                <div class="form-list-item c666 p14">总金额</div>
+                <div class="form-list-item cRed p16 tar">¥{{data.totalPrice}}</div>
+            </div>
+        </div>
+        <div class="form-title">订单信息</div>
+        <div class="bgfff">
+        	<div class="form-list">
+                <div class="form-list-item c666 p14 title">订单号</div>
+                <div class="form-list-item c666 p14 tar" bindtap="copyThis" data-content="{{data.ordernum}}" data-type="订单号">{{data.ordernum}}</div>
+            </div>
+            <div class="form-list">
+                <div class="form-list-item c666 p14 title">配送方式</div>
+                <div class="form-list-item c666 p14 tar">{{data.deliveryType==2?'用户自提':'商家配送'}}</div>
+            </div>
+            <div class="form-list" wx:if="{{data.message}}">
+                <div class="form-list-item c666 p14 title">订单留言</div>
+                <div class="form-list-item c666 p14 tar">{{data.message}}</div>
+            </div>
+            <div class="form-list" wx:if="{{data.paytypeName}}">
+                <div class="form-list-item c666 p14 title">支付方式</div>
+                <div class="form-list-item tar c666 p14">{{data.paytypeName}}</div>
+            </div>
+            <div class="form-list">
+                <div class="form-list-item c666 p14 title">下单时间</div>
+                <div class="form-list-item c666 p14 tar">{{data.addtime}}</div>
+            </div>
+            <div class="form-list" wx:if="{{data.paytime}}">
+                <div class="form-list-item c666 p14 title">支付时间</div>
+                <div class="form-list-item c666 p14 tar">{{data.paytime}}</div>
+            </div>
+            <div class="form-list" wx:if="{{data.deliverytime}}">
+                <div class="form-list-item c666 p14 title">发货时间</div>
+                <div class="form-list-item c666 p14 tar">{{data.deliverytime}}</div>
+            </div>
+            <div class="form-list" wx:if="{{data.confirmtime}}">
+                <div class="form-list-item c666 p14 title">确认时间</div>
+                <div class="form-list-item c666 p14 tar">{{data.confirmtime}}</div>
+ 			</div>
+            <div class="form-list" wx:if="{{data.status==3&&data.autoconfirmdate}}">
+            	<div class="form-list-item c666 p14 title">自动收货</div>
+                <div class="form-list-item c666 p14 tar">{{data.autoconfirmdate}}</div>
+            </div>
+            <div class="form-list" wx:if="{{data.autoreturndate}}">
+            	<div class="form-list-item c666 p14">自动处理售后</div>
+                <div class="form-list-item c666 p14 tar">{{data.autoreturndate}}</div>
+            </div>
+        </div>
+        <div wx:if="{{data.commentlist&&data.commentlist.length}}">
+            <div class="form-title">订单评价</div>
+            <div class="bgfff plr14 ptb10 evaluate_list" wx:for="{{data.commentlist}}">
+                <div class="mt10">
+                    <span class="order_starList"><i class="{{(item.stars>=1?'xzicon-star2':'xzicon-staro')}}"></i></span>
+                    <span class="order_starList"><i class="{{(item.stars>=2?'xzicon-star2':'xzicon-staro')}}"></i></span>
+                    <span class="order_starList"><i class="{{(item.stars>=3?'xzicon-star2':'xzicon-staro')}}"></i></span>
+                    <span class="order_starList"><i class="{{(item.stars>=4?'xzicon-star2':'xzicon-staro')}}"></i></span>
+                    <span class="order_starList"><i class="{{(item.stars>=5?'xzicon-star2':'xzicon-staro')}}"></i></span>
+                    <span class="order_starTips" wx:if="{{item.stars==1}}">非常差</span>
+                    <span class="order_starTips" wx:if="{{item.stars==2}}">很差</span>
+                    <span class="order_starTips" wx:if="{{item.stars==3}}">一般</span>
+                    <span class="order_starTips" wx:if="{{item.stars==4}}">满意</span>
+                    <span class="order_starTips" wx:if="{{item.stars==5}}">超赞</span>
+                </div>
+                <div class="mt10 c666 p14">
+                    <pre style="font-family:inherit;">{{item.content}}</pre>
+                </div>
+                <div class="mt10" wx:if="{{item.pics&&item.pics.length}}">
+                    <div class="evaluate_picBox clearfix">
+                        <div class="evaluate_picList" wx:for="{{item.pics}}" wx:for-index="l" wx:for-item="g">
+                            <div class="list" bindtap="viewImage2" data-index="{{l}}" data-parent="{{index}}">
+                                <image src="{{g.file}}" mode="widthFix" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hasBorder top mt10 pt10 displayFlex cRed" wx:if="{{item.replaycontent}}">商家回复：{{item.replaycontent}}</div>
+            </div>
+        </div>
+        <div class="mt10 bgfff" wx:if="{{userHomeData.customertel||userHomeData.customerwx}}">
+            <button class="form-list mg0 tal" style="width:100%;" wx:if="{{client=='wx'&&userHomeData.customertel}}" bindtap="callTel" data-tel="{{userHomeData.customertel}}">
+                <div class="form-list-item c666 p14 title">客服电话</div>
+                <div class="form-list-item rightIcon tar c666">{{userHomeData.customertel}}</div>
+            </button>
+            <navigator url="tel:{{userHomeData.customertel}}" class="form-list" wx:if="{{client!='wx'&&userHomeData.customertel}}">
+            	<div class="form-list-item c666 p14 title">客服电话</div>
+                <div class="form-list-item rightIcon tar c666">{{userHomeData.customertel}}</div>
+            </navigator>
+            <button class="form-list mg0 tal" style="width:100%;" wx:if="{{userHomeData.customerwx}}" bindtap="showWx" data-wx="{{userHomeData.customerwx}}">
+            	<div class="form-list-item c666 p14 title">客服微信</div>
+                <div class="form-list-item rightIcon tar c666">{{userHomeData.customerwx}}</div>
+            </button>
+        </div>
+        <view class="xzui-btn-app positionBottom" wx:if="{{data.status==1}}">
+        	<div class="displayFlex">
+                <div class="list" wx:if="{{!data.teamstatus}}">
+                    <button type="button" class="xzui-btn xzui-btn_b gray" size="large" bindtap="delOrder">取消订单</button>
+                </div>
+                <div class="list">
+                    <button type="button" class="xzui-btn xzui-btn_b primary" size="large" bindtap="payOrder">立即付款</button>
+                </div>
+            </div>
+        </view>
+        <view class="xzui-btn-app positionBottom" wx:elif="{{data.status==2&&!data.afterstatus}}">
+        	<div class="displayFlex">
+                <div class="list" wx:if="{{!data.teamstatus}}">
+                    <button type="button" class="xzui-btn xzui-btn_b gray" size="large" bindtap="cancelOrder">申请退款</button>
+                </div>
+                <div class="list" wx:if="{{showRemindDeliver}}">
+                    <button type="button" class="xzui-btn xzui-btn_b primary" size="large" bindtap="remindDeliver">提醒发货</button>
+                </div>
+            </div>
+        </view>
+        <view class="xzui-btn-app positionBottom" wx:elif="{{data.status==3}}">
+        	<div class="displayFlex">
+                <div class="list" wx:if="{{data.canreturn==1&&!data.afterstatus&&!data.teamstatus}}">
+                    <button type="button" class="xzui-btn xzui-btn_b gray" size="large" bindtap="refundOrder">申请退款</button>
+                </div>
+                <div class="list">
+                    <button type="button" class="xzui-btn xzui-btn_b primary" size="large" bindtap="reveiveOrder">确认收货</button>
+                </div>
+            </div>
+        </view>
+        <view class="xzui-btn-app positionBottom" wx:elif="{{(data.status==4||data.status==6)&&!data.commentstatus}}">
+        	<div class="displayFlex">
+                <div class="list">
+                    <button type="button" class="xzui-btn xzui-btn_b primary" size="large" bindtap="toEvaluate">立即评价</button>
+                </div>
+            </div>
+        </view>
+    </div>
+    <nologin bindloginsuccess="onShow" wx:else></nologin>
+    <!--取消弹框-->
+	<view class="" hidden="{{!showCancelDialog}}">
+		<div style="z-index:20;" class="xzui-mask show" bindtap="toHideCancelDialog"></div>
+		<div class="xzui-modal show" style="z-index:21;">
+			<div class="xzui-modal_body" style="padding:16px 14px">
+                <div class="xzui-modal_main">
+                    <div style="border:1px solid #eee;padding:5px;"><textarea class="p14 tal" style="border:0 none;height:90px;width:100%;font-family:inherit;" placeholder="请输入取消订单的原因" bindinput="model" data-model="cancelForm.content" value="{{cancelForm.content}}"></textarea></div>
+                </div>
+            </div>
+			<div class="xzui-modal_foot">
+				<div class="xzui-modal_btnBox">
+					<button class="xzui-btn confirm xzui-modal_btn" type="primary" bindtap="toHideCancelDialog">取消</button>
+					<button class="xzui-btn confirm xzui-modal_btn" type="primary" bindtap="toConfirmCancelDialog">确定</button>
+				</div>
+			</div>
+		</div>
+	</view>
+</div>

@@ -1,0 +1,6 @@
+framework module HybridSDK {
+  umbrella header "HybridSDK.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "upload": "/components/common/upload/upload"
+  },
+  "enablePullDownRefresh": false,
+  "navigationBarTitleText": "编辑内容"
+}

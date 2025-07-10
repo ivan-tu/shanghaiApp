@@ -1,0 +1,215 @@
+.user-login-canvas{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    z-index: -1;
+}
+.user-login-logo{
+	width: 140px;
+	margin:80px 0 0 30px;
+}
+.user-login-title {
+    padding: 0 30px;
+    font-size: 17px;
+    color: #888;
+    margin-top: 5px;
+}
+.user-login-mobile {
+    padding: 0 25px;
+    margin-top: 60px;
+}
+.user-login-input {
+    height: 56px;
+    color: #333;
+    font-size: 26px;
+    border-bottom: 1px solid #E7E7E7;
+    letter-spacing: 1.5px;
+    border-radius: 0;
+	font-weight:400;
+}
+.user-login-input::-moz-placeholder {
+    color:#999;
+	font-weight:400;
+}
+.user-login-input:-ms-input-placeholder {
+    color:#999;
+	font-weight:400;
+}
+.user-login-input::-webkit-input-placeholder {
+    color:#999;
+	font-weight:400;
+}
+.user-login-wx{
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	margin-top: 24px;
+	background-image: url('https://static.mendianquan.com/15618100024522964.png');
+	background-size: 669px;
+	background-position: -555px -145px;
+	background-repeat: no-repeat;
+}
+.user-login-code{
+	padding:0 30px;
+}
+.user-login-tips{
+	color:#ccc;
+}
+.user-login-codeMobile{
+	color: #999;
+	font-size: 0;
+	margin-top: 4px;
+	line-height: 30px;
+}
+.user-login-codeMobile3{
+	padding-left: 6px;
+}
+.user-login-codeMobile6{
+	padding-right: 6px;
+}
+.user-login-codeMobile span{
+	font-size: 17px;
+}
+.user-login-codeMobile span,
+.user-login-codeMobile button{
+	display: inline-block;
+	vertical-align: top;
+}
+.user-login-codeEdit{
+	width:18px;
+	height: 30px;
+	line-height: 30px;
+	margin-left: 4px;
+}
+.user-login-codeBox{
+	position: relative;
+	margin-top: 60px;
+}
+.user-login-codeInput{
+	position: absolute;
+	top: 0;
+	left: 0px;
+	right: 0;
+	height:60px;
+	z-index: 11;
+}
+.user-login-codeInput input{
+	width: 200%;
+	margin-left: -100%;
+	height: 60px;
+	font-size: 1px;
+}
+.user-login-codeInput input+span{
+	position: absolute;
+	height: 35px;
+	bottom: 12px;
+	width: 2px;
+	background-color: #FBE900;
+	left: 10.5%;
+	display: none;
+}
+.user-login-codeCursor.show{
+	display: block;
+}
+.user-login-codeInput input:focus +span{
+	display: block;
+}
+.user-login-codeInput .user-login-codeCursor_1{
+	left: 36.5%;
+}
+.user-login-codeInput .user-login-codeCursor_2{
+	left: 63%;
+}
+.user-login-codeInput .user-login-codeCursor_3{
+	left: 89%;
+}
+.user-login-codeInput .user-login-codeCursor_4{
+	left: 200%;
+}
+.user-login-codeList{
+	margin-left: -18px;
+}
+.user-login-codeList div{
+	width: 25%;
+	float: left;
+	text-align: center;
+	font-size: 42px;
+	color: #333;
+}
+.user-login-codeList span{
+	display: block;
+	margin-left: 18px;
+	border-bottom: 2px solid #eee;
+	line-height: 60px;
+	height: 60px;
+}
+.user-login-agreement{
+	text-align: center;
+	color: #999;
+	font-size: 12px;
+	margin-bottom: 16px;
+	margin-top: 32px;
+}
+.user-login-agreement .link{
+	border-bottom: 1px solid #999;
+	color: #999;
+	display: inline-block;
+}
+.user-login-foot{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+}
+.user-login-foot.focus{
+	position: static;
+	margin-top: 40px;
+}
+.user-login-submit{
+	width: 100% !important;
+	line-height: 44px;
+	font-size: 18px;
+	color: #999 !important;
+	font-weight: 500;
+	background-color: #F4F4F4;
+	border-radius: 22px;
+	margin-top:24px;
+}
+.user-login-submit.active{
+	background-color: #FBE900;
+	color: #2b2b2b !important;
+}
+.user-login-submit.wx{
+	background-color: #08BB08;
+	color: #fff !important;
+	box-shadow: 0 6px 12px 1px rgba(8,187,8,0.19);
+}
+.user-login-submit.wx i,
+.user-login-submit.wx span{
+	display: inline-block;
+	vertical-align: top;
+}
+.user-login-submit.wx i:before{
+	color: #fff;
+}
+.user-login-submit.wx i{
+	font-size: 24px;
+	padding-right: 8px;
+}
+.user-login-error{
+	text-align: center;
+	margin-top: 30px;
+	font-size: 12px;
+	color: #888;
+}
+.userbootomLogo{
+	margin-top:150px;
+	margin-bottom:50px;
+	text-align:center;
+}
+.userbootomLogo .pic{
+	width:40px;
+}

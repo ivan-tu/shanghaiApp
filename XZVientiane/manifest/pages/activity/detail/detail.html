@@ -1,0 +1,445 @@
+<div class="app-wrapper">
+	<div class="app-main">
+		<view class="markWraper"></view>
+		<view class="loadingBox mlr14" wx:if="{{!data}}">
+			<div class="xzicon-loading"></div>
+			<div class="xzui-loadmore__tips">正在加载</div>
+		</view>
+		<view class="activityDetail_container" wx:else>
+			<div class="activityDetail_topPic hasLoading" style="height:{{topHeight}}px;">
+				<image style="width:100%;height:100%;" src="{{data.topPic}}" mode="widthFix" data-pic="{{data.topPic}}"
+					bindtap="viewThisImage" />
+			</div>
+			<div class="activityDetail_title bgfff">{{data.name}}</div>
+			<div class="activityDetail_main">
+				<div class="bgfff activityDetail_footBorder">
+					<div class="plr15 ptb10">
+                    	<div class="clearfix">
+                            <div wx:if="{{data.isfree==2&&data.price}}" class="fl activityDetail_red activityDetail_price">
+                                {{data.price}}<span class="p12" wx:if="{{data.paytype=='diamond'}}"> 钻</span><span class="p12" wx:elif="{{data.paytype=='cash'}}"> 元</span><span class="p12" wx:elif="{{data.paytype=='wallte'}}"> 币</span></div>
+                            <div wx:else class="fl activityDetail_red activityDetail_price">免费</div>
+                            <div class="fl activityDetail_oldPrice" wx:if="{{data.oldPrice}}">原价:{{data.oldPrice}}</div>
+                            <div class="fl activityDetail_zuanshi" wx:if="{{data.diamondpay==1}}"><image class="w100" src="https://statics.tuiya.cc/17364224209748687.png" mode="widthFix" /></div>
+                            <div wx:if="{{data.clubInfo&&data.clubInfo._id}}" class="fr tar activityDetail_master" data-id="{{data.clubInfo._id}}" bindtap="toClubDetail">
+                                <image class="masterPic" src="{{data.clubInfo.pic}}" mode="widthFix" />
+                                <span class="masterName">{{data.clubInfo.name}} 组织</span>
+                            </div>
+                            <div wx:else class="fr tar activityDetail_master" data-id="{{data.userid}}" bindtap="toUserDetail">
+                                <image class="masterPic" src="{{data.masterpic}}" mode="widthFix" />
+                                <span class="masterName">{{data.mastername}} 组织</span>
+                            </div>
+                        </div>
+                    	<div class="tagsBox">
+                        	<span class="tagsList" wx:if="{{data.isfree==2&&data.signRefund==1}}">现场签到后退款</span>
+                            <span class="tagsList" wx:if="{{data.acceptGift==1}}">支持送礼</span>
+                            <span class="tagsList" wx:if="{{data.selfcancel==1}}">不可取消</span>
+                        </div>
+					</div>
+					<div class="hasBorder top" style="padding:7px 15px;">
+                        <p class="activityDetail_text">{{data.activityTime}}</p>
+                        <p class="activityDetail_tips">约{{data.aboutTime}} 以现场为准</p>
+					</div>
+					<div class="clearfix" style="padding:7px 15px;">
+						<div class="fl activityDetail_addressItem">
+							<p class="activityDetail_text">{{data.addressName||data.address}}</p>
+							<p class="activityDetail_tips">{{data.realAddress}}</p>
+						</div>
+						<button wx:if="{{client=='wx'}}" type="button" class="fr tac" bindtap="openLocation"
+							data-address="{{data.realAddress}}" >
+							<p style="color:#6996FF"><i class="xzicon-map"></i></p>
+							<p class="p12" style="color:#6996FF">导航</p>
+						</button>
+						<navigator wx:else class="fr tac"
+							url="https://m.amap.com/search/mapview/keywords={{data.realAddress}}" target="_blank">
+							<p style="color:#6996FF"><i class="xzicon-map"></i></p>
+							<p class="p12" style="color:#6996FF">导航</p>
+						</navigator>
+					</div>
+				</div>
+                <!--选项卡-->
+                <div class="activityDetail_menuBox" wx:if="{{data.joinData&&data.grouppic}}">
+                    <span class="listBtn {{(showCodeType=='qrcode'?' active':'')}}" data-type="qrcode" bindtap="changeCodeType">签到码</span>
+                    <span class="listBtn {{(showCodeType=='group'?' active':'')}}" data-type="group" bindtap="changeCodeType">入群码</span>
+				</div>
+                
+                <div class="activityMyCode_box tac ptb10" wx:if="{{data.joinData&&showCodeType=='qrcode'}}">
+                	<!--收集信息模块-->
+                    <div class="" wx:if="{{data.iscollect==1&&!data.myJoinInfo}}">
+                        <p class="p14 c888 mt5">请提交您的身份资料，完成后可获取签到二维码</p>
+                        <p wx:if="{{data.collectTips}}" class="p14 c333 mt5">{{data.collectTips}}</p>
+                        <div class="tac pt10 pb20"><span class="yellowBtn activity-submitInfoBtn" bindtap="toJoinInfo">前往提交</span></div>
+                    </div>
+                    <!--签到二维码模块-->
+                    <div wx:else>
+                        <div wx:if="{{data.joinData.signstatus==1}}">
+                            <p class="p16 cGreen mt5">您已签到</p>
+                        </div>
+                        <div wx:else>
+                            <p class="p16 c888 mt5">您还未签到</p>
+                            <p class="p14 cRed mt5" wx:if="{{data.isfree==2&&data.signRefund==1}}">成功签到后，会进行退款</p>
+                            <div class="codeImage hasLoading" >
+                                <image style="width:100%;" src="{{qrcodePic}}" mode="widthFix" />
+                            </div>
+                            <p class="codeText mt10">电子票二维码</p>
+                            <p class="codeText">到场后出示二维码签到</p>
+                        </div>
+                    </div>
+                </div>
+                <div wx:if="{{data.joinData&&data.grouppic&&showCodeType=='group'}}" class="tac pb20 hasBorder top pt20">
+                    <p class="c666 p14">点击保存群二维码，微信扫码加入活动群</p>
+                    <div class="tac" style="width:140px;margin:10px auto;">
+                        <image wx:if="{{client=='wx'}}" data-pic="{{data.grouppic}}" bindtap="viewThisImage"
+                                class="activityDetail_codeImage" src="{{data.grouppic}}" mode="widthFix" />
+                        <image wx:else class="activityDetail_codeImage" src="{{data.grouppic}}" mode="widthFix" />
+                    </div>
+                </div>
+				<navigator url="../../activity/signupList/signupList?id={{data._id}}&clubid={{data.clubid||''}}"
+					class="form-list activityDetail_joinUser activityDetail_border" style="padding:7px 15px;"
+					wx:if="{{data.ismy==1||data.showusernum==1}}">
+					<div class="form-list-item {{(data.joinnum>0?' rightIcon':'')}}">
+						<p class="title">限{{data.limitnum}}人报名<span wx:if="{{data.joinnum>0}}">，已报名{{data.joinnum}}人</span><span wx:if="{{data.saleticket}}">，已售{{data.saleticket}}张票</span></p>
+						<div class="mt10" wx:if="{{userList&&userList.length}}">
+							<div class="userBox">
+								<div class="userList clearfix">
+									<div class="list" wx:for="{{userList}}">
+										<div class="picBox hasLoading">
+											<image class="round" src="{{item.headpic}}" mode="widthFix" />
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</navigator>
+                <!--联合举办-->
+                <div class="activityDetail_clubBox activityDetail_border" wx:if="{{data.joinclubList&&data.joinclubList.length}}">
+                	<div class="clearfix">
+                    	<p class="title fl">本活动由下列俱乐部联合举办</p>
+                        <span class="fr yellowBtn" bindtap="addJoinclub" wx:if="{{data.ismy==1}}">修改联办方</span>
+                    </div>
+                	<div class="activityDetail_clubList" wx:for="{{data.joinclubList}}" data-index="{{index}}" bindtap="joinclubMoreSet">
+                    	<div class="clearfix">
+                            <div class="picBox"><image src="{{item.pic}}" class="w100 h100" mode="widthFix" /></div>
+                            <p class="textBox">{{item.name}}</p>
+                        </div>
+     				</div>
+   				</div>
+                <!--选项卡-->
+                <div class="activityDetail_border activityDetail_menuBox">
+                    <span class="listBtn {{(showDetailType=='content'?' active':'')}}" data-type="content" bindtap="changeShowType">详情</span>
+                    <span class="listBtn  {{(showDetailType=='dynamic'?' active':'')}}" data-type="dynamic" bindtap="changeShowType">评价</span>
+                    <span wx:if="{{data.acceptGift==1}}" class="listBtn  {{(showDetailType=='gift'?' active':'')}}" data-type="gift" bindtap="changeShowType">礼物</span>
+				</div>
+                <!--详情部分-->
+				<div class="ptb10 plr15" id="divContent">
+                	<p class="activityDetail_divTitle">详情</p>
+					<div wx:if="{{contentData&&contentData.length}}" class="mt10">
+						<editor-content content="{{contentData}}" id="editorcontent"></editor-content>
+					</div>
+					<div wx:else class="tac c999 mt10">暂无详情</div>
+                    <!--
+					<div wx:if="{{data.pics&&data.pics.length}}">
+						<div class="activityDetail_picList" wx:for="{{data.pics}}">
+							<image src="{{item}}" mode="widthFix" bindtap="viewImage" data-index="{{index}}" />
+						</div>
+					</div>-->
+				</div>
+                <!--评价部分-->
+                <div class="plr15 ptb10" id="divDynamic">
+                	<div class="clearfix">
+                		<p class="activityDetail_divTitle fl">评价<span class="p12">（共{{dynamicCount}}条）</span></p>
+                        <navigator wx:if="{{data.ismy==1||data.joinData}}" url="../../evaluate/publish/publish?activityid={{data._id}}&clubid={{data.clubid}}" class="activityDetail_publishBtn yellowBtn fr">+ 发布评价</navigator>
+                    </div>
+                    <div class="activityDetail_dynamicBox" wx:if="{{dynamicList&&dynamicList.length}}">
+                        <div class="activityDetail_dynamicList" wx:for="{{dynamicList}}">
+                            <div class="userPicBox" data-id="{{item.userid}}" bindtap="toUserDetail"><image class="round w100 h100" src="{{item.headpic}}" mode="widthFix" /></div>
+                            <div class="contentBox">
+                                <p class="userName" data-id="{{item.userid}}" bindtap="toUserDetail"><span class="displayIB vMid">{{item.username}}</span><span wx:if="{{item.levelname&&item.levelname.name}}" class="levelName">{{item.levelname.name}}</span></p>
+                                <div class="starsBox">
+                                	<image class="iconPic" src="{{staticPath}}iconPic/evaluate_{{item.stars}}.png" mode="widthFix" />
+                                	<span class="iconTitle">{{starsText[item.stars]}}</span>
+                                    <span class="iconStars"><image class="w100" src="{{staticPath}}iconPic/{{(item.stars>=1?'evaluate_starActive.png':'evaluate_star.png')}}" mode="widthFix" /></span>
+                                    <span class="iconStars"><image class="w100" src="{{staticPath}}iconPic/{{(item.stars>=2?'evaluate_starActive.png':'evaluate_star.png')}}" mode="widthFix" /></span>
+                                    <span class="iconStars"><image class="w100" src="{{staticPath}}iconPic/{{(item.stars>=3?'evaluate_starActive.png':'evaluate_star.png')}}" mode="widthFix" /></span>
+                                    <span class="iconStars"><image class="w100" src="{{staticPath}}iconPic/{{(item.stars>=4?'evaluate_starActive.png':'evaluate_star.png')}}" mode="widthFix" /></span>
+                                    <span class="iconStars"><image class="w100" src="{{staticPath}}iconPic/{{(item.stars>=5?'evaluate_starActive.png':'evaluate_star.png')}}" mode="widthFix" /></span>
+                                    <span wx:if="{{item.activityData&&item.activityData.name}}" class="activityName" data-id="{{item.activityData._id}}" bindtap="toOtherActivity">{{item.activityData.name}}</span>
+                                </div>
+                                <p class="content">{{item.content}}</p>
+                                <div class="picContainer row1 clearfix mt10" wx:if="{{item.videos&&item.videos.file}}">
+                                    <div class="picBox">
+                                        <div class="picList" style="width:170px;" data-index="{{index}}" catchtap="viewDynamicVideo" wx:if="{{client=='wx'}}">
+                                            <video data-index="{{index}}" bindfullscreenchange="fullScreenChange" id="myVideo_{{index}}" poster="{{item.videos.pic}}" src="{{item.videos.file}}" controls></video>
+                                        </div>
+                                        <div wx:else class="picList" style="width:170px;" data-index="{{index}}" catchtap="viewDynamicVideo">
+                                            <image mode="widthFix" src="{{item.videos.pic}}"/>
+                                            <image mode="widthFix" src="https://static.gedian.shop/16492353454154144.png" class="videoPlay_image" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="picContainer row1 clearfix mt10" wx:elif="{{item.pics&&item.pics.length==1}}">
+                                    <div class="picBox" wx:for="{{item.pics}}" wx:for-item="g" wx:for-index="l">
+                                        <div class="picList hasLoading" style="width:170px;height:187px;" data-index="{{l}}" data-parent="{{index}}" bindtap="viewImage">
+                                            <image src="{{g.src}}" class="pic" mode="widthFix" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="picContainer row2 clearfix mt10" wx:elif="{{item.pics&&item.pics.length==2}}">
+                                    <div class="picBox" wx:for="{{item.pics}}" wx:for-item="g" wx:for-index="l">
+                                        <div class="picList hasLoading" style="width:{{dynamicPicW_a}}px;height:{{dynamicPicH_a}}px;" data-index="{{l}}" data-parent="{{index}}" bindtap="viewImage">
+                                            <image src="{{g.src}}" class="pic" mode="widthFix" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="picContainer row3 clearfix mt10" wx:elif="{{item.pics&&item.pics.length>2}}">
+                                    <div class="picBox" wx:for="{{item.pics}}" wx:for-item="g" wx:for-index="l">
+                                        <div class="picList hasLoading" style="width:{{dynamicPicW_b}}px;height:{{dynamicPicH_b}}px;" data-index="{{l}}" data-parent="{{index}}" bindtap="viewImage">
+                                            <image src="{{g.src}}" class="pic" mode="widthFix" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt10 clearfix" style="overflow:hidden;">
+                                    <div class="fl addtime">{{item.createAt}}</div>
+                                    <div class="fr p12 c888">
+                                        <span wx:if="{{item.ismy==1}}" class="displayIB dynamicListBtn" catchtap="delThisDynamic" data-index="{{index}}">删除</span>
+                                        <!--
+                                        <span wx:if="{{data.ismy==1&&item.showstatus==1}}" class="displayIB dynamicListBtn" catchtap="hideThisDynamic" data-index="{{index}}">隐藏</span>
+                                        <span wx:elif="{{data.ismy==1}}" class="displayIB dynamicListBtn" catchtap="showThisDynamic" data-index="{{index}}">显示</span>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <view class="loadingBox mlr15" hidden="{{!showLoading}}">
+                        <div class="xzicon-loading"></div>
+                    </view>
+                    <view class="ptb15 tac c999" hidden="{{!showNoData}}">报名后可发布评价</view>
+                </div>
+                <!--礼物部分-->
+				<div class="ptb10 plr15" id="divGift" wx:if="{{data.acceptGift==1}}">
+                	<div class="clearfix">
+                		<p class="activityDetail_divTitle fl">礼物<span class="p12">（共{{activityGiftCount}}次）</span></p>
+                        <span class="activityDetail_publishBtn yellowBtn fr" bindtap="toSendGift">我要送礼</span>
+                    </div>
+                    <div class="activityDetail_dynamicBox" wx:if="{{activityGiftList&&activityGiftList.length}}">
+                        <div class="activityDetail_dynamicList" style="margin-top:0;" wx:for="{{activityGiftList}}">
+                            <div class="userPicBox" data-id="{{item.userid}}" bindtap="toUserDetail"><image class="round w100 h100" src="{{item.headpic}}" mode="widthFix" /></div>
+                            <div class="contentBox">
+                                <p class="userName" data-id="{{item.userid}}" bindtap="toUserDetail"><span class="displayIB vMid">{{item.username}}</span><span wx:if="{{item.levelname&&item.levelname.name}}" class="levelName">{{item.levelname.name}}</span></p>
+                                <div class="giftBox clearfix">
+                                	<div class="giftPicBox"><image class="w100" src="{{item.pic}}" mode="widthFix" /></div>
+                                    <p class="giftNum">x{{item.giftnum}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+				</div>
+                <ad-custom wx:if="{{client=='wx'}}" style="margin-top:10px;" unit-id="adunit-cc6a61319423a76a"></ad-custom>
+			</div>
+			<div class="activityDetail_footBtn" wx:if="{{data.ismy==1}}">
+            	<div class="activityDetail_moreBtn">
+                	<div class="displayFlex">
+                    	<div class="list" bindtap="backIndex">
+							<p class="moreBtn-icon"><i class="xzicon-home"></i></p>
+							<p class="c999 p12">首页</p>
+						</div>
+                        <div class="list" >
+							<div wx:if="{{client=='wx'}}" bindtap="callTel" data-tel="{{data.customerTel}}">
+								<p class="moreBtn-icon c999">
+									<i class="xzicon-customerservice"></i>
+								</p>
+								<p class="c999 p12">客服</p>
+							</div>
+							<navigator url="tel:{{data.customerTel}}" wx:else>
+								<p class="moreBtn-icon c999">
+									<i class="xzicon-customerservice"></i>
+								</p>
+								<p class="c999 p12">客服</p>
+							</navigator>
+						</div>
+                        <div class="list" bindtap="toShare">
+							<p class="moreBtn-icon"><i class="xzicon-sharealt"></i></p>
+							<p class="c999 p12">分享</p>
+						</div>
+                    </div>
+                </div>
+                <div class="btnBox">
+                    <div class="displayFlex">
+                    	<!--
+                        <div class="list"><button type="button" bindtap="toShare" class="btn detail_redBtn">分享给好友</button></div>
+                        -->
+                        <!--
+                        <div class="list ml5"><button type="button" bindtap="toFreeInvite" class="btn detail_yellowBtn">邀请免费报名</button></div>-->
+                        <div class="list ml5" wx:if="{{data.status!=2&&data.isfree==2}}"><button type="button" bindtap="toSendTickets" class="btn detail_yellowBtn">赠送门票</button></div>
+                        <!--<div class="list ml5"><button wx:if="{{data.showstatus==0}}" type="button" bindtap="toUp" class="btn detail_greenBtn">上架活动</button><button wx:else type="button" bindtap="toDel" class="btn detail_grayBtn">下架/删除</button></div>-->
+                        <div class="list ml5" wx:if="{{data.status!=2}}"><button type="button" bindtap="toEdit" class="btn detail_blueBtn">编辑活动</button></div>
+                        <div class="list ml5" wx:if="{{data.status==2}}"><button type="button" bindtap="toCopy" class="btn detail_blueBtn">再次发布</button></div>
+                    </div>
+                </div>
+			</div>
+			<div class="activityDetail_footBtn" wx:else>
+            	<div class="activityDetail_moreBtn">
+                	<div class="displayFlex">
+                    	<div class="list" bindtap="backIndex">
+							<p class="moreBtn-icon"><i class="xzicon-home"></i></p>
+							<p class="c999 p12">首页</p>
+						</div>
+                        <div class="list" >
+							<div wx:if="{{client=='wx'}}" bindtap="callTel" data-tel="{{data.customerTel}}">
+								<p class="moreBtn-icon c999">
+									<i class="xzicon-customerservice"></i>
+								</p>
+								<p class="c999 p12">客服</p>
+							</div>
+							<navigator url="tel:{{data.customerTel}}" wx:else>
+								<p class="moreBtn-icon c999">
+									<i class="xzicon-customerservice"></i>
+								</p>
+								<p class="c999 p12">客服</p>
+							</navigator>
+						</div>
+                        <div class="list" bindtap="toShare">
+							<p class="moreBtn-icon"><i class="xzicon-sharealt"></i></p>
+							<p class="c999 p12">分享</p>
+						</div>
+                    </div>
+                </div>
+                <!--
+				<div class="shareBtn" bindtap="toShare">
+					<i class="xzicon-sharealt"></i><span class="text">分享给好友</span>
+				</div>-->
+				<div class="btnBox" wx:if="{{isUserLogin}}">
+					<div class="displayFlex" wx:if="{{showJoinBtn}}">
+						<div class="list" wx:if="{{data.isfree==2}}"><button type="button" bindtap="toMyTicket"
+								class="btn detail_blueBtn">我的门票<span
+									wx:if="{{data.myticketnum>0}}">（{{data.myticketnum}}张）</span></button></div>
+                        <!--已报名的免费活动-->
+						<div class="list" wx:if="{{data.isfree==1&&data.joinData}}"><button type="button" bindtap="cancelThis"
+								class="btn detail_redBtn">取消报名</button></div>
+                        <div class="list" wx:else><button type="button" bindtap="submit"
+								class="btn detail_redBtn">{{data.isfree==2?'购买门票':'立即报名'}}</button></div>
+					</div>
+					<div class="displayFlex" wx:elif="{{showCancelBtn}}">
+                        <div class="list" wx:if="{{data.isfree==2}}">
+                        	<button type="button" bindtap="toMyTicket" class="btn detail_blueBtn">我的门票<span wx:if="{{data.myticketnum>0}}">（{{data.myticketnum}}张）</span></button>
+                        </div>
+                        <div class="list" wx:else>
+                        	<button type="button" bindtap="showMyCode" class="btn detail_blueBtn">我的门票</button>
+                        </div>
+					</div>
+                    <div class="displayFlex" wx:elif="{{showEndBtn}}">
+                    	<div class="list" wx:if="{{data.isfree==2}}">
+                        	<button type="button" bindtap="toEndTicket" class="btn detail_blueBtn">我的门票<span wx:if="{{data.myticketnum>0}}">（{{data.myticketnum}}张）</span></button>
+                        </div>
+                    	<div class="list"><button type="button" class="btn detail_grayBtn">报名已结束</button></div>
+      				</div>
+                    <div class="displayFlex" wx:elif="{{showFullBtn}}">
+                    	<div class="list"><button type="button" class="btn detail_grayBtn">报名人数已满</button></div>
+      				</div>
+                    <div class="displayFlex" wx:elif="{{showNotJoinBtn}}">
+                    	<div class="list"><button type="button" class="btn detail_grayBtn">暂未开启报名</button></div>
+      				</div>
+                    <div class="displayFlex" wx:elif="{{showNoCanBtn}}">
+                    	<div class="list"><button type="button" class="btn detail_grayBtn">暂无权限报名</button></div>
+      				</div>
+				</div>
+				<div class="btnBox" wx:else>
+					<div class="displayFlex">
+						<div class="list"><button type="button" bindtap="toLogin" class="btn detail_redBtn">登录报名</button></div>
+					</div>
+				</div>
+			</div>
+		</view>
+	</div>
+	<newShare id="newShareCon"></newShare>
+    <!--生成邀请链接成功-->
+    <div class="publicScroll_dialog inviteDialog {{(inviteDialog.show?' show':'')}}">
+        <div class="publicScroll_body" style="height:{{inviteDialog.height}}px;">
+            <div class="publicScroll_main">
+                <p class="tac p16 c131">专属链接已生成</p>
+                <p class="p14 c333 plr15 mt10">通过此链接即可免费参加组局，一个链接只能邀请一位好友。</p>
+                <button wx:if="{{client=='wx'}}" open-type="share" class="toSubmitBtn">立即分享</button>
+                <button wx:else bindtap="toShare" class="toSubmitBtn">立即分享</button>
+            </div>
+        </div>
+    </div>
+	<div class="signUp_dialog {{(showDialog?' show':'')}}">
+		<view class="signUp_body ptb5">
+			<div class="form-title clearfix tac">
+				<span class="p16" style="color:#3B3B3B;">立即报名</span>
+				<span class="fr p16" bindtap="toHideDialog"><i class="xzicon-close"></i></span>
+			</div>
+			<div class="hasBorder bottom left" wx:if="{{data.formList&&data.formList.length}}">
+				<div class="form-list" wx:for="{{data.formList}}">
+					<div class="form-list-item">{{item.title}}</div>
+					<div class="form-list-item title long tar"><span data-index="{{index}}" bindtap="changeFormList"
+							class="xzui-switch-new {{(item.active==1?' active':'')}}"></span></div>
+				</div>
+			</div>
+			<p class="plr15 c666 ptb5" wx:if="{{data.otheruser==1}}">请选择参加人数</p>
+			<view wx:if="{{data.otheruser==1}}" class="plr15 ptb10" style="border-bottom:1px solid #e9e9e9;">
+				<div class="selectPeopleBox clearfix">
+					<div class="selectPeopleList" wx:for="{{peopleList}}">
+						<div class="list {{(maxuser==item?' active':'')}}" bindtap="selectThis" data-num="{{item}}">
+							{{item}}</div>
+					</div>
+				</div>
+			</view>
+			<view class="plr15 ptb15">
+				<button class="submitBtn" type="button" bindtap="toConfirmDialog">确定</button>
+			</view>
+		</view>
+	</div>
+    <!--个人资料弹框-->
+    <div class="publicScroll_dialog showEditInfoDialog {{(showEditInfoDialog.show?' show':'')}}">
+        <div class="publicScroll_body" style="height:{{showEditInfoDialog.height}}px;">
+            <div class="publicScroll_main">
+                <p class="tac plr15 c131">请完善个人资料</p>
+                <div class="headPicBox">
+                    <div class="picBox hasLoading" wx:if="{{client=='wx'}}">
+                        <button class="wxUploadBtn" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
+                            <image class="round" src="{{showEditInfoDialog.avatarUrl}}" style="width:100%;height:100%;" mode="widthFix" />
+                        </button> 
+                    </div>
+                    <div class="picBox hasLoading" wx:else><upload value="{{showEditInfoDialog.headpic}}" class="user-upload" width="60" height="60" bindchange="uploadSuccess" id="uploadPic"></upload></div>
+                    <span class="cameraIcon"><i class="xzicon-camera"></i></span>
+                </div>
+                <div class="inputBox" wx:if="{{showEditInfoDialog.show}}"><input type="nickname" class="textInput" bindinput="model" data-model="showEditInfoDialog.username" value="{{showEditInfoDialog.username}}" placeholder="请输入昵称" /></div>
+                <div class="toSubmitBtn" bindtap="toConfirmEditInfoDialog">确定</div>
+            </div>
+        </div>
+    </div>
+    <!--礼物弹框-->
+    <div class="publicScroll_dialog {{(giftDialog.show?' show':'')}}">
+        <div class="publicScroll_body" style="height:{{giftDialog.height}}px;">
+            <div class="publicScroll_head clearfix tac bgfff">
+                <span class="p16" style="color:#3B3B3B;">赠送礼物</span>
+                <span class="fr p16" bindtap="toHideGiftDialog"><i class="xzicon-close"></i></span>
+            </div>
+            <div class="publicScroll_main pd15 bgfff">
+                <div class="publicScroll_giftBox clearfix">
+                    <div class="publicScroll_giftList" wx:for="{{giftDialog.data}}">
+                        <div class="list {{(item.giftid==giftDialog.giftid?' active':'')}}" data-id="{{item.giftid}}" data-index="{{index}}" bindtap="selectThisGift">
+                            <div class="topContainer">
+                                <div class="picBox" style="width:{{giftDialog.picWidth}}px;height:{{giftDialog.picWidth}}px;"><image src="{{item.pic}}" mode="widthFix" class="pic" /></div>
+                                <div class="priceBox"><span class="priceText">{{item.diamond}}钻石</span></div>
+                            </div>
+                            <div class="quantityBox mt5" wx:if="{{item.selectCount>0}}">
+                                <span class="reduceBtn" catchtap="changeGiftNum" data-type="reduce" data-index="{{index}}"><i class="xzicon-minus"></i></span>
+                                <span class="numBtn">{{item.selectCount}}</span>
+                                <span class="addBtn" catchtap="changeGiftNum" data-type="add"  data-index="{{index}}"><i class="xzicon-plus"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="publicScroll_footBtn">
+                <div class="publicScroll_giftFoot">
+                    <div class="priceBox"><image class="priceIcon" src="https://statics.tuiya.cc/17364224209748687.png" mode="widthFix" /><span class="priceText">{{giftDialog.total}}</span><span class="displayIB vMid p12 ml5 c888">(余额：{{giftDialog.balance}})</span></div>
+                    <span class="toSubmitBtn" bindtap="toSubmitGift">赠送</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<videoPlay id="videoPlay"></videoPlay>

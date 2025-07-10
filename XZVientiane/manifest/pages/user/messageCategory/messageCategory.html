@@ -1,0 +1,24 @@
+<div class="app-wrapper">
+    <div class="app-main" wx:if="{{isUserLogin}}">
+    	<div class="markWraper"></div>
+        <div class="pb20">
+            <div class="userMsgList-box" wx:if="{{data&&data.length}}">
+            	<div bindtap="toDetail" data-index="{{index}}" class="userMsgList-list clearfix" wx:for="{{data}}">
+                    <div class="picBox hasLoading"><image wx:if="{{item.headpic}}" src="{{item.headpic}}" mode="widthFix" class="round" /><image wx:else src="https://static.gedian.shop/15866666279029446.png" mode="widthFix" class="round" /></div>
+                    <div class="textBox">
+                        <p class="c131 textOver" wx:if="{{item.type=='system'||!item.username}}">通知</p>
+                        <p class="c131 textOver" wx:else>{{item.username}}</p>
+                        <div class="mt5 c999 p12 textOver">{{item.content}}</div>
+                    </div>
+                    <span class="time">{{item.createAt}}</span>
+                </div>
+            </div>
+            <view class="loadingBox mlr15" hidden="{{!showLoading}}">
+                <div class="xzicon-loading"></div>
+                <div class="xzui-loadmore__tips">正在加载</div>
+            </view>
+            <view class="noData mlr15" hidden="{{!showNoData}}">暂无数据</view>
+        </div>
+    </div>
+    <nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

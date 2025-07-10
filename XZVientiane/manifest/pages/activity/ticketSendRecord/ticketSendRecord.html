@@ -1,0 +1,64 @@
+<div class="app-wrapper">
+	<div class="app-main pb20 positionBottom" wx:if="{{isUserLogin}}">
+		<view class="markWraper" style="background:rgba(254,254,254)"></view>
+        <div class="searchCategory-box clearfix bgfff">
+			<div class="searchCategory">
+				<div class="listBox">
+					<span class="list {{(form.status==''?'active':'')}}" data-type="status" data-value="" bindtap="screen">全部</span>
+					<span class="list {{(form.status=='1'?'active':'')}}" data-type="status" data-value="1"
+						bindtap="screen">已使用</span>
+                    <span class="list {{(form.status=='0'?'active':'')}}" data-type="status" data-value="0"
+						bindtap="screen">未使用</span>
+                    <span class="list {{(form.status=='2'?'active':'')}}" data-type="status" data-value="2"
+						bindtap="screen">已退票</span>
+				</div>
+			</div>
+		</div>
+        <div class="form-title clearfix">
+        	<p class="fl">共<span class="cRed">{{count}}</span>张票</p>
+            <span class="fr redBtn" bindtap="cancelAll">撤回所有未使用</span>
+        </div>
+		<div class="ticketSendRecord_box" wx:if="{{data&&data.length}}">
+			<view class="listBox" wx:for="{{data}}">
+            	<div>
+                    <div class="activityInfo clearfix">
+                        <p class="title">{{item.ticketinfo.name}}</p>
+                        <p class="tips mt5">{{item.ticketinfo.content}}</p>
+                        <p class="price">¥{{item.ticketinfo.price}}</p>
+                    </div>
+                    <div class="ticketSendRecord_line"></div>
+                    <div class="clearfix pt15 plr15" wx:if="{{item.userData}}">
+                        <div class="fl">
+                            <span class="displayIB mr5 vMid">领取人：</span>
+                            <image style="width:28px;height:28px;" src="{{item.userData.headpic}}" mode="widthFix" class="round" />
+                            <span class="textOver ml5 vMid"
+                                style="max-width:120px;display:inline-block;">{{item.userData.username}}</span>
+                        </div>
+                    </div>
+                </div>
+				<div class="ticketSendRecord_footBtn clearfix">
+					<div class="fl">
+                    	<div wx:if="{{item.status==2}}">
+							<span class="spanStatus c999">已退票</span>
+						</div>
+						<div wx:elif="{{item.status==0}}">
+							<span class="spanStatus cRed">未使用</span>
+						</div>
+						<div wx:elif="{{item.status==1}}">
+							<span class="spanStatus cRed">已使用</span>
+						</div>
+					</div>
+					<div class="fr tar" wx:if="{{item.status==0}}">
+						<span class="btn detail_grayBtn" data-index="{{index}}" bindtap="toCancel">撤回</span>
+					</div>
+				</div>
+			</view>
+		</div>
+		<view class="loadingBox mlr14" hidden="{{!showLoading}}">
+			<div class="xzicon-loading"></div>
+			<div class="xzui-loadmore__tips">正在加载</div>
+		</view>
+		<view class="noData mlr14" hidden="{{!showNoData}}">暂无数据</view>
+	</div>
+	<nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

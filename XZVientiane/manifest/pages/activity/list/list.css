@@ -1,0 +1,61 @@
+.mt2{
+	margin-top:2px;
+}
+.activityBox .activityList{
+	padding:10px 15px;
+	display:block;
+}
+.activityBox .activityList + .activityList{
+	border-top:1px solid #eee;
+}
+.activityBox .activityList .picBox{
+	float:left;
+	width:120px;
+	height:96px;
+	border-radius:4px;
+	overflow:hidden;
+}
+.activityBox .activityList .picBox .pic{
+	border-radius:4px;
+}
+.activityBox .activityList .textBox{
+	margin-left:130px;
+}
+.activityBox .activityList .title{
+	font-size:16px;
+	color:#131313;
+}
+.activityBox .activityList .address{
+	font-size:12px;
+	color:#666;
+}
+.activityBox .activityList .userInfo .userPic{
+	width:20px;
+	height:20px;
+	border-radius:50%;
+}
+.activityBox .activityList .userInfo .userName{
+	display:inline-block;
+	margin-left:5px;
+	font-size:12px;
+	color:#313131;
+}
+.activityBox .activityList .textBox .price{
+	color:#D9001B;
+	font-size:15px;
+	font-weight:600;
+}
+.activityBox .activityList .signInfo{
+	font-size:12px;
+	color:#666;
+	line-height:21px;
+}
+.activityList_btnList{
+	padding:6px 10px !important;
+}
+.activityList_btnList.grayBtn:hover{
+	color:#333 !important;
+}
+.activityList_btnList +.activityList_btnList{
+	margin-left:5px;
+}

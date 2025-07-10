@@ -1,0 +1,65 @@
+/*动态*/
+.dynamicList_dynamicList{
+	padding-top:15px;
+}
+.dynamicList_dynamicList + .dynamicList_dynamicList{
+	margin-top:15px;
+	border-top:1px solid #F9F9F9;
+}
+.dynamicList_dynamicList .content{
+	color:#131313;
+	line-height:18px;
+	font-size:14px;
+}
+.dynamicList_dynamicList .addtime{
+	color:#131313;
+	font-size:12px;
+	margin-top:5px;
+}
+.dynamicList_dynamicList .picContainer{
+	margin-left:-5px;
+}
+.dynamicList_dynamicList .picContainer .picBox{
+	float:left;
+	display:block;
+	width:33.333333%;
+}
+.dynamicList_dynamicList .picContainer.row1 .picBox{
+	width:100%;
+}
+.dynamicList_dynamicList .picContainer.row2 .picBox{
+	width:50%;
+}
+.dynamicList_dynamicList .picContainer .picBox .picList{
+	margin:5px 0 0 5px;
+	position:relative;
+}
+.dynamicList_dynamicList .picContainer .videoPlay_image{
+	width: 30px;
+	height: 30px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -15px;
+	margin-left: -15px;
+}
+.dynamicList_dynamicList .userPicBox{
+	width:35px;
+	height:35px;
+	border-radius:50%;
+	overflow:hidden;
+	float:left;
+}
+.dynamicList_dynamicList .contentBox{
+	margin-left:45px;
+}
+.dynamicList_dynamicList .userName{
+	color:#336699;
+	font-size:16px;
+}
+.dynamicList_dynamicList .content{
+	margin-top:10px;
+}
+.dynamicList_dynamicListBtn +.dynamicList_dynamicListBtn{
+	margin-left:10px;
+}

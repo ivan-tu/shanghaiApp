@@ -1,0 +1,31 @@
+<div class="app-wrapper">
+    <div class="app-main positionBottom">
+    	<p class="form-title">共 {{count}} 条</p>
+        <div class="pb20" wx:if="{{data&&data.length}}">
+            <div class="userMsgDetail-box">
+                <div class="userMsgDetail-list clearfix" wx:for="{{data}}">
+                    <div class="picBox hasLoading"><image src="{{item.headpic}}" mode="widthFix" class="round" /></div>
+                    <div class="textBox">
+                        <p class="c131 p12 textOver">{{item.username}}<span class="time">{{item.createAt}}</span></p>
+                        <div class="content mt5">{{item.content}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <view class="loadingBox mlr15" hidden="{{!showLoading}}">
+			<div class="xzicon-loading"></div>
+			<div class="xzui-loadmore__tips">正在加载</div>
+		</view>
+		<view class="noData mlr15" hidden="{{!showNoData}}">暂无数据</view>
+        <div class="xzui-btn-app positionBottom">
+        	<div class="displayFlex">
+            	<div class="list">
+                	<button type="button" bindtap="toDetail" class="xzui-btn xzui-btn_b primary" size="large">TA的主页</button>
+                </div>
+                <div class="list ml10">
+                	<button type="button" bindtap="submit" class="xzui-btn xzui-btn_b primary" size="large">回私信</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

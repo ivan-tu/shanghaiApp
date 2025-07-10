@@ -1,0 +1,14 @@
+.operCenter-header{
+	padding:30px 0px;
+}
+.operCenter-item .title{
+	width:72px;
+	float:left;
+}
+.operCenter-item .content{
+	margin-left:72px;
+}
+.operCenter-title{
+	background:rgb(247,247,247);
+	padding:8px 15px 5px 15px;
+}

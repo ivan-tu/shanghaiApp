@@ -1,0 +1,57 @@
+.selectCategoryBox{
+	padding:0 20px 20px 20px;
+}
+.selectCategoryList{
+	position:relative;
+}
+.selectCategoryList{
+	border-top:1px solid #efefef;
+}
+.selectCategoryList.noBorder +.selectCategoryList{
+	border-top:0 none;
+}
+.selectCategoryList .selectCategoryList_son{
+	max-height:0px;
+	overflow:hidden;
+	transition:max-height 1s linear;
+}
+.selectCategoryList.active .selectCategoryList_son{
+	border-top:1px solid #efefef;
+	max-height:none;
+}
+.selectCategoryBox .rightIcon{
+	position: absolute;
+	z-index: 2;
+	right: 0;
+	top: 10px;
+	line-height: 24px;
+	transition: all 0.2s;
+	display: inline-block;
+	width: 22px;
+	text-align: center;
+}
+.selectCategoryBox .rightIcon.active{
+	transform:rotate(180deg);
+}
+.selectCategoryBox .text{
+	font-size: 15px;
+	color: #555555;
+	line-height:20px;
+	padding:10px 0;
+	display: block;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	margin-right:20px;
+}
+.selectCategoryBox .hasSon .text{
+	padding:6px 0;
+}
+.selectCategoryList_son .text{
+	margin-left:10px;
+	margin-right:0px;
+}
+.selectCategoryList .text.active{
+	font-weight:bold;
+	color:#f90022;
+}

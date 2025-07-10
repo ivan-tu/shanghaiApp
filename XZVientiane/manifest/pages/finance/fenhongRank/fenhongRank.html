@@ -1,0 +1,25 @@
+<div class="app-wrapper">
+    <div wx:if="{{isUserLogin}}" class="app-main">
+    	<div class="fenhongRank-head c666">
+            <span class="indexNum">排名</span>
+            <div class="infoBox">用户信息</div>
+            <span class="totalNum">分红</span>
+        </div>
+         <div class="bgfff fenhongRank-box pb15" wx:if="{{data&&data.length}}">
+         	
+            <div class="fenhongRank-list clearfix" wx:for="{{data}}" data-id="{{item.userid}}" bindtap="toUserDetail">
+            	<span class="indexNum index_{{index}}">{{index+1}}</span>
+                <div class="picBox hasLoading"><image src="{{item.userData.headpic}}" mode="widthFix" class="round" /></div>
+                <div class="textBox">{{item.userData.username}}</div>
+                <span class="totalNum">{{item.total}}</span>
+            </div>
+            <p class="ptb10 tac p12 c888">此排名只展示前十位</p>
+        </div>
+        <view class="loadingBox mlr14" hidden="{{!showLoading}}">
+            <div class="xzicon-loading"></div>
+            <div class="xzui-loadmore__tips">正在加载</div>
+        </view>
+        <view class="noData mlr14" hidden="{{!showNoData}}">暂无排名</view>
+    </div>
+    <nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

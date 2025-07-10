@@ -1,0 +1,35 @@
+<div class="app-wrapper">
+	<div class="app-main positionBottom" wx:if="{{isUserLogin}}">
+    	<view class="loadingBox mlr14" wx:if="{{showLoading}}">
+			<div class="xzicon-loading"></div>
+			<div class="xzui-loadmore__tips">正在加载</div>
+		</view>
+		<view class="noData mlr14" wx:elif="{{showNoData}}">暂无数据</view>
+        <div wx:else>
+        	<div class="typeManage-box">
+            	<div class="typeManage-list" wx:for="{{data}}">
+                	<div class="clearfix pd10">
+                        <div class="picBox">
+                            <image wx:if="{{item.pic}}" src="{{item.pic}}" class="w100 h100" mode="widthFix" />
+                        </div>
+                        <div class="textBox">
+                            <p class="p14 textOver">{{item.name}}</p>
+                            <p class="p12 c888 mt5">{{item.content}}</p>
+                        </div>
+                    </div>
+                    <div class="displayFlex tac hasBorder top mt5" wx:if="{{options.select==1}}">
+                    	<div class="list ptb15" data-index="{{index}}" bindtap="selectThis">选择</div>
+                    </div>
+                    <div class="displayFlex tac hasBorder top mt5" wx:else>
+                    	<div class="list ptb10" data-index="{{index}}" bindtap="toDel">删除</div>
+                        <div class="list ptb10 ml10" data-index="{{index}}" bindtap="toEdit">编辑</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <view class="xzui-btn-app positionBottom">
+        	<button type="button" class="xzui-btn xzui-btn_b primary" size="large" bindtap="toAdd">添加系列</button>
+		</view>
+	</div>
+	<nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

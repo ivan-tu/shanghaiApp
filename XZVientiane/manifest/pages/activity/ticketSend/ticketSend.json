@@ -1,0 +1,7 @@
+{
+  "usingComponents":
+  {
+	  "newShare": "/components/common/newShare/newShare"
+  },
+  "navigationBarTitleText": "赠送门票"
+}

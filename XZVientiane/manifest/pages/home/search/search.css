@@ -1,0 +1,155 @@
+.home-search-head{
+	position: fixed;
+	top: 0;
+	left: 0;
+	background: #fff;
+	width: 100%;
+	padding:10px 20px;
+	z-index: 2;
+}
+.home-search-search{
+	height: 34px;
+	line-height: 34px;
+	background-color: #EEEEF0;
+	border-radius: 17px;
+	color: #7A797B;
+	font-size: 0;
+}
+.home-search-search .searchForm{
+	position: relative;
+}
+.home-search-search .searchForm .icon{
+	position: absolute;
+	left: 0;
+	top: 0;
+	padding:0 6px 0 14px;
+	line-height: 34px;
+	font-size: 14px;
+}
+.home-search-search .searchInput{
+	margin-left: 34px;
+}
+.home-search-search .searchInput .xzui-input{
+	height: 34px;
+	font-size: 14px;
+}
+.home-search-search .searchClear{
+    position: absolute;
+    right: 0;
+    top: 0;
+    line-height: 34px;
+    width: 34px;
+    text-align: center;
+    color: #ccc;
+    font-size:14px;
+}
+.home-search-main{
+	padding-top: 46px;
+	background: #fff;
+}
+.getMoreBtn{
+	line-height: 44px;
+	text-align: center;
+	color: #757575;
+	display:block;
+}
+
+.home-search-userBox .userList{
+	padding:10px 15px;
+	overflow:hidden;
+	display:block;
+}
+.home-search-userBox .userList .picBox{
+	width:45px;
+	height:45px;
+	border-radius:50%;
+	float:left;
+}
+.home-search-userBox .userList .textBox{
+	margin-left:55px;
+}
+.home-search-userBox .userList .sexIcon{
+	width:15px;
+}
+
+.mt2{
+	margin-top:2px;
+}
+.home-search-activityBox .activityList{
+	padding:10px 15px;
+	display:block;
+}
+.home-search-activityBox .activityList + .activityList{
+	border-top:1px solid #eee;
+}
+.home-search-activityBox .activityList .picBox{
+	float:left;
+	width:120px;
+	height:96px;
+	border-radius:4px;
+	overflow:hidden;
+}
+.home-search-activityBox .activityList .picBox .pic{
+	border-radius:4px;
+}
+.home-search-activityBox .activityList .textBox{
+	margin-left:130px;
+}
+.home-search-activityBox .activityList .title{
+	font-size:16px;
+	color:#131313;
+}
+.home-search-activityBox .activityList .address{
+	font-size:12px;
+	color:#666;
+}
+.home-search-activityBox .activityList .userInfo .userPic{
+	width:20px;
+	height:20px;
+	border-radius:50%;
+}
+.home-search-activityBox .activityList .userInfo .userName{
+	display:inline-block;
+	margin-left:5px;
+	font-size:12px;
+	color:#313131;
+}
+.home-search-activityBox .activityList .textBox .price{
+	color:#D9001B;
+	font-size:15px;
+}
+.home-search-activityBox .activityList .signInfo{
+	font-size:12px;
+	color:#666;
+}
+
+.home-search-clubBox{
+	margin-left:-10px;
+	padding:0 15px;
+}
+.home-search-clubBox .listBox{
+	float:left;
+	width:50%;
+	display:block;
+}
+.home-search-clubBox .listBox .list{
+	margin:10px 0 0 10px;
+	display:block;
+}
+.home-search-clubBox .textBox{
+	padding:5px;
+}
+.home-search-clubBox .picBox{
+	border-radius:2px;
+	overflow:hidden;
+}
+.home-search-clubBox .w100{
+	border-radius:2px;
+}
+.home-search-clubBox .textBox .username{
+	display: inline-block;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width:120px;
+}

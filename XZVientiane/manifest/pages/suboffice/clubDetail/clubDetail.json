@@ -1,0 +1,8 @@
+{
+	"usingComponents":{
+		"nologin": "/components/common/nologin/nologin",
+		"newShare": "/components/common/newShare/newShare",
+		"videoPlay":"/components/common/videoPlay/videoPlay"
+	},
+    "navigationBarTitleText": "俱乐部"
+}

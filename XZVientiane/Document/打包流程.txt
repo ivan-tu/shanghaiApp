@@ -1,0 +1,27 @@
+响见打包流程：
+
+1、备份响站
+2、搜索“//TODO”（修改应用更新中的appleid，以及其他注意事项）
+3、查看Devices（弄清是要打包iphone/ipad/universal,选择universal时要勾选requires full screen）
+4、在备份的响站中替换packagePython.py中的相关信息
+    siteId（通过二维码获得）（clientsetting.plist 中要修改websiteid）
+    deviceType
+    bundleId(类似com.xiangzhan.二级域名)
+不是响见  就  替换info.plist、publicSetting.plist文件
+5、go2shell运行python3 packagePython.py
+6、检查icon和启动图尺寸
+7、搜索com.tuweia.xiangjian  用现有bundleid替换掉
+8、修改info.plist里面的搜索关键词（响见和响站的检查一下，其他可以删掉），info.plist中分享的scheme设置
+    在XiangZhanClient->ClientTabBarController.m->getSharePushInfo方法中获取分享推送账号，或者去响站后台的设置中找
+9、在info.plist修改Bundle versions string, short和Bundle version
+10、内外网切换：
+    1）、XiangZhanBase->xiangZhanBaseHead.h中修改kIsDebug参数值，0代表正式环境，1代表测试环境
+    2）、XiangZhanClient->ClientSetting.plist中修改kIsDebug参数值，0代表正式环境，1代表测试环境
+11、修改证书提交AppStore
+
+响见打包：
+1、publicsetting.plist中修改appPackage的值：appPackage值为xiangjian代表是响见，appPackage值为其他值代表客户端应用
+2、clientsetting中修改WebSiteId的值
+
+
+

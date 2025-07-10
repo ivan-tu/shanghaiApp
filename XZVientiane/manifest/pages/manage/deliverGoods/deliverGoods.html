@@ -1,0 +1,42 @@
+<div class="app-wrapper">
+	<div wx:if="{{isUserLogin}}" class="app-main">
+		<div class="p14 c666 clearfix bgfff p15" wx:if="{{form.addressObj&&form.addressObj.name}}">
+			<div class="fl size18 mt10">
+				<i class="xzicon-map"></i>
+			</div>
+			<div class="fl xzui-media-box__bd xzui-media-box__bd_in-appmsg pl10">
+				<div class="xzui-media-box__title">{{form.addressObj.name}} {{form.addressObj.mobile}}</div>
+				<div class="xzui-media-box__desc">{{form.addressObj.address}}</div>
+			</div>
+		</div>
+		<!-- 物流单号 -->
+		<div class="xzui-cells mt10">
+			<div class="xzui-cell xzui-cell_vcode">
+				<div class="xzui-cell__hd">
+					<label class="xzui-label">物流单号</label>
+				</div>
+				<div class="xzui-cell__bd c999" style="font-size: 12px;">
+					<input class="xzui-input" value="{{form.value}}" bindinput="changeOrder" placeholder="请输入物流单号，没有可为空" />
+				</div>
+				<div class="xzui-cell__ft pr15">
+					<button type="button" class="xzui-btn mt5 primary" size="mini" bindtap="matching">匹配</button>
+				</div>
+			</div>
+		</div>
+		<!--快递公司-->
+		<view class="xzui-cell xzui-cell_access bgfff ptb10 plr15" bindtap="setCompany">
+			<div class="xzui-cell__hd">快递公司</div>
+			<div class="xzui-cell__hd" style="width: 100%;">
+				<p class="p12 c999">{{form.deliveryCompany||'请选择快递公司'}}</p>
+            </div>
+			<div class="xzui-cell__ft xzui-cell__ft_in-access"><i class="xzicon-right xzui-cell__ft_arrow"></i></div>
+		</view>
+		<div class="xzui-cells__title">输入物流单号后点击匹配系统自动匹配快递公司，如未匹配到请手动选择</div>
+		<div class="xzui-btn-app">
+			<button type="button" wx:if="{{form.isedit}}" bindtap="submit" class="xzui-btn xzui-btn_b primary"
+				size="large">确认修改</button>
+			<button type="button" wx:else bindtap="submit" class="xzui-btn xzui-btn_b primary" size="large">发货</button>
+		</div>
+	</div>
+	<nologin bindloginsuccess="onShow" wx:else></nologin>
+</div>

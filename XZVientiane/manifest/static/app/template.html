@@ -1,0 +1,16 @@
+<script>
+	var pageData={
+					url:'{{url}}',
+                    template:{{template}}
+					},
+					usingComponents={{components}};
+			
+			if(typeof usingComponents=='object'){
+				$.each(usingComponents,function(name,value){
+					xzSystem.useComponents[name]=value;
+				});
+			};
+</script>
+{{jscript}}
+<link href="pages/{{systemId}}/{{moduleId}}/{{moduleId}}.css" rel="stylesheet" />
+<script src="pages/{{systemId}}/{{moduleId}}/{{moduleId}}.js"></script>

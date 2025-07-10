@@ -1,0 +1,149 @@
+.orderList-searchBox{
+	position:relative;
+	padding-left:120px;
+}
+.orderList-searchType{
+	position:absolute;
+	z-index:2;
+	left:0;
+	padding:6px 0px 6px 8px;
+	color:#666;
+	font-size:12px;
+	width:120px;
+	background-color: #EFEFF4;
+}
+.orderList-searchType:after{
+	content:'\e61d';
+	font-family:'xzicon';
+	color:#666;
+	position:absolute;
+	z-index:2;
+	left: 105px;
+	top: 14px;
+	line-height: 12px;
+	font-size: 12px;
+}
+.orderList-searchType .typeName{
+	background:#fff;
+	display:block;
+	padding:0 5px;
+	height:28px;
+	line-height:28px;
+}
+.orderList_btn{
+	margin:0;
+	display:inline-block;
+	border-radius:4px;
+	text-align:center;
+	height:30px;
+	line-height:30px;
+	font-size:12px;
+	width:65px;
+}
+.orderList_btn.b1{
+	border:1px solid #999;
+	background:#fff;
+	color:#666;
+}
+.orderList_btn.b1:hover{
+	color:#666;
+}
+.orderList_btn.b2{
+	border:1px solid #D2161F;
+	background:#D2161F;
+	color:#fff;
+}
+.orderList_btn.b2:hover{
+	color:#fff;
+}
+.orderList_btn + .orderList_btn{
+	margin-left:10px;
+}
+.orderListGoods{
+	position:relative;
+	padding-right:40px;
+	margin-left:-5px;
+}
+.orderListGoods .picList{
+	width:25%;
+	float:left;
+}
+.orderListGoods .picList .list{
+	margin-left:5px;
+}
+.orderListGoods .quantityText{
+	width:15px;
+	font-size:12px;
+	color:#666;
+	position:absolute;
+	right:10px;
+	top:50%;
+	line-height:20px;
+	height:60px;
+	margin-top:-30px;
+	text-align:center;
+	padding-left:10px;
+	border-left:1px solid #eee;
+}
+.manage_orderList_list{
+	position:relative;
+	transition:all 0.1s;
+}
+.manage_orderList_list.active{
+	padding-left:30px;
+}
+.manage_orderList_checkbox{
+	position:absolute;
+	left:-50px;
+	top:50%;
+	margin-top:-14px;
+	transition:all 0.1s;
+}
+.manage_orderList_list.active .manage_orderList_checkbox{
+	left:10px;
+}
+.manage_orderList_footBtn{
+	background:#fff;
+	height:40px;
+	line-height:40px;
+	position:fixed;
+	bottom:0;
+	left:0;
+	right:0;
+	z-index:8;
+	text-align:right;
+}
+.manage_orderList_footBtn .list{
+	padding:0 15px;
+	color:#666;
+}
+.manage_orderList_main{
+	padding-bottom:70px;
+}
+.xzui-btn_b.gray{
+	color: #999;
+	font-weight: 500;
+	background-color: #f5f5f5;
+	display: block;
+	margin: 0;
+}
+.xzui-btn_b.red{
+	color: #fff;
+	font-weight: 500;
+	background-color:rgba(248,68,56,0.6);
+	display: block;
+	margin: 0;
+}
+.xzui-btn-app.displayFlex .list + .list{
+	margin-left:10px;
+}
+.orderLargeBtn{
+	padding:0 !important;
+	font-size:14px !important;
+}
+.orderList_userName{
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width:100px;
+}

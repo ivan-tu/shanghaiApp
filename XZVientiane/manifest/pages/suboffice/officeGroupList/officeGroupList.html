@@ -1,0 +1,25 @@
+<div class="app-wrapper">
+    <div class="app-main">
+    	<search-bar label="搜索俱乐部名称" placeholder="搜索俱乐部名称" keyword="{{form.keyword}}" bindchange="changeKeyword" bindclose="closeKeyword"></search-bar>
+        <div class="pb20" wx:if="{{data&&data.length}}">
+            <div class="officeChange_box bgfff">
+                <div class="officeChange_list clearfix" wx:for="{{data}}">
+                	<div class="clearfix">
+                        <div class="picBox hasLoading"><image class="w100 h100 pic" src="{{item.pic}}" mode="widthFix" /></div>
+                        <div class="textBox">
+                            <p class="title">{{item.name}}</p>
+                            <div class="mt2 userInfo">主席：{{item.username}}</div>
+                            <p class="p12 c666 mt2">{{item.areaText}}</p>
+                            <p class="p12 c666 mt2 texOver">{{item.summary}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <view class="loadingBox mlr15" hidden="{{!showLoading}}">
+			<div class="xzicon-loading"></div>
+			<div class="xzui-loadmore__tips">正在加载</div>
+		</view>
+		<view class="noData mlr15" hidden="{{!showNoData}}">暂无数据</view>
+    </div>
+</div>

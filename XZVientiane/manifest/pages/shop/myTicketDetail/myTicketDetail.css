@@ -1,0 +1,23 @@
+.getGoods_address{
+	text-align:left;
+}
+.getGoods_address .title{
+	margin-top:35px;
+}
+.getGoods_address .detail{
+	margin-top:10px;
+	font-size: 14px;
+	color: #9A9A9A;
+	line-height: 30px;
+}
+.getGoods_address .submitBtn{
+	display:block;
+	background:#f90022;
+	color:#fff;
+	border-radius:30px;
+	font-size:16px;
+	padding:10px 0;
+	margin:10px 30px;
+	cursor:pointer;
+	text-align:center;
+}

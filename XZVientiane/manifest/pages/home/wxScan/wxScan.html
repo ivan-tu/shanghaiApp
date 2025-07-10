@@ -1,0 +1,33 @@
+<div class="app-wrapper">
+    <div class="app-main">
+    	<div class="bgfff pd20">
+            <div class="member_official mt20 clearfix">
+              <view class="member_official_box">
+                <image src="{{qrcodeSrc}}" mode="widthFix" style="width:130px;" wx:if="{{client=='web'}}" />
+                <image src="{{qrcodeSrc}}" mode="widthFix" style="width:130px;" bindtap="saveImage" wx:else />
+              </view>
+              <view class="member_official_btn" wx:if="{{client=='web'}}">
+                <div class="member_official_btnList">
+                  <div class="c333">第一步</div>
+                  <div class="c666 lineText">长按二维码保存图片到相册</div>
+                </div>
+                <div class="member_official_btnList mt5">
+                  <div class="c333">第二步</div>
+                  <div class="c666 lineText">点击打开扫一扫，从相册选择二维码</div>
+                </div>
+              </view>
+               <view class="member_official_btn" wx:else>
+                <div class="member_official_btnList">
+                  <div class="c333">第一步</div>
+                  <div class="c666 lineText">点击二维码保存图片到相册</div>
+                </div>
+                <div class="member_official_btnList mt5">
+                  <div class="c333">第二步</div>
+                  <div class="c666 lineText">打开微信扫一扫，从相册选择二维码</div>
+                </div>
+              </view>
+            </div>
+            <button type="button" bindtap="toSaosao"  class="xzui-btn xzui-btn_b primary mt20 round20" size="large"  wx:if="{{client!='app'}}">扫一扫</button>
+        </div>
+    </div>
+</div>
