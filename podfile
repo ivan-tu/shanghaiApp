@@ -1,6 +1,7 @@
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '15.0'
 inhibit_all_warnings!
+
 target :XZVientiane do
 pod 'Masonry'
 pod 'MJRefresh'
@@ -27,9 +28,18 @@ pod 'UMShare/Social/DingDing'       # 钉钉分享
 pod 'UMPush'
 pod 'AlipaySDK-iOS'
 
-# 高德SDK套件配置 - 强制使用标准版本（更稳定）
-pod 'AMap3DMap'
-pod 'AMapFoundation'     # 基础SDK
-pod 'AMapSearch'         # 搜索功能SDK
-pod 'AMapLocation'       # 定位功能SDK
+# 高德SDK套件配置 - 使用特定版本解决Xcode 16兼容性问题
+pod 'AMap3DMap', '~> 10.0.600'     # 使用10.0.600版本解决Xcode 16兼容性
+pod 'AMapFoundation'                # 基础SDK
+pod 'AMapSearch'                    # 搜索功能SDK
+pod 'AMapLocation'                  # 定位功能SDK
+end
+
+# 解决Xcode 16兼容性问题的配置
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '14.0'
+    end
+  end
 end

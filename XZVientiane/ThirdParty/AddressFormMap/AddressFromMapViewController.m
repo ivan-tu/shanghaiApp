@@ -557,13 +557,16 @@
         }
         [Defaults setObject:@(coordinate.latitude) forKey:@"currentLat"];
         [Defaults setObject:@(coordinate.longitude) forKey:@"currentLng"];
-        [Defaults setObject:regeocode.POIName.length ? regeocode.POIName :@"请选择" forKey:@"currentCity"];
-        [Defaults setObject:regeocode.POIName.length ? regeocode.POIName :@"请选择" forKey:@"currentAddress"];
+        // 安全处理regeocode为nil的情况
+        NSString *cityName = (regeocode && regeocode.POIName.length > 0) ? regeocode.POIName : @"请选择";
+        NSString *addressName = (regeocode && regeocode.formattedAddress.length > 0) ? regeocode.formattedAddress : @"请选择";
+        [Defaults setObject:cityName forKey:@"currentCity"];
+        [Defaults setObject:cityName forKey:@"currentAddress"];
 
         [Defaults setObject:regeocode.city forKey:@"SelectCity"];
         [Defaults synchronize];
-        cell.locationLabel.text = regeocode.POIName.length ? regeocode.POIName :@"重新定位";
-        self.selectedEvent( CLLocationCoordinate2DMake(coordinate.latitude, coordinate.longitude), regeocode.POIName.length ? regeocode.POIName :@"请选择",regeocode.formattedAddress.length ? regeocode.formattedAddress :@"请选择" );
+        cell.locationLabel.text = cityName.length > 0 ? cityName : @"重新定位";
+        self.selectedEvent( CLLocationCoordinate2DMake(coordinate.latitude, coordinate.longitude), cityName, addressName );
         [self.navigationController popViewControllerAnimated:YES];
     }];
 }

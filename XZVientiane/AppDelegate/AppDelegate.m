@@ -173,8 +173,11 @@
         }
         [Defaults setObject:@(coordinate.latitude) forKey:@"currentLat"];
         [Defaults setObject:@(coordinate.longitude) forKey:@"currentLng"];
-        [Defaults setObject:regeocode.POIName.length ? regeocode.POIName : @"请选择" forKey:@"currentCity"];
-        [Defaults setObject:regeocode.formattedAddress.length ? regeocode.formattedAddress : @"请选择" forKey:@"currentAddress"];
+        // 安全处理regeocode为nil的情况
+        NSString *cityName = (regeocode && regeocode.POIName.length > 0) ? regeocode.POIName : @"请选择";
+        NSString *addressName = (regeocode && regeocode.formattedAddress.length > 0) ? regeocode.formattedAddress : @"请选择";
+        [Defaults setObject:cityName forKey:@"currentCity"];
+        [Defaults setObject:addressName forKey:@"currentAddress"];
 
         [Defaults synchronize];
     }];
@@ -637,8 +640,16 @@
 
 - (void)initValueThirdParty:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     //高德地图
-        [AMapServices sharedServices].apiKey = @"0d1897e206eeab57b4ab4314249ce201";
-        [self getCurrentPosition];
+    // 设置隐私政策配置 - 解决AMapFoundationErrorPrivacyShowUnknow错误
+    [AMapServices sharedServices].enableHTTPS = YES;
+    // 设置隐私权政策同意状态，这里设置为已同意
+    [[AMapServices sharedServices] setApiKey:@"0d1897e206eeab57b4ab4314249ce201"];
+    
+    // 使用正确的隐私政策设置API - 必须在AMapLocationManager实例化之前调用
+    [AMapLocationManager updatePrivacyShow:AMapPrivacyShowStatusDidShow privacyInfo:AMapPrivacyInfoStatusDidContain];
+    [AMapLocationManager updatePrivacyAgree:AMapPrivacyAgreeStatusDidAgree];
+    
+    [self getCurrentPosition];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self getSharePushInfo];
     });

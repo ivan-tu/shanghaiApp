@@ -1202,16 +1202,22 @@ static inline BOOL isIPhoneXSeries() {
                        else {
                            [Defaults setObject:@(coordinate.latitude) forKey:@"currentLat"];
                            [Defaults setObject:@(coordinate.longitude) forKey:@"currentLng"];
-                           [Defaults setObject:regeocode.POIName.length ?regeocode.POIName :@"请选择"  forKey:@"currentCity"];
-                           [Defaults setObject:regeocode.formattedAddress.length ?regeocode.formattedAddress :@"请选择"  forKey:@"currentAddress"];
+                           // 安全处理regeocode为nil的情况
+                           NSString *cityName = (regeocode && regeocode.POIName.length > 0) ? regeocode.POIName : @"请选择";
+                           NSString *addressName = (regeocode && regeocode.formattedAddress.length > 0) ? regeocode.formattedAddress : @"请选择";
+                           [Defaults setObject:cityName forKey:@"currentCity"];
+                           [Defaults setObject:addressName forKey:@"currentAddress"];
 
                        }
                        [Defaults synchronize];
+                       // 安全处理regeocode为nil的情况，确保字典中不会有nil值
+                       NSString *cityName = (regeocode && regeocode.POIName.length > 0) ? regeocode.POIName : @"请选择";
+                       NSString *addressName = (regeocode && regeocode.formattedAddress.length > 0) ? regeocode.formattedAddress : @"请选择";
                        NSDictionary *localDic = @{
                                                   @"lat":@(coordinate.latitude),
                                                   @"lng":@(coordinate.longitude),
-                                                  @"city":regeocode.POIName.length ?regeocode.POIName :@"请选择",
-                                                  @"address":regeocode.formattedAddress.length ? regeocode.formattedAddress :@"请选择"
+                                                  @"city":cityName,
+                                                  @"address":addressName
                                                   };
                        self.webviewBackCallBack(
                                                 @{@"data": localDic,
