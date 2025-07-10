@@ -11,16 +11,25 @@ pod 'Qiniu'
 pod 'GTMBase64'
 pod 'SAMKeychain'
 pod 'SDWebImage', '~> 5.0.6'
+
 # 友盟SDK套件
 pod 'UMCCommon'
-pod 'UMShare'
+
+# UMShare - 使用子规格，排除完整版微信SDK，避免与手动集成的微信SDK冲突
+pod 'UMShare/Core'       # 核心功能
+pod 'UMShare/UI'         # UI组件
+pod 'UMShare/Social/ReducedWeChat'  # 精简版微信（仅分享功能，不包含支付）
+pod 'UMShare/Social/ReducedQQ'      # 精简版QQ
+pod 'UMShare/Social/ReducedSina'    # 精简版微博
+pod 'UMShare/Social/AlipayShare'    # 支付宝分享
+pod 'UMShare/Social/DingDing'       # 钉钉分享
+
 pod 'UMPush'
 pod 'AlipaySDK-iOS'
-# 微信SDK套件
-pod 'WechatOpenSDK-XCFramework'      # 微信官方SDK
+
 # 高德SDK套件配置 - 强制使用标准版本（更稳定）
 pod 'AMap3DMap'
-pod 'AMapFoundation' # 基础SDK（强制标准版本）
-pod 'AMapSearch'         # 搜索功能SDK（强制标准版本）
-pod 'AMapLocation'      # 定位功能SDK（强制标准版本）
+pod 'AMapFoundation'     # 基础SDK
+pod 'AMapSearch'         # 搜索功能SDK
+pod 'AMapLocation'       # 定位功能SDK
 end
