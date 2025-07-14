@@ -9,6 +9,7 @@
 #import "DHGifImageOperation.h"
 #import <ImageIO/ImageIO.h>
 #import <QuartzCore/QuartzCore.h>
+#import <WebKit/WebKit.h>
 
 @interface DHGifImageOperation ()
 {
@@ -118,11 +119,16 @@
     if (self) {
         NSString *gifImgName = [gifImageName stringByReplacingOccurrencesOfString:@".gif" withString:@""];
         NSData *gifData      = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:gifImgName ofType:@"gif"]];
-        UIWebView *webView   = [[UIWebView alloc] initWithFrame:frame];
+        
+        // 使用WKWebView替代UIWebView
+        WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
+        config.allowsInlineMediaPlayback = YES;
+        
+        WKWebView *webView = [[WKWebView alloc] initWithFrame:frame configuration:config];
         [webView setBackgroundColor:[UIColor clearColor]];
-        [webView setScalesPageToFit:YES];
+        [webView setOpaque:NO];
         [webView.scrollView setScrollEnabled:NO];
-        [webView loadData:gifData MIMEType:@"image/gif" textEncodingName:@"" baseURL:[NSURL URLWithString:@""]];
+        [webView loadData:gifData MIMEType:@"image/gif" characterEncodingName:@"" baseURL:[NSURL URLWithString:@""]];
         
         UIButton *clearButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [clearButton setFrame:webView.frame];

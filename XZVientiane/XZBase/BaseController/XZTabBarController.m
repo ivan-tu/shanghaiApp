@@ -72,19 +72,26 @@
     //首页加载完成后才显示tabbar界面
     [[NSNotificationCenter defaultCenter] addObserverForName:@"showTabviewController" object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
         STRONG_SELF;
+        NSLog(@"🎯 [XZTabBarController] 收到showTabviewController通知");
         if ([[UIApplication sharedApplication].keyWindow viewWithTag:2001]) {
+            NSLog(@"🎯 [XZTabBarController] 找到LoadingView，开始移除并显示TabBar");
             //移除遮罩视图
             dispatch_async(dispatch_get_main_queue(), ^(void) {
                 __block UIView *View = [[UIApplication sharedApplication].keyWindow viewWithTag:2001];
                 View.alpha = 1.0;
                 self.view.hidden = NO;
+                NSLog(@"🎯 [XZTabBarController] TabBar已显示");
                 [UIView animateWithDuration:0.3 animations:^{
                     View.alpha = 0.0;
                 } completion:^(BOOL finished) {
                     [View removeFromSuperview];
                     View.alpha = 1.0;
+                    NSLog(@"🎯 [XZTabBarController] LoadingView移除完成");
                 }];
             });
+        } else {
+            NSLog(@"⚠️ [XZTabBarController] 未找到LoadingView，直接显示TabBar");
+            self.view.hidden = NO;
         }
     }];
     

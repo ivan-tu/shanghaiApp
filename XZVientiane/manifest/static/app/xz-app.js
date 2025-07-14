@@ -6,7 +6,7 @@
 (function(global, $) {
 
     let app = global.getApp(),
-        appActions = ['previewImage', 'upload', 'share', 'pay', 'showModal', 'showActionSheet', 'navigateBack', 'setNavigationBarTitle', 'setTabBarBadge', 'removeTabBarBadge', 'showTabBarRedDot', 'hideTabBarRedDot', 'setTabBarStyle', 'setTabBarItem', 'showTabBar', 'hideTabBar', 'switchTab', 'reLaunch'];
+        appActions = ['previewImage', 'upload', 'share', 'pay', 'showModal', 'showActionSheet', 'showToast', 'navigateBack', 'setNavigationBarTitle', 'setTabBarBadge', 'removeTabBarBadge', 'showTabBarRedDot', 'hideTabBarRedDot', 'setTabBarStyle', 'setTabBarItem', 'showTabBar', 'hideTabBar', 'switchTab', 'reLaunch'];
 
     xzApp.init(app);
 

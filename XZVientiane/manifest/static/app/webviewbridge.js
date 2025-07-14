@@ -78,8 +78,10 @@ wx.app.connect=function(callback){
 			 bridge.callHandler('xzBridge',{action:action,data:obj.data},function(backData){
 				 
 				 if(backData.success&&backData.success!='false'){
-					
-					 app.trigger(obj.success,backData.data||{});
+					 var wxResponse = {
+						 data: backData.data || {}
+					 };
+					 app.trigger(obj.success, wxResponse);
 				 }else{
 					 app.trigger(obj.fail,backData.errorMessage);
 				 };

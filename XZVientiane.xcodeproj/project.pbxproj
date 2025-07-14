@@ -3,10 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 48;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2CECB7742E24989F0038FFFE /* XZWKWebViewBaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CECB7732E24989F0038FFFE /* XZWKWebViewBaseController.m */; };
+		2CECB77A2E24994D0038FFFE /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CECB7792E24994D0038FFFE /* WebKit.framework */; };
 		837EE0B2838675C41BE964F1 /* libPods-XZVientiane.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B2658F42FF7D57BA2F8D696 /* libPods-XZVientiane.a */; };
 		A50230C1201EB8880059C305 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = A50230BF201EB8870059C305 /* Reachability.m */; };
 		A50230F1201F245B0059C305 /* CustomTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A50230F0201F245A0059C305 /* CustomTabBar.m */; };
@@ -230,6 +232,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2CECB7722E24989F0038FFFE /* XZWKWebViewBaseController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XZWKWebViewBaseController.h; sourceTree = "<group>"; };
+		2CECB7732E24989F0038FFFE /* XZWKWebViewBaseController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XZWKWebViewBaseController.m; sourceTree = "<group>"; };
+		2CECB7792E24994D0038FFFE /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		2CECB7A92E24B1E60038FFFE /* CFJWebViewMigrationAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CFJWebViewMigrationAdapter.h; sourceTree = "<group>"; };
 		3B2658F42FF7D57BA2F8D696 /* libPods-XZVientiane.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-XZVientiane.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D668819463A92225B014EB5 /* Pods-XZVientiane.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XZVientiane.release.xcconfig"; path = "Target Support Files/Pods-XZVientiane/Pods-XZVientiane.release.xcconfig"; sourceTree = "<group>"; };
 		A50230BF201EB8870059C305 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
@@ -580,11 +586,16 @@
 		D7C958665F8B96A095CF1D2B /* Pods-XZVientiane.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XZVientiane.debug.xcconfig"; path = "Target Support Files/Pods-XZVientiane/Pods-XZVientiane.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		2CECB7752E2498B70038FFFE /* WKWebView */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = WKWebView; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
 		A5550D191FB9A94000B010C4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CECB77A2E24994D0038FFFE /* WebKit.framework in Frameworks */,
 				A5881606212EDAD000A95D98 /* GLKit.framework in Frameworks */,
 				A55B9C0D24869EEE00595FA6 /* UMShare.framework in Frameworks */,
 				A529A20221140A860066EB3E /* CoreMotion.framework in Frameworks */,
@@ -983,6 +994,9 @@
 		A5550D551FB9AA0B00B010C4 /* BaseController */ = {
 			isa = PBXGroup;
 			children = (
+				2CECB7A92E24B1E60038FFFE /* CFJWebViewMigrationAdapter.h */,
+				2CECB7722E24989F0038FFFE /* XZWKWebViewBaseController.h */,
+				2CECB7732E24989F0038FFFE /* XZWKWebViewBaseController.m */,
 				CBD3B3072E01AEF200803613 /* CustomHybridProcessor.h */,
 				CBD3B3082E01AEF200803613 /* CustomHybridProcessor.m */,
 				A54A282120216F6700CA1517 /* XZNavBar.h */,
@@ -1123,6 +1137,7 @@
 		A5550D631FB9AC1300B010C4 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				2CECB7752E2498B70038FFFE /* WKWebView */,
 				A5863384212192BC001C7CE2 /* UITabbar */,
 				A5550DBE1FBA798E00B010C4 /* UIBarButtonItem */,
 				A5550DBD1FBA796A00B010C4 /* UIButton */,
@@ -1447,6 +1462,7 @@
 		A6B108B8107613590EFDF36A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2CECB7792E24994D0038FFFE /* WebKit.framework */,
 				A565BCE3249E1BCC00A2E8FB /* HybridSDK.framework */,
 				A5881605212EDAD000A95D98 /* GLKit.framework */,
 				A529A20121140A860066EB3E /* CoreMotion.framework */,
@@ -1500,6 +1516,9 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				2CECB7752E2498B70038FFFE /* WKWebView */,
 			);
 			name = XZVientiane;
 			productName = XZVientiane;
@@ -1820,6 +1839,7 @@
 				A579579620F857B800B74363 /* TZPhotoPreviewCell.m in Sources */,
 				A53C27421FF388D7001B13B3 /* NSTimer+timerBlock.m in Sources */,
 				A579579420F857B800B74363 /* TZImageManager.m in Sources */,
+				2CECB7742E24989F0038FFFE /* XZWKWebViewBaseController.m in Sources */,
 				A51DA3FA20EE2C8B00E40549 /* EasyShowUtils.m in Sources */,
 				A5E2AEA3210FF68A006C0DE3 /* LBPhotoBrowserView.m in Sources */,
 				A53C27441FF388D7001B13B3 /* ZZCountingLabel.m in Sources */,
@@ -2059,10 +2079,14 @@
 					"$(PROJECT_DIR)/Pods/Headers/Public",
 					"$(PROJECT_DIR)/Pods/**",
 					"$(PROJECT_DIR)/XZVientiane/ThirdParty/SocialLibraries/WeChat/OpenSDK1.8.7.1",
+					"$(SRCROOT)/XZVientiane/Category/WKWebView",
 				);
 				INFOPLIST_FILE = XZVientiane/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/XZVientiane/ThirdParty/SocialLibraries/WeChat/OpenSDK1.8.7.1",
@@ -2233,10 +2257,14 @@
 					"$(PROJECT_DIR)/Pods/Headers/Public",
 					"$(PROJECT_DIR)/Pods/**",
 					"$(PROJECT_DIR)/XZVientiane/ThirdParty/SocialLibraries/WeChat/OpenSDK1.8.7.1",
+					"$(SRCROOT)/XZVientiane/Category/WKWebView",
 				);
 				INFOPLIST_FILE = XZVientiane/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/XZVientiane/ThirdParty/SocialLibraries/WeChat/OpenSDK1.8.7.1",
@@ -2363,7 +2391,11 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = XZVientianeTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.tuweia.xiangjian.XZVientianeTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2377,7 +2409,11 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = XZVientianeTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.tuweia.xiangjian.XZVientianeTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2390,7 +2426,11 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = XZVientianeUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.tuweia.xiangjian.XZVientianeUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2403,7 +2443,11 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = XZVientianeUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.tuweia.xiangjian.XZVientianeUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";

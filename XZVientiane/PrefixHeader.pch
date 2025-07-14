@@ -17,7 +17,7 @@
 #import "UIColor+addition.h"
 #import "NSArray+safe.h"
 #import "NSMutableArray+safe.h"
-#import "UIWebView+addition.h"
+#import "WKWebView+XZAddition.h"
 #import "UIBarButtonItem+DCBarButtonItem.h"
 #import "PublicSettingModel.h"
 #import <UIKit/UIKit.h>
