@@ -272,15 +272,25 @@
                 } else if (client == 'app') {
                     wx.app.call('getLocation', {
                         success: function(res) {
-							if(res.lng&&res.lat){
-								if(res.area){
-									let location = res.lng + ',' + res.lat;
-									res.area = res.area.split('-');
-									res.cityName = res.area[1]||'';
+							// 处理原生返回的数据格式
+							let locationData = res.data || res;
+							if(locationData.lng && locationData.lat){
+								if(locationData.area){
+									let location = locationData.lng + ',' + locationData.lat;
+									locationData.area = locationData.area.split('-');
+									locationData.cityName = locationData.area[1]||'';
 									_this.setData({
-										'form.cityname': res.cityName||''
+										'form.cityname': locationData.cityName||''
 									});
-									app.storage.set('cityname', res.cityName||'');
+									app.storage.set('cityname', locationData.cityName||'');
+									app.storage.set('location', location);
+								} else if(locationData.city) {
+									// 如果没有area但有city
+									let location = locationData.lng + ',' + locationData.lat;
+									_this.setData({
+										'form.cityname': locationData.city
+									});
+									app.storage.set('cityname', locationData.city);
 									app.storage.set('location', location);
 								};
 							}else{

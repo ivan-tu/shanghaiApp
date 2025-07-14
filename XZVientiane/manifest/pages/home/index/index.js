@@ -806,10 +806,18 @@
                 } else if (client == 'app') {
                     wx.app.call('getLocation', {
                         success: function(res) {
-							if(res.city){
-								app.storage.set('areaname', res.city);
+							// 处理原生返回的数据格式
+							let cityName = null;
+							if(res.city) {
+								cityName = res.city;
+							} else if(res.data && res.data.city) {
+								cityName = res.data.city;
+							}
+							
+							if(cityName){
+								app.storage.set('areaname', cityName);
 								_this.setData({
-									areaname: res.city
+									areaname: cityName
 								});
 								_this.load();
 							};

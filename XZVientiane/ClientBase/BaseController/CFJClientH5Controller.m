@@ -770,9 +770,12 @@ static inline BOOL isIPhoneXSeries() {
         NSString *myData = jsDic[@"data"];
         self.webviewBackCallBack = completion;
         NSString *filepath=[[BaseFileManager appH5LocailManifesPath] stringByAppendingPathComponent:myData];
-      NSString *myStr = [NSString stringWithContentsOfURL:[NSURL fileURLWithPath:filepath] encoding:NSUTF8StringEncoding error:nil];
+        NSString *myStr = [NSString stringWithContentsOfURL:[NSURL fileURLWithPath:filepath] encoding:NSUTF8StringEncoding error:nil];
         
-        
+        // 确保myStr不为nil，避免[object object]问题
+        if (!myStr) {
+            myStr = @"";
+        }
         
         if (self.webviewBackCallBack) {
             self.webviewBackCallBack(@{
@@ -781,6 +784,7 @@ static inline BOOL isIPhoneXSeries() {
                 @"errorMassage":@""
                                      });
         }
+        return;
     }
     
     //判断是否安装了微信客户端
@@ -870,6 +874,30 @@ static inline BOOL isIPhoneXSeries() {
                    Url = [NSString stringWithFormat:@"%@%@", JDomain, Url];
                    NSLog(@"拼接后的URL: %@", Url);
                }
+               
+               // 检查是否为配置域名的内部链接
+               NSString *configuredDomain = [[NSUserDefaults standardUserDefaults] objectForKey:@"kUserDefaults_domainStr"];
+               BOOL isInternalLink = NO;
+               if (configuredDomain && configuredDomain.length > 0) {
+                   isInternalLink = [Url containsString:configuredDomain];
+               } else {
+                   // 如果没有配置域名，默认使用hi3.tuiya.cc作为内部域名
+                   configuredDomain = @"hi3.tuiya.cc";
+                   isInternalLink = [Url containsString:configuredDomain];
+               }
+               NSLog(@"配置域名: %@, 是否内部链接: %d", configuredDomain, isInternalLink);
+               
+               if (!isInternalLink) {
+                   // 外部链接，直接用HTMLWebViewController加载
+                   NSLog(@"外部链接，直接加载: %@", Url);
+                   HTMLWebViewController *htmlWebVC = [[HTMLWebViewController alloc] init];
+                   htmlWebVC.webViewDomain = Url;
+                   htmlWebVC.hidesBottomBarWhenPushed = YES;
+                   [self.navigationController pushViewController:htmlWebVC animated:YES];
+                   return;
+               }
+               
+               // 内部链接，使用CustomHybridProcessor处理
 //               [[HybridManager shareInstance] LocialPathByUrlStr:Url templateDic:self.templateDic templateStr:self.templateStr componentJsAndCs:self.ComponentJsAndCs componentDic:self.ComponentDic success:^(NSString * _Nonnull filePath, NSString * _Nonnull templateStr, NSString * _Nonnull title, BOOL isFileExsit) {
                    [CustomHybridProcessor custom_LocialPathByUrlStr:Url
                                                         templateDic:self.templateDic
@@ -1295,17 +1323,51 @@ static inline BOOL isIPhoneXSeries() {
                        else {
                            [Defaults setObject:@(coordinate.latitude) forKey:@"currentLat"];
                            [Defaults setObject:@(coordinate.longitude) forKey:@"currentLng"];
-                           // 安全处理regeocode为nil的情况
-                           NSString *cityName = (regeocode && regeocode.POIName.length > 0) ? regeocode.POIName : @"请选择";
-                           NSString *addressName = (regeocode && regeocode.formattedAddress.length > 0) ? regeocode.formattedAddress : @"请选择";
+                           
+                           // 检查逆地理编码是否有效（海外或模拟器可能没有数据）
+                           BOOL hasValidGeocode = regeocode && 
+                               (regeocode.formattedAddress.length > 0 || 
+                                regeocode.city.length > 0 || 
+                                regeocode.district.length > 0 || 
+                                regeocode.POIName.length > 0);
+                           
+                           NSString *cityName = @"请选择";
+                           NSString *addressName = @"请选择";
+                           
+                           if (hasValidGeocode) {
+                               // 有效的逆地理编码数据
+                               if (regeocode.city.length > 0) {
+                                   cityName = regeocode.city;
+                               } else if (regeocode.district.length > 0) {
+                                   cityName = regeocode.district;
+                               } else if (regeocode.POIName.length > 0) {
+                                   cityName = regeocode.POIName;
+                               }
+                               addressName = regeocode.formattedAddress.length > 0 ? regeocode.formattedAddress : cityName;
+                           } else {
+                               // 逆地理编码失败，可能在海外或模拟器
+                               NSLog(@"⚠️ 逆地理编码失败，可能在海外或模拟器环境");
+                               // 检查是否是模拟器的默认坐标（旧金山）
+                               if (fabs(coordinate.latitude - 37.7858) < 0.01 && fabs(coordinate.longitude - (-122.4064)) < 0.01) {
+                                   // 模拟器环境，提供测试数据
+                                   cityName = @"北京市";
+                                   addressName = @"北京市朝阳区";
+                                   NSLog(@"🧪 检测到模拟器环境，使用测试城市: %@", cityName);
+                               } else {
+                                   // 真实设备在海外，提示用户手动选择
+                                   cityName = @"位置服务不可用";
+                                   addressName = @"请手动选择城市";
+                                   NSLog(@"🌍 检测到海外位置，建议手动选择城市");
+                               }
+                           }
+                           
                            [Defaults setObject:cityName forKey:@"currentCity"];
                            [Defaults setObject:addressName forKey:@"currentAddress"];
-
                        }
                        [Defaults synchronize];
-                       // 安全处理regeocode为nil的情况，确保字典中不会有nil值
-                       NSString *cityName = (regeocode && regeocode.POIName.length > 0) ? regeocode.POIName : @"请选择";
-                       NSString *addressName = (regeocode && regeocode.formattedAddress.length > 0) ? regeocode.formattedAddress : @"请选择";
+                       // 使用与存储相同的逻辑处理返回数据
+                       NSString *cityName = [Defaults objectForKey:@"currentCity"] ?: @"请选择";
+                       NSString *addressName = [Defaults objectForKey:@"currentAddress"] ?: @"请选择";
                        NSDictionary *localDic = @{
                                                   @"lat":@(coordinate.latitude),
                                                   @"lng":@(coordinate.longitude),
@@ -1477,15 +1539,12 @@ static inline BOOL isIPhoneXSeries() {
         WEAK_SELF;
         [[MOFSPickerManager shareManger] showMOFSAddressPickerWithDefaultZipcode:string title:@"" cancelTitle:@"取消" commitTitle:@"确定" commitBlock:^(NSString *address, NSString *zipcode) {
             STRONG_SELF;
-            // 使用统一的数据格式
+            // 使用picker组件期望的数据格式
             NSDictionary *jsResponse = @{
                 @"success": @YES,
                 @"data": @{
-                    @"code": @"0",
-                    @"data": @{
-                        @"code": zipcode ?: @"",
-                        @"value": address ?: @""
-                    }
+                    @"code": zipcode ?: @"",
+                    @"value": address ?: @""
                 },
                 @"errorMessage": @""
             };
@@ -1511,15 +1570,12 @@ static inline BOOL isIPhoneXSeries() {
         WEAK_SELF;
         [[MOFSPickerManager shareManger] showCFJAddressPickerWithDefaultZipcode:string title:@"" cancelTitle:@"取消" commitTitle:@"确定" commitBlock:^(NSString *address, NSString *zipcode) {
             STRONG_SELF;
-            // 使用统一的数据格式
+            // 使用picker组件期望的数据格式
             NSDictionary *jsResponse = @{
                 @"success": @YES,
                 @"data": @{
-                    @"code": @"0",
-                    @"data": @{
-                        @"code": zipcode ?: @"",
-                        @"value": address ?: @""
-                    }
+                    @"code": zipcode ?: @"",
+                    @"value": address ?: @""
                 },
                 @"errorMessage": @""
             };
