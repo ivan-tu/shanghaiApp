@@ -8,6 +8,7 @@
 #import "CFJClientH5Controller.h"
 #import "WKWebView+XZAddition.h"
 #import "HTMLWebViewController.h"
+#import "WKWebViewJavascriptBridge.h"
 //model
 #import "XZOrderModel.h"
 #import "ClientSettingModel.h"
@@ -752,11 +753,8 @@ static inline BOOL isIPhoneXSeries() {
     NSString *function = [jsDic objectForKey:@"action"];
     NSDictionary *dataDic = [jsDic objectForKey:@"data"];
     
-    NSLog(@"🎯 [CFJClientH5Controller] handleJavaScriptCall - action: %@", function);
-    
     // 优先处理网络请求
     if ([function isEqualToString:@"request"]) {
-        NSLog(@"🌐 [CFJClientH5Controller] 处理网络请求 - data: %@", dataDic);
         [self rpcRequestWithJsDic:dataDic completion:completion];
         return;
     }
@@ -1479,12 +1477,31 @@ static inline BOOL isIPhoneXSeries() {
         WEAK_SELF;
         [[MOFSPickerManager shareManger] showMOFSAddressPickerWithDefaultZipcode:string title:@"" cancelTitle:@"取消" commitTitle:@"确定" commitBlock:^(NSString *address, NSString *zipcode) {
             STRONG_SELF;
-            self.webviewBackCallBack(
-                                     @{@"data":@{@"code":zipcode,@"value":address},
-                                       @"success":@"true",
-                                       @"errorMessage":@""
-                                     });
+            // 使用统一的数据格式
+            NSDictionary *jsResponse = @{
+                @"success": @YES,
+                @"data": @{
+                    @"code": @"0",
+                    @"data": @{
+                        @"code": zipcode ?: @"",
+                        @"value": address ?: @""
+                    }
+                },
+                @"errorMessage": @""
+            };
+            self.webviewBackCallBack(jsResponse);
         } cancelBlock:^{
+            STRONG_SELF;
+            // 取消时也要回调
+            NSDictionary *jsResponse = @{
+                @"success": @NO,
+                @"data": @{
+                    @"code": @"-1",
+                    @"data": @{}
+                },
+                @"errorMessage": @"用户取消"
+            };
+            self.webviewBackCallBack(jsResponse);
         }];
         return;
     }
@@ -1494,12 +1511,32 @@ static inline BOOL isIPhoneXSeries() {
         WEAK_SELF;
         [[MOFSPickerManager shareManger] showCFJAddressPickerWithDefaultZipcode:string title:@"" cancelTitle:@"取消" commitTitle:@"确定" commitBlock:^(NSString *address, NSString *zipcode) {
             STRONG_SELF;
-            self.webviewBackCallBack(
-                                     @{@"data":@{@"code":zipcode,@"value":address},
-                                       @"success":@"true",
-                                       @"errorMessage":@""
-                                     });        } cancelBlock:^{
-            }];
+            // 使用统一的数据格式
+            NSDictionary *jsResponse = @{
+                @"success": @YES,
+                @"data": @{
+                    @"code": @"0",
+                    @"data": @{
+                        @"code": zipcode ?: @"",
+                        @"value": address ?: @""
+                    }
+                },
+                @"errorMessage": @""
+            };
+            self.webviewBackCallBack(jsResponse);
+        } cancelBlock:^{
+            STRONG_SELF;
+            // 取消时也要回调
+            NSDictionary *jsResponse = @{
+                @"success": @NO,
+                @"data": @{
+                    @"code": @"-1",
+                    @"data": @{}
+                },
+                @"errorMessage": @"用户取消"
+            };
+            self.webviewBackCallBack(jsResponse);
+        }];
         return;
     }
     if ([function isEqualToString:@"dateSelect"]) {
@@ -2488,8 +2525,6 @@ static inline BOOL isIPhoneXSeries() {
 - (void)rpcRequestWithJsDic:(NSDictionary *)dataDic
                  jsCallBack:(XZWebViewJSCallbackBlock)jsCallBack {
     
-    NSLog(@"🌐 [网络请求] 开始处理网络请求 - URL: %@", [dataDic objectForKey:@"url"]);
-    
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         NSString *dataJsonString = @"";
         if ([dataDic isKindOfClass:[NSDictionary class]]) {
@@ -2499,7 +2534,6 @@ static inline BOOL isIPhoneXSeries() {
         AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
         manager.responseSerializer = [AFJSONResponseSerializer serializer];
         manager.requestSerializer = [AFJSONRequestSerializer serializer];
-        //    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
             
         if(ISIPAD) {
             [manager.requestSerializer setValue:@"iospad" forHTTPHeaderField:@"from"];
@@ -2507,7 +2541,6 @@ static inline BOOL isIPhoneXSeries() {
             [manager.requestSerializer setValue:@"ios" forHTTPHeaderField:@"from"];
         }
         manager.requestSerializer.timeoutInterval = 45;
-        //CFJ新加
         manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/plain", @"text/javascript", @"text/json", @"text/html", nil];
         [manager.requestSerializer setValue:[[NSUserDefaults standardUserDefaults] objectForKey:@"User_Token_String"] forHTTPHeaderField:@"AUTHORIZATION"];
         NSDictionary *header = [dataDic objectForKey:@"header"];
@@ -2516,14 +2549,10 @@ static inline BOOL isIPhoneXSeries() {
         }
         
         NSString *requestUrl = [CustomHybridProcessor custom_getRequestLinkUrl:[dataDic objectForKey:@"url"]];
-        NSLog(@"🌐 [网络请求] 请求URL: %@", requestUrl);
-        NSLog(@"🌐 [网络请求] 请求参数: %@", [dataDic objectForKey:@"data"]);
         
         [manager POST:requestUrl parameters:[dataDic objectForKey:@"data"] headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            NSLog(@"✅ [网络请求] 请求成功 - 响应: %@", responseObject);
-            NSLog(@"🔄 [网络请求] 准备回调前端 - jsCallBack存在: %@", jsCallBack ? @"是" : @"否");
             if (jsCallBack) {
-                // 🔧 关键修复：转换为JavaScript期望的格式
+                // 转换为JavaScript期望的格式
                 NSDictionary *serverResponse = responseObject;
                 
                 // 检查服务器响应的成功状态
@@ -2533,11 +2562,11 @@ static inline BOOL isIPhoneXSeries() {
                     isSuccess = YES;
                 }
                 
-                // 构造JavaScript期望的响应格式 - 关键修复
+                // 构造JavaScript期望的响应格式
                 NSDictionary *jsResponse = @{
                     @"success": isSuccess ? @YES : @NO,
                     @"data": @{
-                        @"code": isSuccess ? @"0" : [NSString stringWithFormat:@"%@", codeValue ?: @(-1)],  // 转换为字符串
+                        @"code": isSuccess ? @"0" : [NSString stringWithFormat:@"%@", codeValue ?: @(-1)],
                         @"data": [serverResponse objectForKey:@"data"] ?: @{},
                         @"errorMessage": [serverResponse objectForKey:@"errorMessage"] ?: @""
                     },
@@ -2545,30 +2574,22 @@ static inline BOOL isIPhoneXSeries() {
                     @"code": codeValue ?: @(-1)
                 };
                 
-                NSLog(@"📤 [网络请求] 转换后的响应格式 - success: %@, data.code: '%@'", 
-                      jsResponse[@"success"], jsResponse[@"data"][@"code"]);
-                NSLog(@"📤 [网络请求] 正在执行回调 - 响应数据: %@", jsResponse);
                 jsCallBack(jsResponse);
-                NSLog(@"✅ [网络请求] 回调已执行完成");
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            NSLog(@"❌ [网络请求] 请求失败 - 错误: %@", error.description);
-            NSLog(@"🔄 [网络请求] 准备回调前端失败结果 - jsCallBack存在: %@", jsCallBack ? @"是" : @"否");
             if (jsCallBack) {
-                // 🔧 关键修复：失败时也使用JavaScript期望的格式
+                // 失败时也使用JavaScript期望的格式
                 NSDictionary *errorResponse = @{
                     @"success": @NO,
                     @"data": @{
-                        @"code": @"-1",  // 转换为字符串
+                        @"code": @"-1",
                         @"data": @{},
                         @"errorMessage": error.localizedDescription ?: @"网络请求失败"
                     },
                     @"errorMessage": error.localizedDescription ?: @"网络请求失败",
                     @"code": @(-1)
                 };
-                NSLog(@"📤 [网络请求] 正在执行失败回调 - 错误数据: %@", errorResponse);
                 jsCallBack(errorResponse);
-                NSLog(@"✅ [网络请求] 失败回调已执行完成");
             }
         }];
     });
@@ -2899,67 +2920,42 @@ static inline BOOL isIPhoneXSeries() {
 }
 
 // 重写父类的jsCallObjc方法，调用子类的业务逻辑
-- (void)jsCallObjc:(NSDictionary *)jsData completion:(void(^)(id result))completion {
+- (void)jsCallObjc:(NSDictionary *)jsData jsCallBack:(WVJBResponseCallback)jsCallBack {
     NSString *action = jsData[@"action"];
     
-    NSLog(@"🔍 [CFJClientH5Controller] jsCallObjc被调用 - action: %@", action);
-    
-    // 定义子类特有的action列表 - 添加request到列表中
+    // 定义子类特有的action列表 (注意：不包括pageReady，它由父类处理)
     NSSet *childActions = [NSSet setWithArray:@[
-        @"request",  // 重要：添加request到子类处理列表
-        @"nativeGet", @"hasWx", @"isiPhoneX", @"readMessage", @"setTabBarBadge", 
-        @"removeTabBarBadge", @"showTabBarRedDot", @"hideTabBarRedDot", @"navigateTo",
+        @"request", @"nativeGet", @"hasWx", @"isiPhoneX", @"readMessage", @"setTabBarBadge", 
+        @"removeTabBarBadge", @"showTabBarRedDot", @"hideTabBarRedDot", @"navigateTo", @"getLocation",
         @"pageShow", @"pageHide", @"pageUnload", @"showLocation", @"changeMessageNum",
         @"copyLink", @"share", @"saveImage", @"closePresentWindow", @"setNavigationBarTitle",
         @"weixinLogin", @"weixinPay", @"aliPay", @"chooseFile", @"uploadFile", @"QRScan",
         @"previewImage", @"userLogin", @"userLogout", @"switchTab", @"hideNavationbar",
-        @"showNavationbar", @"noticemsg_setNumber", @"showModal", @"showToast"
+        @"showNavationbar", @"noticemsg_setNumber", @"showModal", @"showToast", @"selectLocation",
+        @"selectLocationCity", @"navigateBack", @"reLaunch", @"showActionSheet", @"areaSelect"
     ]];
     
     // 如果是子类特有的action，直接调用子类处理
     if ([childActions containsObject:action]) {
-        NSLog(@"✅ [CFJClientH5Controller] 调用子类处理 - action: %@", action);
-        [self handleJavaScriptCall:jsData completion:completion];
-        return; // 重要：添加return，避免继续执行后面的代码
+        [self handleJavaScriptCall:jsData completion:^(id result) {
+            if (jsCallBack) {
+                jsCallBack(result);
+            }
+        }];
+        return;
     }
     
-    // 否则先调用父类处理
-    NSLog(@"📤 [CFJClientH5Controller] 调用父类处理 - action: %@", action);
-    [super jsCallObjc:jsData completion:^(id result) {
-            // 如果父类成功处理了，直接返回结果
-            if (result && [result isKindOfClass:[NSDictionary class]]) {
-                NSDictionary *resultDict = (NSDictionary *)result;
-                id success = resultDict[@"success"];
-                id message = resultDict[@"message"];
-                
-                // 判断是否成功的逻辑 - 处理不同类型的success值
-                BOOL isSuccess = NO;
-                if ([success isKindOfClass:[NSString class]]) {
-                    NSString *successStr = (NSString *)success;
-                    isSuccess = [successStr isEqualToString:@"true"] || [successStr isEqualToString:@"YES"];
-                } else if ([success isKindOfClass:[NSNumber class]]) {
-                    isSuccess = [success boolValue];
-                } else if (success) {
-                    // 其他非nil值都视为成功
-                    isSuccess = YES;
-                }
-                
-                // 检查是否是"Unknown action"错误
-                BOOL isUnknownAction = NO;
-                if ([message isKindOfClass:[NSString class]]) {
-                    isUnknownAction = [message isEqualToString:@"Unknown action"];
-                }
-                
-                // 如果父类返回成功，且不是"Unknown action"错误
-                if (isSuccess && !isUnknownAction) {
-                    if (completion) completion(result);
-                    return;
-                }
-            }
-            
-            // 如果父类没有处理成功，则调用子类的handleJavaScriptCall
-            [self handleJavaScriptCall:jsData completion:completion];
-        }];
+    // 否则调用父类处理
+    [super jsCallObjc:jsData jsCallBack:jsCallBack];
+}
+
+// 保留原有的completion方法作为兼容
+- (void)jsCallObjc:(NSDictionary *)jsData completion:(void(^)(id result))completion {
+    [self jsCallObjc:jsData jsCallBack:^(id responseData) {
+        if (completion) {
+            completion(responseData);
+        }
+    }];
 }
 
 @end

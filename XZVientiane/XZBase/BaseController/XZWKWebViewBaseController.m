@@ -59,6 +59,9 @@ static inline BOOL isIPhoneXSeries() {
 }
 
 @property (nonatomic, strong) WKWebViewJavascriptBridge *bridge;  // 使用WebViewJavascriptBridge
+@property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView; // 加载指示器
+@property (nonatomic, strong) UIProgressView *progressView; // 进度条
+@property (nonatomic, strong) NSString *currentTempFileName; // 当前临时文件名
 
 @end
 
@@ -93,6 +96,9 @@ static inline BOOL isIPhoneXSeries() {
     // 创建WebView
     [self setupWebView];
     [self addWebView];
+    
+    // 创建加载指示器
+    [self setupLoadingIndicators];
     
     // 添加通知监听
     [self addNotificationObservers];
@@ -129,6 +135,13 @@ static inline BOOL isIPhoneXSeries() {
         [self.webView.scrollView.mj_header endRefreshing];
     }
     
+    // 停止loading指示器
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.activityIndicatorView stopAnimating];
+        self.progressView.hidden = YES;
+        self.progressView.progress = 0.0;
+    });
+    
     // 停止网络监控
     self.lastSelectedIndex = 100;
     if (self.timer) {
@@ -141,18 +154,17 @@ static inline BOOL isIPhoneXSeries() {
 }
 
 - (void)cleanupTempHtmlFiles {
-    NSString *manifestPath = [BaseFileManager appH5LocailManifesPath];
-    NSError *error;
-    NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:manifestPath error:&error];
-    
-    if (!error) {
-        for (NSString *fileName in files) {
-            if ([fileName hasPrefix:@"temp_"] && [fileName hasSuffix:@".html"]) {
-                NSString *filePath = [manifestPath stringByAppendingPathComponent:fileName];
-                [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
-                NSLog(@"🗑️ 清理临时文件: %@", fileName);
-            }
+    // 只清理当前控制器的临时文件
+    if (self.currentTempFileName) {
+        NSString *manifestPath = [BaseFileManager appH5LocailManifesPath];
+        NSString *filePath = [manifestPath stringByAppendingPathComponent:self.currentTempFileName];
+        
+        if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+            [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
+            NSLog(@"🗑️ 清理临时文件: %@", self.currentTempFileName);
         }
+        
+        self.currentTempFileName = nil;
     }
 }
 
@@ -225,7 +237,6 @@ static inline BOOL isIPhoneXSeries() {
 }
 
 - (void)setupWebView {
-    NSLog(@"🔧 [WKWebView] 开始设置WKWebView...");
     
     // 创建WKWebView配置
     WKWebViewConfiguration *configuration = [[WKWebViewConfiguration alloc] init];
@@ -245,8 +256,6 @@ static inline BOOL isIPhoneXSeries() {
     if (@available(iOS 14.0, *)) {
         configuration.defaultWebpagePreferences.allowsContentJavaScript = YES;
     }
-    
-    NSLog(@"🔧 [WKWebView] JavaScript已启用，安全策略已配置");
     
     // 配置安全设置，允许混合内容
     if (@available(iOS 10.0, *)) {
@@ -273,7 +282,6 @@ static inline BOOL isIPhoneXSeries() {
                                                       injectionTime:WKUserScriptInjectionTimeAtDocumentStart 
                                                    forMainFrameOnly:NO];
     [self.userContentController addUserScript:userScript];
-    NSLog(@"🔧 [WKWebView] Debug脚本已注入");
     #endif
     
     // 创建WKWebView
@@ -282,8 +290,6 @@ static inline BOOL isIPhoneXSeries() {
     self.webView.UIDelegate = self;
     self.webView.scrollView.delegate = self;
     self.webView.backgroundColor = [UIColor whiteColor];
-    
-    NSLog(@"🔧 [WKWebView] WKWebView对象创建成功");
     
     // 配置滚动视图
     if (@available(iOS 11.0, *)) {
@@ -295,8 +301,6 @@ static inline BOOL isIPhoneXSeries() {
     // 根据资料建议，添加进度监听
     [self.webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:NULL];
     [self.webView addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:NULL];
-    
-    NSLog(@"🔧 [WKWebView] 进度监听已添加");
     
     // 配置滚动视图属性
     self.webView.scrollView.scrollsToTop = YES;
@@ -310,26 +314,46 @@ static inline BOOL isIPhoneXSeries() {
     
     // 设置用户代理
     [self setCustomUserAgent];
-    
-    NSLog(@"✅ [WKWebView] WKWebView设置完成");
 }
 
 - (void)setupRefreshControl {
     // 配置下拉刷新控件
     __weak UIScrollView *scrollView = self.webView.scrollView;
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
-    
-    // 隐藏时间
     header.lastUpdatedTimeLabel.hidden = YES;
+    header.stateLabel.hidden = YES;
     
     // 添加下拉刷新控件
     scrollView.mj_header = header;
+}
+
+- (void)setupLoadingIndicators {
+    // 创建加载指示器
+    self.activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    self.activityIndicatorView.center = CGPointMake(self.view.bounds.size.width / 2, self.view.bounds.size.height / 2);
+    self.activityIndicatorView.hidesWhenStopped = YES;
+    [self.view addSubview:self.activityIndicatorView];
     
-    NSLog(@"✅ 下拉刷新控件已添加");
+    // 创建进度条
+    self.progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
+    self.progressView.frame = CGRectMake(0, 0, self.view.bounds.size.width, 2);
+    self.progressView.progressTintColor = [UIColor colorWithRed:0.2 green:0.6 blue:1.0 alpha:1.0];
+    self.progressView.trackTintColor = [UIColor clearColor];
+    self.progressView.hidden = YES;
+    [self.view addSubview:self.progressView];
+    
+    // 调整进度条位置到导航栏下方
+    if (self.navigationController && !self.navigationController.navigationBar.hidden) {
+        CGFloat navBarMaxY = CGRectGetMaxY(self.navigationController.navigationBar.frame);
+        self.progressView.frame = CGRectMake(0, navBarMaxY, self.view.bounds.size.width, 2);
+    } else {
+        // 如果没有导航栏，放在状态栏下方
+        CGFloat statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
+        self.progressView.frame = CGRectMake(0, statusBarHeight, self.view.bounds.size.width, 2);
+    }
 }
 
 - (void)loadNewData {
-    NSLog(@"📥 下拉刷新被触发");
     
     // 调用JavaScript的下拉刷新事件
     NSDictionary *callJsDic = [[HybridManager shareInstance] objcCallJsWithFn:@"pagePullDownRefresh" data:nil];
@@ -484,6 +508,12 @@ static inline BOOL isIPhoneXSeries() {
     }
     
     self.isLoading = NO;
+    
+    // 显示loading指示器
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.activityIndicatorView startAnimating];
+    });
+    
     [self listenToTimer];
     
     // 读取本地HTML文件
@@ -502,31 +532,26 @@ static inline BOOL isIPhoneXSeries() {
 }
 
 - (void)loadHTMLContent {
-    NSLog(@"📱 开始加载HTML内容 - URL: %@", self.pinUrl);
     
     // 防止频繁重新加载（2秒内只允许加载一次）
     NSDate *now = [NSDate date];
     if (lastLoadTime && [now timeIntervalSinceDate:lastLoadTime] < 2.0) {
-        NSLog(@"⚠️ 距离上次加载时间过短，跳过重复加载（间隔: %.2f秒）", [now timeIntervalSinceDate:lastLoadTime]);
         return;
     }
     lastLoadTime = now;
     
     // 重置加载标志，准备处理新的页面加载
     self.isWebViewLoading = NO;
-    NSLog(@"🔄 重置页面加载标志 - isWebViewLoading: NO");
     
     // 立即取消可能存在的计时器，避免干扰
     if (self.timer) {
         dispatch_source_cancel(self.timer);
         self.timer = nil;
-        NSLog(@"🔥 [loadHTMLContent] 取消现有计时器");
     }
     
     if (self.htmlStr) {
         // 确保JavaScript桥接已建立
         if (!self.bridge) {
-            NSLog(@"🔧 建立JavaScript桥接...");
             [self loadWebBridge];
         }
         
@@ -547,6 +572,7 @@ static inline BOOL isIPhoneXSeries() {
             
             // 同样使用本地文件加载方式
             NSString *tempFileName = [NSString stringWithFormat:@"temp_direct_%@.html", @(arc4random())];
+            self.currentTempFileName = tempFileName; // 记录当前临时文件名
             NSString *manifestPath = [BaseFileManager appH5LocailManifesPath];
             NSString *tempHtmlPath = [manifestPath stringByAppendingPathComponent:tempFileName];
             
@@ -597,6 +623,7 @@ static inline BOOL isIPhoneXSeries() {
                 
                 // 关键修复：创建临时HTML文件并使用WKWebView的本地文件加载API
                 NSString *tempFileName = [NSString stringWithFormat:@"temp_%@.html", @(arc4random())];
+                self.currentTempFileName = tempFileName; // 记录当前临时文件名
                 NSString *manifestPath = [BaseFileManager appH5LocailManifesPath];
                 NSString *tempHtmlPath = [manifestPath stringByAppendingPathComponent:tempFileName];
                 
@@ -610,8 +637,7 @@ static inline BOOL isIPhoneXSeries() {
                     NSURL *fileURL = [NSURL fileURLWithPath:tempHtmlPath];
                     NSURL *readAccessURL = [NSURL fileURLWithPath:manifestPath isDirectory:YES];
                     
-                    NSLog(@"📁 [WKWebView] 使用本地文件加载: %@", fileURL);
-                    NSLog(@"📁 [WKWebView] 允许访问目录: %@", readAccessURL);
+
                     
                     if (@available(iOS 9.0, *)) {
                         [self.webView loadFileURL:fileURL allowingReadAccessToURL:readAccessURL];
@@ -625,9 +651,6 @@ static inline BOOL isIPhoneXSeries() {
             }];
         }
         
-        NSLog(@"✅ HTML内容加载设置完成");
-    } else {
-        NSLog(@"❌ HTML字符串为空，无法加载内容");
     }
 }
 
@@ -675,12 +698,10 @@ static inline BOOL isIPhoneXSeries() {
                 }
             } else {
                 if (strongSelf.isLoading) {
-                    NSLog(@"🔥 [Timer] 页面已就绪(pageReady)，取消计时器");
                     dispatch_source_cancel(strongSelf.timer);
                     strongSelf.timer = nil;
                 } else {
                     timeout--;
-                    NSLog(@"⏰ [Timer] 等待页面就绪(pageReady)，倒计时: %d秒", timeout);
                 }
             }
         });
@@ -740,68 +761,59 @@ static inline BOOL isIPhoneXSeries() {
 }
 
 - (void)jsCallObjc:(NSDictionary *)jsData jsCallBack:(WVJBResponseCallback)jsCallBack {
-    NSLog(@"📨 [jsCallObjc] 接收到JavaScript调用 - action: %@, data: %@", jsData[@"action"], jsData[@"data"]);
-    
     NSDictionary *jsDic = (NSDictionary *)jsData;
     NSString *function = [jsDic objectForKey:@"action"];
     NSDictionary *dataDic = [jsDic objectForKey:@"data"];
     
     if ([function isEqualToString:@"request"]) {
-        NSString *deviceTokenStr = [[NSUserDefaults standardUserDefaults] objectForKey:@"User_ChannelId"];
-        deviceTokenStr = deviceTokenStr ? deviceTokenStr : @"";
-        
-        // 🔧 添加调试处理：检查是否是测试回调
-        NSString *url = [dataDic objectForKey:@"url"];
-        if ([url isEqualToString:@"//test/callback"]) {
-            NSLog(@"🔍 [JavaScript回调调试] 检测到测试回调请求");
-            
-            // 立即返回测试响应
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (jsCallBack) {
-                    NSDictionary *testResponse = @{
-                        @"success": @YES,  // JavaScript期望的字段
-                        @"data": @{@"message": @"测试回调成功!"},
-                        @"errorMessage": @"",
-                        @"code": @0
-                    };
-                    NSLog(@"🔍 [JavaScript回调调试] 发送测试响应: %@", testResponse);
-                    jsCallBack(testResponse);
-                    NSLog(@"🔍 [JavaScript回调调试] 测试响应已发送");
-                }
-            });
-            return;
-        }
-        
         [self rpcRequestWithJsDic:dataDic completion:^(id result) {
             if (jsCallBack) {
                 jsCallBack(result);
             }
         }];
     } else if ([function isEqualToString:@"pageReady"]) {
-        NSLog(@"🎯 [pageReady] 页面就绪事件被触发");
         self.isLoading = YES;
         
         // 立即取消计时器，防止重复调用domainOperate
         if (self.timer) {
             dispatch_source_cancel(self.timer);
             self.timer = nil;
-            NSLog(@"🔥 [pageReady] 计时器已取消");
         }
         
+        // 确保所有loading指示器都被隐藏
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.activityIndicatorView stopAnimating];
+            if (!self.progressView.hidden) {
+                [UIView animateWithDuration:0.3 animations:^{
+                    self.progressView.alpha = 0.0;
+                } completion:^(BOOL finished) {
+                    self.progressView.hidden = YES;
+                    self.progressView.alpha = 1.0;
+                    self.progressView.progress = 0.0;
+                }];
+            }
+        });
+        
         // 处理下拉刷新
-        if ([self.webView.scrollView respondsToSelector:@selector(mj_header)]) {
-            id mj_header = [self.webView.scrollView performSelector:@selector(mj_header)];
-            if (mj_header && [mj_header respondsToSelector:@selector(isRefreshing)]) {
-                BOOL isRefreshing = [[mj_header performSelector:@selector(isRefreshing)] boolValue];
-                if (isRefreshing && [mj_header respondsToSelector:@selector(endRefreshing)]) {
-                    [mj_header performSelector:@selector(endRefreshing)];
-                    NSLog(@"🔄 [pageReady] 结束下拉刷新");
+        @try {
+            if (self.webView && self.webView.scrollView) {
+                UIScrollView *scrollView = self.webView.scrollView;
+                
+                if ([scrollView respondsToSelector:@selector(mj_header)]) {
+                    id mj_header = [scrollView valueForKey:@"mj_header"];
+                    if (mj_header) {
+                        NSNumber *isRefreshing = [mj_header valueForKey:@"isRefreshing"];
+                        if (isRefreshing && [isRefreshing boolValue]) {
+                            [mj_header performSelector:@selector(endRefreshing) withObject:nil];
+                        }
+                    }
                 }
             }
+        } @catch (NSException *exception) {
+            NSLog(@"处理下拉刷新时发生异常: %@", exception.reason);
         }
         
         // 通知页面显示完成
-        NSLog(@"🎯 [pageReady] 发送showTabviewController通知");
         [[NSNotificationCenter defaultCenter] postNotificationName:@"showTabviewController" object:self];
         
         // 调用页面显示的JS事件
@@ -827,28 +839,7 @@ static inline BOOL isIPhoneXSeries() {
     } else if ([function isEqualToString:@"showToast"]) {
         dispatch_async(dispatch_get_main_queue(), ^{
             NSString *title = [dataDic objectForKey:@"title"] ?: @"";
-            NSString *icon = [dataDic objectForKey:@"icon"] ?: @"none";
-            NSTimeInterval duration = [[dataDic objectForKey:@"duration"] doubleValue] / 1000.0 ?: 1.0; // 转换为秒
-            
-            if (title.length > 0) {
-                // 使用SVStatusHUD显示Toast提示
-                if ([icon isEqualToString:@"success"]) {
-                    // 显示成功图标（可以使用系统的勾号图标）
-                    UIImage *successImage = [UIImage imageNamed:@"success_icon"] ?: [UIImage systemImageNamed:@"checkmark.circle.fill"];
-                    [SVStatusHUD showWithImage:successImage status:title duration:duration];
-                } else if ([icon isEqualToString:@"loading"]) {
-                    // 显示加载信息
-                    [SVStatusHUD showWithMessage:title];
-                } else {
-                    // 显示普通信息
-                    [SVStatusHUD showWithMessage:title];
-                    
-                    // 设置自动消失时间
-                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                        // SVStatusHUD可能没有dismiss方法，让视图自然消失
-                    });
-                }
-            }
+            [SVStatusHUD showWithMessage:title];
         });
         
         // 返回成功响应
@@ -861,27 +852,24 @@ static inline BOOL isIPhoneXSeries() {
             });
         }
     } else if ([function isEqualToString:@"stopPullDownRefresh"]) {
-        // 停止下拉刷新 - 使用更安全的方式
+        // 停止下拉刷新
         dispatch_async(dispatch_get_main_queue(), ^{
             @try {
                 if (self.webView && self.webView.scrollView) {
                     UIScrollView *scrollView = self.webView.scrollView;
                     
-                    // 更安全的方式检查和使用MJRefresh
                     if ([scrollView respondsToSelector:@selector(mj_header)]) {
                         id mj_header = [scrollView valueForKey:@"mj_header"];
                         if (mj_header) {
-                            // 使用KVC更安全
                             NSNumber *isRefreshing = [mj_header valueForKey:@"isRefreshing"];
                             if (isRefreshing && [isRefreshing boolValue]) {
                                 [mj_header performSelector:@selector(endRefreshing) withObject:nil];
-                                NSLog(@"🔄 [stopPullDownRefresh] 下拉刷新已停止");
                             }
                         }
                     }
                 }
             } @catch (NSException *exception) {
-                NSLog(@"❌ [stopPullDownRefresh] 处理下拉刷新时发生异常: %@", exception.reason);
+                NSLog(@"处理下拉刷新时发生异常: %@", exception.reason);
             }
         });
         
@@ -895,33 +883,86 @@ static inline BOOL isIPhoneXSeries() {
             });
         }
     } else if ([function isEqualToString:@"getLocation"]) {
-        NSLog(@"📍 [getLocation] 获取位置信息请求");
+        // 从NSUserDefaults获取缓存的位置信息
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        id currentLatObj = [defaults objectForKey:@"currentLat"];
+        id currentLngObj = [defaults objectForKey:@"currentLng"];
+        NSString *currentCity = [defaults objectForKey:@"currentCity"];
+        NSString *currentAddress = [defaults objectForKey:@"currentAddress"];
         
-        // 获取当前位置信息（模拟数据，实际应该从定位服务获取）
-        NSDictionary *locationData = @{
-            @"latitude": @"37.78583400",
-            @"longitude": @"-122.40641700",
-            @"city": @"上海市",
-            @"area": @"徐汇区",
-            @"address": @"上海市徐汇区"
-        };
+        // 安全地转换为字符串
+        NSString *currentLat = nil;
+        NSString *currentLng = nil;
         
+        if ([currentLatObj isKindOfClass:[NSString class]]) {
+            currentLat = (NSString *)currentLatObj;
+        } else if ([currentLatObj isKindOfClass:[NSNumber class]]) {
+            currentLat = [(NSNumber *)currentLatObj stringValue];
+        }
+        
+        if ([currentLngObj isKindOfClass:[NSString class]]) {
+            currentLng = (NSString *)currentLngObj;
+        } else if ([currentLngObj isKindOfClass:[NSNumber class]]) {
+            currentLng = [(NSNumber *)currentLngObj stringValue];
+        }
+        
+        // 如果有缓存的位置信息且不为空
+        if (currentLat && currentLng && currentCity && 
+            ![currentLat isEqualToString:@"0"] && ![currentLng isEqualToString:@"0"] && 
+            ![currentCity isEqualToString:@"请选择"]) {
+            
+            NSDictionary *locationData = @{
+                @"latitude": currentLat,
+                @"longitude": currentLng,
+                @"city": currentCity ?: @"",
+                @"area": currentCity ?: @"",
+                @"address": currentAddress ?: currentCity ?: @""
+            };
+            
+            if (jsCallBack) {
+                jsCallBack(@{
+                    @"success": @YES,
+                    @"data": locationData,
+                    @"errorMessage": @"",
+                    @"code": @0
+                });
+            }
+        } else {
+            // 没有缓存或缓存无效，返回默认位置（可以根据需要改为请求定位）
+            NSDictionary *locationData = @{
+                @"latitude": @"37.78583400",
+                @"longitude": @"-122.40641700",
+                @"city": @"上海市",
+                @"area": @"徐汇区",
+                @"address": @"上海市徐汇区"
+            };
+            
+            if (jsCallBack) {
+                jsCallBack(@{
+                    @"success": @YES,
+                    @"data": locationData,
+                    @"errorMessage": @"",
+                    @"code": @0
+                });
+            }
+        }
+    } else if ([function isEqualToString:@"navigateTo"]) {
+        // navigateTo应该由子类CFJClientH5Controller处理，这里返回未实现
         if (jsCallBack) {
             jsCallBack(@{
-                @"success": @YES,  // JavaScript期望的字段
-                @"data": locationData,
-                @"errorMessage": @"",
-                @"code": @0
+                @"success": @NO,
+                @"message": @"navigateTo should be handled by subclass",
+                @"errorMessage": @"navigateTo should be handled by subclass",
+                @"code": @(-1)
             });
         }
     } else {
-        // 处理其他类型的调用，这里可以根据需要添加更多的处理逻辑
-        NSLog(@"⚠️ [jsCallObjc] 未处理的function: %@", function);
+        // 处理其他类型的调用
         if (jsCallBack) {
             jsCallBack(@{
-                @"success": @NO,  // JavaScript期望的字段
-                @"data": @{},
-                @"errorMessage": @"Unknown function",
+                @"success": @NO,
+                @"message": @"Unknown action",
+                @"errorMessage": @"Unknown action",
                 @"code": @(-1)
             });
         }
@@ -931,30 +972,22 @@ static inline BOOL isIPhoneXSeries() {
 // 根据资料建议改进的objcCallJs方法
 - (void)objcCallJs:(NSDictionary *)dic {
     if (!dic) {
-        NSLog(@"⚠️ [objcCallJs] 传入参数为空");
         return;
     }
     
     NSString *action = dic[@"action"];
     id data = dic[@"data"];
     
-    NSLog(@"📤 [objcCallJs] 调用JavaScript - action: %@, data: %@", action, data);
-    
     // 确保在主线程执行
     dispatch_async(dispatch_get_main_queue(), ^{
         // 检查WebView和Bridge状态
         if (!self.webView || !self.bridge) {
-            NSLog(@"❌ [objcCallJs] WebView或Bridge未初始化");
             return;
         }
         
         // 使用WebViewJavascriptBridge调用JavaScript，添加错误处理
         [self.bridge callHandler:@"xzBridge" data:dic responseCallback:^(id responseData) {
-            if (responseData) {
-                NSLog(@"✅ [objcCallJs] JavaScript响应: %@", responseData);
-            } else {
-                NSLog(@"⚠️ [objcCallJs] JavaScript无响应或返回空值");
-            }
+            // 静默处理响应
         }];
     });
 }
@@ -969,11 +1002,10 @@ static inline BOOL isIPhoneXSeries() {
 }
 
 - (void)callJavaScript:(NSString *)script completion:(XZWebViewJSCallbackBlock)completion {
-    // 根据资料建议，确保在主线程执行并添加完整错误处理
+    // 确保在主线程执行并添加完整错误处理
     dispatch_async(dispatch_get_main_queue(), ^{
         // 检查WebView状态
         if (!self.webView) {
-            NSLog(@"❌ [callJavaScript] WebView未初始化");
             if (completion) {
                 completion(nil);
             }
@@ -982,23 +1014,18 @@ static inline BOOL isIPhoneXSeries() {
         
         // 检查脚本有效性
         if (!script || script.length == 0) {
-            NSLog(@"❌ [callJavaScript] JavaScript脚本为空");
             if (completion) {
                 completion(nil);
             }
             return;
         }
         
-        NSLog(@"📜 [callJavaScript] 执行JavaScript: %@", script);
-        
         [self.webView evaluateJavaScript:script completionHandler:^(id result, NSError *error) {
             if (error) {
-                NSLog(@"❌ [callJavaScript] JavaScript执行失败: %@", error.localizedDescription);
                 if (completion) {
                     completion(nil);
                 }
             } else {
-                NSLog(@"✅ [callJavaScript] JavaScript执行成功，结果: %@", result);
                 if (completion) {
                     completion(result);
                 }
@@ -1010,8 +1037,6 @@ static inline BOOL isIPhoneXSeries() {
 #pragma mark - Network Request
 
 - (void)rpcRequestWithJsDic:(NSDictionary *)dataDic completion:(void(^)(id result))completion {
-    NSLog(@"🌐 [网络请求] 开始处理网络请求 - URL: %@", [dataDic objectForKey:@"url"]);
-    
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         NSString *dataJsonString = @"";
         if ([dataDic isKindOfClass:[NSDictionary class]]) {
@@ -1021,7 +1046,6 @@ static inline BOOL isIPhoneXSeries() {
         AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
         manager.responseSerializer = [AFJSONResponseSerializer serializer];
         manager.requestSerializer = [AFJSONRequestSerializer serializer];
-        //    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
             
         if(ISIPAD) {
             [manager.requestSerializer setValue:@"iospad" forHTTPHeaderField:@"from"];
@@ -1029,7 +1053,6 @@ static inline BOOL isIPhoneXSeries() {
             [manager.requestSerializer setValue:@"ios" forHTTPHeaderField:@"from"];
         }
         manager.requestSerializer.timeoutInterval = 45;
-        //CFJ新加
         manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/plain", @"text/javascript", @"text/json", @"text/html", nil];
         [manager.requestSerializer setValue:[[NSUserDefaults standardUserDefaults] objectForKey:@"User_Token_String"] forHTTPHeaderField:@"AUTHORIZATION"];
         NSDictionary *header = [dataDic objectForKey:@"header"];
@@ -1038,15 +1061,11 @@ static inline BOOL isIPhoneXSeries() {
         }
         
         NSString *requestUrl = [CustomHybridProcessor custom_getRequestLinkUrl:[dataDic objectForKey:@"url"]];
-        NSLog(@"🌐 [网络请求] 请求URL: %@", requestUrl);
-        NSLog(@"🌐 [网络请求] 请求参数: %@", [dataDic objectForKey:@"data"]);
         
         [manager POST:requestUrl parameters:[dataDic objectForKey:@"data"] headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            NSLog(@"✅ [网络请求] 请求成功 - 响应: %@", responseObject);
-            NSLog(@"🔄 [网络请求] 准备回调前端 - completion存在: %@", completion ? @"是" : @"否");
             if (completion) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    // 🔧 关键修复：转换为JavaScript期望的格式
+                    // 构造JavaScript期望的响应格式
                     NSDictionary *serverResponse = responseObject;
                     
                     // 检查服务器响应的成功状态
@@ -1056,11 +1075,11 @@ static inline BOOL isIPhoneXSeries() {
                         isSuccess = YES;
                     }
                     
-                    // 构造JavaScript期望的响应格式 - 关键修复
+                    // 构造JavaScript期望的响应格式
                     NSDictionary *jsResponse = @{
                         @"success": isSuccess ? @YES : @NO,
                         @"data": @{
-                            @"code": isSuccess ? @"0" : [NSString stringWithFormat:@"%@", codeValue ?: @(-1)],  // 转换为字符串
+                            @"code": isSuccess ? @"0" : [NSString stringWithFormat:@"%@", codeValue ?: @(-1)],
                             @"data": [serverResponse objectForKey:@"data"] ?: @{},
                             @"errorMessage": [serverResponse objectForKey:@"errorMessage"] ?: @""
                         },
@@ -1068,32 +1087,24 @@ static inline BOOL isIPhoneXSeries() {
                         @"code": codeValue ?: @(-1)
                     };
                     
-                    NSLog(@"📤 [网络请求] 转换后的响应格式 - success: %@, data.code: %@", 
-                          jsResponse[@"success"], jsResponse[@"data"][@"code"]);
-                    NSLog(@"📤 [网络请求] 正在执行回调 - 响应数据: %@", jsResponse);
                     completion(jsResponse);
-                    NSLog(@"✅ [网络请求] 回调已执行完成");
                 });
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            NSLog(@"❌ [网络请求] 请求失败 - 错误: %@", error.description);
-            NSLog(@"🔄 [网络请求] 准备回调前端失败结果 - completion存在: %@", completion ? @"是" : @"否");
             if (completion) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    // 🔧 关键修复：失败时也使用JavaScript期望的格式
+                    // 失败时也使用JavaScript期望的格式
                     NSDictionary *errorResponse = @{
                         @"success": @NO,
                         @"data": @{
-                            @"code": @"-1",  // 转换为字符串
+                            @"code": @"-1",
                             @"data": @{},
                             @"errorMessage": error.localizedDescription ?: @"网络请求失败"
                         },
                         @"errorMessage": error.localizedDescription ?: @"网络请求失败",
                         @"code": @(-1)
                     };
-                    NSLog(@"📤 [网络请求] 正在执行失败回调 - 错误数据: %@", errorResponse);
                     completion(errorResponse);
-                    NSLog(@"✅ [网络请求] 失败回调已执行完成");
                 });
             }
         }];
@@ -1155,6 +1166,11 @@ static inline BOOL isIPhoneXSeries() {
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
     NSLog(@"✅ WKWebView页面加载完成 - URL: %@", webView.URL.absoluteString);
     
+    // 隐藏loading指示器
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.activityIndicatorView stopAnimating];
+    });
+    
     if (!self.isWebViewLoading) {
         // 处理loading视图
         if ([[UIApplication sharedApplication].keyWindow viewWithTag:2001] && [self isShowingOnKeyWindow]) {
@@ -1187,6 +1203,14 @@ static inline BOOL isIPhoneXSeries() {
     NSLog(@"❌ WebView加载失败: %@", error.localizedDescription);
     NSLog(@"❌ 错误码: %ld, 域: %@", (long)error.code, error.domain);
     NSLog(@"❌ URL: %@", webView.URL);
+    
+    // 隐藏loading指示器
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.activityIndicatorView stopAnimating];
+        self.progressView.hidden = YES;
+        self.progressView.progress = 0.0;
+    });
+    
     self.networkNoteView.hidden = NO;
 }
 
@@ -1194,6 +1218,14 @@ static inline BOOL isIPhoneXSeries() {
     NSLog(@"❌ WebView预加载失败: %@", error.localizedDescription);
     NSLog(@"❌ 错误码: %ld, 域: %@", (long)error.code, error.domain);
     NSLog(@"❌ URL: %@", webView.URL);
+    
+    // 隐藏loading指示器
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.activityIndicatorView stopAnimating];
+        self.progressView.hidden = YES;
+        self.progressView.progress = 0.0;
+    });
+    
     self.networkNoteView.hidden = NO;
 }
 
@@ -1203,6 +1235,13 @@ static inline BOOL isIPhoneXSeries() {
 
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation {
     NSLog(@"📄 WebView开始导航: %@", webView.URL);
+    
+    // 显示loading指示器
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.activityIndicatorView startAnimating];
+        self.progressView.hidden = NO;
+        self.progressView.progress = 0.0;
+    });
 }
 
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
@@ -1250,18 +1289,30 @@ static inline BOOL isIPhoneXSeries() {
 // 根据资料建议，添加KVO监听方法
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if ([keyPath isEqualToString:@"estimatedProgress"]) {
-        // 更新进度条（如果有的话）
+        // 更新进度条
         float progress = [[change objectForKey:NSKeyValueChangeNewKey] floatValue];
-        NSLog(@"📊 [WKWebView] 加载进度: %.2f%%", progress * 100);
         
-        // 这里可以更新UI进度条
-        // self.progressView.progress = progress;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (progress > 0.0 && progress < 1.0) {
+                // 显示进度条并更新进度
+                self.progressView.hidden = NO;
+                [self.progressView setProgress:progress animated:YES];
+            } else if (progress >= 1.0) {
+                // 加载完成，隐藏进度条
+                [UIView animateWithDuration:0.3 animations:^{
+                    self.progressView.alpha = 0.0;
+                } completion:^(BOOL finished) {
+                    self.progressView.hidden = YES;
+                    self.progressView.alpha = 1.0;
+                    self.progressView.progress = 0.0;
+                }];
+            }
+        });
         
     } else if ([keyPath isEqualToString:@"title"]) {
         // 更新标题
         NSString *title = [change objectForKey:NSKeyValueChangeNewKey];
         if (title && title.length > 0) {
-            NSLog(@"📄 [WKWebView] 页面标题: %@", title);
             // 可以更新导航栏标题
             // self.navigationItem.title = title;
         }

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <WebKit/WebKit.h>
 #import "XZViewController.h"
+#import "WKWebViewJavascriptBridge.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -86,6 +87,7 @@ typedef void(^NextPageDataBlock)(NSDictionary *dic);
 
 // JavaScript交互方法
 - (void)jsCallObjc:(NSDictionary *)jsData completion:(void(^)(id result))completion;
+- (void)jsCallObjc:(NSDictionary *)jsData jsCallBack:(WVJBResponseCallback)jsCallBack;
 - (void)objcCallJs:(NSDictionary *)dic;
 - (void)handleJavaScriptCall:(NSDictionary *)data completion:(XZWebViewJSCallbackBlock)completion;
 - (void)callJavaScript:(NSString *)script completion:(XZWebViewJSCallbackBlock)completion;
