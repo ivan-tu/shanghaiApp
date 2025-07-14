@@ -660,6 +660,12 @@ static inline BOOL isIPhoneXSeries() {
 //页面出现
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    // 确保系统的返回手势是启用的
+    if (self.navigationController && self.navigationController.viewControllers.count > 1) {
+        self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+    }
+    
     if (!(self.pushType == isPushNormal)) {
         dispatch_async(dispatch_get_main_queue(), ^{
             //设置边角
@@ -2988,7 +2994,8 @@ static inline BOOL isIPhoneXSeries() {
         @"weixinLogin", @"weixinPay", @"aliPay", @"chooseFile", @"uploadFile", @"QRScan",
         @"previewImage", @"userLogin", @"userLogout", @"switchTab", @"hideNavationbar",
         @"showNavationbar", @"noticemsg_setNumber", @"showModal", @"showToast", @"selectLocation",
-        @"selectLocationCity", @"navigateBack", @"reLaunch", @"showActionSheet", @"areaSelect"
+        @"selectLocationCity", @"navigateBack", @"reLaunch", @"showActionSheet", @"areaSelect",
+        @"reloadOtherPages"
     ]];
     
     // 如果是子类特有的action，直接调用子类处理

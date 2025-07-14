@@ -156,12 +156,31 @@ static inline BOOL isIPhoneXSeries() {
 - (void)cleanupTempHtmlFiles {
     // 只清理当前控制器的临时文件
     if (self.currentTempFileName) {
-        NSString *manifestPath = [BaseFileManager appH5LocailManifesPath];
-        NSString *filePath = [manifestPath stringByAppendingPathComponent:self.currentTempFileName];
+        BOOL fileRemoved = NO;
         
-        if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
-            [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
-            NSLog(@"🗑️ 清理临时文件: %@", self.currentTempFileName);
+        // 首先尝试在Documents目录中查找
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsPath = [paths firstObject];
+        NSString *documentsFilePath = [documentsPath stringByAppendingPathComponent:self.currentTempFileName];
+        
+        if ([[NSFileManager defaultManager] fileExistsAtPath:documentsFilePath]) {
+            [[NSFileManager defaultManager] removeItemAtPath:documentsFilePath error:nil];
+            NSLog(@"🗑️ 清理临时文件（Documents）: %@", self.currentTempFileName);
+            fileRemoved = YES;
+        }
+        
+        // 兼容旧版本，同时检查manifest目录
+        NSString *manifestPath = [BaseFileManager appH5LocailManifesPath];
+        NSString *manifestFilePath = [manifestPath stringByAppendingPathComponent:self.currentTempFileName];
+        
+        if ([[NSFileManager defaultManager] fileExistsAtPath:manifestFilePath]) {
+            [[NSFileManager defaultManager] removeItemAtPath:manifestFilePath error:nil];
+            NSLog(@"🗑️ 清理临时文件（Manifest）: %@", self.currentTempFileName);
+            fileRemoved = YES;
+        }
+        
+        if (!fileRemoved) {
+            NSLog(@"⚠️ 未找到临时文件: %@", self.currentTempFileName);
         }
         
         self.currentTempFileName = nil;
@@ -290,6 +309,11 @@ static inline BOOL isIPhoneXSeries() {
     self.webView.UIDelegate = self;
     self.webView.scrollView.delegate = self;
     self.webView.backgroundColor = [UIColor whiteColor];
+    
+    // 修复左滑返回手势冲突：禁用WKWebView的左滑后退手势
+    if (@available(iOS 9.0, *)) {
+        self.webView.allowsBackForwardNavigationGestures = NO;
+    }
     
     // 配置滚动视图
     if (@available(iOS 11.0, *)) {
@@ -508,6 +532,7 @@ static inline BOOL isIPhoneXSeries() {
     }
     
     self.isLoading = NO;
+    self.isWebViewLoading = NO; // 重置WebView加载标志
     
     // 显示loading指示器
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -542,6 +567,7 @@ static inline BOOL isIPhoneXSeries() {
     
     // 重置加载标志，准备处理新的页面加载
     self.isWebViewLoading = NO;
+    self.isLoading = NO; // 同时重置页面就绪标志
     
     // 立即取消可能存在的计时器，避免干扰
     if (self.timer) {
@@ -570,33 +596,16 @@ static inline BOOL isIPhoneXSeries() {
             
             NSLog(@"🌐 开始加载HTML字符串...");
             
-            // 同样使用本地文件加载方式
-            NSString *tempFileName = [NSString stringWithFormat:@"temp_direct_%@.html", @(arc4random())];
-            self.currentTempFileName = tempFileName; // 记录当前临时文件名
+            // 关键修复：直接使用loadHTMLString方法，避免沙盒问题
+            NSLog(@"📄 [WKWebView-Direct] 使用HTML字符串加载方式");
+            
+            // 使用manifest目录作为baseURL，确保资源正确加载
             NSString *manifestPath = [BaseFileManager appH5LocailManifesPath];
-            NSString *tempHtmlPath = [manifestPath stringByAppendingPathComponent:tempFileName];
+            NSURL *baseURL = [NSURL fileURLWithPath:manifestPath isDirectory:YES];
             
-            NSError *writeError;
-            BOOL writeSuccess = [allHtmlStr writeToFile:tempHtmlPath 
-                                              atomically:YES 
-                                                encoding:NSUTF8StringEncoding 
-                                                   error:&writeError];
+            NSLog(@"📁 [WKWebView-Direct] BaseURL: %@", baseURL);
             
-            if (writeSuccess) {
-                NSURL *fileURL = [NSURL fileURLWithPath:tempHtmlPath];
-                NSURL *readAccessURL = [NSURL fileURLWithPath:manifestPath isDirectory:YES];
-                
-                NSLog(@"📁 [WKWebView-Direct] 使用本地文件加载: %@", fileURL);
-                
-                if (@available(iOS 9.0, *)) {
-                    [self.webView loadFileURL:fileURL allowingReadAccessToURL:readAccessURL];
-                } else {
-                    [self.webView loadHTMLString:allHtmlStr baseURL:[HTMLCache sharedCache].noHtmlBaseUrl];
-                }
-            } else {
-                NSLog(@"❌ 创建临时HTML文件失败: %@", writeError);
-                [self.webView loadHTMLString:allHtmlStr baseURL:[HTMLCache sharedCache].noHtmlBaseUrl];
-            }
+            [self.webView loadHTMLString:allHtmlStr baseURL:baseURL];
         } else {
             // 使用CustomHybridProcessor处理
             NSLog(@"🔄 使用CustomHybridProcessor处理页面 - URL: %@", self.pinUrl);
@@ -621,33 +630,16 @@ static inline BOOL isIPhoneXSeries() {
                 NSLog(@"📄 [HTML-DEBUG] HTML前1000字符: %@", allHtmlStr.length > 1000 ? [allHtmlStr substringToIndex:1000] : allHtmlStr);
                 NSLog(@"📄 [HTML-DEBUG] BaseURL: %@", [HTMLCache sharedCache].noHtmlBaseUrl);
                 
-                // 关键修复：创建临时HTML文件并使用WKWebView的本地文件加载API
-                NSString *tempFileName = [NSString stringWithFormat:@"temp_%@.html", @(arc4random())];
-                self.currentTempFileName = tempFileName; // 记录当前临时文件名
+                // 关键修复：直接使用loadHTMLString方法，避免沙盒问题
+                NSLog(@"📄 [WKWebView-CustomHybrid] 使用HTML字符串加载方式");
+                
+                // 使用manifest目录作为baseURL，确保资源正确加载
                 NSString *manifestPath = [BaseFileManager appH5LocailManifesPath];
-                NSString *tempHtmlPath = [manifestPath stringByAppendingPathComponent:tempFileName];
+                NSURL *baseURL = [NSURL fileURLWithPath:manifestPath isDirectory:YES];
                 
-                NSError *writeError;
-                BOOL writeSuccess = [allHtmlStr writeToFile:tempHtmlPath 
-                                                  atomically:YES 
-                                                    encoding:NSUTF8StringEncoding 
-                                                       error:&writeError];
+                NSLog(@"📁 [WKWebView-CustomHybrid] BaseURL: %@", baseURL);
                 
-                if (writeSuccess) {
-                    NSURL *fileURL = [NSURL fileURLWithPath:tempHtmlPath];
-                    NSURL *readAccessURL = [NSURL fileURLWithPath:manifestPath isDirectory:YES];
-                    
-
-                    
-                    if (@available(iOS 9.0, *)) {
-                        [self.webView loadFileURL:fileURL allowingReadAccessToURL:readAccessURL];
-                    } else {
-                        [self.webView loadHTMLString:allHtmlStr baseURL:[HTMLCache sharedCache].noHtmlBaseUrl];
-                    }
-                } else {
-                    NSLog(@"❌ 创建临时HTML文件失败: %@", writeError);
-                    [self.webView loadHTMLString:allHtmlStr baseURL:[HTMLCache sharedCache].noHtmlBaseUrl];
-                }
+                [self.webView loadHTMLString:allHtmlStr baseURL:baseURL];
             }];
         }
         
@@ -672,7 +664,11 @@ static inline BOOL isIPhoneXSeries() {
         dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
         self.timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
         dispatch_source_set_timer(self.timer, dispatch_walltime(NULL, 0), 1.0 * NSEC_PER_SEC, 0);
-        timeout = 6;
+        timeout = 10; // 增加超时时间到10秒
+        
+        // 添加重试次数限制
+        static NSInteger retryCount = 0;
+        static NSString *lastFailedUrl = nil;
         
         __weak typeof(self) weakSelf = self;
         dispatch_source_set_event_handler(self.timer, ^{
@@ -680,12 +676,39 @@ static inline BOOL isIPhoneXSeries() {
             if (!strongSelf) return;
             
             if (timeout <= 0) {
-                if (strongSelf.isLoading) {
-                    NSLog(@"🔥 [Timer] 页面已就绪(pageReady)，取消计时器");
+                if (strongSelf.isLoading || strongSelf.isWebViewLoading) {
+                    NSLog(@"🔥 [Timer] 页面已就绪(pageReady: %@, WebView: %@)，取消计时器", 
+                          strongSelf.isLoading ? @"YES" : @"NO", 
+                          strongSelf.isWebViewLoading ? @"YES" : @"NO");
                     dispatch_source_cancel(strongSelf.timer);
                     strongSelf.timer = nil;
+                    retryCount = 0; // 重置重试次数
+                    lastFailedUrl = nil;
                 } else {
-                    NSLog(@"⏰ [Timer] 页面加载超时，准备重新加载");
+                    // 检查重试次数限制
+                    NSString *currentUrl = strongSelf.pinUrl ?: @"";
+                    if ([currentUrl isEqualToString:lastFailedUrl]) {
+                        retryCount++;
+                    } else {
+                        retryCount = 1;
+                        lastFailedUrl = currentUrl;
+                    }
+                    
+                    if (retryCount > 3) {
+                        NSLog(@"❌ [Timer] 重试次数超过限制(%ld次)，停止重新加载", (long)retryCount);
+                        dispatch_source_cancel(strongSelf.timer);
+                        strongSelf.timer = nil;
+                        
+                        // 显示错误提示
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [strongSelf.activityIndicatorView stopAnimating];
+                            strongSelf.progressView.hidden = YES;
+                            strongSelf.networkNoteView.hidden = NO;
+                        });
+                        return;
+                    }
+                    
+                    NSLog(@"⏰ [Timer] 页面加载超时，准备重新加载 (第%ld次重试)", (long)retryCount);
                     dispatch_async(dispatch_get_main_queue(), ^{
                         // 检查网络状态
                         if (NoReachable) {
@@ -697,9 +720,11 @@ static inline BOOL isIPhoneXSeries() {
                     });
                 }
             } else {
-                if (strongSelf.isLoading) {
+                if (strongSelf.isLoading || strongSelf.isWebViewLoading) {
                     dispatch_source_cancel(strongSelf.timer);
                     strongSelf.timer = nil;
+                    retryCount = 0; // 重置重试次数
+                    lastFailedUrl = nil;
                 } else {
                     timeout--;
                 }
@@ -1252,6 +1277,26 @@ static inline BOOL isIPhoneXSeries() {
     if ([scheme isEqualToString:@"wvjbscheme"]) {
         NSLog(@"🔗 [WKWebView] 检测到WebViewJavascriptBridge连接: %@", url.absoluteString);
         decisionHandler(WKNavigationActionPolicyAllow);
+        return;
+    }
+    
+    // 处理电话客服按钮
+    if ([scheme isEqualToString:@"tel"]) {
+        NSLog(@"📞 [WKWebView] 检测到电话链接: %@", url.absoluteString);
+        // 在iOS 10.0以上使用新的API
+        if (@available(iOS 10.0, *)) {
+            [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:^(BOOL success) {
+                if (success) {
+                    NSLog(@"✅ [WKWebView] 电话拨打成功");
+                } else {
+                    NSLog(@"❌ [WKWebView] 电话拨打失败");
+                }
+            }];
+        } else {
+            // iOS 10.0以下使用旧API
+            [[UIApplication sharedApplication] openURL:url];
+        }
+        decisionHandler(WKNavigationActionPolicyCancel);
         return;
     }
     
