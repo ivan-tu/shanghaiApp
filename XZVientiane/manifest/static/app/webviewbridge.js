@@ -77,8 +77,8 @@ wx.app.connect=function(callback){
 			 
 			 bridge.callHandler('xzBridge',{action:action,data:obj.data},function(backData){
 				 if(backData.success&&backData.success!='false'){
-					 // 应用层期望res.data格式，所以将backData包装成{data: backData.data}
-					 app.trigger(obj.success,{data: backData.data||{}});
+					
+					 app.trigger(obj.success,backData.data||{});
 				 }else{
 					 app.trigger(obj.fail,backData.errorMessage);
 				 };

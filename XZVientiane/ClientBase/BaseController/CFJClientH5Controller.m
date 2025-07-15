@@ -3061,7 +3061,7 @@ static inline BOOL isIPhoneXSeries() {
         // nativeGet特殊处理，data字段包含实际内容
         formattedData = data ?: @"";
     } else if ([apiType isEqualToString:@"request"]) {
-        // request类型：应用层期望res.data.code == '0'，需要包装服务器响应
+        // request类型：应用层期望res.data.code，需要额外嵌套一层data
         if ([data isKindOfClass:[NSDictionary class]]) {
             // 获取服务器code值，确保类型正确
             NSNumber *serverCode = [data objectForKey:@"code"];
@@ -3076,17 +3076,21 @@ static inline BOOL isIPhoneXSeries() {
                 }
             }
             
-            // 构造应用层期望的格式: {code: "0", data: {...}, errorMessage: ""}
+            // 构造应用层期望的格式，需要嵌套data字段
             formattedData = @{
-                @"code": codeString,
-                @"data": [data objectForKey:@"data"] ?: @{},
-                @"errorMessage": [data objectForKey:@"errorMessage"] ?: @""
+                @"data": @{
+                    @"code": codeString,
+                    @"data": [data objectForKey:@"data"] ?: @{},
+                    @"errorMessage": [data objectForKey:@"errorMessage"] ?: @""
+                }
             };
         } else {
             formattedData = @{
-                @"code": success ? @"0" : @"-1",
-                @"data": @{},
-                @"errorMessage": @""
+                @"data": @{
+                    @"code": success ? @"0" : @"-1",
+                    @"data": @{},
+                    @"errorMessage": @""
+                }
             };
         }
     } else {
