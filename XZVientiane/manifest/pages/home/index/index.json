@@ -2,7 +2,8 @@
   "usingComponents":{
 	  "picker": "/components/web/picker/picker",
 	  "upload": "/components/common/upload/upload",
-	  "newShare": "/components/common/newShare/newShare"
+	  "newShare": "/components/common/newShare/newShare",
+	  "calendar": "plugin://calendar/calendar"
   },
   "navigationBarTitleText":"在局"
 }

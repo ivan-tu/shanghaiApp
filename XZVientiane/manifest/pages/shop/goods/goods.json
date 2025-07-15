@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+		"search-bar": "/components/common/search-bar/search-bar",
+		"newShare": "/components/common/newShare/newShare"
+   },
+  "navigationBarTitleText": "商品"
+}

@@ -6,7 +6,7 @@
 (function(global, $) {
 
     let app = global.getApp(),
-        appActions = ['previewImage', 'upload', 'share', 'pay', 'showModal', 'showActionSheet', 'showToast', 'navigateBack', 'setNavigationBarTitle', 'setTabBarBadge', 'removeTabBarBadge', 'showTabBarRedDot', 'hideTabBarRedDot', 'setTabBarStyle', 'setTabBarItem', 'showTabBar', 'hideTabBar', 'switchTab', 'reLaunch'];
+        appActions = ['previewImage', 'upload', 'share', 'pay', 'showModal', 'showActionSheet', 'navigateBack', 'setNavigationBarTitle', 'setTabBarBadge', 'removeTabBarBadge', 'showTabBarRedDot', 'hideTabBarRedDot', 'setTabBarStyle', 'setTabBarItem', 'showTabBar', 'hideTabBar', 'switchTab', 'reLaunch'];
 
     xzApp.init(app);
 
@@ -89,11 +89,11 @@
          */
 
         request(obj) {
-            if(obj.data){
-                obj.data=JSON.parse(obj.data);
-            }else{
-                obj.data={};
-            }
+			if(obj.data&&typeof obj.data == 'string'){
+				obj.data = JSON.parse(obj.data);
+			}else{
+				obj.data = {};
+			};
             wx.app.call('request', {
                 success: obj.success,
                 fail: obj.fail,

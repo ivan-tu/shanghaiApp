@@ -1,0 +1,136 @@
+<div class="app-wrapper">
+  <div wx:if="{{isUserLogin}}" class="app-main">
+    <view class="markWraper"></view>
+    <div class="user-index">
+     
+      <div class="user-index-newTop clearfix bgfff">
+      <navigator url="../../user/profile/profile?uid={{data._id}}">
+        <div class="picBox hasLoading">
+          <image class="round" src="{{isUserLogin?data.headpic:assetsPath+'images/headpic.png'}}" mode="widthFix" />
+        </div>
+        <div class="textBox">
+          <div class="p20 c333" wx:if="{{isUserLogin}}">{{data.username||'-'}}</div>
+          <div class="p20 c333" wx:else>未命名</div>
+          <div class="p12 c888">推个号：{{isUserLogin?data.pocode:'*********'}} <span class="fr c999">我的推个<i class="xzicon-right"></i></span></div>
+        </div>
+      </navigator>
+    </div>
+      <div class="user-index-countRow">
+        <div class="user-index-count xzui-flex">
+         <navigator url="../../user/balance/balance" class="xzui-flex_item">
+            <p class="user-index-countNum">{{financeData.balance||0}}</p>
+            <p class="user-index-countTitle">余额</p>
+          </navigator>
+          <navigator url="../../tuidou/tuidou/tuidou" class="xzui-flex_item">
+            <p class="user-index-countNum">{{financeData.beans||0}}</p>
+            <p class="user-index-countTitle">推豆</p>
+          </navigator>
+           
+          <navigator url="../../visitor/index/index" class="xzui-flex_item">
+            <p class="user-index-countNum">{{myVisitor.uv||0}}</p>
+            <p class="user-index-countTitle">访客</p>
+          </navigator>
+        </div>
+      </div>
+      <div class="pd15">
+      <navigator url="../../team/index/index">
+             <image style="border-radius:5px;" src="https://static.mendianquan.com/15658376427993175.png" mode="widthFix" />
+          </navigator>
+      </div>
+      <div class="mlr15 tac user_index_menuBar mt10">
+        <div class="xzui-flex">
+          <navigator url="../../message/list/list" class="xzui-flex_item">
+          	<span class="imageIcon xx tuige_newIcon">
+            	<span class="user-index-messageBadge" wx:if="{{unRead>0}}">{{unRead}}</span>
+            </span>
+            <p class="p12 c666">消息</p>
+          </navigator>          
+          <navigator url="../../feedback/index/index" class="xzui-flex_item">
+          	<span class="imageIcon ly tuige_newIcon"></span>
+            <p class="p12 c666">留言</p>
+          </navigator>
+          <navigator url="../../user/picture/picture" class="xzui-flex_item">
+          	<span class="imageIcon xc tuige_newIcon"></span>
+            <p class="p12 c666">相册</p>
+          </navigator>
+          <navigator url="../../user/myCode/myCode" class="xzui-flex_item">
+          	<span class="imageIcon tgm tuige_newIcon"></span>
+            <p class="p12 c666">推个码</p>
+          </navigator>
+        </div>
+      </div>
+      <div class="heightTopBorder mt20 user_socialBar">
+      	<div class="xzui-flex">
+           <div  class="xzui-flex_item share" bindtap="toShare">
+            <p class="p16 bold c333">分享推个</p>
+            <p class="c888 p12">全面展示自我</p>
+          </div>
+          <div bindtap="toPage" data-page="../../page/page/page?id=5d304edd0a39e478e14ce1ae&uid=5d3045160a39e477ed2698d2" class="xzui-flex_item  play" style="border-left:1px solid #f5f5f5;">
+           <p class="p16 bold c333">玩转推个</p>
+            <p class="c888 p12">成为推广高手</p>
+          </div>
+        </div>
+      </div>
+      <div class="userIndex-cell heightTopBorder mb20">
+        <div class="xzui-cells xzui-cells_in-small-appmsg">
+          <navigator url="../../user/feedBack/feedBack" target="_blank" class="xzui-cell xzui-cell_access h52">
+            <div class="xzui-cell__hd xzui-cells_in-small-appmsg-img tuige_newIcon yj"></div>
+            <div class="xzui-cell__bd xzui-cell_primary ml5">
+              <div>提意见</div>
+            </div>
+            <div class="xzui-cell__ft">
+              <i class="xzicon-right xzui-cell__ft_arrow"></i>
+            </div>
+          </navigator>
+          <navigator url="../../page/page/page?id=5d304edd0a39e478e14ce1ae&uid=5d3045160a39e477ed2698d2" target="_blank" class="xzui-cell xzui-cell_access h52">
+            <div class="xzui-cell__hd xzui-cells_in-small-appmsg-img tuige_newIcon sy"></div>
+            <div class="xzui-cell__bd xzui-cell_primary ml5">
+              <div>怎么用</div>
+            </div>
+            <div class="xzui-cell__ft">
+              <i class="xzicon-right xzui-cell__ft_arrow"></i>
+            </div>
+          </navigator>
+          <navigator url="../../home/articleDetail/articleDetail?customId=assistant&title=小助理" target="_blank" class="xzui-cell xzui-cell_access h52">
+            <div class="xzui-cell__hd xzui-cells_in-small-appmsg-img tuige_newIcon zl"></div>
+            <div class="xzui-cell__bd xzui-cell_primary ml5">
+              <div>小助理</div>
+            </div>
+            <div class="xzui-cell__ft">
+              <i class="xzicon-right xzui-cell__ft_arrow"></i>
+            </div>
+          </navigator>
+          <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" class="xzui-cell xzui-cell_access h52" wx:if="{{!bindData.phone&&client=='wx'}}">
+            <div class="xzui-cell__hd xzui-cells_in-small-appmsg-img tuige_newIcon sz"></div>
+            <div class="xzui-cell__bd xzui-cell_primary ml5">
+              <div class="tal">设置</div>
+            </div>
+            <div class="xzui-cell__ft">
+              <i class="xzicon-right xzui-cell__ft_arrow"></i>
+            </div>
+          </button>
+          <view class="xzui-cell xzui-cell_access h52" wx:elif="{{!bindData.phone&&client!='wx'}}" bindtap="toBindAccount">
+            <div class="xzui-cell__hd xzui-cells_in-small-appmsg-img tuige_newIcon sz"></div>
+            <div class="xzui-cell__bd xzui-cell_primary ml5">
+              <div>设置</div>
+            </div>
+            <div class="xzui-cell__ft">
+              <i class="xzicon-right xzui-cell__ft_arrow"></i>
+            </div>
+          </view>
+          <navigator url="../../user/setting/setting" class="xzui-cell xzui-cell_access h52" wx:else>
+            <div class="xzui-cell__hd xzui-cells_in-small-appmsg-img tuige_newIcon sz"></div>
+            <div class="xzui-cell__bd xzui-cell_primary ml5">
+              <div>设置</div>
+            </div>
+            <div class="xzui-cell__ft">
+              <i class="xzicon-right xzui-cell__ft_arrow"></i>
+            </div>
+          </navigator>
+        </div>
+      </div>
+    </div>
+    <newShare id="newShareCon"></newShare>
+  </div>
+  <noLogin bindloginsuccess="onShow" wx:else></noLogin>
+</div>

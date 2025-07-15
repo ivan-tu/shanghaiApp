@@ -78,15 +78,8 @@ wx.app.connect=function(callback){
 			 bridge.callHandler('xzBridge',{action:action,data:obj.data},function(backData){
 				 
 				 if(backData.success&&backData.success!='false'){
-					 // 特殊处理nativeGet，直接返回data字段内容
-					 if(action === 'nativeGet' && backData.data) {
-						 app.trigger(obj.success, backData.data);
-					 } else {
-						 var wxResponse = {
-							 data: backData.data || {}
-						 };
-						 app.trigger(obj.success, wxResponse);
-					 }
+					
+					 app.trigger(obj.success,backData.data||{});
 				 }else{
 					 app.trigger(obj.fail,backData.errorMessage);
 				 };

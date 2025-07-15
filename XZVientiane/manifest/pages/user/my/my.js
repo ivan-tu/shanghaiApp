@@ -103,6 +103,12 @@
 						});
 						
 					};*/
+					if(!res.account){
+						app.tips('请先绑定账号','error');
+						setTimeout(function(){
+							app.navTo('../../user/bindAccount/bindAccount');
+						});
+					};
 					//设置分享参数
 					let newData = app.extend({}, options);
 					newData = app.extend(newData, {

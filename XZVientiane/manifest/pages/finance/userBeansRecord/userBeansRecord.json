@@ -1,0 +1,6 @@
+{
+	"usingComponents": {
+		"nologin": "/components/common/nologin/nologin"
+   },
+   "navigationBarTitleText": "在局币记录"
+}

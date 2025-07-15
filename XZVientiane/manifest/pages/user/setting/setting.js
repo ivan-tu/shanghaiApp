@@ -37,28 +37,13 @@
 			},
             signOut: function(e) {
                 let _this = this;
-                console.log('🔄 [signOut] 用户点击退出登录');
                 app.confirm('确定要退出登录吗?', function () {
-                    console.log('🔄 [signOut] 用户确认退出登录');
-                    
-                    // 定义退出成功后的处理逻辑
-                    const handleLogoutSuccess = function() {
-                        console.log('🔄 [signOut] 开始清理本地数据');
+                    app.request('/user/userapi/logout', function () {
                         app.removeUserSession();
 						app.tips('退出成功','success');
 						setTimeout(function(){
-                            console.log('🔄 [signOut] 准备跳转到首页');
 							app.reLaunch('../../home/index/index');
 						},1000);
-                    };
-                    
-                    app.request('/user/userapi/logout', function () {
-                        console.log('🔄 [signOut] 服务器退出登录成功');
-                        handleLogoutSuccess();
-                    }, function(error) {
-                        console.log('❌ [signOut] 服务器退出登录失败，但继续清理本地数据', error);
-                        // 即使服务器退出失败，也要清理本地数据
-                        handleLogoutSuccess();
                     });
                 })
 

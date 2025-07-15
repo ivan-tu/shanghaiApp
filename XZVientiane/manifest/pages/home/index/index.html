@@ -35,6 +35,7 @@
                     <span class="fr searchBtn"><i class="xzicon-search1"></i> 搜索俱乐部/活动</span>
                 </div>
             </div>
+            <calendar wx:if="{{client=='wx'}}" calendar-style="calendarStyle" header-style="calendarHeader" board-style="calendarBoard" weeks-type="cn" binddayClick="dayClick" binddateChange="dateChange" show-more-days="{{true}}" days-color="{{daysColor}}"/>
         </div>
         <!--
         <div class="homeIndex-menu">

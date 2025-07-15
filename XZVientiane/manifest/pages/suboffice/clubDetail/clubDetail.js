@@ -118,6 +118,25 @@
 				this.setData({ajaxLoading:true});
 				app.request('//clubapi/getClubDetail',{id:options.id},function(res){
 					if(res._id){
+						//是管理员并且没弹出过提醒
+						if(res.ismy==1){
+							let alertArray = app.storage.get('alertArray')||{};
+							if(alertArray.clubManageTips!=1){//没弹出过
+								app.request('//set/get', {type: 'tipsSet'}, function (res) {
+									let backData = res.data||{};
+									if (backData.clubManageTips){
+										app.alert({
+											content:backData.clubManageTips,
+											confirmText:'我知道了',
+											success:function(){
+												alertArray.clubManageTips = 1;
+												app.storage.set('alertArray',alertArray);
+											},
+										});
+									};
+								});
+							};
+						};
 						res.activity_sharepic = app.image.crop(res.pic,480,480);
 						res.pic = app.image.crop(res.pic,80,80);
 						if(res.activityList&&res.activityList.data.length){

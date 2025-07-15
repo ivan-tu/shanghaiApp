@@ -8,7 +8,12 @@
             systemId: 'user',
             moduleId: 'myServer',
 			isUserLogin: app.checkUser(),
-            data:{},
+            data:{
+				teamCount:0,
+				teamMonthCount:0,
+				servers:0,
+				commion:0,
+			},
             options: {},
             settings: {},
             language: {},
@@ -72,9 +77,23 @@
 				if(!formData.grouppic){
 					app.tips('请上传群截图','error');
 				}else{
-					app.request('//operapi/applyOperServer',formData,function(res){
-						app.tips('申请成功','success');
-						_this.load();
+					app.request('//userapi/info', {}, function(userInfo){
+						if(userInfo.wxCodePic){
+							app.request('//operapi/applyOperServer',formData,function(res){
+								app.tips('申请成功','success');
+								_this.load();
+							});
+						}else{
+							app.confirm({
+								content:'请先上传个人微信二维码',
+								confirmText:'立即上传',
+								success:function(req){
+									if(req.confirm){
+										app.navTo('../../user/info/info');
+									};
+								},
+							});
+						};
 					});
 				};
 			},

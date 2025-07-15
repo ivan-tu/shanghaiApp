@@ -1,0 +1,7 @@
+{
+	"usingComponents": {
+		"noLogin": "/components/common/noLogin/noLogin",
+		"newShare": "/components/common/newShare/newShare"
+  },
+	"navigationBarTitleText": "我的"
+}

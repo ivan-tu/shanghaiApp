@@ -1,0 +1,322 @@
+.shopGoodsList_box{
+}
+.shopGoodsList_list{
+	padding:15px;
+}
+.shopGoodsList_list + .shopGoodsList_list{
+	border-top:1px solid #eee;
+}
+.shopGoodsList_list .picBox{
+	width:100px;
+	height:100px;
+	float:left;
+}
+.shopGoodsList_list .textBox{
+	margin-left:110px;
+}
+.shopGoodsList_list .textBox .goodsName{
+	line-height:22px;
+	font-size:15px;
+	height:44px;
+	overflow:hidden;
+}
+.goodsAddCartBox{
+	margin-top:3px;
+	position:relative;
+	overflow:inherit;
+}
+.goodsAddCartBtn{
+	position:absolute;
+	right:0px;
+	top:0px;
+	font-size:20px;
+	color:#f90022;
+	padding:0;
+	margin:0
+}
+.goodsAddCartBtn:hover{
+	color:#f90022 !important;
+}
+.shop-goodsDetail-selectBox{
+	background:#fff;
+	height:0;
+	overflow:hidden;
+	bottom:0;
+	left:0;
+	right:0;
+	position:fixed;
+	z-index:9;
+	box-shadow:0 -2px 3px #333;
+	border-top-left-radius:15px;
+	border-top-right-radius:15px;
+	transition:height 0.2s;
+}
+.shop-goodsDetail-selectBox.show{
+	height:70%;
+}
+.shop-goodsDetail-selectBox.isWeb{
+	bottom:48px;
+}
+.shop-goodsDetail-selectBox-bottom{
+	position:absolute;
+	bottom:0;
+	left:0;
+	right:0;
+}
+.shop-goodsDetail-selectBox-box{
+	position:absolute;
+	left:-10px;
+	right:0;
+	bottom:65px;
+	top:135px;
+	padding:0 15px 15px 15px;
+	-webkit-overflow-scrolling:touch;
+	overflow:auto;
+}
+.shop-goodsDetail-selectBox-btn{
+	padding:0 10px;
+	border:1px solid #eee;
+	font-size:14px;
+	color:#666;
+	margin-top:10px;
+	margin-left:10px;
+	line-height:28px;
+	border-radius:5px;
+	float:left;
+}
+.shop-goodsDetail-selectBox-btn.active{
+	border-color:#f90022;
+	color:#f90022;
+}
+.shop-goodsDetail-selectBox-btn.disabled{
+	border-color:#f5f5f5;
+	color:#ccc;
+}
+.shop-goodsDetail-selectBox-close{
+	position:absolute;
+	right:10px;
+	top:10px;
+	font-size:18px;
+}
+/*购物车购买按钮*/
+.goodsAddCartBox .btnBox{
+	margin-top:10px;
+	text-align:right;
+	font-size:0;
+}
+.goodsAddCartBox .btnBox .addCartBtn{
+	display:inline-block;
+	background: #FFA955;
+	margin:0;
+	padding:0 8px 0 8px;
+	height:30px;
+	line-height:30px;
+	border-radius:100px 0 0 100px;
+	color:#fff;
+	font-size:12px;
+}
+.goodsAddCartBox .btnBox .buyBtn{
+	display:inline-block;
+	background: #D40000;
+	margin:0;
+	padding:0 8px 0 8px;
+	height:30px;
+	line-height:30px;
+	border-radius:0 100px 100px 0;
+	color:#fff;
+	font-size:12px;
+}
+.goodsAddCartBox .btnBox .borderRadius{
+	border-radius:100px;
+}
+
+/*新版头部筛选搜索*/
+.shopGoodsList_head{
+	position:relative;
+	padding:10px 35px 10px 10px;
+}
+.shopGoodsList_head .xzicon-search1{
+	position:absolute;
+	left:9px;
+	top:8px;
+	color:#7A797B;
+}
+.shopGoodsList_head .searchInput{
+	width:100%;
+	border:0 none;
+	background-color: #f4f4f4;
+	font-size:12px;
+	color:#7A797B;
+	height:25px;
+	line-height:25px;
+	outline: 0;
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+}
+.shopGoodsList_head .screenBtn{
+	margin:0;
+	padding:0;
+	display:inline-block;
+	position:absolute;
+	z-index:2;
+	right:10px;
+	top:50%;
+	margin-top:-9px;
+	width:18px;
+	height:18px;
+}
+.shopGoodsList_head .screenBtn .pic{
+	vertical-align:top;
+}
+.shopGoodsList_head .searchBox{
+    border-radius: 20px;
+	background-color: #f4f4f4;
+	padding:5px 30px 5px 27px;
+	position:relative;
+}
+.shopGoodsList_head .closeBtn{
+	position:absolute;
+	z-index:2;
+	right:10px;
+	font-size:14px;
+	line-height:14px;
+	top:50%;
+	margin-top:-7px;
+	color:#888;
+}
+.shopGoodsList-menu{
+	border-radius: 12px 12px 0 0;
+	justify-content : space-around;
+	text-align:center;
+	position:relative;
+}
+.shopGoodsList-menu .list{
+	font-size:15px;
+	height:40px;
+	line-height:40px;
+	color:#555;
+	position:relative;
+	flex-grow:1.0;
+	width:auto;
+}
+.shopGoodsList-menu .xzicon-caretup{
+	font-size:10px;
+	position:absolute;
+	left:50%;
+	margin-left:16px;
+	top:-1px;
+}
+.shopGoodsList-menu .xzicon-caretdown{
+	font-size:10px;
+	position:absolute;
+	left:50%;
+	margin-left:16px;
+	top:5px;
+}
+.shopGoodsList-menu .xzicon-caretup.active{
+	color:#D40000;
+}
+.shopGoodsList-menu .xzicon-caretdown.active{
+	color:#D40000;
+}
+.shopGoodsList-menu .list.long{
+	flex-grow:2;
+}
+.shopGoodsList-menu .list.active{
+	color:#212121;
+	font-size:16px;
+}
+.shopGoodsList-menu .first{
+	text-align:left;
+}
+.shopGoodsList-menu .last{
+	text-align:right;
+}
+.shopGoodsList-menu .list.active:after{
+	content:'';
+	position:absolute;
+	bottom:3px;
+	left:35%;
+	right:35%;
+	height:2px;
+	background:#D40000;
+}
+.shopGoodsList-menu .first.active:after{
+	content:'';
+	position:absolute;
+	bottom:3px;
+	left:20px;
+	height:2px;
+	width:20px;
+	background:#D40000;
+}
+.shopGoodsList-menu .last.active:after{
+	content:'';
+	position:absolute;
+	bottom:3px;
+	left:auto;
+	right:4px;
+	height:2px;
+	width:20px;
+	background:#D40000;
+}
+.shopGoodsList-menu .no.active:after{
+	content:'';
+	position:absolute;
+	bottom:3px;
+	left:auto;
+	right:4px;
+	height:2px;
+	width:20px;
+	background:#fff;
+}
+.shopGoodsList_headBox{
+	position:fixed;
+	top:0;
+	left:0;
+	width:100%;
+	z-index:3;
+	background:#fff;
+}
+.shopGoodsList-container{
+	padding-top:96px;
+}
+
+
+/*nav*/
+.xzui-tabbar_item.index{
+    background-image: url(/static/images/nav-index.png);
+}
+.xzui-bar_item_on.index,
+.xzui-tabbar_item.index:hover{
+    background-image: url(/static/images/nav-indexActive.png);
+}
+.xzui-tabbar_item.goods{
+    background-image: url(/static/images/nav-goods.png);
+}
+.xzui-bar_item_on.goods,
+.xzui-tabbar_item.goods:hover{
+    background-image: url(/static/images/nav-goodsActive.png);
+}
+.xzui-tabbar_item.solitaire{
+    background-image: url(/static/images/nav-solitaire.png);
+}
+.xzui-bar_item_on.solitaire,
+.xzui-tabbar_item.solitaire:hover{
+    background-image: url(/static/images/nav-solitaireActive.png);
+}
+.xzui-tabbar_item.cart{
+    background-image: url(/static/images/nav-cart.png);
+}
+.xzui-bar_item_on.cart,
+.xzui-tabbar_item.cart:hover{
+    background-image: url(/static/images/nav-cartActive.png);
+}
+.xzui-tabbar_item.my{
+    background-image: url(/static/images/nav-my.png);
+}
+.xzui-bar_item_on.my,
+.xzui-tabbar_item.my:hover{
+    background-image: url(/static/images/nav-myActive.png);
+}

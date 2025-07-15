@@ -30,7 +30,7 @@
 			picWidth:120,//(app.system.windowWidth>480?480:app.system.windowWidth)-15,
 			picHeight:96,//Math.ceil(((app.system.windowWidth>480?480:app.system.windowWidth)-15)*0.8),
 			bannerWidth:(app.system.windowWidth>480?480:app.system.windowWidth)-15,
-			bannerHeight:Math.ceil(((app.system.windowWidth>480?480:app.system.windowWidth)-15)*0.425),
+			bannerHeight:Math.ceil(((app.system.windowWidth>480?480:app.system.windowWidth)-15)*0.33333),
 			bannerList:[],
 			ingotDialog:{
 				show:false,
@@ -806,18 +806,10 @@
                 } else if (client == 'app') {
                     wx.app.call('getLocation', {
                         success: function(res) {
-							// 处理原生返回的数据格式
-							let cityName = null;
-							if(res.city) {
-								cityName = res.city;
-							} else if(res.data && res.data.city) {
-								cityName = res.data.city;
-							}
-							
-							if(cityName){
-								app.storage.set('areaname', cityName);
+							if(res.city){
+								app.storage.set('areaname', res.city);
 								_this.setData({
-									areaname: cityName
+									areaname: res.city
 								});
 								_this.load();
 							};
@@ -876,6 +868,12 @@
                     });
                 };
             },
+			dayClick:function(e){
+				console.log('dayClick:'+app.toJSON(e));
+			},
+			dateChange:function(e){
+				console.log('dateChange:'+app.toJSON(e));
+			},
         }
     });
 })();

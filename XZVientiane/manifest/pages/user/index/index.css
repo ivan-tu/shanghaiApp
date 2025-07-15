@@ -1,0 +1,288 @@
+.user-index-top{
+	position:relative;
+	padding-top:40px;
+}
+.markWraper_toLogin{
+	position:fixed;
+	z-index:99;
+	left:0;
+	top:0;
+	width:100%;
+	height:100%;
+}
+.user-index-topSet{
+	padding:20px 15px 0 15px;
+	display:none;
+}
+.user-index-topSet .c333:hover{
+	color:#333;
+}
+.iPhoneLiuHai .user-index-topSet{
+	padding:35px 15px 0 15px;
+}
+.user-index-vip{
+	position:absolute;
+	z-index:2;
+	bottom:0;
+	left:15px;
+	right:15px;
+	border-radius:10px 10px 0 0;
+	background: #565251;
+	padding:8px 15px;
+}
+.user-index-bar{
+	padding:0 15px 32px;
+	
+}
+.user-index-face{
+	float: right;
+	width: 40px;
+	height:40px;
+	position: relative;
+	margin-right: 15px;
+	margin-top:10px;
+	border-radius:50%;
+}
+.user-index-face:before{
+	content: "";
+	position: absolute;
+	right: -14px;
+	top: 50%;
+	width: 8px;
+	height: 12px;
+	margin-top: -6px;
+	background-image: url('https://static.mendianquan.com/15618100024522964.png');
+	background-size: 889px;
+	background-repeat: no-repeat;
+	background-position: -188px -105px;
+}
+.user-index-info{
+	margin-right: 75px;
+	padding-right: 8px;
+}
+.user-index-name{
+	font-size: 22px;
+	line-height: 30px;
+	color: #000;
+	font-weight: 500;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.user-index-line{
+	font-size: 0;
+	margin-top: 5px;
+	line-height: 20px;
+}
+.user-index-line i{
+	font-size: 16px;
+	color: #999;
+}
+.user-index-id{
+	color: #888;
+	font-size: 12px;
+}
+
+.user-index-count{
+	text-align: center;
+}
+.user-index-count .xzui-flex_item{
+	position: relative;
+}
+.user-index-countNum{
+	font-size: 18px;
+	color: #333;
+	line-height: 25px;
+}
+.user-index-countTitle{
+	line-height: 20px;
+	font-size: 12px;
+	color: #888;
+}
+
+.user-index-row1{
+	padding:20px 0;
+}
+.user-index-row2{
+	padding:16px 0;
+}
+.user-index-countRow{
+	margin:0 15px;
+}
+.user-index-main{
+	margin-top: 12px;
+}
+.user_addIcon{
+	border:1px solid #0280EC;
+	border-radius:50%;
+	display:inline-block;
+	height: 16px;
+	width: 16px;
+	line-height: 13px;
+	margin-right: 5px;
+}
+.user-item-face{
+	width:60px;
+	height:60px;
+	border-radius:50%;
+	overflow:hidden;
+}
+.user_iconBg{
+	display:block;
+	width:40px;
+	height:40px;
+	margin:auto;
+}
+.userIndex-menu{
+	padding:10px 0;
+}
+.userIndex-menu .list{
+	padding:5px 0;
+}
+.userIndex-cell .xzui-cells_in-small-appmsg-img{
+	width:24px;
+	height:24px;
+}
+.user_iconBg.sc,
+.xzui-cells_in-small-appmsg-img.sc{
+	background-position: -23px -132px;
+}
+.user_iconBg.yj,
+.xzui-cells_in-small-appmsg-img.yj{
+	background-position: -20px -493px;
+}
+.user_iconBg.sy,
+.xzui-cells_in-small-appmsg-img.sy{
+	background-position: -64px -493px;
+}
+.user_iconBg.zl,
+.xzui-cells_in-small-appmsg-img.zl{
+	background-position: -108px -493px;
+}
+.user_iconBg.fx,
+.xzui-cells_in-small-appmsg-img.fx{
+	background-position: -23px -198px;
+}
+.user_iconBg.sz,
+.xzui-cells_in-small-appmsg-img.sz{
+	background-position: -152px -493px;
+}
+.userIndex-editInfo-btn{
+	display:block;
+	border-radius:20px;
+	background:#FBE900;
+	font-size:18px;
+	text-align:center;
+	height:40px;
+	line-height:40px;
+	color:#333;
+}
+.userIndex-editInfo-btn:hover{
+	color:#333;
+}
+.userIndex-cell{
+	padding-right:15px;
+}
+.userIndex-cell .xzui-cells:after{
+    content: " ";
+    position: absolute;
+    left: 15px;
+    bottom: 0;
+    right: 0;
+    height: 1px;
+   /* border-bottom: 1px solid #E5E5E5;*/
+	 border-bottom:none;
+    color: #E5E5E5;
+    transform-origin: 0 100%;
+    transform: scaleY(0.5);
+    z-index: 2;
+}
+.user-index-newTop{
+	position:relative;
+	padding:30px 20px 30px 20px;
+}
+.user-index-newTop .picBox{
+	width:58px;
+	height:58px;
+	float:left;
+	border-radius:50%;
+	overflow:hidden;
+}
+.user-index-newTop .textBox{
+	margin:0 0 0 72px;
+}
+.user-index-newTop .getQrcode{
+	position:absolute;
+	z-index:2;
+	font-size:12px;
+	color:#666;
+	right:20px;
+	top:50%;
+	margin:-15px 0 0 0;
+	background: #F1F0F6;
+	border-radius: 3px;
+	height:30px;
+	line-height:30px;
+	width:70px;
+}
+.user-index-newTop .xzicon-qrcode{
+	font-size:16px;
+}
+.user_socialBar .share{
+	background-image:url('https://static.mendianquan.com/15658522346809932.png');
+	background-size:100% auto;
+	background-repeat:no-repeat;
+	background-position:bottom;
+	padding:20px 14px;
+}
+.user_socialBar .play{
+	background-image:url('https://static.mendianquan.com/15658376430346782.png');
+	background-size:100% auto;
+	background-repeat:no-repeat;
+	background-position:bottom;
+	padding:20px 14px;
+}
+
+.user_index_menuBar .imageIcon{
+	display:block;
+	margin:0 auto 5px;
+	position:relative;
+}
+.user_index_menuBar .imageIcon.xx{
+	background-position: -200px -490px;
+	width: 25px;
+	height: 25px;
+}
+.user_index_menuBar .imageIcon.ly{
+	background-position: -243px -491px;
+	width: 25px;
+	height: 25px;
+}
+.user_index_menuBar .imageIcon.xc{
+	background-position: -286px -491px;
+	width: 25px;
+	height: 25px;
+}
+.user_index_menuBar .imageIcon.tgm{
+	background-position: -328px -491px;
+	width: 25px;
+	height: 25px;
+}
+.h52{
+  height:52px!important;
+}
+.user-index-messageBadge{
+	position:absolute;
+	border-radius:50%;
+	background:#f00;
+	color:#fff;
+	font-size:11px;
+	line-height:18px;
+	right:-8px;
+	top:-8px;
+	width:18px;
+	height:18px;
+	text-align:center;
+	display:inline-block;
+}
+

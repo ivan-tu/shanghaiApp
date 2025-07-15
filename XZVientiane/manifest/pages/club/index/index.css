@@ -1,0 +1,53 @@
+.club-listBoxx{
+}
+.club-listBox .list{
+	position:relative;
+	padding:10px;
+	background:#fff;
+}
+.club-listBox .list .picBox{
+	width:90px;
+	height:90px;
+	overflow:hidden;
+	border-radius:4px;
+	float:left;
+}
+.club-listBox .list .textBox{
+	margin-left:100px;
+}
+/*nav*/
+.xzui-tabbar_item.index{
+    background-image: url(/static/images/nav-index.png);
+}
+.xzui-bar_item_on.index,
+.xzui-tabbar_item.index:hover{
+    background-image: url(/static/images/nav-indexActive.png);
+}
+.xzui-tabbar_item.activity{
+    background-image: url(/static/images/nav-activity.png);
+}
+.xzui-bar_item_on.activity,
+.xzui-tabbar_item.activity:hover{
+    background-image: url(/static/images/nav-activityActive.png);
+}
+.xzui-tabbar_item.my{
+    background-image: url(/static/images/nav-my.png);
+}
+.xzui-bar_item_on.my,
+.xzui-tabbar_item.my:hover{
+    background-image: url(/static/images/nav-myActive.png);
+}
+.xzui-tabbar_item.club{
+    background-image: url(/static/images/nav-group.png);
+}
+.xzui-bar_item_on.club,
+.xzui-tabbar_item.club:hover{
+    background-image: url(/static/images/nav-groupActive.png);
+}
+.xzui-tabbar_item.friend{
+    background-image: url(/static/images/nav-friend.png);
+}
+.xzui-bar_item_on.friend,
+.xzui-tabbar_item.friend:hover{
+    background-image: url(/static/images/nav-friendActive.png);
+}

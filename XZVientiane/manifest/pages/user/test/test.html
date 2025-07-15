@@ -1,0 +1,262 @@
+<div class="app-wrapper" wx:if="{{type==1||type==2}}">
+    <div class="app-main" style="width:1300px;margin:auto;position:relative;">
+        <div class="main">
+        	<a href="javascript:;" role="neiding" class="neiding" style="font-size:12px;color:#0066CC;"><i class="xzicon-setting"></i></a>
+            <h4>CF对掏专用随机数生成器</h4>
+            <div class="test_title">选队长专用</div>
+            <div class="inputBox">
+                <span>最小值：</span><input type="text" class="testInput" id="captain_min" value="1" />
+                <span>最大值：</span><input type="text" class="testInput" id="captain_max" value="30" />
+                <span>队长个数：</span><input type="text" class="testInput" id="captain_length" value="6" />
+                <a href="javascript:;" role="captain_reSet" class="reSet">重置</a>
+                <a href="javascript:;" role="captain_submit" class="submit">生成</a>
+            </div>
+            <div class="btnBox">
+                <view hidden="{{type==1}}">队长麦序：<input id="captain_resultInput" class="result" /></view>
+                <view hidden="{{type==2}}">队长麦序：<span id="captain_result" class="result"></span></view>
+            </div>
+            <div class="test_title">队长选人专用</div>
+            <div class="captainBox">
+                <div class="list">
+                    <div class="inputBox">
+                        <div>
+                        <span>选几轮：</span><input type="text" class="testInput" id="team" value="1" />
+                        <a href="javascript:;" role="team_reSet" class="reSet">重置</a>
+                        <a href="javascript:;" role="team_submit" class="submit">生成</a></div>
+                    </div>
+                    <div class="btnBox">
+                        <div>选人麦序：<span id="team_result" class="result"></span></div>
+                    </div>
+                </div>
+                <!--<div class="list">
+                    <div class="remainingBox">所有麦序：(绿色代表没被选，灰色代表已选)
+                        <div class="remaining_number"><div class="remaining" id="remaining"></div></div>
+                    </div>
+                    <div>选人结果：(第一个是队长)</div>
+                    <div class="remaining_result" id="remaining_result"></div>
+                    <div style="margin-top:20px;">
+                        <a href="javascript:;" role="remaining_reSet" class="reSet">生成麦序</a>
+                        <a href="javascript:;" role="remaining_submit" class="submit">撤销选人</a>
+                    </div>
+                </div>-->
+            </div>
+            <div class="captainBox pb20">
+            	<div class="list">
+                    <p class="remainingBox">历史记录</p>
+                    <div class="history_result" id="history_result"></div>
+                </div>
+            </div>
+            <div class="test_title">生成空位专用</div>
+            <div class="inputBox">
+                <span>人数：</span><input type="text" class="testInput" id="kongwei_length" value="10" />
+                <span>性别：</span><div class="displayIB" data-sex="1" bindtap="changeSex"><span class="xzui-radio-new {{(sex==1?' active':'')}}"></span><span class="xzui-radioTitle-new  {{(sex==1?' active':'')}}">男马甲</span></div><div class="displayIB ml10" data-sex="2" bindtap="changeSex"><span class="xzui-radio-new  {{(sex==2?' active':'')}}"></span><span class="xzui-radioTitle-new">女马甲</span></div>
+                <a href="javascript:;" role="kongwei_reSet" class="reSet ml15">清空</a>
+                <a href="javascript:;" role="kongwei_submit" class="submit">生成</a>
+                <a href="javascript:;" role="kongwei_zhuanhuan" class="submit" style="background:#339999;">转换</a>
+                <a href="javascript:;" role="kongwei_sort" class="submit" style="background:#0066CC;">排序</a>
+                <div class="displayIB ml10">文字颜色调整：<input type="color" id="colorPicker" value="{{textColor}}" bindinput="colorChange" /></a>
+            </div>
+            <div class="kongweiTips cRed ptb10" wx:if="{{kongweiTips}}">{{kongweiTips}}</div>
+            <div class="clearfix">
+                <div class="kongweiBox clearfix" wx:if="{{kongweiList&&kongweiList.length}}">
+                    <div class="kongweiList" wx:for="{{kongweiList}}" wx:for-item="b" wx:for-index="a">
+                        <div class="itemBox" wx:for="{{b}}" wx:for-item="item" wx:for-index="index">
+                            <div class="spanIndex" style="color:{{textColor}};" bindtap="changeThisSex" data-parent="{{a}}"data-index="{{index}}">{{item.index}}<span class="spanRound">.</span></div>
+                            <image bindtap="changeThisSex" data-parent="{{a}}" data-index="{{index}}" wx:if="{{item.sex==2}}" src="{{womanPic}}" mode="widthFix" />
+                            <image bindtap="changeThisSex" data-parent="{{a}}" data-index="{{index}}" wx:else src="{{manPic}}" mode="widthFix" />
+                            <span class="spanName" style="color:{{textColor}};" bindtap="changeThisUser" data-parent="{{a}}" data-index="{{index}}">{{item.name}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="tianxieBox clearfix mt20">
+                	<p class="c333 pb5">使用说明：可以在输入框中填写名字和轮次，自动生成麦序，<span class="cRed">多个名字用逗号隔开</span>点击马甲可以切换男女马甲，点击名字可以修改。</p>
+                    <p class="c333 pb5">例如：张三1，李四2，王五23。点击排序可以自动按照轮次高低排序。</p>
+                	<div class="textareaBox"><textarea placeholder="请输入名字，多个用逗号隔开" bindinput="model" data-model="userName" value="{{userName}}" id="viewInput"></textarea></div>
+                    <div class="mt15">
+                    	<a href="https://xinghuo.xfyun.cn/desk" target="_blank" class="submit">AI识别截图</a>
+                    	<a href="javascript:;" role="tianxie_submit" class="submit">提交</a>
+                    </div>
+                </div>
+            </div>
+            <p class="copyRight">有事联系：小池 QQ：121787045</p>
+        </div>
+        <!--广告位-->
+        <!--<div class="advertBox left">
+        	<a href="javascript:;" role="advertList" class="list clearfix">
+            	<div class="picBox"><image src="https://static.gedian.shop/15979392735123474.png" /></div>
+                <div class="textBox">
+                	<p class="advertTitle">街拍</p>
+                    <p class="advertTitle">YY:15610</p>
+                	<p class="advertContent">东部大区 5元bo1</p>
+                </div>
+            </a>
+            <a href="javascript:;" role="advertList" class="list clearfix">
+            	<div class="picBox"><image src="https://static.gedian.shop/15979364613109719.png" /></div>
+                <div class="textBox">
+                	<p class="advertTitle">共享</p>
+                    <p class="advertTitle">YY:7196</p>
+                	<p class="advertContent">东部大区 8元bo1</p>
+                </div>
+            </a>
+        </div>
+        <div class="advertBox right">
+        	<a href="javascript:;" role="advertList" class="list clearfix">
+            	<div class="picBox"><image src="https://static.gedian.shop/15979325861825600.png" /></div>
+                <div class="textBox">
+                	<p class="advertTitle">听客</p>
+                    <p class="advertTitle">YY:8570</p>
+                	<p class="advertContent">东部大区 6元bo3</p>
+                </div>
+            </a>
+            <a href="javascript:;" role="advertList" class="list clearfix">
+            	<div class="picBox"><image src="https://static.gedian.shop/15979368666097864.png" /></div>
+                <div class="textBox">
+                	<p class="advertTitle">全民赛事</p>
+                    <p class="advertTitle">YY:47293</p>
+                	<p class="advertContent">东部大区 6元bo1</p>
+                </div>
+            </a>
+        </div>-->
+    </div>
+</div>
+<div class="app-wrapper" wx:if="{{type==3||type==4}}">
+    <div class="app-main testUser_app-main" style="width:850px;margin:auto;position:relative;">
+        <div class="main" style="width:750px;">
+        	<a href="javascript:;" role="backControl" class="neiding2" style="font-size:12px;color:#0066CC;">返回随机器</a>
+            <a href="javascript:;" wx:if="{{type==3}}" role="editUser" class="neiding" style="font-size:12px;color:#0066CC;">名单管理</a>
+            <a href="javascript:;" wx:if="{{type==4}}" role="viewUser" class="neiding" style="font-size:12px;color:#0066CC;">退出管理</a>
+            <h4>东部Ｗ对掏成员名单</h4>
+            <div class="pt10 clearfix">
+            	<button type="button" wx:if="{{type==4}}" class="resetUser fr ml10" bindtap="toAddUser">添加名单</button>
+                <button type="button" class="resetUser fr" bindtap="reSetUser">重置</button>
+            	<p class="p14 c888">当前筛选条件：姓名：{{keyword||'无'}}，关键词：{{content||'无'}}，持枪：<span wx:if="{{searchTypeText==2}}">机枪</span><span wx:elif="{{searchTypeText==3}}">狙击</span><span wx:elif="{{searchTypeText==3}}">双修</span><span wx:else>无</span></p>
+            </div>
+            <div class="bgfff ptb15">
+                <div class="unionIndex-search">
+                    <form action="javascript:;" bindsubmit="toSearch">
+                        <i class="xzicon-search1"></i><input class="searchInput" placeholder="输入姓名，自动搜索" type="search"
+                            value="{{keyword}}" bindconfirm="toSearch" bindinput="changeKeyword" confirm-type="search" />
+                    </form>
+                    <span wx:if="{{keyword}}" class="closeBtn" bindtap="closeSearch"><i class="xzicon-closecircle"></i></span>
+                </div>
+            </div>
+            <div class="displayFlex testScreenBtn">
+            	<span class="list btn1 {{(content=='1'?' active':'')}}" data-text="1" bindtap="screenText" title="王者">1轮</span>
+                <span class="list btn2  {{(content=='2'?' active':'')}}" data-text="2" bindtap="screenText" title="钻石">2轮</span>
+                <span class="list btn3  {{(content=='3'?' active':'')}}" data-text="3" bindtap="screenText" title="黄金">3轮</span>
+                <span class="list btn4  {{(content=='5'?' active':'')}}" data-text="5" bindtap="screenText" title="白银">5轮</span>
+                <span class="list btn5  {{(content=='女'?' active':'')}}" data-text="女" bindtap="screenText" title="青铜">女</span>
+            </div>
+            <div class="displayFlex testScreenBtn mt10">
+            	<span class="list btn6 {{(searchTypeText==2?' active':'')}}" data-type="2" bindtap="screenTypeText" title="枪">枪</span>
+                <span class="list btn7  {{(searchTypeText==3?' active':'')}}" data-type="3" bindtap="screenTypeText" title="狙击">狙击</span>
+                <span class="list btn8  {{(searchTypeText==4?' active':'')}}" data-type="4" bindtap="screenTypeText" title="双修">双修</span>
+                <span class="list" title=""></span>
+                <span class="list" title=""></span>
+            </div>
+            <p class="mt15 c666 p14">共 {{userList.length}} 位家人</p>
+            <div class="testUserBox clearfix">
+            	<div class="testUserList" wx:for="{{userList}}">
+                	<div class="list {{(item.isGirl==1?' isGirl':'')}}">
+                    	<span class="name">{{item.username}}</span>：{{item.content}}<span class="p12" wx:if="{{item.type==2}}">(枪)</span><span class="p12" wx:elif="{{item.type==3}}">(狙)</span><span class="p12" wx:elif="{{item.type==4}}">(双)</span><span wx:if="{{type==4}}" class="delBtn" bindtap="editUser" data-index="{{index}}"><i class="xzicon-edit"></i></span><span wx:if="{{type==4}}" class="delBtn" bindtap="delUser" data-index="{{index}}"><i class="xzicon-delete"></i></span>
+                    </div>
+                </div>
+            </div>
+            <view class="loadingBox mlr14" hidden="{{!showLoading}}">
+                <div class="xzicon-loading"></div>
+                <div class="xzui-loadmore__tips">正在加载</div>
+            </view>
+            <view class="noData mlr14" hidden="{{!showNoData}}">暂无数据</view>
+        </div>
+    </div>
+</div>
+<!--添加弹框-->
+<view class="" hidden="{{!showForm}}">
+    <div style="z-index:20;" class="xzui-mask show" bindtap="toHideForm"></div>
+    <div class="xzui-modal show" style="z-index:21;">
+        <div class="xzui-modal_body" style="padding:15px 14px;">
+            <div class="xzui-modal_main">
+            	<p class="tac p16">请输入资料</p>
+                <div class="form-list tal pd0" style="margin-top:15px;">
+                    <div class="form-list-item title c666 p12 short" style="line-height:32px;">姓名</div>
+                    <div class="form-list-item">
+                        <input autocomplete="off" type="text" value="{{form.username}}" bindinput="model"
+                            data-model="form.username" placeholder="请输入" class="textInput"
+                            style="border:1px solid #ddd;padding:0 10px;height:32px;" />
+                    </div>
+                </div>
+                <div class="form-list tal pd0 noBorder" style="margin-top:15px;">
+                    <div class="form-list-item title c666 p12 short" style="line-height:32px;">内容</div>
+                    <div class="form-list-item">
+                        <input autocomplete="off" type="text" value="{{form.content}}" bindinput="model"
+                            data-model="form.content" placeholder="请输入" class="textInput"
+                            style="border:1px solid #ddd;padding:0 10px;height:32px;" />
+                    </div>
+                </div>
+                <div class="form-list tal pd0 noBorder" style="margin-top:15px;">
+                    <div class="form-list-item title c666 p12 short" style="line-height:32px;">习惯</div>
+                    <div class="form-list-item">
+                    	<div class="displayIB" data-type="1" bindtap="screenType"><span class="xzui-radio-new small {{(form.type==1?' active':'')}}"></span><span style="margin-left:5px;" class="xzui-radioTitle-new small">未知</span></div>
+                        <div class="displayIB ml5" data-type="2" bindtap="screenType"><span class="xzui-radio-new small {{(form.type==2?' active':'')}}"></span><span style="margin-left:5px;" class="xzui-radioTitle-new small">机枪</span></div>
+                        <div class="displayIB ml5" data-type="3" bindtap="screenType"><span class="xzui-radio-new  small {{(form.type==3?' active':'')}}"></span><span style="margin-left:5px;" class="xzui-radioTitle-new small">狙击</span></div>
+                        <div class="displayIB ml5" data-type="4" bindtap="screenType"><span class="xzui-radio-new small  {{(form.type==4?' active':'')}}"></span><span style="margin-left:5px;" class="xzui-radioTitle-new small">双修</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="xzui-modal_foot">
+            <div class="xzui-modal_btnBox">
+                <button class="xzui-btn confirm xzui-modal_btn" type="primary" bindtap="toHideForm">取消</button>
+                <button class="xzui-btn confirm xzui-modal_btn" type="primary" bindtap="toConfirmForm">确定</button>
+            </div>
+        </div>
+    </div>
+</view>
+<!--密码弹框-->
+<view class="" hidden="{{!showPwForm}}">
+    <div style="z-index:20;" class="xzui-mask show" bindtap="toHidePwForm"></div>
+    <div class="xzui-modal show" style="z-index:21;">
+        <div class="xzui-modal_body" style="padding:15px 14px;">
+            <div class="xzui-modal_main">
+            	<p class="tac p16">请输入密码</p>
+                <div class="form-list tal" style="margin-top:1px;">
+                    <div class="form-list-item">
+                        <input autocomplete="off" type="password" value="{{password}}" bindinput="model"
+                            data-model="password" placeholder="请输入密码" class="textInput"
+                            style="border:1px solid #ddd;padding:0 10px;height:32px;" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="xzui-modal_foot">
+            <div class="xzui-modal_btnBox">
+                <button class="xzui-btn confirm xzui-modal_btn" type="primary" bindtap="toHidePwForm">取消</button>
+                <button class="xzui-btn confirm xzui-modal_btn" type="primary" bindtap="toConfirmPwForm">确定</button>
+            </div>
+        </div>
+    </div>
+</view>
+<!--人名弹框-->
+<view class="" wx:if="{{showNameForm.show}}">
+    <div style="z-index:20;" class="xzui-mask show" bindtap="toHideNameForm"></div>
+    <div class="xzui-modal show" style="z-index:21;">
+        <div class="xzui-modal_body" style="padding:15px 14px;">
+            <div class="xzui-modal_main">
+            	<p class="tac p16">请输入人名</p>
+                <div class="form-list tal" style="margin-top:1px;">
+                    <div class="form-list-item">
+                        <input autocomplete="off" type="text" value="{{showNameForm.name}}" bindinput="model"
+                            data-model="showNameForm.name" placeholder="请输入人名" class="textInput"
+                            style="border:1px solid #ddd;padding:0 10px;height:32px;" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="xzui-modal_foot">
+            <div class="xzui-modal_btnBox">
+                <button class="xzui-btn confirm xzui-modal_btn" type="primary" bindtap="toHideNameForm">取消</button>
+                <button class="xzui-btn confirm xzui-modal_btn" type="primary" bindtap="toConfirmNameForm">确定</button>
+            </div>
+        </div>
+    </div>
+</view>

@@ -307,14 +307,12 @@
 						case'region':
 							wx.app.call('areaSelect', {
 								success: function(data) {
-									// 处理原生返回的数据格式：{"success":true,"data":{"value":"福建省-福州市-鼓楼区","code":"350000-350100-350102"},"errorMessage":""}
-									let resultData = data.data || data; // 兼容两种格式
-									if(resultData.value){
+									if(data.value){
 										//app返回:{"code":"310000-310100-310115","value":"上海市-上海市-浦东新区"}
 										_this.setData({
-											value:resultData.value.split('-')
+											value:data.value.split('-')
 										});
-										_this.pEvent('change',{ids:resultData.code?resultData.code.split('-'):[],value:resultData.value?resultData.value.split('-'):[]});
+										_this.pEvent('change',{ids:data.code?data.code.split('-'):[],value:data.value?data.value.split('-'):[]});
 									};
 								},
 								data:{name:value?value.join('-'):''}

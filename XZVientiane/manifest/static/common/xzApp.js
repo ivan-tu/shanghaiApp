@@ -619,7 +619,6 @@ let xzApp;
          *关闭所有页面，打开到应用内的某个页面。
          */
         reLaunch(url) {
-          console.log('🔄 [app.reLaunch] 准备跳转到:', url);
 		  if(app.config.client=='wx'){
 			  let isPackageUrl = false;
 			  app.each(packageA,function(i,item){
@@ -633,15 +632,8 @@ let xzApp;
 				  url = url.replace('/p/','/packageA/');
 			  };
 		  };
-          console.log('🔄 [app.reLaunch] 调用wx.reLaunch:', url);
           wx.reLaunch({
-            url: url,
-            success: function(res) {
-              console.log('✅ [app.reLaunch] 跳转成功', res);
-            },
-            fail: function(err) {
-              console.log('❌ [app.reLaunch] 跳转失败', err);
-            }
+            url: url
           });
         },
 
@@ -700,25 +692,13 @@ let xzApp;
          *重载当前页面以外的所有页面
          */
         reloadOtherPages() {
-          console.log('🔄 [app.reloadOtherPages] 开始重载其他页面');
           if (isWX) {
-            console.log('🔄 [app.reloadOtherPages] 微信小程序环境，暂不处理');
             /* app.each(getCurrentPages(), function (i, item) {
 
              });*/
           } else {
             if (isApp) {
-              console.log('🔄 [app.reloadOtherPages] app环境，调用原生方法');
-              wx.app.call('reloadOtherPages', {
-                success: function(res) {
-                  console.log('✅ [app.reloadOtherPages] 原生调用成功', res);
-                },
-                fail: function(err) {
-                  console.log('❌ [app.reloadOtherPages] 原生调用失败', err);
-                }
-              });
-            } else {
-              console.log('🔄 [app.reloadOtherPages] 非app环境，无需处理');
+              wx.app.call('reloadOtherPages');
             }
           }
         },
@@ -1008,32 +988,22 @@ let xzApp;
          *删除用户登录信息
          */
         removeUserSession() {
-		  console.log('🔄 [removeUserSession] 开始执行退出登录');
 		  app.storage.remove('user_expires_in');
           app.storage.remove('pocode');
           app.session.remove('userSession');
 		  app.session.remove('manageShopId');
 		  app.session.remove('manageShopShortId');
           if (app.config.client == 'app') {
-            console.log('🔄 [removeUserSession] 调用原生userLogout方法');
             wx.app.call('userLogout', {
               data: {
-                header: app.getHeader()
-              },
-              success: function(res) {
-                console.log('✅ [removeUserSession] userLogout调用成功', res);
-              },
-              fail: function(err) {
-                console.log('❌ [removeUserSession] userLogout调用失败', err);
+                header: this.getHeader()
               },
 			  complete:function(){
-                console.log('🔄 [removeUserSession] 调用reloadOtherPages');
-				app.reloadOtherPages();
+				  app.reloadOtherPages();
 			  }
             });
           }else{
-            console.log('🔄 [removeUserSession] 非app环境，直接调用reloadOtherPages');
-			app.reloadOtherPages();
+			  app.reloadOtherPages();
 		  };
         },
 

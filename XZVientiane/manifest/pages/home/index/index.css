@@ -588,6 +588,21 @@
 .showWxGZHDialog.show{
 	bottom:100px;
 }
+
+/*日历部分*/
+.calendar{
+	background-color:white;/*背景色为白色*/
+    padding-top: 10px;/*上内边距为10px*/
+    border-radius: 15px;/*添加边框圆角*/
+}
+.header {
+    font-size: large;
+    color: #59518d;   
+}
+.board {
+    color: #c7cbe2;
+    font-weight: bold;
+}
 /*nav*/
 .xzui-tabbar:before{
   border-top: 0px none;

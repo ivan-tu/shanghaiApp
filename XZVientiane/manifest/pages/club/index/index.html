@@ -1,0 +1,47 @@
+<div class="app-wrapper {{(client=='web'?' hasPageFrame':'')}}">
+    <div class="app-main">
+    	<div class="bgfff ptb10">
+            <div class="searchCategory-box clearfix">
+                <div class="searchCategory">
+                    <div class="listBox">
+                        <span class="list {{(form.type=='recommend'?' active':'')}}" data-type="recommend" bindtap="screenType">推荐</span>
+                        <span class="list {{(form.type=='hot'?' active':'')}}" data-type="hot" bindtap="screenType">我关注的</span>
+                        <span class="list {{(form.type=='free'?' active':'')}}" data-type="free" bindtap="screenType">我加入的</span>
+                        <span class="list {{(form.type=='member'?' active':'')}}" data-type="member" bindtap="screenType">我管理的</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    	<div class="pd15">
+            <div class="club-listBox" wx:if="{{data&&data.length}}">
+                <navigator url="javascript:;" class="displayB list mt10 clearfix" wx:for="{{data}}">
+                    <div class="picBox hasLoading">
+                        <image class="round4" src="{{item.pic}}" mode="widthFix" />
+                    </div>
+                    <div class="textBox">
+                    	<p class="p16 c000">{{item.username}}</p>
+                        <div class="p12 c666">43粉丝 28会员 32活动</div>
+                        <div class="p14 c666">最新活动：<span class="c000">7.28|上海</span></div>
+                    </div>
+                </navigator>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="xzui-tabbar app-nav max480" wx:if="{{client=='web'}}">
+    <navigator url="../../home/index/index" class="xzui-tabbar_item index">
+        <span class="xzui-tabbar_label">首页</span>
+    </navigator>
+    <navigator url="../../home/index/index" class="xzui-tabbar_item activity">
+        <span class="xzui-tabbar_label">活动</span>
+    </navigator>
+    <navigator url="../../club/index/index" class="xzui-tabbar_item club xzui-bar_item_on">
+        <span class="xzui-tabbar_label">俱乐部</span>
+    </navigator>
+    <navigator url="../../home/index/index" class="xzui-tabbar_item friend">
+        <span class="xzui-tabbar_label">好友</span>
+    </navigator>
+    <navigator url="../../home/index/index" class="xzui-tabbar_item my">
+        <span class="xzui-tabbar_label">我的</span>
+    </navigator>
+</div>

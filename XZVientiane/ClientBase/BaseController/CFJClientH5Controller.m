@@ -784,11 +784,12 @@ static inline BOOL isIPhoneXSeries() {
         }
         
         if (self.webviewBackCallBack) {
-            self.webviewBackCallBack(@{
-                @"data":myStr,
-                @"success":@"true",
-                @"errorMassage":@""
-                                     });
+            // 使用新的格式化方法，返回JavaScript端期望的格式
+            NSDictionary *response = [self formatCallbackResponse:@"nativeGet" 
+                                                           data:myStr 
+                                                        success:YES 
+                                                   errorMessage:nil];
+            self.webviewBackCallBack(response);
         }
         return;
     }
@@ -798,10 +799,12 @@ static inline BOOL isIPhoneXSeries() {
         self.webviewBackCallBack = completion;
         BOOL ische = [XZPackageH5 sharedInstance].isWXAppInstalled;
         if (self.webviewBackCallBack) {
-            self.webviewBackCallBack(@{@"data":@{@"status": ische ? @(1) : @(0),},
-                                       @"success":@"true",
-                                       @"errorMassage":@""
-            });
+            // 使用新的格式化方法，返回JavaScript端期望的格式
+            NSDictionary *response = [self formatCallbackResponse:@"hasWx" 
+                                                           data:@{@"status": ische ? @(1) : @(0)} 
+                                                        success:YES 
+                                                   errorMessage:nil];
+            self.webviewBackCallBack(response);
         }
         return;
     }
@@ -809,10 +812,12 @@ static inline BOOL isIPhoneXSeries() {
     if ([function isEqualToString:@"isiPhoneX"]) {
         self.webviewBackCallBack = completion;
         if (self.webviewBackCallBack) {
-            self.webviewBackCallBack(@{@"data":@{@"status": isIPhoneXSeries() ? @(1) : @(0),},
-                                       @"success":@"true",
-                                       @"errorMassage":@""
-            });
+            // 使用新的格式化方法，返回JavaScript端期望的格式
+            NSDictionary *response = [self formatCallbackResponse:@"isiPhoneX" 
+                                                           data:@{@"status": isIPhoneXSeries() ? @(1) : @(0)} 
+                                                        success:YES 
+                                                   errorMessage:nil];
+            self.webviewBackCallBack(response);
         }
         return;
     }
@@ -989,28 +994,37 @@ static inline BOOL isIPhoneXSeries() {
     }
     //显示模态弹窗
     if ([function isEqualToString:@"showModal"]) {
-        self.webviewBackCallBack = completion;
         NSString *title = [[dataDic objectForKey:@"title"] length] ?  [dataDic objectForKey:@"title"] : @"";
         NSString *cancleText = [[dataDic objectForKey:@"cancelText"] length] ?  [dataDic objectForKey:@"cancelText"] : @"取消";
         NSString *confirmText = [[dataDic objectForKey:@"confirmText"] length] ?  [dataDic objectForKey:@"confirmText"] : @"确认";
         ShowAlertView  *alert = [ShowAlertView showAlertWithTitle:title message:[dataDic objectForKey:@"content"]];
+        
+        // 创建独立的回调处理，避免被后续调用覆盖
+        XZWebViewJSCallbackBlock modalCallback = completion;
+        
         WEAK_SELF;
         [alert addItemWithTitle:cancleText itemType:(ShowAlertItemTypeBlack) callback:^(ShowAlertView *showview) {
             STRONG_SELF;
-            if (self.webviewBackCallBack) {
-                self.webviewBackCallBack(@{@"data":@{@"cancel":@"true"},
-                                           @"success":@"true",
-                                           @"errorMassage":@""
-                });
+            NSLog(@"🔄 [showModal] 用户点击取消按钮");
+            if (modalCallback) {
+                // 使用新的格式化方法，返回JavaScript端期望的格式
+                NSDictionary *response = [self formatCallbackResponse:@"showModal" 
+                                                               data:@{@"cancel": @"true"} 
+                                                            success:YES 
+                                                       errorMessage:nil];
+                modalCallback(response);
             }
         }];
         [alert addItemWithTitle:confirmText itemType:(ShowStatusTextTypeCustom) callback:^(ShowAlertView *showview) {
             STRONG_SELF;
-            if (self.webviewBackCallBack) {
-                self.webviewBackCallBack(@{@"data":@{@"confirm":@"true"},
-                                           @"success":@"true",
-                                           @"errorMassage":@""
-                });
+            NSLog(@"🔄 [showModal] 用户点击确认按钮");
+            if (modalCallback) {
+                // 使用新的格式化方法，返回JavaScript端期望的格式
+                NSDictionary *response = [self formatCallbackResponse:@"showModal" 
+                                                               data:@{@"confirm": @"true"} 
+                                                            success:YES 
+                                                       errorMessage:nil];
+                modalCallback(response);
             }
         }];
         [alert show];
@@ -1065,10 +1079,12 @@ static inline BOOL isIPhoneXSeries() {
             [alert addItemWithTitle:items[i] itemType:(ShowAlertItemTypeBlack) callback:^(ShowAlertView *showview) {
                 STRONG_SELF;
                 if (self.webviewBackCallBack) {
-                    self.webviewBackCallBack(@{@"data":@{@"tapIndex":@(i)},
-                                               @"success":@"true",
-                                               @"errorMassage":@""
-                    });
+                    // 使用新的格式化方法，返回JavaScript端期望的格式
+                    NSDictionary *response = [self formatCallbackResponse:@"showActionSheet" 
+                                                                   data:@{@"tapIndex": @(i)} 
+                                                                success:YES 
+                                                           errorMessage:nil];
+                    self.webviewBackCallBack(response);
                 }
             }];
         }
@@ -1285,11 +1301,12 @@ static inline BOOL isIPhoneXSeries() {
                                           @"city":[Defaults objectForKey:@"currentCity"],
                                           @"address":[Defaults objectForKey:@"currentAddress"]
                                           };
-               self.webviewBackCallBack(
-                                        @{@"data": localDic,
-                                          @"success":@"true",
-                                          @"errorMessage":@""
-                                          });
+               // 使用新的格式化方法，返回JavaScript端期望的格式
+               NSDictionary *response = [self formatCallbackResponse:@"getLocation" 
+                                                              data:localDic 
+                                                           success:YES 
+                                                      errorMessage:nil];
+               self.webviewBackCallBack(response);
                return;
                
            }
@@ -1380,11 +1397,12 @@ static inline BOOL isIPhoneXSeries() {
                                                   @"city":cityName,
                                                   @"address":addressName
                                                   };
-                       self.webviewBackCallBack(
-                                                @{@"data": localDic,
-                                                  @"success":@"true",
-                                                  @"errorMessage":@""
-                                                  });
+                       // 使用新的格式化方法，返回JavaScript端期望的格式
+                       NSDictionary *response = [self formatCallbackResponse:@"getLocation" 
+                                                                      data:localDic 
+                                                                   success:YES 
+                                                              errorMessage:nil];
+                       self.webviewBackCallBack(response);
                        
                    }];
                }
@@ -1529,11 +1547,12 @@ static inline BOOL isIPhoneXSeries() {
         [[MOFSPickerManager shareManger]showPickerViewWithData:array tag:1 title:nil cancelTitle:@"取消" commitTitle:@"确认" commitBlock:^(NSString *string) {
             STRONG_SELF;
             NSArray *indexArr = [string componentsSeparatedByString:@","];
-            self.webviewBackCallBack(
-                                     @{@"data":@{@"value":indexArr[0]},
-                                       @"success":@"true",
-                                       @"errorMessage":@""
-                                     });
+            // 使用新的格式化方法，返回JavaScript端期望的格式
+            NSDictionary *response = [self formatCallbackResponse:@"fancySelect" 
+                                                           data:@{@"value": indexArr[0]} 
+                                                        success:YES 
+                                                   errorMessage:nil];
+            self.webviewBackCallBack(response);
             
         } cancelBlock:^{
         }];
@@ -1545,28 +1564,20 @@ static inline BOOL isIPhoneXSeries() {
         WEAK_SELF;
         [[MOFSPickerManager shareManger] showMOFSAddressPickerWithDefaultZipcode:string title:@"" cancelTitle:@"取消" commitTitle:@"确定" commitBlock:^(NSString *address, NSString *zipcode) {
             STRONG_SELF;
-            // 使用picker组件期望的数据格式
-            NSDictionary *jsResponse = @{
-                @"success": @YES,
-                @"data": @{
-                    @"code": zipcode ?: @"",
-                    @"value": address ?: @""
-                },
-                @"errorMessage": @""
-            };
-            self.webviewBackCallBack(jsResponse);
+            // 使用新的格式化方法，返回JavaScript端期望的格式
+            NSDictionary *response = [self formatCallbackResponse:@"areaSelect" 
+                                                           data:@{@"code": zipcode ?: @"", @"value": address ?: @""} 
+                                                        success:YES 
+                                                   errorMessage:nil];
+            self.webviewBackCallBack(response);
         } cancelBlock:^{
             STRONG_SELF;
             // 取消时也要回调
-            NSDictionary *jsResponse = @{
-                @"success": @NO,
-                @"data": @{
-                    @"code": @"-1",
-                    @"data": @{}
-                },
-                @"errorMessage": @"用户取消"
-            };
-            self.webviewBackCallBack(jsResponse);
+            NSDictionary *response = [self formatCallbackResponse:@"areaSelect" 
+                                                           data:@{@"code": @"-1", @"value": @""} 
+                                                        success:NO 
+                                                   errorMessage:@"用户取消"];
+            self.webviewBackCallBack(response);
         }];
         return;
     }
@@ -1576,28 +1587,20 @@ static inline BOOL isIPhoneXSeries() {
         WEAK_SELF;
         [[MOFSPickerManager shareManger] showCFJAddressPickerWithDefaultZipcode:string title:@"" cancelTitle:@"取消" commitTitle:@"确定" commitBlock:^(NSString *address, NSString *zipcode) {
             STRONG_SELF;
-            // 使用picker组件期望的数据格式
-            NSDictionary *jsResponse = @{
-                @"success": @YES,
-                @"data": @{
-                    @"code": zipcode ?: @"",
-                    @"value": address ?: @""
-                },
-                @"errorMessage": @""
-            };
-            self.webviewBackCallBack(jsResponse);
+            // 使用新的格式化方法，返回JavaScript端期望的格式
+            NSDictionary *response = [self formatCallbackResponse:@"areaSelect" 
+                                                           data:@{@"code": zipcode ?: @"", @"value": address ?: @""} 
+                                                        success:YES 
+                                                   errorMessage:nil];
+            self.webviewBackCallBack(response);
         } cancelBlock:^{
             STRONG_SELF;
             // 取消时也要回调
-            NSDictionary *jsResponse = @{
-                @"success": @NO,
-                @"data": @{
-                    @"code": @"-1",
-                    @"data": @{}
-                },
-                @"errorMessage": @"用户取消"
-            };
-            self.webviewBackCallBack(jsResponse);
+            NSDictionary *response = [self formatCallbackResponse:@"areaSelect" 
+                                                           data:@{@"code": @"-1", @"value": @""} 
+                                                        success:NO 
+                                                   errorMessage:@"用户取消"];
+            self.webviewBackCallBack(response);
         }];
         return;
     }
@@ -2283,13 +2286,12 @@ static inline BOOL isIPhoneXSeries() {
             [dataArray addObject:dic];
         }
         if (self.webviewBackCallBack) {
-            self.webviewBackCallBack(
-                                     @{@"data":dataArray,
-                                       @"success":@"true",
-                                       @"errorMessage":@""
-                                     }
-                                     
-                                     );
+            // 使用新的格式化方法，返回JavaScript端期望的格式
+            NSDictionary *response = [self formatCallbackResponse:@"chooseFile" 
+                                                           data:dataArray 
+                                                        success:YES 
+                                                   errorMessage:nil];
+            self.webviewBackCallBack(response);
         }
     } else {
         // 3. 获取原图的示例，这样一次性获取很可能会导致内存飙升，建议获取1-2张，消费和释放掉，再获取剩下的
@@ -2320,12 +2322,12 @@ static inline BOOL isIPhoneXSeries() {
                         [dataArray addObject:dic];
                     }
                     if (self.webviewBackCallBack) {
-                        self.webviewBackCallBack(
-                                                 @{@"data":dataArray,
-                                                   @"success":@"true",
-                                                   @"errorMessage":@""
-                                                 }
-                                                 );
+                        // 使用新的格式化方法，返回JavaScript端期望的格式
+                        NSDictionary *response = [self formatCallbackResponse:@"chooseFile" 
+                                                                       data:dataArray 
+                                                                    success:YES 
+                                                               errorMessage:nil];
+                        self.webviewBackCallBack(response);
                     }
                 }
             }];
@@ -3019,6 +3021,75 @@ static inline BOOL isIPhoneXSeries() {
             completion(responseData);
         }
     }];
+}
+
+#pragma mark - 回调数据格式化
+
+/**
+ * 统一的回调数据格式化方法
+ * 解决OC端多包一层data导致的多端兼容性问题
+ */
+- (NSDictionary *)formatCallbackResponse:(NSString *)apiType data:(id)data success:(BOOL)success errorMessage:(NSString *)errorMessage {
+    if (!errorMessage) {
+        errorMessage = @"";
+    }
+    
+    if ([apiType isEqualToString:@"showModal"]) {
+        // showModal类型：直接返回confirm/cancel状态
+        return @{
+            @"confirm": data[@"confirm"] ?: @"false",
+            @"cancel": data[@"cancel"] ?: @"false",
+            @"errMsg": success ? @"showModal:ok" : @"showModal:fail"
+        };
+    } else if ([apiType isEqualToString:@"showActionSheet"]) {
+        // showActionSheet类型：直接返回tapIndex
+        return @{
+            @"tapIndex": data[@"tapIndex"] ?: @(-1),
+            @"errMsg": success ? @"showActionSheet:ok" : @"showActionSheet:fail"
+        };
+    } else if ([apiType isEqualToString:@"fancySelect"] || [apiType isEqualToString:@"areaSelect"]) {
+        // 选择器类型：直接返回value和code
+        return @{
+            @"value": data[@"value"] ?: @"",
+            @"code": data[@"code"] ?: @"",
+            @"errMsg": success ? @"select:ok" : @"select:fail"
+        };
+    } else if ([apiType isEqualToString:@"chooseFile"]) {
+        // 文件选择类型：直接返回文件列表
+        return data ?: @[];
+    } else if ([apiType isEqualToString:@"nativeGet"]) {
+        // nativeGet类型：返回包含data字段的格式
+        return @{
+            @"data": data ?: @"",
+            @"success": success ? @YES : @NO,
+            @"errorMessage": errorMessage
+        };
+    } else if ([apiType isEqualToString:@"getLocation"]) {
+        // 定位类型：直接返回位置信息
+        return @{
+            @"latitude": data[@"lat"] ?: @(0),
+            @"longitude": data[@"lng"] ?: @(0),
+            @"city": data[@"city"] ?: @"",
+            @"address": data[@"address"] ?: @"",
+            @"errMsg": success ? @"getLocation:ok" : @"getLocation:fail"
+        };
+    } else if ([apiType isEqualToString:@"hasWx"] || [apiType isEqualToString:@"isiPhoneX"]) {
+        // 状态查询类型：直接返回状态
+        return @{
+            @"status": data[@"status"] ?: @(0),
+            @"errMsg": success ? @"query:ok" : @"query:fail"
+        };
+    } else if ([apiType isEqualToString:@"request"]) {
+        // 网络请求类型：直接返回数据（已经是正确格式）
+        return data;
+    } else {
+        // 其他类型：简单成功/失败格式
+        return @{
+            @"success": success ? @YES : @NO,
+            @"data": data ?: @{},
+            @"errorMessage": errorMessage
+        };
+    }
 }
 
 @end

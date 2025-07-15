@@ -9,9 +9,17 @@
             <div class="myServer-header" wx:if="{{data.isserver==1}}">
                 <p class="myServer-header-title tac p18">您已经是服务商</p>
                 <div class="bgfff displayFlex tac hasBorder top">
-                    <navigator url="../../user/myServerTeam/myServerTeam" class="list ptb15">
+                    <navigator url="../../user/myServerTeam/myServerTeam?isexpert=1" class="list ptb15">
                         <p class="p18">{{data.teamCount}}</p>
                         <p class="p14 c666">达人</p>
+                    </navigator>
+                    <navigator url="../../user/myServerTeam/myServerTeam?isexpert=1&timestap=month" class="list ptb15">
+                        <p class="p18">{{data.teamMonthCount}}</p>
+                        <p class="p14 c666">本月达人</p>
+                    </navigator>
+                    <navigator url="../../user/myServerTeam/myServerTeam?isserver=1" class="list ptb15">
+                        <p class="p18">{{data.servers}}</p>
+                        <p class="p14 c666">服务商</p>
                     </navigator>
                     <navigator url="../../finance/incomeReocrd/incomeReocrd?fromre=4101" class="list ptb15">
                         <p class="p18">{{data.commion}}</p>
