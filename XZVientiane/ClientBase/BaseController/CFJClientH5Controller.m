@@ -7,6 +7,7 @@
 //
 #import "CFJClientH5Controller.h"
 #import "WKWebView+XZAddition.h"
+#import "UIWebView+addition.h"
 #import "HTMLWebViewController.h"
 #import "WKWebViewJavascriptBridge.h"
 //model
@@ -133,6 +134,186 @@ static inline BOOL isIPhoneXSeries() {
 @end
 
 @implementation CFJClientH5Controller
+
+// 智能检测并处理登录状态变化
+- (void)detectAndHandleLoginStateChange:(void(^)(NSDictionary*))completion {
+    if (!self.webView || ![self.webView isKindOfClass:[WKWebView class]]) {
+        return;
+    }
+    
+    WKWebView *wkWebView = (WKWebView *)self.webView;
+    
+    // 获取JavaScript端的userSession
+    [wkWebView evaluateJavaScript:@"(function(){ try { return app.session.get('userSession') || ''; } catch(e) { return ''; } })()" 
+                completionHandler:^(id jsUserSession, NSError *error) {
+        
+        // 获取iOS端的登录状态
+        BOOL iosLoginState = [[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"];
+        BOOL jsHasSession = jsUserSession && [jsUserSession isKindOfClass:[NSString class]] && [(NSString*)jsUserSession length] > 0;
+        
+        NSLog(@"🔍 [状态检测] JS有Session: %@, iOS登录状态: %@", jsHasSession ? @"是" : @"否", iosLoginState ? @"是" : @"否");
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (jsHasSession && !iosLoginState) {
+                // JS有session但iOS端未登录 -> 执行登录逻辑
+                NSLog(@"✅ [状态同步] 检测到用户登录，同步iOS端状态");
+                [self syncLoginState];
+            } else if (!jsHasSession && iosLoginState) {
+                // JS无session但iOS端已登录 -> 执行退出登录逻辑  
+                NSLog(@"✅ [状态同步] 检测到用户退出，同步iOS端状态");
+                [self syncLogoutState];
+            }
+            // 其他情况：状态一致，无需处理
+        });
+    }];
+}
+
+// 同步登录状态
+- (void)syncLoginState {
+    // 设置iOS端登录状态
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isLogin"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    // 清除HTML缓存，确保页面能正确刷新
+    [[HTMLCache sharedCache] removeAllCache];
+    
+    NSLog(@"🎯 [syncLoginState] 已同步登录状态");
+    
+    // 执行登录成功后的处理
+    dispatch_async(dispatch_get_main_queue(), ^{
+        // 跳转到首页并选中第一个tab
+        if (self.tabBarController && [self.tabBarController isKindOfClass:[UITabBarController class]]) {
+            self.tabBarController.selectedIndex = 0;
+            NSLog(@"🎯 [syncLoginState] 切换到TabBar第0个Tab（首页）");
+            
+            // 延迟一点再发送backToHome通知，确保tab切换完成
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                NSDictionary *setDic = @{@"selectNumber": @"0"};
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"backToHome" object:setDic];
+            });
+        }
+    });
+}
+
+// 同步退出登录状态
+- (void)syncLogoutState {
+    // 设置iOS端退出登录状态
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isLogin"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    // 清除HTML缓存和Cookie，确保页面能正确刷新
+    [[HTMLCache sharedCache] removeAllCache];
+    [UIWebView cookieDeleteAllCookie];
+    
+    // 重置所有tab页面到初始状态，清除内页导航历史
+    [self resetAllTabsToInitialState];
+    
+    //隐藏底部角标
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tabBarController.tabBar hideBadgeOnItemIndex:3];
+    });
+    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"clinetMessageNum"];
+    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"shoppingCartNum"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    NSLog(@"🎯 [syncLogoutState] 已同步退出登录状态");
+    
+    // 执行退出登录后的处理
+    dispatch_async(dispatch_get_main_queue(), ^{
+        // 跳转到首页并选中第一个tab
+        if (self.tabBarController && [self.tabBarController isKindOfClass:[UITabBarController class]]) {
+            self.tabBarController.selectedIndex = 0;
+            NSLog(@"🎯 [syncLogoutState] 切换到TabBar第0个Tab（首页）");
+            
+            // 发送backToHome通知，传递正确的NSDictionary格式
+            NSDictionary *setDic = @{@"selectNumber": @"0"};
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"backToHome" object:setDic];
+        }
+    });
+}
+
+// 重置所有tab页面到初始状态，清除内页导航历史
+- (void)resetAllTabsToInitialState {
+    if (!self.tabBarController) {
+        NSLog(@"⚠️ [resetAllTabsToInitialState] 未找到TabBarController");
+        return;
+    }
+    
+    NSLog(@"🔄 [resetAllTabsToInitialState] 开始重置所有tab页面");
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSArray *viewControllers = self.tabBarController.viewControllers;
+        
+        for (NSInteger i = 0; i < viewControllers.count; i++) {
+            UIViewController *viewController = viewControllers[i];
+            NSLog(@"🔍 [resetAllTabsToInitialState] 处理第%ld个tab: %@", (long)i, NSStringFromClass([viewController class]));
+            
+            // 如果是导航控制器，pop到根视图控制器
+            if ([viewController isKindOfClass:[UINavigationController class]]) {
+                UINavigationController *navController = (UINavigationController *)viewController;
+                if (navController.viewControllers.count > 1) {
+                    NSLog(@"📤 [resetAllTabsToInitialState] 导航控制器有%ld个页面，pop到根页面", (long)navController.viewControllers.count);
+                    [navController popToRootViewControllerAnimated:NO];
+                }
+            }
+            // 如果是WebView控制器（继承自CFJClientH5Controller或XZWKWebViewBaseController）
+            else if ([viewController isKindOfClass:[CFJClientH5Controller class]] || 
+                     [viewController respondsToSelector:@selector(webView)]) {
+                
+                NSLog(@"🌐 [resetAllTabsToInitialState] 重置WebView控制器");
+                [self resetWebViewControllerState:viewController];
+            }
+        }
+        
+        NSLog(@"✅ [resetAllTabsToInitialState] 所有tab页面重置完成");
+    });
+}
+
+// 重置WebView控制器状态
+- (void)resetWebViewControllerState:(UIViewController *)controller {
+    // 尝试获取WebView
+    WKWebView *webView = nil;
+    
+    if ([controller respondsToSelector:@selector(webView)]) {
+        webView = [controller performSelector:@selector(webView)];
+    }
+    
+    if (!webView || ![webView isKindOfClass:[WKWebView class]]) {
+        NSLog(@"⚠️ [resetWebViewControllerState] 未找到有效的WebView");
+        return;
+    }
+    
+    NSLog(@"🧹 [resetWebViewControllerState] 清理WebView状态");
+    
+    // 停止当前加载
+    [webView stopLoading];
+    
+    // 彻底清理JavaScript状态和存储
+    [webView evaluateJavaScript:@"try { localStorage.clear(); sessionStorage.clear(); if(window.app && window.app.storage) { window.app.storage.clear(); } if(window.history) { while(window.history.length > 1) { window.history.back(); } } } catch(e) { console.log('清理状态时出错:', e); }" completionHandler:nil];
+    
+    // 清理WKWebView数据存储
+    NSSet *websiteDataTypes = [NSSet setWithArray:@[
+        WKWebsiteDataTypeDiskCache,
+        WKWebsiteDataTypeMemoryCache,
+        WKWebsiteDataTypeLocalStorage,
+        WKWebsiteDataTypeSessionStorage
+    ]];
+    NSDate *dateFrom = [NSDate dateWithTimeIntervalSince1970:0];
+    [[WKWebsiteDataStore defaultDataStore] removeDataOfTypes:websiteDataTypes 
+                                               modifiedSince:dateFrom 
+                                           completionHandler:^{
+        NSLog(@"✅ [resetWebViewControllerState] WebView数据清理完成");
+    }];
+    
+    // 延迟重新加载，确保清理完成
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        if ([controller respondsToSelector:@selector(domainOperate)]) {
+            NSLog(@"🔄 [resetWebViewControllerState] 调用domainOperate重新加载");
+            [controller performSelector:@selector(domainOperate)];
+        }
+    });
+}
+
 - (NSLock *)lock {
     if (_lock == nil) {
         _lock = [[NSLock alloc]init];
@@ -759,6 +940,8 @@ static inline BOOL isIPhoneXSeries() {
     NSString *function = [jsDic objectForKey:@"action"];
     NSDictionary *dataDic = [jsDic objectForKey:@"data"];
     
+    NSLog(@"🎯 [handleJavaScriptCall] 被调用，function: %@, dataDic: %@", function, dataDic);
+    
     // 优先处理网络请求
     if ([function isEqualToString:@"request"]) {
         [self rpcRequestWithJsDic:dataDic completion:completion];
@@ -977,14 +1160,48 @@ static inline BOOL isIPhoneXSeries() {
     }
     //返回首页(目前处理返回顶层控制器)
     if ([function isEqualToString:@"reLaunch"]) {
+        NSLog(@"🎯 [reLaunch] 被调用，数据: %@", dataDic);
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.navigationController popToRootViewControllerAnimated:YES];
+            // 在TabBar应用中，应该切换到第一个Tab（首页）
+            if (self.tabBarController) {
+                NSLog(@"🎯 [reLaunch] 切换到TabBar第0个Tab（首页）");
+                self.tabBarController.selectedIndex = 0; // 切换到首页
+            } else {
+                NSLog(@"🎯 [reLaunch] 使用popToRootViewController");
+                // 如果不是TabBar应用，则使用原来的逻辑
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            }
         });
+        
+        // 返回成功响应
+        if (completion) {
+            completion(@{
+                @"success": @"true",
+                @"data": @{},
+                @"errorMessage": @"",
+                @"code": @0
+            });
+        }
         return;
     }
     //刷新当前页以外页面
     if ([function isEqualToString:@"reloadOtherPages"]) {
+        NSLog(@"🔄 [handleJavaScriptCall] 被调用，function: reloadOtherPages, dataDic:");
+        
+        // 智能检测登录状态变化
+        [self detectAndHandleLoginStateChange:completion];
+        
         [[NSNotificationCenter defaultCenter]postNotificationName:@"RefreshOtherAllVCNotif" object:self];
+        
+        // WKWebView升级后需要给JS端明确的回调响应
+        if (completion) {
+            completion(@{
+                @"success": @"true",
+                @"data": @{},
+                @"errorMessage": @"",
+                @"code": @0
+            });
+        }
         return;
     }
     if ([function isEqualToString:@"dialogBridge"]) {
@@ -1254,23 +1471,106 @@ static inline BOOL isIPhoneXSeries() {
         [self RequestWithJsDic:dataDic type:@"1"];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isLogin"];
         [[NSUserDefaults standardUserDefaults]synchronize];
+        
+        // 清除HTML缓存，确保页面能正确刷新
+        [[HTMLCache sharedCache] removeAllCache];
+        
         NSDictionary *imData = [dataDic objectForKey:@"imData"];
         GeDianUserInfo *userInfo = [[GeDianUserInfo alloc] init];
         userInfo.nickname = getSafeString([imData objectForKey:@"username"]);
         userInfo.userId = getSafeString([imData objectForKey:@"_id"]);
         userInfo.headpic = [NSString stringWithFormat:@"%@%@",QiNiuChace,getSafeString([imData objectForKey:@"headpic"])];
+        
+        // 登录成功后的处理
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // 刷新所有页面
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshOtherAllVCNotif" object:self];
+            
+            // 跳转到首页并选中第一个tab
+            if (self.tabBarController) {
+                self.tabBarController.selectedIndex = 0; // 切换到首页tab
+                NSLog(@"🎯 [userLogin] 切换到TabBar第0个Tab（首页）");
+            }
+            
+            // 延迟一点再发送backToHome通知，确保tab切换完成
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                NSDictionary *setDic = @{@"selectNumber": @"0"};
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"backToHome" object:setDic];
+                NSLog(@"🎯 [userLogin] 发送backToHome通知完成");
+            });
+        });
     }
     //退出登录
     if ([function isEqualToString:@"userLogout"]) {
         [self RequestWithJsDic:dataDic type:@"2"];
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isLogin"];
         [[NSUserDefaults standardUserDefaults]synchronize];
+        
+        // 重置所有tab页面到初始状态，清除内页导航历史
+        [self resetAllTabsToInitialState];
+        
+        // 清除HTML缓存和Cookie，确保页面能正确刷新
+        [[HTMLCache sharedCache] removeAllCache];
+        [UIWebView cookieDeleteAllCookie];
+        
+        // 清理WKWebView的导航历史，解决页面状态残留问题
+        if (self.webView && [self.webView isKindOfClass:[WKWebView class]]) {
+            WKWebView *wkWebView = (WKWebView *)self.webView;
+            // 停止所有加载
+            [wkWebView stopLoading];
+            
+            // 强制清理JavaScript全局状态和本地存储
+            [wkWebView evaluateJavaScript:@"try { localStorage.clear(); sessionStorage.clear(); if(window.app && window.app.storage) { window.app.storage.clear(); } } catch(e) { console.log('清理存储时出错:', e); }" completionHandler:nil];
+            
+            // 延迟清理，避免与当前操作冲突
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                // 清理所有非持久化数据存储
+                NSSet *websiteDataTypes = [NSSet setWithArray:@[
+                    WKWebsiteDataTypeDiskCache,
+                    WKWebsiteDataTypeMemoryCache,
+                    WKWebsiteDataTypeLocalStorage,
+                    WKWebsiteDataTypeSessionStorage
+                ]];
+                NSDate *dateFrom = [NSDate dateWithTimeIntervalSince1970:0];
+                [[WKWebsiteDataStore defaultDataStore] removeDataOfTypes:websiteDataTypes 
+                                                           modifiedSince:dateFrom 
+                                                       completionHandler:^{
+                    NSLog(@"✅ WKWebView数据清理完成");
+                }];
+            });
+            
+            NSLog(@"🧹 [userLogout] WKWebView状态清理开始");
+        }
+        
         //隐藏底部角标
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tabBarController.tabBar hideBadgeOnItemIndex:3];
         });
         [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"clinetMessageNum"];
+        [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"shoppingCartNum"];
         [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        // 退出登录后的处理
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // 刷新所有页面
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshOtherAllVCNotif" object:self];
+            
+            // 跳转到首页并选中第一个tab
+            if (self.tabBarController && [self.tabBarController isKindOfClass:[UITabBarController class]]) {
+                self.tabBarController.selectedIndex = 0;
+                NSLog(@"🎯 [reLaunch] 切换到TabBar第0个Tab（首页）");
+                
+                // 发送backToHome通知，传递正确的NSDictionary格式
+                NSDictionary *setDic = @{@"selectNumber": @"0"};
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"backToHome" object:setDic];
+            }
+        });
+        
+        // 延迟一点再次强制刷新，确保状态完全重置
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshOtherAllVCNotif" object:self];
+            NSLog(@"🔄 [userLogout] 延迟刷新执行完成");
+        });
     }
     
     //返回首层页面
@@ -2683,7 +2983,24 @@ static inline BOOL isIPhoneXSeries() {
 #pragma mark ------ 七牛上传
 
 - (void)QiNiuUploadImageWithData:(NSDictionary *)datadic{
-    NSInteger index = [[datadic objectForKey:@"nameIndex"] integerValue];
+    // 修复：nameIndex实际上是文件名，不是数组索引
+    // 我们需要找到对应的文件索引，或者使用第一个文件（单文件上传场景）
+    NSInteger index = 0; // 默认使用第一个文件
+    NSString *nameIndex = [datadic objectForKey:@"nameIndex"];
+    
+    // 如果nameIndex是数字字符串，则使用它作为索引
+    if (nameIndex && [nameIndex rangeOfCharacterFromSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]].location == NSNotFound) {
+        NSInteger providedIndex = [nameIndex integerValue];
+        if (providedIndex >= 0 && providedIndex < _selectedAssets.count) {
+            index = providedIndex;
+        }
+    }
+    
+    // 安全检查：确保索引在有效范围内
+    if (index >= _selectedAssets.count || index >= _selectedPhotos.count) {
+        index = 0;
+    }
+    
     NSString *qiniuToken = [datadic objectForKey:@"token"];
     PHAsset *asset = _selectedAssets[index];
     UIImage *image = _selectedPhotos[index];
@@ -2696,11 +3013,10 @@ static inline BOOL isIPhoneXSeries() {
     QNUploadOption *opt = [[QNUploadOption alloc] initWithMime:nil progressHandler:^(NSString *key, float percent) {
         STRONG_SELF;
         dispatch_async(dispatch_get_main_queue(), ^{
-            NSString *percentStr = [NSString stringWithFormat:@"%.f",percent * 100];
+            // 修复：确保进度值是数字类型，且字段名匹配JavaScript端期望
+            NSInteger percentValue = (NSInteger)(percent * 100);
             
-            NSDictionary *data =  @{@"progress":percentStr,
-                                    @"key":@""
-            };
+            NSDictionary *data = @{@"progress": @(percentValue)};  // 使用NSNumber而不是字符串
             NSDictionary *callJsDic = [[HybridManager shareInstance] objcCallJsWithFn:@"uploadFile" data:data];
             [self objcCallJs:callJsDic];
         });
@@ -2728,9 +3044,8 @@ static inline BOOL isIPhoneXSeries() {
         }
         STRONG_SELF;
         dispatch_async(dispatch_get_main_queue(), ^{
-            NSDictionary *data =  @{@"progress":@"100",
-                                    @"key":key
-            };
+            // 修复：上传完成时只发送key，不发送progress
+            NSDictionary *data = @{@"key": key ?: @""};
             NSDictionary *callJsDic = [[HybridManager shareInstance] objcCallJsWithFn:@"uploadFile" data:data];
             [self objcCallJs:callJsDic];
             if (isVideo) {
@@ -2975,6 +3290,8 @@ static inline BOOL isIPhoneXSeries() {
 - (void)jsCallObjc:(NSDictionary *)jsData jsCallBack:(WVJBResponseCallback)jsCallBack {
     NSString *action = jsData[@"action"];
     
+    NSLog(@"🎯 [CFJClientH5Controller] jsCallObjc被调用，action: %@, 完整数据: %@", action, jsData);
+    
     // 定义子类特有的action列表 (注意：不包括pageReady，它由父类处理)
     NSSet *childActions = [NSSet setWithArray:@[
         @"request", @"nativeGet", @"hasWx", @"isiPhoneX", @"readMessage", @"setTabBarBadge", 
@@ -2990,6 +3307,7 @@ static inline BOOL isIPhoneXSeries() {
     
     // 如果是子类特有的action，直接调用子类处理
     if ([childActions containsObject:action]) {
+        NSLog(@"🎯 [CFJClientH5Controller] 调用子类处理: %@", action);
         [self handleJavaScriptCall:jsData completion:^(id result) {
             if (jsCallBack) {
                 jsCallBack(result);
@@ -2998,6 +3316,7 @@ static inline BOOL isIPhoneXSeries() {
         return;
     }
     
+    NSLog(@"🎯 [CFJClientH5Controller] 调用父类处理: %@", action);
     // 否则调用父类处理
     [super jsCallObjc:jsData jsCallBack:jsCallBack];
 }

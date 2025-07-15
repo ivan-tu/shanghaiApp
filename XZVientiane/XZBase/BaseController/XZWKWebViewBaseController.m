@@ -431,7 +431,29 @@ static inline BOOL isIPhoneXSeries() {
         if (self == vc) {
             return;
         }
-        [self domainOperate];
+        
+        NSLog(@"🔄 [XZWKWebView] 收到RefreshOtherAllVCNotif通知，开始刷新页面");
+        
+        // 彻底刷新页面，让条件页面重新执行状态判断
+        if ([AFNetworkReachabilityManager manager].networkReachabilityStatus != AFNetworkReachabilityStatusNotReachable) {
+            NSLog(@"🔄 [XZWKWebView] 使用domainOperate彻底刷新页面，重新执行状态判断");
+            [self domainOperate];
+        } else {
+            NSLog(@"⚠️ [XZWKWebView] 网络不可用，跳过页面刷新");
+        }
+    }];
+    
+    // 监听backToHome通知，用于tab切换
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"backToHome" object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+        STRONG_SELF;
+        NSLog(@"🏠 [XZWKWebView] 收到backToHome通知");
+        
+        // 如果当前页面是tab页面，确保正确刷新
+        if (self.isTabbarShow && [self isShowingOnKeyWindow]) {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self domainOperate];
+            });
+        }
     }];
 }
 
@@ -982,15 +1004,9 @@ static inline BOOL isIPhoneXSeries() {
             });
         }
     } else {
-        // 处理其他类型的调用
-        if (jsCallBack) {
-            jsCallBack(@{
-                @"success": @NO,
-                @"message": @"Unknown action",
-                @"errorMessage": @"Unknown action",
-                @"code": @(-1)
-            });
-        }
+        // 其他方法应该由子类处理，这里不处理，让子类有机会处理
+        NSLog(@"⚠️ [XZWKWebViewBaseController] 未处理的action: %@，应该由子类处理", function);
+        // 不返回错误，让子类有机会处理
     }
 }
 
