@@ -1062,7 +1062,7 @@ static inline BOOL isIPhoneXSeries() {
         // 返回成功响应
         if (completion) {
             completion(@{
-                @"success": @YES,
+                @"success": @"true",
                 @"data": @{},
                 @"errorMessage": @"",
                 @"code": @0
@@ -1159,7 +1159,7 @@ static inline BOOL isIPhoneXSeries() {
         // 返回成功响应
         if (completion) {
             completion(@{
-                @"success": @YES,
+                @"success": @"true",
                 @"data": @{},
                 @"errorMessage": @"",
                 @"code": @0
@@ -1744,7 +1744,7 @@ static inline BOOL isIPhoneXSeries() {
         
         // 确保回调成功
         if (completion) {
-            completion(@{@"success": @YES, @"data": @{}, @"errorMessage": @""});
+            completion(@{@"success": @"true", @"data": @{}, @"errorMessage": @""});
         }
         return;
     }
@@ -1752,7 +1752,7 @@ static inline BOOL isIPhoneXSeries() {
     // 处理完成，返回成功
     NSLog(@"✅ [CFJClientH5Controller] 默认处理完成 - action: %@", function);
     if (completion) {
-        completion(@{@"success": @YES, @"data": @{}, @"errorMessage": @""});
+        completion(@{@"success": @"true", @"data": @{}, @"errorMessage": @""});
     }
 }
 
@@ -2616,7 +2616,7 @@ static inline BOOL isIPhoneXSeries() {
         
         [manager POST:requestUrl parameters:[dataDic objectForKey:@"data"] headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             if (jsCallBack) {
-                // 转换为JavaScript期望的格式
+                // 获取服务器响应数据
                 NSDictionary *serverResponse = responseObject;
                 
                 // 检查服务器响应的成功状态
@@ -2626,33 +2626,21 @@ static inline BOOL isIPhoneXSeries() {
                     isSuccess = YES;
                 }
                 
-                // 构造JavaScript期望的响应格式
-                NSDictionary *jsResponse = @{
-                    @"success": isSuccess ? @YES : @NO,
-                    @"data": @{
-                        @"code": isSuccess ? @"0" : [NSString stringWithFormat:@"%@", codeValue ?: @(-1)],
-                        @"data": [serverResponse objectForKey:@"data"] ?: @{},
-                        @"errorMessage": [serverResponse objectForKey:@"errorMessage"] ?: @""
-                    },
-                    @"errorMessage": [serverResponse objectForKey:@"errorMessage"] ?: @"",
-                    @"code": codeValue ?: @(-1)
-                };
+                // 使用formatCallbackResponse方法保持格式一致
+                NSDictionary *jsResponse = [self formatCallbackResponse:@"request" 
+                                                                  data:serverResponse 
+                                                               success:isSuccess 
+                                                          errorMessage:[serverResponse objectForKey:@"errorMessage"] ?: @""];
                 
                 jsCallBack(jsResponse);
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             if (jsCallBack) {
-                // 失败时也使用JavaScript期望的格式
-                NSDictionary *errorResponse = @{
-                    @"success": @NO,
-                    @"data": @{
-                        @"code": @"-1",
-                        @"data": @{},
-                        @"errorMessage": error.localizedDescription ?: @"网络请求失败"
-                    },
-                    @"errorMessage": error.localizedDescription ?: @"网络请求失败",
-                    @"code": @(-1)
-                };
+                // 使用formatCallbackResponse方法保持格式一致
+                NSDictionary *errorResponse = [self formatCallbackResponse:@"request" 
+                                                                      data:@{} 
+                                                                   success:NO 
+                                                              errorMessage:error.localizedDescription ?: @"网络请求失败"];
                 jsCallBack(errorResponse);
             }
         }];
@@ -3034,62 +3022,86 @@ static inline BOOL isIPhoneXSeries() {
         errorMessage = @"";
     }
     
+    id formattedData = nil;
+    
     if ([apiType isEqualToString:@"showModal"]) {
-        // showModal类型：直接返回confirm/cancel状态
-        return @{
+        // showModal类型：JavaScript端期望 {confirm: true/false, cancel: true/false}
+        formattedData = @{
             @"confirm": data[@"confirm"] ?: @"false",
-            @"cancel": data[@"cancel"] ?: @"false",
-            @"errMsg": success ? @"showModal:ok" : @"showModal:fail"
+            @"cancel": data[@"cancel"] ?: @"false"
         };
     } else if ([apiType isEqualToString:@"showActionSheet"]) {
-        // showActionSheet类型：直接返回tapIndex
-        return @{
-            @"tapIndex": data[@"tapIndex"] ?: @(-1),
-            @"errMsg": success ? @"showActionSheet:ok" : @"showActionSheet:fail"
+        // showActionSheet类型：JavaScript端期望 {tapIndex: number}
+        formattedData = @{
+            @"tapIndex": data[@"tapIndex"] ?: @(-1)
         };
     } else if ([apiType isEqualToString:@"fancySelect"] || [apiType isEqualToString:@"areaSelect"]) {
-        // 选择器类型：直接返回value和code
-        return @{
+        // 选择器类型：JavaScript端期望 {value: string, code: string}
+        formattedData = @{
             @"value": data[@"value"] ?: @"",
-            @"code": data[@"code"] ?: @"",
-            @"errMsg": success ? @"select:ok" : @"select:fail"
+            @"code": data[@"code"] ?: @""
         };
     } else if ([apiType isEqualToString:@"chooseFile"]) {
-        // 文件选择类型：直接返回文件列表
-        return data ?: @[];
-    } else if ([apiType isEqualToString:@"nativeGet"]) {
-        // nativeGet类型：返回包含data字段的格式
-        return @{
-            @"data": data ?: @"",
-            @"success": success ? @YES : @NO,
-            @"errorMessage": errorMessage
-        };
+        // 文件选择类型：JavaScript端期望文件列表数组
+        formattedData = data ?: @[];
     } else if ([apiType isEqualToString:@"getLocation"]) {
-        // 定位类型：直接返回位置信息
-        return @{
+        // 定位类型：JavaScript端期望 {latitude: number, longitude: number, city: string}
+        formattedData = @{
             @"latitude": data[@"lat"] ?: @(0),
             @"longitude": data[@"lng"] ?: @(0),
             @"city": data[@"city"] ?: @"",
-            @"address": data[@"address"] ?: @"",
-            @"errMsg": success ? @"getLocation:ok" : @"getLocation:fail"
+            @"address": data[@"address"] ?: @""
         };
     } else if ([apiType isEqualToString:@"hasWx"] || [apiType isEqualToString:@"isiPhoneX"]) {
-        // 状态查询类型：直接返回状态
-        return @{
-            @"status": data[@"status"] ?: @(0),
-            @"errMsg": success ? @"query:ok" : @"query:fail"
+        // 状态查询类型：JavaScript端期望 {status: number}
+        formattedData = @{
+            @"status": data[@"status"] ?: @(0)
         };
+    } else if ([apiType isEqualToString:@"nativeGet"]) {
+        // nativeGet特殊处理，data字段包含实际内容
+        formattedData = data ?: @"";
     } else if ([apiType isEqualToString:@"request"]) {
-        // 网络请求类型：直接返回数据（已经是正确格式）
-        return data;
+        // request类型：应用层期望res.data.code == '0'，需要包装服务器响应
+        if ([data isKindOfClass:[NSDictionary class]]) {
+            // 获取服务器code值，确保类型正确
+            NSNumber *serverCode = [data objectForKey:@"code"];
+            NSString *codeString = @"0"; // 默认成功
+            
+            if (!success) {
+                // 如果不成功，使用服务器返回的code
+                if (serverCode) {
+                    codeString = [serverCode stringValue];
+                } else {
+                    codeString = @"-1";
+                }
+            }
+            
+            // 构造应用层期望的格式: {code: "0", data: {...}, errorMessage: ""}
+            formattedData = @{
+                @"code": codeString,
+                @"data": [data objectForKey:@"data"] ?: @{},
+                @"errorMessage": [data objectForKey:@"errorMessage"] ?: @""
+            };
+        } else {
+            formattedData = @{
+                @"code": success ? @"0" : @"-1",
+                @"data": @{},
+                @"errorMessage": @""
+            };
+        }
     } else {
-        // 其他类型：简单成功/失败格式
-        return @{
-            @"success": success ? @YES : @NO,
-            @"data": data ?: @{},
-            @"errorMessage": errorMessage
-        };
+        // 其他类型：保持原始数据
+        formattedData = data ?: @{};
     }
+    
+    // 统一返回格式：{success: boolean, data: object, errorMessage: string}
+    // 这样JavaScript端的 backData.data 就能正确获取到数据
+    // 注意：JavaScript端期望success是字符串"true"/"false"
+    return @{
+        @"success": success ? @"true" : @"false",
+        @"data": formattedData,
+        @"errorMessage": errorMessage
+    };
 }
 
 @end

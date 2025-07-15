@@ -855,7 +855,7 @@ static inline BOOL isIPhoneXSeries() {
         // 返回成功响应给前端
         if (jsCallBack) {
             jsCallBack(@{
-                @"success": @YES,
+                @"success": @"true",
                 @"data": @{},
                 @"errorMessage": @"",
                 @"code": @0
@@ -870,7 +870,7 @@ static inline BOOL isIPhoneXSeries() {
         // 返回成功响应
         if (jsCallBack) {
             jsCallBack(@{
-                @"success": @YES,
+                @"success": @"true",
                 @"data": @{},
                 @"errorMessage": @"",
                 @"code": @0
@@ -901,7 +901,7 @@ static inline BOOL isIPhoneXSeries() {
         // 返回成功响应
         if (jsCallBack) {
             jsCallBack(@{
-                @"success": @YES,
+                @"success": @"true",
                 @"data": @{},
                 @"errorMessage": @"",
                 @"code": @0
@@ -946,7 +946,7 @@ static inline BOOL isIPhoneXSeries() {
             
             if (jsCallBack) {
                 jsCallBack(@{
-                    @"success": @YES,
+                    @"success": @"true",
                     @"data": locationData,
                     @"errorMessage": @"",
                     @"code": @0
@@ -964,7 +964,7 @@ static inline BOOL isIPhoneXSeries() {
             
             if (jsCallBack) {
                 jsCallBack(@{
-                    @"success": @YES,
+                    @"success": @"true",
                     @"data": locationData,
                     @"errorMessage": @"",
                     @"code": @0
@@ -975,7 +975,7 @@ static inline BOOL isIPhoneXSeries() {
         // navigateTo应该由子类CFJClientH5Controller处理，这里返回未实现
         if (jsCallBack) {
             jsCallBack(@{
-                @"success": @NO,
+                @"success": @"false",
                 @"message": @"navigateTo should be handled by subclass",
                 @"errorMessage": @"navigateTo should be handled by subclass",
                 @"code": @(-1)
@@ -1102,7 +1102,7 @@ static inline BOOL isIPhoneXSeries() {
                     
                     // 构造JavaScript期望的响应格式
                     NSDictionary *jsResponse = @{
-                        @"success": isSuccess ? @YES : @NO,
+                        @"success": isSuccess ? @"true" : @"false",
                         @"data": @{
                             @"code": isSuccess ? @"0" : [NSString stringWithFormat:@"%@", codeValue ?: @(-1)],
                             @"data": [serverResponse objectForKey:@"data"] ?: @{},
@@ -1120,7 +1120,7 @@ static inline BOOL isIPhoneXSeries() {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     // 失败时也使用JavaScript期望的格式
                     NSDictionary *errorResponse = @{
-                        @"success": @NO,
+                        @"success": @"false",
                         @"data": @{
                             @"code": @"-1",
                             @"data": @{},
