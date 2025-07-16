@@ -3,11 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 48;
+	objectVersion = 90;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		491CB84E2326319D8744B879 /* libPods-XZVientiane.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6D1A7DE6A32DA032BCCF8C6 /* libPods-XZVientiane.a */; };
+		2CECB7742E24989F0038FFFE /* XZWKWebViewBaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CECB7732E24989F0038FFFE /* XZWKWebViewBaseController.m */; };
+		2CECB77A2E24994D0038FFFE /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CECB7792E24994D0038FFFE /* WebKit.framework */; };
+		837EE0B2838675C41BE964F1 /* libPods-XZVientiane.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B2658F42FF7D57BA2F8D696 /* libPods-XZVientiane.a */; };
 		A50230C1201EB8880059C305 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = A50230BF201EB8870059C305 /* Reachability.m */; };
 		A50230F1201F245B0059C305 /* CustomTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A50230F0201F245A0059C305 /* CustomTabBar.m */; };
 		A505CABD1FDE2A0C00FBD4A3 /* XZPicNavBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A505CAAB1FDE2A0900FBD4A3 /* XZPicNavBar.m */; };
@@ -18,7 +20,6 @@
 		A505CAC91FDE2BCD00FBD4A3 /* HTMLCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A505CAC71FDE2BCD00FBD4A3 /* HTMLCache.m */; };
 		A505CACD1FDE2C2700FBD4A3 /* XZOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A505CACC1FDE2C2700FBD4A3 /* XZOrderModel.m */; };
 		A505CCA81FDE2CBF00FBD4A3 /* UINavigationController+ZFFullscreenPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = A505CB251FDE2CB700FBD4A3 /* UINavigationController+ZFFullscreenPopGesture.m */; };
-		A505CCA91FDE2CBF00FBD4A3 /* libUMessage_Sdk_1.4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A505CB411FDE2CB800FBD4A3 /* libUMessage_Sdk_1.4.0.a */; };
 		A505CCAA1FDE2CBF00FBD4A3 /* SVStatusHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = A505CB451FDE2CB800FBD4A3 /* SVStatusHUD.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A505CD1A1FDE2CE800FBD4A3 /* RNCachingURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = A505CD181FDE2CE800FBD4A3 /* RNCachingURLProtocol.m */; };
 		A505CD1D1FDE2D2A00FBD4A3 /* XZTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A505CD1B1FDE2D2A00FBD4A3 /* XZTableViewCell.m */; };
@@ -81,7 +82,6 @@
 		A508734B2484E236005AF8B8 /* LocationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A50873452484E236005AF8B8 /* LocationCell.m */; };
 		A508734C2484E236005AF8B8 /* AdressHistoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A50873472484E236005AF8B8 /* AdressHistoryCell.m */; };
 		A508734D2484E236005AF8B8 /* AddressFromMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A50873482484E236005AF8B8 /* AddressFromMapViewController.m */; };
-		A508734F2484E2E7005AF8B8 /* AMapSearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A508734E2484E2E6005AF8B8 /* AMapSearchKit.framework */; };
 		A50873682484E30E005AF8B8 /* JFCityCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A50873522484E30E005AF8B8 /* JFCityCollectionViewCell.m */; };
 		A50873692484E30E005AF8B8 /* JFLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = A50873542484E30E005AF8B8 /* JFLocation.m */; };
 		A508736A2484E30E005AF8B8 /* JFModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A50873592484E30E005AF8B8 /* JFModel.m */; };
@@ -96,7 +96,6 @@
 		A508737A2484E355005AF8B8 /* SCIndexViewConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = A50873742484E354005AF8B8 /* SCIndexViewConfiguration.m */; };
 		A508737B2484E355005AF8B8 /* SCIndexView.m in Sources */ = {isa = PBXBuildFile; fileRef = A50873762484E354005AF8B8 /* SCIndexView.m */; };
 		A508737C2484E355005AF8B8 /* UITableView+SCIndexView.m in Sources */ = {isa = PBXBuildFile; fileRef = A50873782484E354005AF8B8 /* UITableView+SCIndexView.m */; };
-		A50873842484F2F2005AF8B8 /* AMapLocationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50873832484F2F2005AF8B8 /* AMapLocationKit.framework */; };
 		A51DA3F920EE2C8B00E40549 /* ShowAlertType.m in Sources */ = {isa = PBXBuildFile; fileRef = A51DA3EF20EE2C8B00E40549 /* ShowAlertType.m */; };
 		A51DA3FA20EE2C8B00E40549 /* EasyShowUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = A51DA3F120EE2C8B00E40549 /* EasyShowUtils.m */; };
 		A51DA3FB20EE2C8B00E40549 /* EasyShowLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A51DA3F220EE2C8B00E40549 /* EasyShowLabel.m */; };
@@ -149,9 +148,7 @@
 		A5550DD11FBA823000B010C4 /* DCConsts.m in Sources */ = {isa = PBXBuildFile; fileRef = A5550DD01FBA823000B010C4 /* DCConsts.m */; };
 		A5550DD41FBA823F00B010C4 /* DCNavSearchBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5550DD31FBA823F00B010C4 /* DCNavSearchBarView.m */; };
 		A55B9C0624869EEE00595FA6 /* DTShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A55B9BF324869EEE00595FA6 /* DTShareKit.framework */; };
-		A55B9C0824869EEE00595FA6 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = A55B9BFA24869EEE00595FA6 /* README.txt */; };
-		A55B9C0924869EEE00595FA6 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A55B9BFC24869EEE00595FA6 /* libWeChatSDK.a */; };
-
+		A55B9C0724869EEE00595FA6 /* libSocialDingDing.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A55B9BF524869EEE00595FA6 /* libSocialDingDing.a */; };
 		A55B9C0B24869EEE00595FA6 /* libSocialSina.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A55B9C0024869EEE00595FA6 /* libSocialSina.a */; };
 		A55B9C0C24869EEE00595FA6 /* libSocialQQ.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A55B9C0424869EEE00595FA6 /* libSocialQQ.a */; };
 		A55B9C0D24869EEE00595FA6 /* UMShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A55B9C0524869EEE00595FA6 /* UMShare.framework */; };
@@ -224,19 +221,21 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		A51DA4A020EE76D300E40549 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
 			dstPath = "";
-			dstSubfolderSpec = 10;
+			dstSubfolder = Frameworks;
 			files = (
 			);
 			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1AF8E83BA851A447BD2094E1 /* Pods-XZVientiane.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XZVientiane.release.xcconfig"; path = "Target Support Files/Pods-XZVientiane/Pods-XZVientiane.release.xcconfig"; sourceTree = "<group>"; };
-		947EB2C529C7995A681E0E26 /* Pods-XZVientiane.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XZVientiane.debug.xcconfig"; path = "Target Support Files/Pods-XZVientiane/Pods-XZVientiane.debug.xcconfig"; sourceTree = "<group>"; };
+		2CECB7722E24989F0038FFFE /* XZWKWebViewBaseController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XZWKWebViewBaseController.h; sourceTree = "<group>"; };
+		2CECB7732E24989F0038FFFE /* XZWKWebViewBaseController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XZWKWebViewBaseController.m; sourceTree = "<group>"; };
+		2CECB7792E24994D0038FFFE /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		2CECB7A92E24B1E60038FFFE /* CFJWebViewMigrationAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CFJWebViewMigrationAdapter.h; sourceTree = "<group>"; };
+		3B2658F42FF7D57BA2F8D696 /* libPods-XZVientiane.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-XZVientiane.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5D668819463A92225B014EB5 /* Pods-XZVientiane.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XZVientiane.release.xcconfig"; path = "Target Support Files/Pods-XZVientiane/Pods-XZVientiane.release.xcconfig"; sourceTree = "<group>"; };
 		A50230BF201EB8870059C305 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		A50230C0201EB8880059C305 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		A50230EF201F24590059C305 /* CustomTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTabBar.h; sourceTree = "<group>"; };
@@ -259,8 +258,6 @@
 		A505CACC1FDE2C2700FBD4A3 /* XZOrderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XZOrderModel.m; sourceTree = "<group>"; };
 		A505CB251FDE2CB700FBD4A3 /* UINavigationController+ZFFullscreenPopGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+ZFFullscreenPopGesture.m"; sourceTree = "<group>"; };
 		A505CB261FDE2CB700FBD4A3 /* UINavigationController+ZFFullscreenPopGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+ZFFullscreenPopGesture.h"; sourceTree = "<group>"; };
-		A505CB411FDE2CB800FBD4A3 /* libUMessage_Sdk_1.4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMessage_Sdk_1.4.0.a; sourceTree = "<group>"; };
-		A505CB421FDE2CB800FBD4A3 /* UMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMessage.h; sourceTree = "<group>"; };
 		A505CB441FDE2CB800FBD4A3 /* SVStatusHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVStatusHUD.h; sourceTree = "<group>"; };
 		A505CB451FDE2CB800FBD4A3 /* SVStatusHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVStatusHUD.m; sourceTree = "<group>"; };
 		A505CD181FDE2CE800FBD4A3 /* RNCachingURLProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNCachingURLProtocol.m; sourceTree = "<group>"; };
@@ -368,7 +365,6 @@
 		A50873462484E236005AF8B8 /* SearchTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchTableView.h; sourceTree = "<group>"; };
 		A50873472484E236005AF8B8 /* AdressHistoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdressHistoryCell.m; sourceTree = "<group>"; };
 		A50873482484E236005AF8B8 /* AddressFromMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressFromMapViewController.m; sourceTree = "<group>"; };
-		A508734E2484E2E6005AF8B8 /* AMapSearchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AMapSearchKit.framework; sourceTree = "<group>"; };
 		A50873512484E30E005AF8B8 /* JFCityCollectionFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFCityCollectionFlowLayout.h; sourceTree = "<group>"; };
 		A50873522484E30E005AF8B8 /* JFCityCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFCityCollectionViewCell.m; sourceTree = "<group>"; };
 		A50873542484E30E005AF8B8 /* JFLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFLocation.m; sourceTree = "<group>"; };
@@ -396,7 +392,6 @@
 		A50873772484E354005AF8B8 /* SCIndexViewConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCIndexViewConfiguration.h; sourceTree = "<group>"; };
 		A50873782484E354005AF8B8 /* UITableView+SCIndexView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+SCIndexView.m"; sourceTree = "<group>"; };
 		A50873792484E354005AF8B8 /* SCIndexView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCIndexView.h; sourceTree = "<group>"; };
-		A50873832484F2F2005AF8B8 /* AMapLocationKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AMapLocationKit.framework; sourceTree = "<group>"; };
 		A508738B24854C50005AF8B8 /* TCConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCConfig.h; sourceTree = "<group>"; };
 		A51DA3EF20EE2C8B00E40549 /* ShowAlertType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowAlertType.m; sourceTree = "<group>"; };
 		A51DA3F020EE2C8B00E40549 /* UIView+EasyShowExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+EasyShowExt.h"; sourceTree = "<group>"; };
@@ -494,13 +489,11 @@
 		A5550DD21FBA823F00B010C4 /* DCNavSearchBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCNavSearchBarView.h; sourceTree = "<group>"; };
 		A5550DD31FBA823F00B010C4 /* DCNavSearchBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCNavSearchBarView.m; sourceTree = "<group>"; };
 		A55B9BF324869EEE00595FA6 /* DTShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DTShareKit.framework; sourceTree = "<group>"; };
+		A55B9BF424869EEE00595FA6 /* UMSocialDingDingHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialDingDingHandler.h; sourceTree = "<group>"; };
+		A55B9BF524869EEE00595FA6 /* libSocialDingDing.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSocialDingDing.a; sourceTree = "<group>"; };
 		A55B9BF824869EEE00595FA6 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		A55B9BF924869EEE00595FA6 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
-		A55B9BFA24869EEE00595FA6 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		A55B9BFB24869EEE00595FA6 /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
-		A55B9BFC24869EEE00595FA6 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
-
-		A55B9BFE24869EEE00595FA6 /* UMSocialWechatHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialWechatHandler.h; sourceTree = "<group>"; };
 		A55B9C0024869EEE00595FA6 /* libSocialSina.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSocialSina.a; sourceTree = "<group>"; };
 		A55B9C0124869EEE00595FA6 /* UMSocialSinaHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialSinaHandler.h; sourceTree = "<group>"; };
 		A55B9C0324869EEE00595FA6 /* UMSocialQQHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialQQHandler.h; sourceTree = "<group>"; };
@@ -586,23 +579,31 @@
 		A5F9D9D720D035F7004D8669 /* endPoint@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "endPoint@3x.png"; sourceTree = "<group>"; };
 		A5F9D9D820D035F7004D8669 /* startPoint@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "startPoint@3x.png"; sourceTree = "<group>"; };
 		A5FD2F7A202D6A3D003CB2EC /* XZVientiane.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XZVientiane.entitlements; sourceTree = "<group>"; };
-		A6D1A7DE6A32DA032BCCF8C6 /* libPods-XZVientiane.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-XZVientiane.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBD3B3072E01AEF200803613 /* CustomHybridProcessor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomHybridProcessor.h; sourceTree = "<group>"; };
 		CBD3B3082E01AEF200803613 /* CustomHybridProcessor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomHybridProcessor.m; sourceTree = "<group>"; };
+		D7C958665F8B96A095CF1D2B /* Pods-XZVientiane.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XZVientiane.debug.xcconfig"; path = "Target Support Files/Pods-XZVientiane/Pods-XZVientiane.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		2CECB7752E2498B70038FFFE /* WKWebView */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = WKWebView;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		A5550D191FB9A94000B010C4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
+				2CECB77A2E24994D0038FFFE /* WebKit.framework in Frameworks */,
 				A5881606212EDAD000A95D98 /* GLKit.framework in Frameworks */,
-				A508734F2484E2E7005AF8B8 /* AMapSearchKit.framework in Frameworks */,
 				A55B9C0D24869EEE00595FA6 /* UMShare.framework in Frameworks */,
 				A529A20221140A860066EB3E /* CoreMotion.framework in Frameworks */,
 				A565BCE4249E1BCC00A2E8FB /* HybridSDK.framework in Frameworks */,
 				A55B9C0624869EEE00595FA6 /* DTShareKit.framework in Frameworks */,
 				A505CD6B1FDE4EA100FBD4A3 /* AssetsLibrary.framework in Frameworks */,
+				A55B9C0724869EEE00595FA6 /* libSocialDingDing.a in Frameworks */,
 				A505CD751FDE54B500FBD4A3 /* Accounts.framework in Frameworks */,
 				A505CD731FDE53EE00FBD4A3 /* SystemConfiguration.framework in Frameworks */,
 				A505CD711FDE519200FBD4A3 /* CoreData.framework in Frameworks */,
@@ -611,7 +612,6 @@
 				A505CD6F1FDE510B00FBD4A3 /* libz.tbd in Frameworks */,
 				A505CD6D1FDE510000FBD4A3 /* libc++.tbd in Frameworks */,
 				A505CD691FDE4E8B00FBD4A3 /* Security.framework in Frameworks */,
-				A55B9C0924869EEE00595FA6 /* libWeChatSDK.a in Frameworks */,
 				A505CD671FDE4E5B00FBD4A3 /* libiconv.2.tbd in Frameworks */,
 				A55B9C0B24869EEE00595FA6 /* libSocialSina.a in Frameworks */,
 				A505CD651FDE4E3600FBD4A3 /* libz.1.tbd in Frameworks */,
@@ -623,26 +623,19 @@
 				A505CD531FDE389500FBD4A3 /* MessageUI.framework in Frameworks */,
 				A505CD501FDE387F00FBD4A3 /* UserNotificationsUI.framework in Frameworks */,
 				A505CD511FDE387F00FBD4A3 /* UserNotifications.framework in Frameworks */,
-				A50873842484F2F2005AF8B8 /* AMapLocationKit.framework in Frameworks */,
 				A55B9C0C24869EEE00595FA6 /* libSocialQQ.a in Frameworks */,
-				A505CCA91FDE2CBF00FBD4A3 /* libUMessage_Sdk_1.4.0.a in Frameworks */,
-				491CB84E2326319D8744B879 /* libPods-XZVientiane.a in Frameworks */,
+				837EE0B2838675C41BE964F1 /* libPods-XZVientiane.a in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A5550D311FB9A94100B010C4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A5550D3C1FB9A94100B010C4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
@@ -665,15 +658,6 @@
 				A505CB251FDE2CB700FBD4A3 /* UINavigationController+ZFFullscreenPopGesture.m */,
 			);
 			path = ZFNavigationController;
-			sourceTree = "<group>";
-		};
-		A505CB401FDE2CB800FBD4A3 /* UMessage_Sdk_1.4.0 */ = {
-			isa = PBXGroup;
-			children = (
-				A505CB411FDE2CB800FBD4A3 /* libUMessage_Sdk_1.4.0.a */,
-				A505CB421FDE2CB800FBD4A3 /* UMessage.h */,
-			);
-			path = UMessage_Sdk_1.4.0;
 			sourceTree = "<group>";
 		};
 		A505CB431FDE2CB800FBD4A3 /* SVStatusHUD */ = {
@@ -1006,6 +990,9 @@
 		A5550D551FB9AA0B00B010C4 /* BaseController */ = {
 			isa = PBXGroup;
 			children = (
+				2CECB7A92E24B1E60038FFFE /* CFJWebViewMigrationAdapter.h */,
+				2CECB7722E24989F0038FFFE /* XZWKWebViewBaseController.h */,
+				2CECB7732E24989F0038FFFE /* XZWKWebViewBaseController.m */,
 				CBD3B3072E01AEF200803613 /* CustomHybridProcessor.h */,
 				CBD3B3082E01AEF200803613 /* CustomHybridProcessor.m */,
 				A54A282120216F6700CA1517 /* XZNavBar.h */,
@@ -1096,7 +1083,6 @@
 				A579576D20F857B800B74363 /* TZImagePickerController */,
 				A5E738472028977D00E6B19E /* DHGuidePageHUD */,
 				A505CB431FDE2CB800FBD4A3 /* SVStatusHUD */,
-				A505CB401FDE2CB800FBD4A3 /* UMessage_Sdk_1.4.0 */,
 				A505CB241FDE2CB700FBD4A3 /* ZFNavigationController */,
 			);
 			path = ThirdParty;
@@ -1147,6 +1133,7 @@
 		A5550D631FB9AC1300B010C4 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				2CECB7752E2498B70038FFFE /* WKWebView */,
 				A5863384212192BC001C7CE2 /* UITabbar */,
 				A5550DBE1FBA798E00B010C4 /* UIBarButtonItem */,
 				A5550DBD1FBA796A00B010C4 /* UIButton */,
@@ -1317,6 +1304,8 @@
 			isa = PBXGroup;
 			children = (
 				A55B9BF324869EEE00595FA6 /* DTShareKit.framework */,
+				A55B9BF424869EEE00595FA6 /* UMSocialDingDingHandler.h */,
+				A55B9BF524869EEE00595FA6 /* libSocialDingDing.a */,
 			);
 			path = DingDing;
 			sourceTree = "<group>";
@@ -1325,7 +1314,6 @@
 			isa = PBXGroup;
 			children = (
 				A55B9BF724869EEE00595FA6 /* OpenSDK1.8.7.1 */,
-				A55B9BFE24869EEE00595FA6 /* UMSocialWechatHandler.h */,
 			);
 			path = WeChat;
 			sourceTree = "<group>";
@@ -1335,9 +1323,7 @@
 			children = (
 				A55B9BF824869EEE00595FA6 /* WXApi.h */,
 				A55B9BF924869EEE00595FA6 /* WXApiObject.h */,
-				A55B9BFA24869EEE00595FA6 /* README.txt */,
 				A55B9BFB24869EEE00595FA6 /* WechatAuthSDK.h */,
-				A55B9BFC24869EEE00595FA6 /* libWeChatSDK.a */,
 			);
 			path = OpenSDK1.8.7.1;
 			sourceTree = "<group>";
@@ -1472,9 +1458,8 @@
 		A6B108B8107613590EFDF36A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2CECB7792E24994D0038FFFE /* WebKit.framework */,
 				A565BCE3249E1BCC00A2E8FB /* HybridSDK.framework */,
-				A50873832484F2F2005AF8B8 /* AMapLocationKit.framework */,
-				A508734E2484E2E6005AF8B8 /* AMapSearchKit.framework */,
 				A5881605212EDAD000A95D98 /* GLKit.framework */,
 				A529A20121140A860066EB3E /* CoreMotion.framework */,
 				A505CD741FDE54B500FBD4A3 /* Accounts.framework */,
@@ -1496,7 +1481,7 @@
 				A505CD521FDE389500FBD4A3 /* MessageUI.framework */,
 				A505CD4F1FDE387F00FBD4A3 /* UserNotifications.framework */,
 				A505CD4E1FDE387F00FBD4A3 /* UserNotificationsUI.framework */,
-				A6D1A7DE6A32DA032BCCF8C6 /* libPods-XZVientiane.a */,
+				3B2658F42FF7D57BA2F8D696 /* libPods-XZVientiane.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1504,8 +1489,8 @@
 		B41BC1C9408F9A5C9F4C1991 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				947EB2C529C7995A681E0E26 /* Pods-XZVientiane.debug.xcconfig */,
-				1AF8E83BA851A447BD2094E1 /* Pods-XZVientiane.release.xcconfig */,
+				D7C958665F8B96A095CF1D2B /* Pods-XZVientiane.debug.xcconfig */,
+				5D668819463A92225B014EB5 /* Pods-XZVientiane.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -1517,16 +1502,17 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A5550D481FB9A94100B010C4 /* Build configuration list for PBXNativeTarget "XZVientiane" */;
 			buildPhases = (
-				42D597B22EBDEF13E29594E6 /* [CP] Check Pods Manifest.lock */,
+				CB61AFECF070106E2C90B676 /* [CP] Check Pods Manifest.lock */,
 				A5550D181FB9A94000B010C4 /* Sources */,
 				A5550D191FB9A94000B010C4 /* Frameworks */,
 				A5550D1A1FB9A94000B010C4 /* Resources */,
 				A51DA4A020EE76D300E40549 /* Embed Frameworks */,
-				059607A233407BEB10ED8A6D /* [CP] Copy Pods Resources */,
+				8E6FF35350215344DB07DF36 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
-			dependencies = (
+			fileSystemSynchronizedGroups = (
+				2CECB7752E2498B70038FFFE /* WKWebView */,
 			);
 			name = XZVientiane;
 			productName = XZVientiane;
@@ -1603,7 +1589,6 @@
 				};
 			};
 			buildConfigurationList = A5550D171FB9A94000B010C4 /* Build configuration list for PBXProject "XZVientiane" */;
-			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -1613,6 +1598,7 @@
 				"tz-ru",
 			);
 			mainGroup = A5550D131FB9A94000B010C4;
+			preferredProjectObjectVersion = 90;
 			productRefGroup = A5550D1D1FB9A94000B010C4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1627,7 +1613,6 @@
 /* Begin PBXResourcesBuildPhase section */
 		A5550D1A1FB9A94000B010C4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				A588A7D723216AC1005CA94B /* city.json in Resources */,
 				A5550DAA1FB9B16B00B010C4 /* icomoon.ttf in Resources */,
@@ -1639,7 +1624,6 @@
 				A5550DB01FB9B1D500B010C4 /* network_1242_2016.png in Resources */,
 				A588A7D1232166E0005CA94B /* ClientSetting.plist in Resources */,
 				A53C27431FF388D7001B13B3 /* ZZCircleProgress.bundle in Resources */,
-				A55B9C0824869EEE00595FA6 /* README.txt in Resources */,
 				A508736C2484E30E005AF8B8 /* cityList.json in Resources */,
 				A588A7D0232166E0005CA94B /* appInfo.json in Resources */,
 				A5550DB11FB9B1D500B010C4 /* network_1242_2208.png in Resources */,
@@ -1654,38 +1638,33 @@
 				A5550D271FB9A94000B010C4 /* Main.storyboard in Resources */,
 				A5F9D9D920D035F7004D8669 /* endPoint@3x.png in Resources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A5550D321FB9A94100B010C4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A5550D3D1FB9A94100B010C4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		059607A233407BEB10ED8A6D /* [CP] Copy Pods Resources */ = {
+		8E6FF35350215344DB07DF36 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-XZVientiane/Pods-XZVientiane-resources.sh",
 				"${PODS_ROOT}/AMap3DMap/MAMapKit.framework/AMap.bundle",
 				"${PODS_ROOT}/AlipaySDK-iOS/AlipaySDK.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/HappyDNS/HappyDNS.privacy.bundle",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/MJRefresh/MJRefresh.Privacy.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/Qiniu/Qiniu.privacy.bundle",
 				"${PODS_ROOT}/SAMKeychain/Support/SAMKeychain.bundle",
+				"${PODS_ROOT}/UMPush/UMPush/UMPushResource.bundle",
+				"${PODS_ROOT}/UMShare/UMShare/UMSocialUI/UMSocialSDKResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -1693,34 +1672,41 @@
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AlipaySDK.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/HappyDNS.privacy.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.Privacy.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Qiniu.privacy.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SAMKeychain.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/UMPushResource.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/UMSocialSDKResources.bundle",
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-XZVientiane/Pods-XZVientiane-resources.sh\"\n";
+			shellScript = (
+				"\"${PODS_ROOT}/Target Support Files/Pods-XZVientiane/Pods-XZVientiane-resources.sh\"",
+				"",
+			);
 			showEnvVarsInLog = 0;
 		};
-		42D597B22EBDEF13E29594E6 /* [CP] Check Pods Manifest.lock */ = {
+		CB61AFECF070106E2C90B676 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-XZVientiane-checkManifestLockResult.txt",
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = (
+				"diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null",
+				"if [ $? != 0 ] ; then",
+				"    # print error to STDERR",
+				"    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2",
+				"    exit 1",
+				"fi",
+				"# This output is used by Xcode 'outputs' to avoid re-running this script phase.",
+				"echo \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"",
+				"",
+			);
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1728,7 +1714,6 @@
 /* Begin PBXSourcesBuildPhase section */
 		A5550D181FB9A94000B010C4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				A505CE0B1FDE63F900FBD4A3 /* SkipSetViewController.m in Sources */,
 				A579579520F857B800B74363 /* TZPhotoPickerController.m in Sources */,
@@ -1842,6 +1827,7 @@
 				A579579620F857B800B74363 /* TZPhotoPreviewCell.m in Sources */,
 				A53C27421FF388D7001B13B3 /* NSTimer+timerBlock.m in Sources */,
 				A579579420F857B800B74363 /* TZImageManager.m in Sources */,
+				2CECB7742E24989F0038FFFE /* XZWKWebViewBaseController.m in Sources */,
 				A51DA3FA20EE2C8B00E40549 /* EasyShowUtils.m in Sources */,
 				A5E2AEA3210FF68A006C0DE3 /* LBPhotoBrowserView.m in Sources */,
 				A53C27441FF388D7001B13B3 /* ZZCountingLabel.m in Sources */,
@@ -1868,23 +1854,18 @@
 				A505CD201FDE2D7600FBD4A3 /* UploadImageModel.m in Sources */,
 				A5E2AE9E210FF68A006C0DE3 /* LBOptionView.m in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A5550D301FB9A94100B010C4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				A5550D391FB9A94100B010C4 /* XZVientianeTests.m in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A5550D3B1FB9A94100B010C4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				A5550D441FB9A94100B010C4 /* XZVientianeUITests.m in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
@@ -1921,7 +1902,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		A5550D461FB9A94100B010C4 /* Debug */ = {
+		A5550D461FB9A94100B010C4 /* Debug configuration for PBXProject "XZVientiane" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1979,7 +1960,7 @@
 			};
 			name = Debug;
 		};
-		A5550D471FB9A94100B010C4 /* Release */ = {
+		A5550D471FB9A94100B010C4 /* Release configuration for PBXProject "XZVientiane" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -2031,9 +2012,9 @@
 			};
 			name = Release;
 		};
-		A5550D491FB9A94100B010C4 /* Debug */ = {
+		A5550D491FB9A94100B010C4 /* Debug configuration for PBXNativeTarget "XZVientiane" */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 947EB2C529C7995A681E0E26 /* Pods-XZVientiane.debug.xcconfig */;
+			baseConfigurationReference = D7C958665F8B96A095CF1D2B /* Pods-XZVientiane.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -2080,18 +2061,23 @@
 					"\"${PODS_ROOT}/Headers/Public/WebViewJavascriptBridge\"",
 					"$(PROJECT_DIR)/Pods/Headers/Public",
 					"$(PROJECT_DIR)/Pods/**",
+					"$(PROJECT_DIR)/XZVientiane/ThirdParty/SocialLibraries/WeChat/OpenSDK1.8.7.1",
+					"$(SRCROOT)/XZVientiane/Category/WKWebView",
 				);
 				INFOPLIST_FILE = XZVientiane/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"$(PROJECT_DIR)/XZVientiane/ThirdParty/SocialLibraries/WeChat/OpenSDK1.8.7.1",
 					"$(PROJECT_DIR)/XZVientiane/ThirdParty/UMSocial_Sdk_Extra_Frameworks/Twitter",
 					"$(PROJECT_DIR)/XZVientiane/ThirdParty/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/XZVientiane/ThirdParty/UMSocial_Sdk_Extra_Frameworks/SinaSSO",
 					"$(PROJECT_DIR)/XZVientiane/ThirdParty/UMSocial_Sdk_Extra_Frameworks/Wechat",
 					"$(PROJECT_DIR)/XZVientiane/ThirdParty/UMSocial_Sdk_Extra_Frameworks/Facebook",
-					"$(PROJECT_DIR)/XZVientiane/ThirdParty/UMessage_Sdk_1.4.0",
 					"$(PROJECT_DIR)/XZVientiane/ThirdParty/UnionPay/libs",
 					"$(PROJECT_DIR)/XZVientiane/ThirdParty/UMSocial_Sdk_5.2.1",
 					"$(PROJECT_DIR)/XZVientiane/ThirdParty/HelpDeskSDK/lib",
@@ -2114,7 +2100,6 @@
 					"$(PROJECT_DIR)/XZVientiane/ThirdParty/UMShare/SocialLibraries/Tumblr",
 					"$(PROJECT_DIR)/XZVientiane/ThirdParty/UMShare/SocialLibraries/GooglePlus",
 					"$(PROJECT_DIR)/XZVientiane/ThirdParty/UMShare/SocialLibraries/WeChat",
-					"$(PROJECT_DIR)/XZVientiane/ThirdParty/UMShare/SocialLibraries/WeChat/WechatSDK",
 					"$(PROJECT_DIR)/XZVientiane/ThirdParty/UMShare/SocialLibraries/Facebook",
 					"$(PROJECT_DIR)/XZVientiane/ThirdParty/UMShare/SocialLibraries/Line",
 					"$(PROJECT_DIR)/XZVientiane/ThirdParty/UMShare/SocialLibraries/VKontakte",
@@ -2131,7 +2116,6 @@
 					"$(PROJECT_DIR)/XZVientiane/ThirdParty/UMShare/SocialLibraries/QQ",
 					"$(PROJECT_DIR)/XZVientiane/ThirdParty/UMShare/UMSocialSDKPlugin",
 					"$(PROJECT_DIR)/XZVientiane/ThirdParty/SocialLibraries/DingDing",
-					"$(PROJECT_DIR)/XZVientiane/ThirdParty/SocialLibraries/WeChat/OpenSDK1.8.7.1",
 					"$(PROJECT_DIR)/XZVientiane/ThirdParty/SocialLibraries/WeChat",
 					"$(PROJECT_DIR)/XZVientiane/ThirdParty/SocialLibraries/Sina",
 					"$(PROJECT_DIR)/XZVientiane/ThirdParty/SocialLibraries/QQ",
@@ -2153,6 +2137,8 @@
 					"-l\"SAMKeychain\"",
 					"-l\"SDWebImage\"",
 					"-l\"WebViewJavascriptBridge\"",
+					"-force_load",
+					"$(PROJECT_DIR)/XZVientiane/ThirdParty/SocialLibraries/WeChat/OpenSDK1.8.7.1/libWeChatSDK.a",
 					"-l\"c++\"",
 					"-l\"resolv\"",
 					"-l\"sqlite3\"",
@@ -2204,9 +2190,9 @@
 			};
 			name = Debug;
 		};
-		A5550D4A1FB9A94100B010C4 /* Release */ = {
+		A5550D4A1FB9A94100B010C4 /* Release configuration for PBXNativeTarget "XZVientiane" */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1AF8E83BA851A447BD2094E1 /* Pods-XZVientiane.release.xcconfig */;
+			baseConfigurationReference = 5D668819463A92225B014EB5 /* Pods-XZVientiane.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -2253,18 +2239,23 @@
 					"\"${PODS_ROOT}/Headers/Public/WebViewJavascriptBridge\"",
 					"$(PROJECT_DIR)/Pods/Headers/Public",
 					"$(PROJECT_DIR)/Pods/**",
+					"$(PROJECT_DIR)/XZVientiane/ThirdParty/SocialLibraries/WeChat/OpenSDK1.8.7.1",
+					"$(SRCROOT)/XZVientiane/Category/WKWebView",
 				);
 				INFOPLIST_FILE = XZVientiane/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"$(PROJECT_DIR)/XZVientiane/ThirdParty/SocialLibraries/WeChat/OpenSDK1.8.7.1",
 					"$(PROJECT_DIR)/XZVientiane/ThirdParty/UMSocial_Sdk_Extra_Frameworks/Twitter",
 					"$(PROJECT_DIR)/XZVientiane/ThirdParty/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/XZVientiane/ThirdParty/UMSocial_Sdk_Extra_Frameworks/SinaSSO",
 					"$(PROJECT_DIR)/XZVientiane/ThirdParty/UMSocial_Sdk_Extra_Frameworks/Wechat",
 					"$(PROJECT_DIR)/XZVientiane/ThirdParty/UMSocial_Sdk_Extra_Frameworks/Facebook",
-					"$(PROJECT_DIR)/XZVientiane/ThirdParty/UMessage_Sdk_1.4.0",
 					"$(PROJECT_DIR)/XZVientiane/ThirdParty/UnionPay/libs",
 					"$(PROJECT_DIR)/XZVientiane/ThirdParty/UMSocial_Sdk_5.2.1",
 					"$(PROJECT_DIR)/XZVientiane/ThirdParty/HelpDeskSDK/lib",
@@ -2287,7 +2278,6 @@
 					"$(PROJECT_DIR)/XZVientiane/ThirdParty/UMShare/SocialLibraries/Tumblr",
 					"$(PROJECT_DIR)/XZVientiane/ThirdParty/UMShare/SocialLibraries/GooglePlus",
 					"$(PROJECT_DIR)/XZVientiane/ThirdParty/UMShare/SocialLibraries/WeChat",
-					"$(PROJECT_DIR)/XZVientiane/ThirdParty/UMShare/SocialLibraries/WeChat/WechatSDK",
 					"$(PROJECT_DIR)/XZVientiane/ThirdParty/UMShare/SocialLibraries/Facebook",
 					"$(PROJECT_DIR)/XZVientiane/ThirdParty/UMShare/SocialLibraries/Line",
 					"$(PROJECT_DIR)/XZVientiane/ThirdParty/UMShare/SocialLibraries/VKontakte",
@@ -2304,7 +2294,6 @@
 					"$(PROJECT_DIR)/XZVientiane/ThirdParty/UMShare/SocialLibraries/QQ",
 					"$(PROJECT_DIR)/XZVientiane/ThirdParty/UMShare/UMSocialSDKPlugin",
 					"$(PROJECT_DIR)/XZVientiane/ThirdParty/SocialLibraries/DingDing",
-					"$(PROJECT_DIR)/XZVientiane/ThirdParty/SocialLibraries/WeChat/OpenSDK1.8.7.1",
 					"$(PROJECT_DIR)/XZVientiane/ThirdParty/SocialLibraries/WeChat",
 					"$(PROJECT_DIR)/XZVientiane/ThirdParty/SocialLibraries/Sina",
 					"$(PROJECT_DIR)/XZVientiane/ThirdParty/SocialLibraries/QQ",
@@ -2326,6 +2315,8 @@
 					"-l\"SAMKeychain\"",
 					"-l\"SDWebImage\"",
 					"-l\"WebViewJavascriptBridge\"",
+					"-force_load",
+					"$(PROJECT_DIR)/XZVientiane/ThirdParty/SocialLibraries/WeChat/OpenSDK1.8.7.1/libWeChatSDK.a",
 					"-l\"c++\"",
 					"-l\"resolv\"",
 					"-l\"sqlite3\"",
@@ -2377,13 +2368,17 @@
 			};
 			name = Release;
 		};
-		A5550D4C1FB9A94100B010C4 /* Debug */ = {
+		A5550D4C1FB9A94100B010C4 /* Debug configuration for PBXNativeTarget "XZVientianeTests" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = XZVientianeTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.tuweia.xiangjian.XZVientianeTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2391,13 +2386,17 @@
 			};
 			name = Debug;
 		};
-		A5550D4D1FB9A94100B010C4 /* Release */ = {
+		A5550D4D1FB9A94100B010C4 /* Release configuration for PBXNativeTarget "XZVientianeTests" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = XZVientianeTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.tuweia.xiangjian.XZVientianeTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2405,12 +2404,16 @@
 			};
 			name = Release;
 		};
-		A5550D4F1FB9A94100B010C4 /* Debug */ = {
+		A5550D4F1FB9A94100B010C4 /* Debug configuration for PBXNativeTarget "XZVientianeUITests" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = XZVientianeUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.tuweia.xiangjian.XZVientianeUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2418,12 +2421,16 @@
 			};
 			name = Debug;
 		};
-		A5550D501FB9A94100B010C4 /* Release */ = {
+		A5550D501FB9A94100B010C4 /* Release configuration for PBXNativeTarget "XZVientianeUITests" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = XZVientianeUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.tuweia.xiangjian.XZVientianeUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2437,37 +2444,33 @@
 		A5550D171FB9A94000B010C4 /* Build configuration list for PBXProject "XZVientiane" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A5550D461FB9A94100B010C4 /* Debug */,
-				A5550D471FB9A94100B010C4 /* Release */,
+				A5550D461FB9A94100B010C4 /* Debug configuration for PBXProject "XZVientiane" */,
+				A5550D471FB9A94100B010C4 /* Release configuration for PBXProject "XZVientiane" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		A5550D481FB9A94100B010C4 /* Build configuration list for PBXNativeTarget "XZVientiane" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A5550D491FB9A94100B010C4 /* Debug */,
-				A5550D4A1FB9A94100B010C4 /* Release */,
+				A5550D491FB9A94100B010C4 /* Debug configuration for PBXNativeTarget "XZVientiane" */,
+				A5550D4A1FB9A94100B010C4 /* Release configuration for PBXNativeTarget "XZVientiane" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		A5550D4B1FB9A94100B010C4 /* Build configuration list for PBXNativeTarget "XZVientianeTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A5550D4C1FB9A94100B010C4 /* Debug */,
-				A5550D4D1FB9A94100B010C4 /* Release */,
+				A5550D4C1FB9A94100B010C4 /* Debug configuration for PBXNativeTarget "XZVientianeTests" */,
+				A5550D4D1FB9A94100B010C4 /* Release configuration for PBXNativeTarget "XZVientianeTests" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		A5550D4E1FB9A94100B010C4 /* Build configuration list for PBXNativeTarget "XZVientianeUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A5550D4F1FB9A94100B010C4 /* Debug */,
-				A5550D501FB9A94100B010C4 /* Release */,
+				A5550D4F1FB9A94100B010C4 /* Debug configuration for PBXNativeTarget "XZVientianeUITests" */,
+				A5550D501FB9A94100B010C4 /* Release configuration for PBXNativeTarget "XZVientianeUITests" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */

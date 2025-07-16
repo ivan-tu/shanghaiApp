@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 70;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -221,13 +221,10 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		A51DA4A020EE76D300E40549 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
 			dstPath = "";
-			dstSubfolderSpec = 10;
 			files = (
 			);
 			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -587,13 +584,18 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		2CECB7752E2498B70038FFFE /* WKWebView */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = WKWebView; sourceTree = "<group>"; };
+		2CECB7752E2498B70038FFFE /* WKWebView */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+			);
+			path = WKWebView;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		A5550D191FB9A94000B010C4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				2CECB77A2E24994D0038FFFE /* WebKit.framework in Frameworks */,
 				A5881606212EDAD000A95D98 /* GLKit.framework in Frameworks */,
@@ -625,21 +627,16 @@
 				A55B9C0C24869EEE00595FA6 /* libSocialQQ.a in Frameworks */,
 				837EE0B2838675C41BE964F1 /* libPods-XZVientiane.a in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A5550D311FB9A94100B010C4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A5550D3C1FB9A94100B010C4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
@@ -1595,7 +1592,6 @@
 				};
 			};
 			buildConfigurationList = A5550D171FB9A94000B010C4 /* Build configuration list for PBXProject "XZVientiane" */;
-			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -1605,6 +1601,7 @@
 				"tz-ru",
 			);
 			mainGroup = A5550D131FB9A94000B010C4;
+			preferredProjectObjectVersion = 90;
 			productRefGroup = A5550D1D1FB9A94000B010C4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1619,7 +1616,6 @@
 /* Begin PBXResourcesBuildPhase section */
 		A5550D1A1FB9A94000B010C4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				A588A7D723216AC1005CA94B /* city.json in Resources */,
 				A5550DAA1FB9B16B00B010C4 /* icomoon.ttf in Resources */,
@@ -1645,77 +1641,47 @@
 				A5550D271FB9A94000B010C4 /* Main.storyboard in Resources */,
 				A5F9D9D920D035F7004D8669 /* endPoint@3x.png in Resources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A5550D321FB9A94100B010C4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A5550D3D1FB9A94100B010C4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		8E6FF35350215344DB07DF36 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-XZVientiane/Pods-XZVientiane-resources.sh",
-				"${PODS_ROOT}/AMap3DMap/MAMapKit.framework/AMap.bundle",
-				"${PODS_ROOT}/AlipaySDK-iOS/AlipaySDK.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/HappyDNS/HappyDNS.privacy.bundle",
-				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/MJRefresh/MJRefresh.Privacy.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/Qiniu/Qiniu.privacy.bundle",
-				"${PODS_ROOT}/SAMKeychain/Support/SAMKeychain.bundle",
-				"${PODS_ROOT}/UMPush/UMPush/UMPushResource.bundle",
-				"${PODS_ROOT}/UMShare/UMShare/UMSocialUI/UMSocialSDKResources.bundle",
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-XZVientiane/Pods-XZVientiane-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AMap.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AlipaySDK.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/HappyDNS.privacy.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.Privacy.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Qiniu.privacy.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SAMKeychain.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/UMPushResource.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/UMSocialSDKResources.bundle",
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-XZVientiane/Pods-XZVientiane-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-XZVientiane/Pods-XZVientiane-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		CB61AFECF070106E2C90B676 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
-			);
-			inputFileListPaths = (
 			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-XZVientiane-checkManifestLockResult.txt",
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
@@ -1725,7 +1691,6 @@
 /* Begin PBXSourcesBuildPhase section */
 		A5550D181FB9A94000B010C4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				A505CE0B1FDE63F900FBD4A3 /* SkipSetViewController.m in Sources */,
 				A579579520F857B800B74363 /* TZPhotoPickerController.m in Sources */,
@@ -1866,23 +1831,18 @@
 				A505CD201FDE2D7600FBD4A3 /* UploadImageModel.m in Sources */,
 				A5E2AE9E210FF68A006C0DE3 /* LBOptionView.m in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A5550D301FB9A94100B010C4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				A5550D391FB9A94100B010C4 /* XZVientianeTests.m in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A5550D3B1FB9A94100B010C4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				A5550D441FB9A94100B010C4 /* XZVientianeUITests.m in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
@@ -2464,7 +2424,6 @@
 				A5550D461FB9A94100B010C4 /* Debug */,
 				A5550D471FB9A94100B010C4 /* Release */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		A5550D481FB9A94100B010C4 /* Build configuration list for PBXNativeTarget "XZVientiane" */ = {
@@ -2473,7 +2432,6 @@
 				A5550D491FB9A94100B010C4 /* Debug */,
 				A5550D4A1FB9A94100B010C4 /* Release */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		A5550D4B1FB9A94100B010C4 /* Build configuration list for PBXNativeTarget "XZVientianeTests" */ = {
@@ -2482,7 +2440,6 @@
 				A5550D4C1FB9A94100B010C4 /* Debug */,
 				A5550D4D1FB9A94100B010C4 /* Release */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		A5550D4E1FB9A94100B010C4 /* Build configuration list for PBXNativeTarget "XZVientianeUITests" */ = {
@@ -2491,7 +2448,6 @@
 				A5550D4F1FB9A94100B010C4 /* Debug */,
 				A5550D501FB9A94100B010C4 /* Release */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */

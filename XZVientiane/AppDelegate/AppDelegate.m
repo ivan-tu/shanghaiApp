@@ -301,36 +301,100 @@
 }
 
 -(void) onResp:(BaseResp*)response {
+    NSLog(@"🔔 [微信回调] 收到响应: %@, 错误码: %d", NSStringFromClass([response class]), response.errCode);
+    
     if([response isKindOfClass:[PayResp class]]) {
         PayResp *res = (PayResp *)response;
+        NSLog(@"💰 [微信支付回调] 错误码: %d", res.errCode);
         switch (res.errCode) {
             case WXSuccess:
             {
+                NSLog(@"✅ [微信支付] 支付成功");
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"weixinPay" object:@"true"];
             }
                 break;
             default:
             {
+                NSLog(@"❌ [微信支付] 支付失败或取消，错误码: %d", res.errCode);
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"weixinPay" object:@"false"];
             }
                 break;
         }
+        return;
     }
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"weixinPay" object:@"false"];
+    
+    // 处理微信分享回调
+    if([response isKindOfClass:[SendMessageToWXResp class]]) {
+        SendMessageToWXResp *resp = (SendMessageToWXResp *)response;
+        NSLog(@"📤 [微信分享回调] 错误码: %d", resp.errCode);
+        
+        NSString *resultMessage = @"";
+        BOOL shareSuccess = NO;
+        
+        switch (resp.errCode) {
+            case WXSuccess:
+                NSLog(@"✅ [微信分享] 分享成功");
+                resultMessage = @"分享成功";
+                shareSuccess = YES;
+                break;
+            case WXErrCodeCommon:
+                NSLog(@"❌ [微信分享] 普通错误类型");
+                resultMessage = @"分享失败";
+                break;
+            case WXErrCodeUserCancel:
+                NSLog(@"⚠️ [微信分享] 用户点击取消并返回");
+                resultMessage = @"分享已取消";
+                break;
+            case WXErrCodeSentFail:
+                NSLog(@"❌ [微信分享] 发送失败");
+                resultMessage = @"分享发送失败";
+                break;
+            case WXErrCodeAuthDeny:
+                NSLog(@"❌ [微信分享] 授权失败");
+                resultMessage = @"微信授权失败";
+                break;
+            case WXErrCodeUnsupport:
+                NSLog(@"❌ [微信分享] 微信不支持");
+                resultMessage = @"微信版本过低";
+                break;
+            default:
+                NSLog(@"❌ [微信分享] 未知错误，错误码: %d", resp.errCode);
+                resultMessage = [NSString stringWithFormat:@"分享失败(%d)", resp.errCode];
+                break;
+        }
+        
+        // 发送分享结果通知
+        NSDictionary *shareResult = @{
+            @"success": shareSuccess ? @"true" : @"false",
+            @"errorCode": @(resp.errCode),
+            @"errorMessage": resultMessage
+        };
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"wechatShareResult" object:shareResult];
+        return;
+    }
+    
+    NSLog(@"⚠️ [微信回调] 未处理的响应类型: %@", NSStringFromClass([response class]));
 }
 
 #pragma mark -  回调
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options {
+    NSLog(@"🔗 [URL回调] 收到URL: %@, scheme: %@, host: %@", url.absoluteString, url.scheme, url.host);
+    
     //6.3的新的API调用，是为了兼容国外平台(例如:新版facebookSDK,VK等)的调用[如果用6.2的api调用会没有回调],对国内平台没有影响。
     BOOL result = [[UMSocialManager defaultManager]  handleOpenURL:url options:options];
+    
+    NSLog(@"📤 [UMSocialManager] 处理结果: %@", result ? @"成功" : @"失败");
+    
     if (!result) {
         //银联和支付宝支付返回结果
         if ([url.host isEqualToString:@"safepay"] || [url.host isEqualToString:@"platformapi"] || [url.host isEqualToString:@"uppayresult"]) {
+            NSLog(@"💳 [支付回调] 检测到支付相关URL");
             [[NSNotificationCenter defaultCenter] postNotificationName:@"payresultnotif" object:url];
             return YES;
         }
         else if ( [url.host isEqualToString:@"pay"]) {
+            NSLog(@"💰 [微信支付] 检测到微信支付回调");
             return [WXApi handleOpenURL:url delegate:self];
         }
         
@@ -339,6 +403,7 @@
         @"result" : @(result),
         @"urlhost" : url.host ? url.host : @"",
     };
+    NSLog(@"📢 [通知发送] 发送分享结果通知: %@", dic);
     [[NSNotificationCenter defaultCenter] postNotificationName:@"shareresultnotif" object:dic];
     return result;
 }

@@ -294,6 +294,12 @@ static inline BOOL isIPhoneXSeries() {
         [self handleweixinPayResult:note.object];
     }];
     
+    // 监听微信分享结果
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"wechatShareResult" object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+        STRONG_SELF;
+        [self handleWechatShareResult:note.object];
+    }];
+    
     [[NSNotificationCenter defaultCenter] addObserverForName:@"HideTabBarNotif" object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
         STRONG_SELF;
         [UIView animateWithDuration:0.5 animations:^{
@@ -2099,77 +2105,90 @@ static inline BOOL isIPhoneXSeries() {
 - (void)shareContent:(NSDictionary *)dic presentedVC:(UIViewController *)vc {
     NSString *type = [dic objectForKey:@"type"];
     NSInteger shareType = [[dic objectForKey:@"shareType"] integerValue];
+    
+    NSLog(@"🔄 [分享开始] 类型: %@, shareType: %ld, 数据: %@", type, (long)shareType, dic);
+    
     if ([type isEqualToString:@"copy"]) {
         //复制内容到粘贴板
         UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
         pasteboard.string = [dic objectForKey:@"url"];;
         [SVStatusHUD showWithMessage:@"复制链接成功"];
+        
+        // 给JavaScript端回调成功结果
+        if (self.webviewBackCallBack) {
+            self.webviewBackCallBack(@{
+                @"success": @"true",
+                @"data": @{},
+                @"errorMessage": @""
+            });
+        }
+        return;
     }
     else {
         UMSocialPlatformType snsName = [self thirdPlatform:type];
         if(snsName == UMSocialPlatformType_UnKnown) {
+            NSLog(@"❌ [分享失败] 未知的平台类型: %@", type);
+            if (self.webviewBackCallBack) {
+                self.webviewBackCallBack(@{
+                    @"success": @"false",
+                    @"data": @{},
+                    @"errorMessage": @"不支持的分享平台"
+                });
+            }
             return;
         }
-        if (snsName == UMSocialPlatformType_WechatSession && shareType == 1) {
-            [self shareMiniProgramToPlatformType:snsName dataDic:dic];
+        
+        // 检查微信是否安装
+        if (snsName == UMSocialPlatformType_WechatSession || snsName == UMSocialPlatformType_WechatTimeLine) {
+            if (![WXApi isWXAppInstalled]) {
+                NSLog(@"❌ [分享失败] 微信未安装");
+                [SVStatusHUD showWithMessage:@"请先安装微信应用"];
+                if (self.webviewBackCallBack) {
+                    self.webviewBackCallBack(@{
+                        @"success": @"false",
+                        @"data": @{},
+                        @"errorMessage": @"微信未安装"
+                    });
+                }
+                return;
+            }
+            
+            if (![WXApi isWXAppSupportApi]) {
+                NSLog(@"❌ [分享失败] 微信版本过低");
+                [SVStatusHUD showWithMessage:@"微信版本过低，请升级"];
+                if (self.webviewBackCallBack) {
+                    self.webviewBackCallBack(@{
+                        @"success": @"false",
+                        @"data": @{},
+                        @"errorMessage": @"微信版本过低"
+                    });
+                }
+                return;
+            }
+        }
+        
+        NSLog(@"✅ [分享准备] 平台检查通过，开始分享到: %@", type);
+        
+        // 对于微信分享，使用直接的WXApi方法避免UMSocialManager的openURL问题
+        if (snsName == UMSocialPlatformType_WechatSession || snsName == UMSocialPlatformType_WechatTimeLine) {
+            if (shareType == 1) {
+                [self shareDirectMiniProgramToWeChat:dic toTimeline:(snsName == UMSocialPlatformType_WechatTimeLine)];
+            } else {
+                [self shareDirectWebPageToWeChat:dic toTimeline:(snsName == UMSocialPlatformType_WechatTimeLine)];
+            }
         }
         else {
-            [self shareWebPageToPlatformType:snsName dataDic:dic];
+            // 其他平台继续使用UMSocialManager
+            if (snsName == UMSocialPlatformType_WechatSession && shareType == 1) {
+                [self shareMiniProgramToPlatformType:snsName dataDic:dic];
+            }
+            else {
+                [self shareWebPageToPlatformType:snsName dataDic:dic];
+            }
         }
     }
-    
 }
 //分享小程序
-//- (void)shareMiniProgramToPlatformType:(UMSocialPlatformType)platformType dataDic:(NSDictionary *)dataDic
-//{
-//    NSString *titleStr = [dataDic objectForKey:@"title"];
-//    NSString *shareText = [dataDic objectForKey:@"content"];
-//    NSString *imgStr = [dataDic objectForKey:@"img"];
-//    NSString *url = [dataDic objectForKey:@"url"];
-//    NSString *userName = Xiaochengxu;
-//    NSString *pagePath = [dataDic objectForKey:@"pagePath"];
-//    //创建分享消息对象
-//    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
-//    UMShareMiniProgramObject *shareObject = [UMShareMiniProgramObject shareObjectWithTitle:titleStr descr:shareText thumImage:imgStr];
-//    shareObject.webpageUrl = url;
-//    shareObject.userName = userName;
-//    shareObject.path = pagePath;
-//    //先下载图片
-//    SDWebImageManager *manager = [SDWebImageManager sharedManager];
-//    [manager loadImageWithURL:[NSURL URLWithString:imgStr] options:0 progress:^(NSInteger receivedSize, NSInteger expectedSizem, NSURL *targetUrl) {
-//        //NSLog(@"receiveSize:%ld,expectedSize:%ld",(long)receivedSize,(long)expectedSize);
-//    } completed:^(UIImage *image,NSData *data, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
-//        if (image) {
-//            if (![[NSString contentTypeForImageData:data] isEqualToString:@"png"]) {
-//              shareObject.hdImageData = UIImageJPEGRepresentation(image, 0.1);
-//            }
-//            else {
-//                shareObject.hdImageData = data;
-//            }
-//        }
-//        //打开注释hdImageData展示高清大图
-//        //   shareObject.hdImageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:imgStr]];
-//        //TODO  发布版小程序
-//        shareObject.miniProgramType = UShareWXMiniProgramTypeRelease;
-//        messageObject.shareObject = shareObject;
-//        [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
-//            if (error) {
-//                UMSocialLogInfo(@"************Share fail with error %@*********",error);
-//            }else{
-//                if ([data isKindOfClass:[UMSocialShareResponse class]]) {
-//                    UMSocialShareResponse *resp = data;
-//                    //分享结果消息
-//                    UMSocialLogInfo(@"response message is %@",resp.message);
-//                    //第三方原始返回的数据
-//                    UMSocialLogInfo(@"response originalResponse data is %@",resp.originalResponse);
-//
-//                }else{
-//                    UMSocialLogInfo(@"response data is %@",data);
-//                }
-//            }
-//        }];
-//    }];
-//    }
 - (void)shareMiniProgramToPlatformType:(UMSocialPlatformType)platformType dataDic:(NSDictionary *)dataDic
 {
     NSString *titleStr = [dataDic objectForKey:@"title"];
@@ -2178,6 +2197,9 @@ static inline BOOL isIPhoneXSeries() {
     NSString *url = [dataDic objectForKey:@"url"];
     NSString *userName = [dataDic objectForKey:@"wxid"];;
     NSString *pagePath = [dataDic objectForKey:@"pagePath"];
+    
+    NSLog(@"📱 [小程序分享] 开始，标题: %@, 用户名: %@, 路径: %@", titleStr, userName, pagePath);
+    
     //创建分享消息对象
     UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
     UMShareMiniProgramObject *shareObject = [UMShareMiniProgramObject shareObjectWithTitle:titleStr descr:shareText thumImage:imgStr];
@@ -2191,11 +2213,23 @@ static inline BOOL isIPhoneXSeries() {
     //TODO  发布版小程序
     shareObject.miniProgramType = UShareWXMiniProgramTypeRelease;
     messageObject.shareObject = shareObject;
+    
     [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
         if (error) {
+            NSLog(@"❌ [小程序分享失败] 错误: %@", error.localizedDescription);
             UMSocialLogInfo(@"************Share fail with error %@*********",error);
+            
+            // 回调JavaScript端分享失败
+            if (self.webviewBackCallBack) {
+                self.webviewBackCallBack(@{
+                    @"success": @"false",
+                    @"data": @{},
+                    @"errorMessage": error.localizedDescription ?: @"分享失败"
+                });
+            }
         }
         else{
+            NSLog(@"✅ [小程序分享成功] 响应数据: %@", data);
             if ([data isKindOfClass:[UMSocialShareResponse class]]) {
                 UMSocialShareResponse *resp = data;
                 //分享结果消息
@@ -2205,6 +2239,15 @@ static inline BOOL isIPhoneXSeries() {
                 
             }else{
                 UMSocialLogInfo(@"response data is %@",data);
+            }
+            
+            // 回调JavaScript端分享成功
+            if (self.webviewBackCallBack) {
+                self.webviewBackCallBack(@{
+                    @"success": @"true",
+                    @"data": @{},
+                    @"errorMessage": @""
+                });
             }
         }
     }];
@@ -2216,6 +2259,27 @@ static inline BOOL isIPhoneXSeries() {
     NSString *shareText = [dataDic objectForKey:@"content"];
     NSString *imgStr = [dataDic objectForKey:@"img"];
     NSString *url = [dataDic objectForKey:@"url"];
+    
+    NSString *platformName = @"未知平台";
+    switch (platformType) {
+        case UMSocialPlatformType_WechatSession:
+            platformName = @"微信好友";
+            break;
+        case UMSocialPlatformType_WechatTimeLine:
+            platformName = @"微信朋友圈";
+            break;
+        case UMSocialPlatformType_QQ:
+            platformName = @"QQ";
+            break;
+        case UMSocialPlatformType_Sina:
+            platformName = @"微博";
+            break;
+        default:
+            break;
+    }
+    
+    NSLog(@"🌐 [网页分享] 开始分享到 %@，标题: %@, URL: %@", platformName, titleStr, url);
+    
     //创建分享消息对象
     UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
     //创建网页内容对象
@@ -2228,8 +2292,19 @@ static inline BOOL isIPhoneXSeries() {
     //调用分享接口
     [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
         if (error) {
+            NSLog(@"❌ [网页分享失败] 平台: %@, 错误: %@", platformName, error.localizedDescription);
             UMSocialLogInfo(@"************Share fail with error %@*********",error);
+            
+            // 回调JavaScript端分享失败
+            if (self.webviewBackCallBack) {
+                self.webviewBackCallBack(@{
+                    @"success": @"false",
+                    @"data": @{},
+                    @"errorMessage": error.localizedDescription ?: @"分享失败"
+                });
+            }
         }else{
+            NSLog(@"✅ [网页分享成功] 平台: %@, 响应数据: %@", platformName, data);
             if ([data isKindOfClass:[UMSocialShareResponse class]]) {
                 UMSocialShareResponse *resp = data;
                 //分享结果消息
@@ -2240,9 +2315,146 @@ static inline BOOL isIPhoneXSeries() {
             }else{
                 UMSocialLogInfo(@"response data is %@",data);
             }
+            
+            // 回调JavaScript端分享成功
+            if (self.webviewBackCallBack) {
+                self.webviewBackCallBack(@{
+                    @"success": @"true",
+                    @"data": @{},
+                    @"errorMessage": @""
+                });
+            }
         }
     }];
 }
+
+#pragma mark - 直接微信分享方法 (避免UMSocialManager的openURL问题)
+
+// 直接分享网页到微信
+- (void)shareDirectWebPageToWeChat:(NSDictionary *)dic toTimeline:(BOOL)toTimeline {
+    NSString *titleStr = [dic objectForKey:@"title"];
+    NSString *shareText = [dic objectForKey:@"content"];
+    NSString *imgStr = [dic objectForKey:@"img"];
+    NSString *url = [dic objectForKey:@"url"];
+    
+    NSString *targetName = toTimeline ? @"朋友圈" : @"好友";
+    NSLog(@"🔗 [直接微信分享] 开始分享网页到%@，标题: %@", targetName, titleStr);
+    
+    // 创建多媒体消息结构体
+    WXMediaMessage *message = [WXMediaMessage message];
+    message.title = titleStr;
+    message.description = shareText;
+    
+    // 创建网页数据对象
+    WXWebpageObject *webPageObject = [WXWebpageObject object];
+    webPageObject.webpageUrl = url;
+    message.mediaObject = webPageObject;
+    
+    // 异步加载缩略图
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSData *imageData = nil;
+        if (imgStr && imgStr.length > 0) {
+            imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:imgStr]];
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (imageData) {
+                // 压缩图片到32KB以下
+                UIImage *image = [UIImage imageWithData:imageData];
+                NSData *compressedData = [UIImage compressImage:image toByte:32768];
+                message.thumbData = compressedData;
+            }
+            
+            // 创建发送请求
+            SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
+            req.bText = NO;
+            req.message = message;
+            req.scene = toTimeline ? WXSceneTimeline : WXSceneSession;
+            
+            // 发送到微信
+            [WXApi sendReq:req completion:^(BOOL success) {
+                NSLog(@"🚀 [直接微信分享] WXApi发送%@: %@", targetName, success ? @"成功" : @"失败");
+                
+                // 注意：这里的success只表示调用成功，真正的分享结果会在WXApiDelegate回调中处理
+                if (!success) {
+                    if (self.webviewBackCallBack) {
+                        self.webviewBackCallBack(@{
+                            @"success": @"false",
+                            @"data": @{},
+                            @"errorMessage": @"微信分享调用失败"
+                        });
+                    }
+                }
+                // 成功调用的情况下，等待用户操作结果回调
+            }];
+        });
+    });
+}
+
+// 直接分享小程序到微信
+- (void)shareDirectMiniProgramToWeChat:(NSDictionary *)dic toTimeline:(BOOL)toTimeline {
+    NSString *titleStr = [dic objectForKey:@"title"];
+    NSString *shareText = [dic objectForKey:@"content"];
+    NSString *imgStr = [dic objectForKey:@"img"];
+    NSString *url = [dic objectForKey:@"url"];
+    NSString *userName = [dic objectForKey:@"wxid"];
+    NSString *pagePath = [dic objectForKey:@"pagePath"];
+    
+    NSString *targetName = toTimeline ? @"朋友圈" : @"好友";
+    NSLog(@"📱 [直接微信分享] 开始分享小程序到%@，用户名: %@", targetName, userName);
+    
+    // 创建多媒体消息结构体
+    WXMediaMessage *message = [WXMediaMessage message];
+    message.title = titleStr;
+    message.description = shareText;
+    
+    // 创建小程序对象
+    WXMiniProgramObject *miniProgramObject = [WXMiniProgramObject object];
+    miniProgramObject.webpageUrl = url;
+    miniProgramObject.userName = userName;
+    miniProgramObject.path = pagePath;
+    miniProgramObject.miniProgramType = WXMiniProgramTypeRelease; // 正式版
+    message.mediaObject = miniProgramObject;
+    
+    // 异步加载缩略图
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSData *imageData = nil;
+        if (imgStr && imgStr.length > 0) {
+            imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:imgStr]];
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (imageData) {
+                // 压缩图片到128KB以下
+                UIImage *image = [UIImage imageWithData:imageData];
+                NSData *compressedData = [UIImage compressImage:image toByte:131072];
+                message.thumbData = compressedData;
+            }
+            
+            // 创建发送请求
+            SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
+            req.bText = NO;
+            req.message = message;
+            req.scene = toTimeline ? WXSceneTimeline : WXSceneSession;
+            
+            // 发送到微信
+            [WXApi sendReq:req completion:^(BOOL success) {
+                NSLog(@"🚀 [直接微信分享] WXApi小程序发送%@: %@", targetName, success ? @"成功" : @"失败");
+                
+                if (!success) {
+                    if (self.webviewBackCallBack) {
+                        self.webviewBackCallBack(@{
+                            @"success": @"false",
+                            @"data": @{},
+                            @"errorMessage": @"微信小程序分享调用失败"
+                        });
+                    }
+                }
+            }];
+        });
+    });
+}
+
 //根据web传过来的类型对第三方平台类型赋值
 - (UMSocialPlatformType )thirdPlatform:(NSString *)type {
     UMSocialPlatformType snsName;
@@ -2374,6 +2586,23 @@ static inline BOOL isIPhoneXSeries() {
                                    @"success":success,
                                    @"errorMassage":@""
                                    });
+    }
+}
+
+// 处理微信分享结果
+- (void)handleWechatShareResult:(NSDictionary *)result {
+    NSLog(@"📨 [处理微信分享结果] 收到通知: %@", result);
+    
+    if (self.webviewBackCallBack) {
+        // 直接将分享结果回调给JavaScript端
+        self.webviewBackCallBack(@{
+            @"success": [result objectForKey:@"success"] ?: @"false",
+            @"data": @{},
+            @"errorMessage": [result objectForKey:@"errorMessage"] ?: @"分享失败"
+        });
+        
+        // 清除回调，避免重复调用
+        self.webviewBackCallBack = nil;
     }
 }
 
