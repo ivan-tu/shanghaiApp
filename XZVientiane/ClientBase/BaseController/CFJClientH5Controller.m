@@ -1757,11 +1757,16 @@ static inline BOOL isIPhoneXSeries() {
     if ([function isEqualToString:@"fancySelect"]) {
         self.webviewBackCallBack = completion;
         NSArray *array = [dataDic objectForKey:@"value"];
+        
         WEAK_SELF;
-        [[MOFSPickerManager shareManger]showPickerViewWithData:array tag:1 title:nil cancelTitle:@"取消" commitTitle:@"确认" commitBlock:^(NSString *string) {
+        [[MOFSPickerManager shareManger] showPickerViewWithData:array 
+                                                            tag:1 
+                                                          title:@"" 
+                                                    cancelTitle:@"取消" 
+                                                    commitTitle:@"确认" 
+                                                    commitBlock:^(NSString *string) {
             STRONG_SELF;
             NSArray *indexArr = [string componentsSeparatedByString:@","];
-            // 使用新的格式化方法，返回JavaScript端期望的格式
             NSDictionary *response = [self formatCallbackResponse:@"fancySelect" 
                                                            data:@{@"value": indexArr[0]} 
                                                         success:YES 
@@ -1769,6 +1774,12 @@ static inline BOOL isIPhoneXSeries() {
             self.webviewBackCallBack(response);
             
         } cancelBlock:^{
+            STRONG_SELF;
+            NSDictionary *response = [self formatCallbackResponse:@"fancySelect" 
+                                                           data:@{@"value": @""} 
+                                                        success:NO 
+                                                   errorMessage:@"用户取消"];
+            self.webviewBackCallBack(response);
         }];
         return;
     }
@@ -1778,7 +1789,6 @@ static inline BOOL isIPhoneXSeries() {
         WEAK_SELF;
         [[MOFSPickerManager shareManger] showMOFSAddressPickerWithDefaultZipcode:string title:@"" cancelTitle:@"取消" commitTitle:@"确定" commitBlock:^(NSString *address, NSString *zipcode) {
             STRONG_SELF;
-            // 使用新的格式化方法，返回JavaScript端期望的格式
             NSDictionary *response = [self formatCallbackResponse:@"areaSelect" 
                                                            data:@{@"code": zipcode ?: @"", @"value": address ?: @""} 
                                                         success:YES 
@@ -1786,7 +1796,6 @@ static inline BOOL isIPhoneXSeries() {
             self.webviewBackCallBack(response);
         } cancelBlock:^{
             STRONG_SELF;
-            // 取消时也要回调
             NSDictionary *response = [self formatCallbackResponse:@"areaSelect" 
                                                            data:@{@"code": @"-1", @"value": @""} 
                                                         success:NO 
@@ -1801,7 +1810,6 @@ static inline BOOL isIPhoneXSeries() {
         WEAK_SELF;
         [[MOFSPickerManager shareManger] showCFJAddressPickerWithDefaultZipcode:string title:@"" cancelTitle:@"取消" commitTitle:@"确定" commitBlock:^(NSString *address, NSString *zipcode) {
             STRONG_SELF;
-            // 使用新的格式化方法，返回JavaScript端期望的格式
             NSDictionary *response = [self formatCallbackResponse:@"areaSelect" 
                                                            data:@{@"code": zipcode ?: @"", @"value": address ?: @""} 
                                                         success:YES 
@@ -1809,7 +1817,6 @@ static inline BOOL isIPhoneXSeries() {
             self.webviewBackCallBack(response);
         } cancelBlock:^{
             STRONG_SELF;
-            // 取消时也要回调
             NSDictionary *response = [self formatCallbackResponse:@"areaSelect" 
                                                            data:@{@"code": @"-1", @"value": @""} 
                                                         success:NO 
@@ -1830,13 +1837,18 @@ static inline BOOL isIPhoneXSeries() {
         WEAK_SELF;
         [[MOFSPickerManager shareManger]showDatePickerWithfirstDate:newdate minDate:isMin ? min : nil maxDate:nil datePickerMode:UIDatePickerModeDate commitBlock:^(NSDate *date) {
             STRONG_SELF;
-            self.webviewBackCallBack(
-                                     @{@"data":@{@"value":[df stringFromDate:date]},
-                                       @"success":@"true",
-                                       @"errorMessage":@""
-                                     });
+            NSDictionary *response = [self formatCallbackResponse:@"dateSelect" 
+                                                           data:@{@"value": [df stringFromDate:date]} 
+                                                        success:YES 
+                                                   errorMessage:nil];
+            self.webviewBackCallBack(response);
         } cancelBlock:^{
-            
+            STRONG_SELF;
+            NSDictionary *response = [self formatCallbackResponse:@"dateSelect" 
+                                                           data:@{@"value": @""} 
+                                                        success:NO 
+                                                   errorMessage:@"用户取消"];
+            self.webviewBackCallBack(response);
         }];
         return;
     }
@@ -1852,13 +1864,18 @@ static inline BOOL isIPhoneXSeries() {
         WEAK_SELF;
         [[MOFSPickerManager shareManger]showDatePickerWithfirstDate:newdate minDate:isMin ? min : nil maxDate:nil datePickerMode:UIDatePickerModeDateAndTime commitBlock:^(NSDate *date) {
             STRONG_SELF;
-            self.webviewBackCallBack(
-                                     @{@"data":@{@"value":[df stringFromDate:date]},
-                                       @"success":@"true",
-                                       @"errorMessage":@""
-                                     });
+            NSDictionary *response = [self formatCallbackResponse:@"dateAndTimeSelect" 
+                                                           data:@{@"value": [df stringFromDate:date]} 
+                                                        success:YES 
+                                                   errorMessage:nil];
+            self.webviewBackCallBack(response);
         } cancelBlock:^{
-            
+            STRONG_SELF;
+            NSDictionary *response = [self formatCallbackResponse:@"dateAndTimeSelect" 
+                                                           data:@{@"value": @""} 
+                                                        success:NO 
+                                                   errorMessage:@"用户取消"];
+            self.webviewBackCallBack(response);
         }];
         return;
     }
@@ -1871,13 +1888,19 @@ static inline BOOL isIPhoneXSeries() {
         WEAK_SELF;
         [[MOFSPickerManager shareManger]showDatePickerWithfirstDate:newdate minDate:nil maxDate:nil datePickerMode:UIDatePickerModeTime commitBlock:^(NSDate *date) {
             STRONG_SELF;
-            self.webviewBackCallBack(
-                                     @{@"data":@{@"value":[df stringFromDate:date]},
-                                       @"success":@"true",
-                                       @"errorMessage":@""
-                                     });        } cancelBlock:^{
-                
-            }];
+            NSDictionary *response = [self formatCallbackResponse:@"timeSelect" 
+                                                           data:@{@"value": [df stringFromDate:date]} 
+                                                        success:YES 
+                                                   errorMessage:nil];
+            self.webviewBackCallBack(response);
+        } cancelBlock:^{
+            STRONG_SELF;
+            NSDictionary *response = [self formatCallbackResponse:@"timeSelect" 
+                                                           data:@{@"value": @""} 
+                                                        success:NO 
+                                                   errorMessage:@"用户取消"];
+            self.webviewBackCallBack(response);
+        }];
         return;
     }
     //    if ([function isEqualToString:@"userSignin"]) {
@@ -1963,8 +1986,6 @@ static inline BOOL isIPhoneXSeries() {
         return;
     }
     
-    // 处理完成，返回成功
-    NSLog(@"✅ [CFJClientH5Controller] 默认处理完成 - action: %@", function);
     if (completion) {
         completion(@{@"success": @"true", @"data": @{}, @"errorMessage": @""});
     }
@@ -3216,6 +3237,7 @@ static inline BOOL isIPhoneXSeries() {
         @"previewImage", @"userLogin", @"userLogout", @"switchTab", @"hideNavationbar",
         @"showNavationbar", @"noticemsg_setNumber", @"showModal", @"showToast", @"selectLocation",
         @"selectLocationCity", @"navigateBack", @"reLaunch", @"showActionSheet", @"areaSelect",
+        @"dateSelect", @"timeSelect", @"fancySelect", @"dateAndTimeSelect",
         @"reloadOtherPages"
     ]];
     

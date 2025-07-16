@@ -95,6 +95,7 @@
 						avatarUrl:res.headpic?app.image.crop(res.headpic,90,90):'',
 						showSex:(res.sex==1||res.sex==2)?false:true,
 						birthday:res.birthday||'1990-01-01',
+						sexIndex: res.sex == 2 ? 1 : 0, // 根据实际性别设置索引
                     });
 					setTimeout(function(){
 						if (res.headpic&&client!='wx') {

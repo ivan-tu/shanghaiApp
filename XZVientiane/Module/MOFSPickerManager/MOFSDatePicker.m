@@ -47,6 +47,11 @@
         self.datePickerMode = UIDatePickerModeDate;
         self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         
+        // 强制使用滚轮样式，兼容iOS 14+
+        if (@available(iOS 13.4, *)) {
+            self.preferredDatePickerStyle = UIDatePickerStyleWheels;
+        }
+        
         [self initBgView];
     }
     return self;
